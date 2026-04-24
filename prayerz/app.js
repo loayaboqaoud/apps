@@ -622,12 +622,13 @@ function updatePrayerHeader(times) {
   // ── Countdown to next prayer ──
   if (nxtKey && times[nxtKey]) {
     let remaining = (timeToMinutes(times[nxtKey]) - nowM) * 60;
-    // If we're in Isha and next is tomorrow's Fajr, nowM > dhuhr so
-    // timeToMinutes(fajr) < nowM → remaining would be negative; add 24h
     if (remaining < 0) remaining += 24 * 3600;
-    setText('next-prayer-countdown', '-' + secondsToHMS(remaining));
+    const cd = '-' + secondsToHMS(remaining);
+    setText('next-prayer-countdown',      cd);
+    setText('progress-countdown-label',   cd);
   } else {
-    setText('next-prayer-countdown', '');
+    setText('next-prayer-countdown',    '');
+    setText('progress-countdown-label', '');
   }
 
   // ── Progress bar ──
