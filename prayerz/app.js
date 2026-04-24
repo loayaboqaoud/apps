@@ -573,7 +573,7 @@ async function renderTables() {
   if (groups.length > 0 && isToday) {
     const g = groups[0];
     const t = await fetchPrayerTimes(g.cityEn, g.countryEn, viewingDate);
-    if (t) updatePrayerHeader(t);
+    if (t) { _lastTimes = t; updatePrayerHeader(t); }
   }
 }
 
@@ -848,6 +848,8 @@ function rotateMaEquee(prayerKey) {
 // ────────────────────────────────────────────────────────────────
 //  Clock tick (every second)
 // ────────────────────────────────────────────────────────────────
+let _lastTimes = null; // cached times from most recent renderTables call
+
 function tick() {
   const now = new Date();
   const clockEl = document.getElementById('live-clock');
@@ -860,13 +862,8 @@ function tick() {
     }
   }
   if (now.getSeconds() === 0) renderTables();
-  if (viewingDate === todayStr()) {
-    const g = getCityGroups()[0];
-    if (g) {
-      const ck = `${getCityData(g.cityEn,g.countryEn)?.lat}|${getCityData(g.cityEn,g.countryEn)?.lng}|${viewingDate}|${cfg.calculation_method}`;
-      const t  = timesCache[ck];
-      if (t) updatePrayerHeader(t);
-    }
+  if (viewingDate === todayStr() && _lastTimes) {
+    updatePrayerHeader(_lastTimes);
   }
 }
 
