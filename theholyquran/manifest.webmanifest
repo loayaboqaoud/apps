@@ -1,0 +1,1 @@
+{"name": "المصحف", "short_name": "المصحف", "start_url": "./", "display": "standalone", "background_color": "#0f4f45", "theme_color": "#0f4f45", "lang": "ar", "dir": "rtl", "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]}
