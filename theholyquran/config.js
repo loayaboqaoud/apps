@@ -4,5 +4,5 @@
    احصل على مفتاح مجاني من: https://developers.giphy.com
 */
 const CONFIG={
-  GIPHY_KEY:'TiKmWAqkpizO0rBhaDZ0tgC3TNsf0BWj'
+  GIPHY_KEY:'rJRFbmMVyTiy0bZCFpFMp2pUSWGtrcGm'
 };
