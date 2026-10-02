@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f4f45">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg">
+<title>المصحف</title>
+<style>
+@font-face{font-family:F0;src:url(fonts/QCF4_QBSML.woff2) format("woff2");font-display:block}
+@font-face{font-family:F1;src:url(fonts/QCF4_Hafs_01_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F2;src:url(fonts/QCF4_Hafs_02_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F3;src:url(fonts/QCF4_Hafs_03_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F4;src:url(fonts/QCF4_Hafs_04_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F5;src:url(fonts/QCF4_Hafs_05_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F6;src:url(fonts/QCF4_Hafs_06_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F7;src:url(fonts/QCF4_Hafs_07_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F8;src:url(fonts/QCF4_Hafs_08_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F9;src:url(fonts/QCF4_Hafs_09_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F10;src:url(fonts/QCF4_Hafs_10_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F11;src:url(fonts/QCF4_Hafs_11_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F12;src:url(fonts/QCF4_Hafs_12_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F13;src:url(fonts/QCF4_Hafs_13_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F14;src:url(fonts/QCF4_Hafs_14_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F15;src:url(fonts/QCF4_Hafs_15_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F16;src:url(fonts/QCF4_Hafs_16_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F17;src:url(fonts/QCF4_Hafs_17_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F18;src:url(fonts/QCF4_Hafs_18_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F19;src:url(fonts/QCF4_Hafs_19_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F20;src:url(fonts/QCF4_Hafs_20_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F21;src:url(fonts/QCF4_Hafs_21_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F22;src:url(fonts/QCF4_Hafs_22_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F23;src:url(fonts/QCF4_Hafs_23_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F24;src:url(fonts/QCF4_Hafs_24_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F25;src:url(fonts/QCF4_Hafs_25_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F26;src:url(fonts/QCF4_Hafs_26_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F27;src:url(fonts/QCF4_Hafs_27_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F28;src:url(fonts/QCF4_Hafs_28_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F29;src:url(fonts/QCF4_Hafs_29_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F30;src:url(fonts/QCF4_Hafs_30_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F31;src:url(fonts/QCF4_Hafs_31_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F32;src:url(fonts/QCF4_Hafs_32_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F33;src:url(fonts/QCF4_Hafs_33_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F34;src:url(fonts/QCF4_Hafs_34_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F35;src:url(fonts/QCF4_Hafs_35_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F36;src:url(fonts/QCF4_Hafs_36_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F37;src:url(fonts/QCF4_Hafs_37_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F38;src:url(fonts/QCF4_Hafs_38_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F39;src:url(fonts/QCF4_Hafs_39_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F40;src:url(fonts/QCF4_Hafs_40_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F41;src:url(fonts/QCF4_Hafs_41_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F42;src:url(fonts/QCF4_Hafs_42_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F43;src:url(fonts/QCF4_Hafs_43_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F44;src:url(fonts/QCF4_Hafs_44_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F45;src:url(fonts/QCF4_Hafs_45_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F46;src:url(fonts/QCF4_Hafs_46_W.woff2) format("woff2");font-display:block}
+@font-face{font-family:F47;src:url(fonts/QCF4_Hafs_47_W.woff2) format("woff2");font-display:block}
+
+:root{--card:#fffdf6;--txt:#17150f;--soft:color-mix(in srgb,var(--txt) 8%,var(--card));--line:color-mix(in srgb,var(--txt) 24%,var(--card));--mut:color-mix(in srgb,var(--txt) 58%,var(--card));--green:#0f4f45;--gold:#a8823f;--paper:#fbf6e8;--pink:#17150f;--bg:#e4dfd0;--a:1;--pw:360px;
+--ui:"Noto Naskh Arabic","Geeza Pro","Segoe UI",Tahoma,system-ui,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);font-family:var(--ui);color:var(--txt);overflow:hidden;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}
+#bar{flex:none;height:48px;display:flex;align-items:center;gap:4px;padding:0 6px;background:var(--green);color:#f4ecd6}
+#bar button{background:none;border:0;color:inherit;padding:8px 10px;border-radius:8px;font-size:15px}
+#bar button:active,#bar button:focus-visible{background:#ffffff26;outline:none}
+#ttl{flex:1;text-align:center;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#pager{flex:1;min-height:0;display:flex;direction:rtl;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#pager.h{flex-direction:row;scroll-snap-type:x mandatory}
+#pager.v{flex-direction:column;overflow-x:hidden}
+.slide{flex:none;display:flex;flex-direction:column;align-items:center;padding:10px 8px 24px}
+.h .slide{width:100%;height:100%;overflow-y:auto;scroll-snap-align:center;scroll-snap-stop:always}
+.v .slide{width:100%;height:calc(var(--pw)*1.6 + 34px)}
+.page{direction:rtl;flex:none;width:var(--pw);height:calc(var(--pw)*1.6);margin:auto;position:relative;color:var(--pink);
+background:var(--paper);box-shadow:0 1px 10px #0003;padding:calc(var(--pw)*.07) calc(var(--pw)*.05) calc(var(--pw)*.06);
+display:flex;flex-direction:column;border:1px solid #0002}
+.ph,.pf{position:absolute;left:calc(var(--pw)*.05);right:calc(var(--pw)*.05);display:flex;justify-content:space-between;font-size:calc(var(--pw)*.032);opacity:.6}
+.ph{top:calc(var(--pw)*.02)}.pf{bottom:calc(var(--pw)*.016);justify-content:center}
+.lines{flex:1;display:flex;flex-direction:column;justify-content:space-between;opacity:var(--a)}
+.lines.few{justify-content:space-evenly}
+.ln{flex:none;height:calc(var(--pw)*.098);display:flex;justify-content:center;align-items:center;direction:rtl;white-space:nowrap;line-height:1}
+.w{display:inline-block;cursor:pointer;border-radius:.12em;transform:translateY(.13em)}
+.w.sel{background:#0f4f452e}.w.play{background:#a8823f44}
+.ln.hd{height:calc(var(--pw)*.095);border:1.5px solid var(--gold);outline:1px solid var(--gold);outline-offset:calc(var(--pw)*-.008);background:#a8823f22;border-radius:calc(var(--pw)*.012);margin:calc(var(--pw)*.006) 0}
+.ln.hd .w{transform:none;cursor:default}
+.sheet{position:fixed;inset:0;z-index:5;display:none;background:#0006}.sheet.on{display:block}
+.card{position:absolute;bottom:0;left:0;right:0;max-height:84%;overflow:auto;background:var(--card);border-radius:18px 18px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom));max-width:660px;margin:0 auto}
+.card h3{margin:0 0 10px;font-size:17px;color:var(--green)}
+.tabs,.seg{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.tabs button,.seg button{flex:1;min-width:64px;padding:9px 6px;border:1px solid var(--line);background:var(--soft);border-radius:10px;font-size:14px}
+.tabs .on,.seg .on{background:var(--green);color:#fff;border-color:var(--green)}
+.row{display:flex;align-items:center;gap:10px;padding:11px 8px;border:0;border-bottom:1px solid var(--line);width:100%;background:none;text-align:start;font-size:16px}
+.row b{flex:none;width:30px;color:var(--gold)}.row span{flex:1}.row i{font-style:normal;color:var(--mut);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px}
+.grid button{padding:10px 0;border:1px solid var(--line);background:var(--soft);border-radius:10px;font-size:15px}.grid .cur{background:var(--green);color:#fff}
+label.f{display:block;margin:12px 0 5px;font-size:14px}
+input[type=range]{width:100%;accent-color:var(--green)}
+input[type=number],select,input[type=text]{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:14px}
+input[type=number]{width:70px;text-align:center}
+input[type=color]{width:42px;height:34px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--card);vertical-align:middle}
+.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.act button,.btn{flex:1;min-width:110px;padding:10px;border-radius:10px;border:0;background:var(--green);color:#fff;font-size:14px}
+.alt{background:var(--soft)!important;color:var(--txt)!important}
+.note{font-size:12.5px;color:var(--mut);margin:6px 0 0}
+.sw{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sw button{width:36px;height:36px;border-radius:50%;border:2px solid var(--line)}.sw button.on{border-color:var(--green);box-shadow:0 0 0 2px #fff inset}
+.pl{display:flex;align-items:center;gap:8px}.pl button{width:44px;height:44px;border-radius:50%;border:0;background:var(--green);color:#fff;font-size:18px}
+.pl .s{width:36px;height:36px;background:var(--soft);color:var(--txt)}.pl b{flex:1;font-size:15px}
+/* studio */
+#studio{position:fixed;inset:0;z-index:9;background:var(--bg);display:none;flex-direction:column;padding-top:env(safe-area-inset-top)}#studio.on{display:flex}
+#stb{flex:none;height:44px;display:flex;align-items:center;padding:0 10px;background:var(--green);color:#f4ecd6;gap:8px}
+#stb button{background:none;border:0;color:inherit;font-size:15px;padding:8px}#stb b{flex:1;text-align:center;font-weight:500}
+#pvw{flex:1 1 40%;min-height:150px;display:flex;align-items:center;justify-content:center;padding:8px;background:repeating-conic-gradient(#c9c3b1 0 25%,#d8d3c3 0 50%) 0 0/16px 16px}
+#pv{max-width:100%;max-height:100%;box-shadow:0 2px 12px #0004;touch-action:none;cursor:grab}
+#pnl{flex:none;height:52%;overflow:auto;background:var(--card);border-radius:16px 16px 0 0;padding:10px 14px calc(14px + env(safe-area-inset-bottom))}
+.tp{display:none}.tp.on{display:block}
+.two{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.two label{font-size:14px}
+#chips{display:flex;flex-wrap:wrap;gap:4px;max-height:140px;overflow:auto;padding:6px;background:var(--soft);border-radius:10px;direction:rtl}
+.chip{padding:3px 7px;background:var(--card);border:1px solid var(--line);border-radius:7px;font-size:16px;cursor:pointer}.chip.br{background:#dcebe0;margin-inline-end:100%}
+#gal{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}#gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;cursor:pointer}
+#dim{position:fixed;inset:0;z-index:99;background:#000;pointer-events:none;opacity:0}
+.lines{filter:brightness(var(--fb,1))}
+#as{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;display:none;align-items:center;gap:6px;background:#0f4f45ee;color:#f4ecd6;border-radius:26px;padding:6px 10px;box-shadow:0 2px 12px #0005}
+#as.on{display:flex}#as button{background:none;border:0;color:inherit;font-size:18px;width:36px;height:36px;border-radius:50%}#as button:active{background:#ffffff30}#as b{min-width:34px;text-align:center;font-size:14px}
+.ib{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+svg.i,.ib svg{width:1.25em;height:1.25em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ib span{font-size:.86em}
+#bar .ib,.tabs .ib,.seg .ib{flex-direction:column;gap:1px}
+#bar .ib span,.tabs .ib span,.seg .ib span{font-size:11px;line-height:1.15}
+#bar button{padding:2px 8px;min-width:52px}
+.rg{display:flex;align-items:center;gap:6px;direction:ltr;flex:1 1 100%}
+.rg input{flex:1;min-width:0}
+.rg .st{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--soft);font-size:20px;line-height:1;padding:0;color:var(--txt)}
+.rg .st:active{background:var(--green);color:#fff}
+.rg .val{flex:none;min-width:48px;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
+.sw.th{flex-wrap:nowrap;gap:5px}.sw.th button{border-radius:8px;width:100%;max-width:34px;height:34px;flex:1}
+#pager{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+body.nc #bar,body.nc #as{display:none!important}
+#cX,#vX{background:var(--soft)!important;color:var(--txt)!important}
+.w.mn{color:var(--mn)}
+#sMean,#sVm{direction:rtl}
+.me{padding:10px 0;border-bottom:1px solid var(--line);text-align:right}
+.me b{color:var(--green);font-size:17px}.me p{margin:4px 0;line-height:1.9;font-size:16px}.me small{color:var(--mut);font-size:12px}
+#sVm h4{margin:14px 0 2px;color:var(--green)}
+.bk{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.act{flex-wrap:wrap}.act button{flex:1 1 40%}
+#print{display:none}
+@media print{#dim,#as{display:none!important}#print .page{--paper:#fff;--pink:#000}#print .lines{filter:none}@page{size:A4 portrait;margin:8mm}
+html,body{height:auto;overflow:visible;background:var(--card)}
+body>*:not(#print){display:none!important}#print{display:block}
+#print .page{--pw:172mm;box-shadow:none;border:0;margin:0 auto;break-after:page;page-break-after:always}
+#print .page:last-child{break-after:auto;page-break-after:auto}#print .w.sel,#print .w.play{background:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16" /> <path d="M4 12h16" /> <path d="M4 19h16" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /> <rect x="5" y="3" width="5" height="18" rx="1" /></symbol><symbol id="i-square" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /></symbol><symbol id="i-skip-forward" viewBox="0 0 24 24"><path d="M21 4v16" /> <path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z" /></symbol><symbol id="i-skip-back" viewBox="0 0 24 24"><path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z" /> <path d="M3 20V4" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 5v16" /> <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></symbol><symbol id="i-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /> <circle cx="9" cy="9" r="2" /> <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></symbol><symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /> <rect x="2" y="6" width="14" height="12" rx="2" /></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /> <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></symbol><symbol id="i-volume-2" viewBox="0 0 24 24"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" /> <path d="M16 9a5 5 0 0 1 0 6" /> <path d="M19.364 18.364a9 9 0 0 0 0-12.728" /></symbol><symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol><symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /> <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /> <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /> <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /> <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 3v12" /> <path d="m17 8-5-5-5 5" /> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3" /> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <path d="m7 10 5 5 5-5" /></symbol><symbol id="i-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M7 3v18" /> <path d="M3 7.5h4" /> <path d="M3 12h18" /> <path d="M3 16.5h4" /> <path d="M17 3v18" /> <path d="M17 7.5h4" /> <path d="M17 16.5h4" /></symbol><symbol id="i-smile" viewBox="0 0 24 24"><path d="M15 10V9" /> <path d="M16.472 15a6 6 0 01-8.943 0" /> <path d="M9 10V9" /> <circle cx="12" cy="12" r="10" /></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13" /> <circle cx="6" cy="18" r="3" /> <circle cx="18" cy="16" r="3" /></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /> <path d="M3 11v-1a4 4 0 0 1 4-4h14" /> <path d="m7 22-4-4 4-4" /> <path d="M21 13v1a4 4 0 0 1-4 4H3" /></symbol><symbol id="i-repeat-1" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /> <path d="M3 11v-1a4 4 0 0 1 4-4h14" /> <path d="m7 22-4-4 4-4" /> <path d="M21 13v1a4 4 0 0 1-4 4H3" /> <path d="M11 10h1v4" /></symbol><symbol id="i-rotate-cw" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" /></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol><symbol id="i-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="i-align-right" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M21 12H9" /> <path d="M21 19H7" /></symbol><symbol id="i-align-center" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M17 12H7" /> <path d="M19 19H5" /></symbol><symbol id="i-align-left" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M15 12H3" /> <path d="M17 19H3" /></symbol><symbol id="i-arrow-down-to-line" viewBox="0 0 24 24"><path d="M12 17V3" /> <path d="m6 11 6 6 6-6" /> <path d="M19 21H5" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="i-type" viewBox="0 0 24 24"><path d="M12 4v16" /> <path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /> <path d="M9 20h6" /></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="i-hash" viewBox="0 0 24 24"><line x1="4" x2="20" y1="9" y2="9" /> <line x1="4" x2="20" y1="15" y2="15" /> <line x1="10" x2="8" y1="3" y2="21" /> <line x1="16" x2="14" y1="3" y2="21" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></symbol><symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" /> <path d="M8.12 8.12 12 12" /> <path d="M20 4 8.12 15.88" /> <circle cx="6" cy="18" r="3" /> <path d="M14.8 14.8 20 20" /></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6" /> <path d="m4 14 6-6 2-3" /> <path d="M2 5h12" /> <path d="M7 2h1" /> <path d="m22 22-5-10-5 10" /> <path d="M14 18h6" /></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-trash-2" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></symbol></svg>
+<div id="bar"><button id="bIdx">الفهرس</button><div id="ttl"></div><button id="bSet">الإعدادات</button></div>
+<div id="pager" class="h"></div>
+<div id="as"><button id="asT">⏸</button><button id="asM">−</button><b id="asV"></b><button id="asP">+</button><button id="asX">✕</button></div>
+<div id="dim"></div>
+
+<div class="sheet" id="sIdx"><div class="card"><h3>الفهرس</h3>
+<div class="tabs"><button data-t="s" class="on">السور</button><button data-t="j">الأجزاء</button><button data-t="p">الصفحات</button></div><div id="idxBody"></div></div></div>
+
+<div class="sheet" id="sSet"><div class="card"><h3>الإعدادات</h3>
+<h4>المظهر</h4>
+<label class="f">الثيم</label><div class="sw th" id="thL"></div><div class="sw th" id="thD" style="margin-top:6px"></div>
+<label class="f"><input type="checkbox" id="night"> القراءة الليلية</label>
+<label class="f">لون خلفية الصفحة</label><div class="sw" id="sw"></div>
+<div class="two" style="margin-top:8px"><label>لون الخط <input type="color" id="fcol"></label><button class="btn alt" id="fcR" style="flex:none">إعادة الضبط</button></div>
+<label class="f">شفافية الخط</label><input type="range" id="aRng" min="8" max="100">
+<label class="f">سطوع الشاشة</label><input type="range" id="brR" min="15" max="100">
+<label class="f">سطوع الخط</label><input type="range" id="fbR" min="25" max="100">
+<h4>القراءة</h4>
+<div class="seg"><button id="mH">أفقي</button><button id="mV">عمودي</button></div>
+<label class="f">سرعة التمرير التلقائي</label><input type="range" id="spR" min="1" max="100">
+<div class="act"><button id="bAs">تمرير تلقائي</button><button id="bFs" class="alt">ملء الشاشة</button></div>
+<h4>معاني الغريب</h4>
+<label class="f"><input type="checkbox" id="mnOn"> تلوين الكلمات التي لها معنى</label>
+<div class="two" style="margin-top:8px"><label>لون الكلمات <input type="color" id="mcol"></label><button class="btn alt" id="mcR" style="flex:none">إعادة الضبط</button></div>
+<label class="f" style="margin-top:8px">الكتب</label><div id="mbL" class="bk"></div>
+<p class="note"><span>المصدر:</span> <a href="https://quranpedia.net" target="_blank" rel="noopener">Quranpedia.net</a> · 2026-09-26</p>
+<h4>الطباعة</h4>
+<div class="two"><label>من <input type="number" id="pFrom" min="1"></label><label>إلى <input type="number" id="pTo" min="1"></label></div>
+<div class="act"><button id="bPrint">طباعة</button></div>
+<p class="note">تُطبع الصفحات بنفس الشفافية المختارة.</p>
+<h4>اللغة</h4><select id="lang" style="width:100%"></select>
+<h4>الأوفلاين</h4><div class="act" style="margin-top:0"><button id="bOff" class="alt">حالة الأوفلاين</button></div><p class="note" id="offMsg"></p>
+</div></div>
+
+<div class="sheet" id="sCtx"><div class="card"><div class="pl"><b id="cTtl"></b><button class="s" id="cX">✕</button></div>
+<div class="act"><button id="cPlay">استماع</button><button id="cMn">المعاني</button></div>
+<div class="act"><button id="cCopy" class="alt">نسخ النص</button><button id="cShare" class="alt">مشاركة النص</button></div>
+<div class="act"><button id="cImg" class="alt">صورة سريعة</button><button id="cDs">تصميم صورة / فيديو</button></div></div></div>
+
+<div class="sheet" id="sMean"><div class="card" style="max-height:55%"><div class="pl"><b id="mTtl"></b><button class="s" id="mX">✕</button></div><div id="mBody"></div></div></div>
+<div class="sheet" id="sVm"><div class="card"><div class="pl"><b id="vmTtl"></b><button class="s" id="vmX">✕</button></div><div id="vmBody"></div></div></div>
+
+<div class="sheet" id="vbar" style="background:none;pointer-events:none"><div class="card" style="pointer-events:auto;max-height:62%">
+<div class="pl"><button id="aPlay">▶</button><button class="s" id="aPrev">⏮</button><button class="s" id="aNext">⏭</button><b id="vTtl"></b><button class="s" id="vX">✕</button></div>
+<div class="seg" id="modes" style="margin-top:10px"><button data-v="once">مرة</button><button data-v="cont">متواصل</button><button data-v="v">تكرار الآية</button><button data-v="s">تكرار السورة</button><button data-v="r">تكرار مقطع</button></div>
+<div class="two"><label>عدد التكرار <input type="number" id="rN" min="0" max="99"> <small>(٠ = بلا نهاية)</small></label></div>
+<div class="two" style="margin-top:6px"><button class="btn alt" id="setS">تعيين البداية</button><button class="btn alt" id="setE">تعيين النهاية</button><span id="rgTx" class="note"></span></div>
+<label class="f">القارئ والرواية <select id="rec" style="width:100%"></select></label>
+<div class="act"><button id="vTxt">نسخ النص</button><button id="vImg">نسخ كصورة</button><button id="vDl" class="alt">حفظ PNG</button><button id="vDs">تصميم صورة</button></div>
+<div class="two" style="margin-top:8px"><label>لون الخط <input type="color" id="vCol" value="#17150f"></label><label><input type="checkbox" id="vTr" checked> خلفية شفافة (وإلا: لون الصفحة)</label></div>
+</div></div>
+
+<div id="studio">
+<div id="stb"><button id="stX">إغلاق</button><b>تصميم صورة بالآيات</b></div>
+<div id="pvw"><canvas id="pv"></canvas></div>
+<div id="pnl">
+<div class="tabs" id="stTabs"><button data-t="tx" class="on">النص</button><button data-t="bg">الخلفية</button><button data-t="sz">الأبعاد</button><button data-t="lb">العناوين</button><button data-t="ex">التصدير</button></div>
+<div class="tp on" id="tp-tx">
+<div class="two"><select data-k="s" id="dS"></select><label>من آية <input type="number" data-k="a1" min="1"></label><label>إلى <input type="number" data-k="a2" min="1"></label></div>
+<label class="f">حذف كلمات من البداية: <b id="c0v"></b></label><input type="range" data-k="cut0" min="0" max="0">
+<label class="f">حذف كلمات من النهاية: <b id="c1v"></b></label><input type="range" data-k="cut1" min="0" max="0">
+<label class="f">اضغط كلمة لإدراج سطر جديد بعدها:</label><div id="chips"></div>
+<label class="f">حجم الخط</label><input type="range" data-k="fs" min="2" max="16" step=".1">
+<label class="f">عرض مربع النص</label><input type="range" data-k="bw" min="20" max="100">
+<label class="f">تباعد الأسطر</label><input type="range" data-k="ls" min="1.4" max="3" step=".05">
+<div class="two"><label class="f">موضع أفقي</label><input type="range" data-k="bx" min="0" max="100"><label class="f">رأسي</label><input type="range" data-k="by" min="0" max="100"></div>
+<label class="f">المحاذاة</label><div class="seg"><button data-k="al" data-v="r">يمين</button><button data-k="al" data-v="c">وسط</button><button data-k="al" data-v="l">يسار</button></div>
+<label>لون الخط <input type="color" data-k="col"></label> <span class="note">يمكنك أيضاً سحب النص على المعاينة.</span>
+<h4 style="margin:14px 0 4px;color:var(--green)">الظل</h4><label class="f"><input type="checkbox" data-k="sh.on"> إضافة ظل للنص</label>
+<label>لون الظل <input type="color" data-k="sh.col"></label>
+<label class="f">شفافية الظل</label><input type="range" data-k="sh.a" min="0" max="100">
+<label class="f">زاوية الظل</label><input type="range" data-k="sh.ang" min="0" max="360">
+<label class="f">بُعد الظل</label><input type="range" data-k="sh.d" min="0" max="40" step=".5">
+<label class="f">قوة الظل (التمويه)</label><input type="range" data-k="sh.b" min="0" max="40" step=".5"></div>
+<div class="tp" id="tp-bg">
+<div class="seg"><button data-k="bg" data-v="none">شفاف</button><button data-k="bg" data-v="solid">لون</button><button data-k="bg" data-v="grad">تدرج</button><button data-k="bg" data-v="pat">زخرفة</button><button data-k="bg" data-v="img">صورة</button></div>
+<div class="two"><label>اللون ١ <input type="color" data-k="c1"></label><label>اللون ٢ <input type="color" data-k="c2"></label></div>
+<label class="f">زاوية التدرج</label><input type="range" data-k="ang" min="0" max="360">
+<label class="f">بداية التدرج ٪</label><input type="range" data-k="g0" min="0" max="100">
+<label class="f">نهاية التدرج ٪</label><input type="range" data-k="g1" min="0" max="100">
+<label class="f">صورة الخلفية</label>
+<div class="act" style="margin-top:0"><button class="btn alt" id="imF">من الجهاز</button><input type="file" id="imFile" accept="image/*" hidden></div>
+<div class="two" style="margin-top:8px"><input type="text" id="imQ" value="islamic geometric pattern" style="flex:1"><button class="btn" id="imGo" style="flex:none;min-width:70px">بحث</button></div>
+<div id="gal"></div><p class="note" id="imCr">المصدر الإلكتروني: ويكيميديا كومنز (صور حرّة الترخيص؛ بعضها يشترط ذكر المصوّر).</p>
+<label class="f">تعتيم صورة الخلفية</label><input type="range" data-k="dim" min="0" max="90"></div>
+<div class="tp" id="tp-sz">
+<div class="seg"><button data-k="ratio" data-v="1:1">1:1</button><button data-k="ratio" data-v="4:5">4:5</button><button data-k="ratio" data-v="3:4">3:4</button><button data-k="ratio" data-v="2:3">2:3</button><button data-k="ratio" data-v="9:16">9:16</button><button data-k="ratio" data-v="16:9">16:9</button><button data-k="ratio" data-v="4:3">4:3</button><button data-k="ratio" data-v="3:2">3:2</button><button data-k="ratio" data-v="21:9">21:9</button><button data-k="ratio" data-v="c">مخصص</button></div>
+<div class="two"><label>العرض <input type="number" data-k="cw" min="1"></label><label>الارتفاع <input type="number" data-k="ch" min="1"></label></div>
+<label class="f">أبعاد جاهزة</label><div class="seg" id="presets"></div><div class="act"><button id="flip" class="alt">قلب الاتجاه (طولي/عرضي)</button></div></div>
+<div class="tp" id="tp-lb">
+<div class="seg"><button data-k="tgt" data-v="txt">تحريك: النص</button><button data-k="tgt" data-v="nm">اسم السورة</button><button data-k="tgt" data-v="rf">رقم الآية</button></div>
+<label class="f"><input type="checkbox" data-k="nm.on"> إظهار اسم السورة</label>
+<div class="two"><label class="f">الحجم</label><input type="range" data-k="nm.size" min="3" max="20" step=".2"><label>اللون <input type="color" data-k="nm.col"></label></div>
+<div class="two"><label class="f">أفقي</label><input type="range" data-k="nm.x" min="0" max="100"><label class="f">رأسي</label><input type="range" data-k="nm.y" min="0" max="100"></div>
+<label class="f"><input type="checkbox" data-k="rf.on"> إظهار رقم الآية / الآيات</label>
+<div class="two"><label class="f">الحجم</label><input type="range" data-k="rf.size" min="1.5" max="12" step=".1"><label>اللون <input type="color" data-k="rf.col"></label></div>
+<div class="two"><label class="f">أفقي</label><input type="range" data-k="rf.x" min="0" max="100"><label class="f">رأسي</label><input type="range" data-k="rf.y" min="0" max="100"></div></div>
+<div class="tp" id="tp-ex">
+<label class="f">الدقة</label><div class="seg"><button data-k="res" data-v="1">HD ١٠٨٠</button><button data-k="res" data-v="2">2K/4K ×٢</button><button data-k="res" data-v="3">أعلى ×٣</button></div><p class="note" id="resTx"></p>
+<div class="act"><button id="xPng">حفظ صورة PNG</button><button id="xShP" class="alt">مشاركة الصورة</button></div>
+<label class="f">فيديو — الصوت</label>
+<div class="seg"><button data-k="asrc" data-v="none">بلا صوت</button><button data-k="asrc" data-v="ayat">تلاوة الآيات</button><button data-k="asrc" data-v="file">ملف صوتي</button></div>
+<input type="file" id="auF" accept="audio/*"><div class="two" style="margin-top:6px"><label>المدة بلا صوت (ثانية) <input type="number" data-k="vsec" min="2" max="120"></label></div>
+<div class="act"><button id="xVid">تصدير فيديو</button><button id="xShV" class="alt">مشاركة الفيديو</button></div>
+<p class="note" id="exMsg">التلاوة تتحمّل من everyayah.com وتحتاج إنترنت.</p></div>
+</div></div>
+<div id="print"></div>
+<script src="data.js"></script>
+<script src="meanings.js"></script>
+<script>
+let lang='ar';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],ar=n=>lang!='ar'?String(n):String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const JUZ=[1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582],MAXP=604;
+const PAL=[['#fbf6e8','#17150f'],['#ffffff','#111111'],['#f1e4c3','#2b2112'],['#e9e9e6','#1a1a1a'],['#e3efe1','#10281f'],['#16181b','#e9e2cc']];
+const REC=[['حفص عن عاصم',[['الحصري — مرتل','Husary_128kbps'],['الحصري — مجوّد','Husary_Mujawwad_128kbps'],['مشاري العفاسي','Alafasy_128kbps'],['عبد الباسط — مرتل','Abdul_Basit_Murattal_64kbps'],['عبد الباسط — مجوّد','Abdul_Basit_Mujawwad_128kbps'],['المنشاوي — مرتل','Minshawy_Murattal_128kbps'],['المنشاوي — مجوّد','Minshawy_Mujawwad_192kbps'],['السديس','Abdurrahmaan_As-Sudais_192kbps'],['الشريم','Saood_ash-Shuraym_128kbps'],['أبو بكر الشاطري','Abu_Bakr_Ash-Shaatree_128kbps'],['هاني الرفاعي','Hani_Rifai_192kbps'],['ماهر المعيقلي','MaherAlMuaiqly128kbps'],['الحذيفي','Hudhaify_128kbps'],['الغامدي','Ghamadi_40kbps'],['ياسر الدوسري','Yasser_Ad-Dussary_128kbps'],['محمد الطبلاوي','Mohammad_al_Tablaway_128kbps']]],['ورش عن نافع',[['إبراهيم الدوسري','warsh/warsh_ibrahim_aldosary_128kbps'],['ياسين الجزائري','warsh/warsh_yassin_al_jazaery_64kbps']]]];
+const st=Object.assign({p:1,a:100,m:'h',bg:null,rec:'Husary_128kbps',mode:'once',n:1,rs:null,re:null,tap:1,night:0,br:100,fb:100,sp:20,th:null,lt:0,dk:10,fc:null,lang:'ar',mo:1,mc:null,mb:null},(()=>{try{return JSON.parse(localStorage.getItem('mushaf2')||'{}')}catch(e){return{}}})());
+if(st.th==null){st.th=st.night?10:0;st.bg=null}lang=st.lang||'ar';
+const save=()=>{try{localStorage.setItem('mushaf2',JSON.stringify(st))}catch(e){}};
+const juzOf=p=>JUZ.filter(s=>p>=s).length;
+const CNT={},ORDER=[],IDX={},PAGEOF={},WU={};
+SURAHS.forEach(s=>{CNT[s.id]=s.c;for(let a=1;a<=s.c;a++){const k=s.id+':'+a;IDX[k]=ORDER.length;ORDER.push(k)}});
+for(let p=1;p<=MAXP;p++)for(const L of DATA[p].l)if(L.t=='t')for(const w of L.w){if(w[2]==2)continue;const k=w[1];if(!(k in PAGEOF))PAGEOF[k]=p;const u=WU[k]=WU[k]||[];if(w[2]==0){w[4]=u.length;u.push({c:w[0],f:L.f,t:w[3]})}else if(u.length)u[u.length-1].c+=w[0]}
+const vt=k=>{const[s,a]=k.split(':');return sName(s)+' — '+T('الآية')+' '+ar(a)};
+const verseText=k=>WU[k].map(u=>u.t).join(' ')+' \u06DD'+ar(k.split(':')[1]);
+const sName=id=>SURAHS[id-1].n;
+
+/* معاني الغريب */
+const MB=typeof MEAN_BOOKS!='undefined'?MEAN_BOOKS:[],MN=typeof MEAN!='undefined'?MEAN:{},MWc={};
+if(!st.mb)st.mb=MB.map(b=>b.id);
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const bname=id=>(MB.find(b=>b.id==id)||{}).n||'';
+const mEnt=k=>(MN[k]||[]).filter(e=>st.mb.includes(e[0]));
+function cover(k,i){if(!st.mo||!MN[k])return null;let m=MWc[k];if(!m){m=MWc[k]={};MN[k].forEach((e,j)=>{if(e[3]>=0)for(let x=e[3];x<e[3]+e[4];x++)(m[x]=m[x]||[]).push(j)})}const r=(m[i]||[]).filter(j=>st.mb.includes(MN[k][j][0]));return r.length?r:null}
+function showMean(el){const k=el.dataset.k,c=cover(k,+el.dataset.i);if(!c)return;$('#mTtl').textContent=vt(k);
+ $('#mBody').innerHTML=c.map(j=>{const e=MN[k][j];return'<div class="me"><b>'+esc(e[1])+'</b><p>'+esc(e[2])+'</p><small>'+esc(bname(e[0]))+'</small></div>'}).join('');open('#sMean')}
+function showVm(k){$('#vmTtl').textContent=vt(k);const E=mEnt(k);
+ $('#vmBody').innerHTML=E.length?MB.filter(b=>st.mb.includes(b.id)).map(b=>{const r=E.filter(e=>e[0]==b.id);return r.length?'<h4>'+esc(b.n)+'</h4>'+r.map(e=>'<div class="me"><b>'+esc(e[1])+'</b><p>'+esc(e[2])+'</p></div>').join(''):''}).join(''):'<p class="note">'+T('لا توجد معاني لهذه الآية في الكتب المحددة')+'</p>';open('#sVm')}
+function buildMb(){const s=$('#mbL');s.innerHTML='';MB.forEach(b=>{const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.checked=st.mb.includes(b.id);
+ c.onchange=()=>{st.mb=MB.filter(x=>x.id==b.id?c.checked:st.mb.includes(x.id)).map(x=>x.id);save();build()};l.append(c,' '+b.n);s.appendChild(l)})}
+
+/* الثيمات */
+const TH=[['#0f4f45','#a8823f','#e4dfd0','#fffdf6','#17150f','#fbf6e8','#17150f'],['#2b5d4f','#b08d3c','#eceff1','#ffffff','#111111','#ffffff','#111111'],['#7a4e1d','#c58b3a','#e8dcc3','#fbf3e0','#2b2112','#f1e4c3','#2b2112'],['#1f6f5c','#3a9d84','#dcebe3','#f5fbf7','#10281f','#e3efe1','#10281f'],['#1e5a8a','#4a90c2','#dbe7f2','#f6faff','#0e2236','#eaf2fa','#0e2236'],['#8a2f4f','#c9708c','#f0dfe4','#fff8fa','#2f1018','#fbeef1','#2f1018'],['#5a4a8a','#8f7cc4','#e4e0f0','#fbfaff','#1d1736','#f1eefa','#1d1736'],['#4f5a1f','#8a9a3a','#e6e8d2','#fbfcf1','#1f2410','#f1f3df','#1f2410'],['#3d4650','#7a8793','#e2e5e8','#fafbfc','#15191d','#eef0f2','#15191d'],['#b0541f','#e08b4a','#f3e2d2','#fffaf4','#2d1608','#fdf0e1','#2d1608']].map(a=>[0,...a]).concat([['#10231e','#c9a24d','#0a0b0d','#1a1c1f','#e6dfc8','#14161a','#d8cfb3'],['#1c1c1c','#c9a24d','#000000','#0d0d0d','#dddddd','#000000','#cfc7ad'],['#0f2744','#5aa0e0','#070d17','#111c2b','#dbe6f3','#0c1522','#c9d6e6'],['#2a2d31','#d1a24a','#121315','#1d1f22','#e8e6df','#17181a','#dcd6c4'],['#3b2415','#d9a455','#130c07','#21160e','#f0e4d0','#1a110a','#e6d6bb'],['#123524','#7fbf8f','#07110b','#0f1c14','#dcebdf','#0c1710','#cfe2d3'],['#3a1f4d','#c08be0','#0e0713','#1a1023','#eadcf5','#140b1b','#ddcdea'],['#4a1a24','#e08a8a','#12070a','#200e13','#f3dcdf','#190a0d','#e8cdd0'],['#11474c','#5fc4c9','#071314','#0f2224','#d6eced','#0b1b1d','#c7e2e4'],['#3d2e1a','#d1a24a','#14100a','#221b11','#efe3c9','#1a140b','#e0d2b3']].map(a=>[1,...a]));
+const pg=()=>st.bg||[TH[st.th][6],TH[st.th][7]];
+function applyBg(){const t=TH[st.th],r=document.documentElement.style;
+ [['--green',1],['--gold',2],['--bg',3],['--card',4],['--txt',5]].forEach(([k,i])=>r.setProperty(k,t[i]));
+ const pb=pg();r.setProperty('--paper',pb[0]);r.setProperty('--pink',st.fc||pb[1]);r.setProperty('--fb',st.fb/100);
+ $('#dim').style.opacity=(1-st.br/100)*.88;$('#night').checked=!!t[0];$('#brR').value=st.br;$('#fbR').value=st.fb;$('#spR').value=st.sp;$('#asV').textContent=ar(st.sp);$('#fcol').value=st.fc||pb[1];
+ const mc=st.mc||(t[0]?'#6fb3ff':'#1565c0');r.setProperty('--mn',mc);$('#mcol').value=mc;$('#mnOn').checked=!!st.mo;
+ document.querySelector('meta[name=theme-color]').content=t[1];syncRg()}
+function selTheme(i){st.th=i;st.bg=null;st.fc=null;if(TH[i][0])st.dk=i;else st.lt=i;applyBg();save();buildTh();buildSw()}
+function buildTh(){['#thL','#thD'].forEach((id,k)=>{const s=$(id);s.innerHTML='';TH.forEach((x,i)=>{if(x[0]!=k)return;const b=document.createElement('button');b.style.background='linear-gradient(135deg,'+x[1]+' 50%,'+x[6]+' 50%)';b.className=i==st.th?'on':'';b.onclick=()=>selTheme(i);s.appendChild(b)})})}
+function lum(h){const n=parseInt(h.slice(1),16);return(.299*(n>>16)+.587*((n>>8)&255)+.114*(n&255))/255}
+function buildSw(){const s=$('#sw');s.innerHTML='';const d=document.createElement('button');d.style.background=TH[st.th][6];d.className=st.bg?'':'on';d.onclick=()=>{st.bg=null;applyBg();save();buildSw()};s.appendChild(d);
+ PAL.forEach(p=>{const b=document.createElement('button');b.style.background=p[0];b.className=st.bg&&st.bg[0]==p[0]?'on':'';b.onclick=()=>{st.bg=p;applyBg();save();buildSw()};s.appendChild(b)});
+ const c=document.createElement('input');c.type='color';c.value=pg()[0];c.oninput=()=>{st.bg=[c.value,lum(c.value)<.45?'#f1ead6':'#17150f'];applyBg();save();$$('#sw button').forEach(x=>x.className='')};s.appendChild(c)}
+$('#fcol').oninput=e=>{st.fc=e.target.value;applyBg();save()};$('#fcR').onclick=()=>{st.fc=null;applyBg();save()};
+/* أزرار ± للمنزلقات */
+const PCT=['aRng','brR','fbR','bw','g0','g1','dim','bx','by','nm.x','nm.y','rf.x','rf.y','sh.a'];
+function sv(r){if(!r._v)return;const k=r.dataset.k||r.id,n=parseFloat(r.value),v=Number.isInteger(n)?n:+n.toFixed(2);r._v.textContent=ar(v)+(PCT.includes(k)?(lang=='ar'?'٪':'%'):/ang$/.test(k)?'°':'')}
+const syncRg=()=>$$('input[type=range]').forEach(sv);
+function enh(){$$('input[type=range]').forEach(r=>{if(r._v)return;const w=document.createElement('div');w.className='rg';
+ const mk=(x,d)=>{const b=document.createElement('button');b.type='button';b.className='st';b.textContent=x;b.onclick=()=>{const s=+r.step||1;r.value=Math.min(+r.max,Math.max(+r.min,+(+r.value+d*s).toFixed(4)));r.dispatchEvent(new Event('input',{bubbles:true}))};return b};
+ const v=document.createElement('span');v.className='val';r._v=v;r.replaceWith(w);w.append(mk('−',-1),r,mk('+',1),v);r.addEventListener('input',()=>sv(r))})}
+/* الأيقونات */
+const ico=(s,n)=>{$(s).innerHTML='<svg><use href="#i-'+n+'"/></svg>'};
+const IC=[['#bIdx','menu'],['#bSet','settings'],['#bAs','arrow-down-to-line'],['#bFs','maximize'],['#bPrint','printer'],['#bOff','wifi'],['#mH','layers'],['#mV','list'],['#fcR','rotate-cw'],
+['#aPlay','play'],['#aPrev','skip-back'],['#aNext','skip-forward'],['#vX','x'],['#cX','x'],['#setS','chevron-right'],['#setE','chevron-left'],['#vTxt','copy'],['#vImg','image'],['#vDl','download'],['#vDs','film'],
+['#cPlay','volume-2'],['#cMn','book-open'],['#mX','x'],['#vmX','x'],['#mcR','rotate-cw'],['#cCopy','copy'],['#cShare','share-2'],['#cImg','download'],['#cDs','film'],['#asT','pause'],['#asM','minus'],['#asP','plus'],['#asX','x'],
+['#stX','x'],['#imF','upload'],['#imGo','search'],['#xPng','download'],['#xShP','share-2'],['#xVid','video'],['#xShV','share-2'],['#flip','rotate-cw'],
+['#sIdx [data-t=s]','book-open'],['#sIdx [data-t=j]','layers'],['#sIdx [data-t=p]','list'],
+['#stTabs [data-t=tx]','type'],['#stTabs [data-t=bg]','palette'],['#stTabs [data-t=sz]','ruler'],['#stTabs [data-t=lb]','hash'],['#stTabs [data-t=ex]','download'],
+['#modes [data-v=once]','play'],['#modes [data-v=cont]','skip-forward'],['#modes [data-v=v]','repeat-1'],['#modes [data-v=s]','repeat'],['#modes [data-v=r]','scissors'],
+['[data-k=al][data-v=r]','align-right'],['[data-k=al][data-v=c]','align-center'],['[data-k=al][data-v=l]','align-left'],
+['[data-k=bg][data-v=none]','x'],['[data-k=bg][data-v=solid]','palette'],['[data-k=bg][data-v=grad]','layers'],['[data-k=bg][data-v=pat]','sparkles'],['[data-k=bg][data-v=img]','image'],
+['[data-k=asrc][data-v=none]','x'],['[data-k=asrc][data-v=ayat]','volume-2'],['[data-k=asrc][data-v=file]','music'],
+['[data-k=tgt][data-v=txt]','type'],['[data-k=tgt][data-v=nm]','book-open'],['[data-k=tgt][data-v=rf]','hash']];
+function decorate(){IC.forEach(([s,n])=>$$(s).forEach(b=>{if(b.querySelector('svg'))return;const x=b.textContent.trim();b.classList.add('ib');b.innerHTML='<svg><use href="#i-'+n+'"/></svg>'+(x&&!/^[▶⏸⏮⏭✕+−⇣]$/.test(x)?'<span>'+x+'</span>':'')}))}
+
+/* الصفحات */
+function pageEl(n){
+ const d=DATA[n],el=document.createElement('div');el.className='page';el.dataset.p=n;
+ let h='<div class="ph"><span>'+T('الجزء ')+ar(juzOf(n))+'</span><span>'+T('سورة ')+sName(d.s)+'</span></div><div class="lines'+(d.l.length<15?' few':'')+'">';
+ for(const L of d.l){
+  if(L.t=='h')h+='<div class="ln hd"><span class="w" style="font-family:F0;font-size:calc(var(--pw)*.0694)">'+L.c+'</span></div>';
+  else if(L.t=='b')h+='<div class="ln"><span class="w" style="font-family:F'+L.f+';font-size:calc(var(--pw)*.0559)">'+L.c+'</span></div>';
+  else{const R=L.e>=14.5?(.9/L.e):.0559;
+   h+='<div class="ln" style="font-size:calc(var(--pw)*'+R.toFixed(5)+');font-family:F'+L.f+'">'+L.w.map(w=>'<span class="w'+(w[2]==0&&cover(w[1],w[4])?' mn':'')+'"'+(w[2]==2?'':' data-k="'+w[1]+'"')+(w[2]==0?' data-i="'+w[4]+'"':'')+'>'+w[0]+'</span>').join('')+'</div>'}}
+ el.innerHTML=h+'</div><div class="pf">'+ar(n)+'</div>';
+ markPlay(el);return el}
+const pager=$('#pager');let rio,cio,lock=false,ratios={};
+function build(){
+ pager.className=st.m;pager.innerHTML='';ratios={};
+ for(let n=1;n<=MAXP;n++){const s=document.createElement('section');s.className='slide';s.dataset.p=n;pager.appendChild(s)}
+ rio&&rio.disconnect();cio&&cio.disconnect();
+ rio=new IntersectionObserver(es=>es.forEach(e=>{const s=e.target;if(e.isIntersecting){if(!s.firstChild)s.appendChild(pageEl(+s.dataset.p))}else s.textContent=''}),{root:pager,rootMargin:st.m=='h'?'0px 200% 0px 200%':'200% 0px 200% 0px'});
+ cio=new IntersectionObserver(es=>{es.forEach(e=>{ratios[e.target.dataset.p]=e.intersectionRatio});if(lock)return;let b=0,bp=st.p;for(const p in ratios)if(ratios[p]>b){b=ratios[p];bp=+p}if(b>0)setPage(bp)},{root:pager,threshold:[0,.2,.4,.6,.8,1]});
+ $$('.slide').forEach(s=>{rio.observe(s);cio.observe(s)});size()}
+let baseH=0,lastW=0;
+function size(){
+ const W=innerWidth;if(W!=lastW||innerHeight>baseH){baseH=innerHeight;lastW=W}
+ let pw=Math.min(pager.clientWidth-16,780);
+ if(W<=baseH)pw=Math.min(pw,(baseH-48-20)/1.6); /* الارتفاع لا يتغير مع لوحة المفاتيح */
+ document.documentElement.style.setProperty('--pw',Math.max(240,pw)+'px');go(st.p,false)}
+function go(n,smooth){n=Math.max(1,Math.min(MAXP,n|0||1));lock=true;const s=pager.querySelector('.slide[data-p="'+n+'"]');
+ if(s)s.scrollIntoView({behavior:smooth?'smooth':'instant',block:'start',inline:'center'});setPage(n,true);setTimeout(()=>{lock=false},smooth?700:150)}
+function setPage(n,f){if(n==st.p&&!f)return;st.p=n;save();title()}
+function title(){$('#ttl').textContent=T('صفحة ')+ar(st.p)+' · '+T('الجزء ')+ar(juzOf(st.p))+' · '+sName(DATA[st.p].s)}
+function flash(t){$('#ttl').textContent=t;setTimeout(title,1800)}
+
+/* الفهرس */
+let tab='s';
+function idx(){const b=$('#idxBody');$$('#sIdx .tabs button').forEach(x=>x.classList.toggle('on',x.dataset.t==tab));let h='';
+ if(tab=='s')for(const s of SURAHS)h+='<button class="row" data-g="'+s.p+'"><b>'+ar(s.id)+'</b><span>'+s.n+'</span><i>'+ar(s.c)+' '+T('آية')+' · '+T('ص')+' '+ar(s.p)+'</i></button>';
+ if(tab=='j')JUZ.forEach((p,i)=>{h+='<button class="row" data-g="'+p+'"><b>'+ar(i+1)+'</b><span>'+T('الجزء ')+ar(i+1)+'</span><i>'+T('ص')+' '+ar(p)+'</i></button>'});
+ if(tab=='p'){h='<div class="grid">';for(let p=1;p<=MAXP;p++)h+='<button data-g="'+p+'"'+(p==st.p?' class="cur"':'')+'>'+ar(p)+'</button>';h+='</div>'}
+ b.innerHTML=h;const c=b.querySelector('.cur');c&&c.scrollIntoView({block:'center'})}
+const open=id=>$(id).classList.add('on'),shut=id=>$(id).classList.remove('on');
+$('#bIdx').onclick=()=>{idx();open('#sIdx')};
+$$('#sIdx .tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;idx()});
+$('#idxBody').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;shut('#sIdx');go(+b.dataset.g,false)};
+$$('.sheet').forEach(s=>s.addEventListener('click',e=>{if(e.target===s&&s.id!='vbar'){s.classList.remove('on');if(s.id=='sCtx')clrSel()}}));
+
+/* العرض */
+function ui(){document.documentElement.style.setProperty('--a',st.a/100);$('#aRng').value=st.a;$('#mH').classList.toggle('on',st.m=='h');$('#mV').classList.toggle('on',st.m=='v')}
+$('#bSet').onclick=()=>{$('#pFrom').value=$('#pTo').value=st.p;$('#pFrom').max=$('#pTo').max=MAXP;buildSw();buildTh();buildMb();$('#lang').value=lang;syncRg();open('#sSet')};
+$('#aRng').oninput=e=>{st.a=+e.target.value;ui();save()};
+$('#mH').onclick=()=>{st.m='h';ui();build()};$('#mV').onclick=()=>{st.m='v';ui();build()};
+const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement,de=document.documentElement;
+if(!(de.requestFullscreen||de.webkitRequestFullscreen))$('#bFs').style.display='none';
+$('#bFs').onclick=()=>{fsEl()?(document.exitFullscreen||document.webkitExitFullscreen).call(document):(de.requestFullscreen||de.webkitRequestFullscreen).call(de)};
+['fullscreenchange','webkitfullscreenchange'].forEach(e=>document.addEventListener(e,()=>setTimeout(size,150)));
+$('#bPrint').onclick=async()=>{let a=Math.max(1,Math.min(MAXP,+$('#pFrom').value||st.p)),b=Math.max(1,Math.min(MAXP,+$('#pTo').value||a));if(b<a)[a,b]=[b,a];
+ const P=$('#print');P.innerHTML='';for(let n=a;n<=b;n++)P.appendChild(pageEl(n));shut('#sSet');P.offsetHeight;
+ await document.fonts.ready;setTimeout(()=>window.print(),400)};
+addEventListener('afterprint',()=>{$('#print').innerHTML=''});
+$('#bOff').onclick=async()=>{const m=$('#offMsg');if(!('serviceWorker' in navigator)||!/^https?:/.test(location.protocol)){m.textContent=T('الوضع الأوفلاين الكامل يحتاج فتح التطبيق من عنوان http(s) (انظر ملف README).');return}
+ const c=await caches.keys();const n=c.length?(await (await caches.open(c[0])).keys()).length:0;m.textContent=T('ملفات محفوظة للأوفلاين: ')+ar(n)+' / '+ar(50)+(n>=50?' — '+T('التطبيق يعمل بدون إنترنت.'):' — '+T('استمر بالتصفح ليكتمل.'))};
+
+/* الصوت */
+const au=new Audio();au.preload='auto';let pl=null;
+const recSel=$('#rec');REC.forEach(g=>{const o=document.createElement('optgroup');o.label=g[0];g[1].forEach(r=>{const x=document.createElement('option');x.value=r[1];x.textContent=r[0];o.appendChild(x)});recSel.appendChild(o)});
+recSel.value=st.rec;recSel.onchange=()=>{st.rec=recSel.value;save();if(pl)playAt()};
+const aUrl=k=>{const[s,a]=k.split(':');return 'https://everyayah.com/data/'+st.rec+'/'+String(s).padStart(3,'0')+String(a).padStart(3,'0')+'.mp3'};
+let cur=null;
+function modesUi(){$$('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.v==st.mode));$('#rN').value=st.n;
+ $('#rgTx').textContent=st.rs?(T('المقطع: ')+ar(st.rs.replace(':','/'))+' ← '+ar((st.re||st.rs).replace(':','/'))):T('المقطع غير محدد')}
+$('#modes').onclick=e=>{const b=e.target.closest('button');if(!b)return;st.mode=b.dataset.v;save();modesUi()};
+$('#rN').onchange=e=>{st.n=Math.max(0,Math.min(99,+e.target.value||0));save()};
+$('#setS').onclick=()=>{st.rs=cur;if(!st.re||IDX[st.re]<IDX[cur])st.re=cur;save();modesUi()};
+$('#setE').onclick=()=>{st.re=cur;if(!st.rs||IDX[st.rs]>IDX[cur])st.rs=cur;save();modesUi()};
+function startPlay(k){const m=st.mode,s=+k.split(':')[0];let list,i=0,loops=1;
+ if(m=='once')list=[k];else if(m=='cont'){list=ORDER.slice(IDX[k],IDX[s+':'+CNT[s]]+1)}
+ else if(m=='v'){list=[k];loops=st.n}
+ else if(m=='s'){list=ORDER.slice(IDX[s+':1'],IDX[s+':'+CNT[s]]+1);i=IDX[k]-IDX[s+':1'];loops=st.n}
+ else{if(!st.rs){st.rs=st.re=k}list=ORDER.slice(IDX[st.rs],IDX[st.re]+1);loops=st.n}
+ pl={list,i,loops,loop:0,first:true};playAt()}
+function playAt(){if(!pl)return;const k=pl.list[pl.i];au.src=aUrl(k);au.play().catch(()=>{});pl.k=k;markPlay();
+ if(PAGEOF[k]!=st.p&&!pl.first)go(PAGEOF[k],true);pl.first=false;ico('#aPlay','pause');
+ const nx=pl.list[pl.i+1];if(nx){const pre=new Audio();pre.preload='auto';pre.src=aUrl(nx)}}
+au.onended=()=>{if(!pl)return;pl.i++;if(pl.i>=pl.list.length){pl.loop++;if(pl.loops&&pl.loop>=pl.loops){stopPlay();return}pl.i=0}playAt()};
+au.onerror=()=>{if(pl){stopPlay();flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
+function stopPlay(){au.pause();pl=null;ico('#aPlay','play');markPlay()}
+function markPlay(root){const k=pl&&pl.k;(root?[root]:[document]).forEach(r=>r.querySelectorAll('.w.play').forEach(x=>x.classList.remove('play')));if(k)(root?root:document).querySelectorAll('.w[data-k="'+k+'"]').forEach(x=>x.classList.add('play'))}
+$('#aPlay').onclick=()=>{if(pl&&!au.paused){au.pause();ico('#aPlay','play')}else if(pl){au.play();ico('#aPlay','pause')}else startPlay(cur)};
+const step=d=>{const j=IDX[cur]+d;if(j<0||j>=ORDER.length)return;pick(ORDER[j]);if(PAGEOF[cur]!=st.p)go(PAGEOF[cur],true);startPlay(cur)};
+$('#aPrev').onclick=()=>step(-1);$('#aNext').onclick=()=>step(1);
+
+/* تحديد الآية */
+function pick(k){$$('.w.sel').forEach(x=>x.classList.remove('sel'));cur=k;
+ if(!k){shut('#vbar');return}
+ $$('.w[data-k="'+k+'"]').forEach(x=>x.classList.add('sel'));
+ $('#vTtl').textContent=vt(k);modesUi();open('#vbar')}
+const clrSel=()=>{if(!$('#vbar').classList.contains('on'))$$('.w.sel').forEach(x=>x.classList.remove('sel'))};
+function toggleChrome(){const h=!document.body.classList.contains('nc');document.body.classList.toggle('nc',h);
+ if(h){$$('.sheet').forEach(s=>s.classList.remove('on'));$$('.w.sel').forEach(x=>x.classList.remove('sel'))}else if(pl)open('#vbar');
+ setTimeout(()=>go(st.p,false),80)}
+let lpT=0,lpF=0,lpX=0,lpY=0;
+pager.addEventListener('pointerdown',e=>{lpF=0;const w=e.target.closest('.w[data-k]');if(!w)return;lpX=e.clientX;lpY=e.clientY;clearTimeout(lpT);lpT=setTimeout(()=>{lpT=0;lpF=1;ctxOpen(w.dataset.k)},480)});
+pager.addEventListener('pointermove',e=>{if(lpT&&Math.hypot(e.clientX-lpX,e.clientY-lpY)>10){clearTimeout(lpT);lpT=0}});
+['pointerup','pointercancel'].forEach(x=>pager.addEventListener(x,()=>{clearTimeout(lpT);lpT=0}));
+pager.addEventListener('contextmenu',e=>e.preventDefault());
+pager.addEventListener('click',e=>{if(lpF){lpF=0;return}const w=e.target.closest('.w.mn');if(w){showMean(w);return}toggleChrome()});
+function ctxOpen(k){$$('.w.sel').forEach(x=>x.classList.remove('sel'));cur=k;$$('.w[data-k="'+k+'"]').forEach(x=>x.classList.add('sel'));$('#cTtl').textContent=vt(k);open('#sCtx');if(navigator.vibrate)navigator.vibrate(12)}
+$('#cX').onclick=()=>{shut('#sCtx');clrSel()};
+$('#cMn').onclick=()=>{shut('#sCtx');showVm(cur);clrSel()};
+$('#mX').onclick=()=>shut('#sMean');$('#vmX').onclick=()=>shut('#sVm');
+$('#mnOn').onchange=e=>{st.mo=e.target.checked?1:0;save();build()};$('#mcol').oninput=e=>{st.mc=e.target.value;applyBg();save()};$('#mcR').onclick=()=>{st.mc=null;applyBg();save()};
+$('#cPlay').onclick=()=>{shut('#sCtx');pick(cur);startPlay(cur)};
+$('#cCopy').onclick=()=>{shut('#sCtx');$('#vTxt').onclick();clrSel()};
+$('#cImg').onclick=()=>{shut('#sCtx');$('#vDl').onclick();clrSel()};
+$('#cDs').onclick=()=>{shut('#sCtx');$('#vDs').onclick()};
+$('#cShare').onclick=async()=>{shut('#sCtx');const x=verseText(cur);clrSel();if(navigator.share)try{await navigator.share({text:x});return}catch(e){if(e.name=='AbortError')return}$('#vTxt').onclick()};
+$('#vX').onclick=()=>{stopPlay();pick(null)};
+$('#vTxt').onclick=async()=>{const t=verseText(cur);try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove()}flash(T('تم نسخ النص'))};
+async function fontsFor(us){await Promise.all([...new Set([0,...us.map(u=>u.f)])].map(f=>document.fonts.load('40px F'+f,'\uF100')))}
+/* رسم النص على canvas */
+const cw=(ctx,u,fs)=>{ctx.font=fs+'px F'+u.f;return[...u.c].map(ch=>ctx.measureText(ch).width)};
+function lay(ctx,units,fs,maxW,brk){const gap=fs*.14,L=[];let cr=[],w=0;
+ for(const u of units){const ws=cw(ctx,u,fs),uw=ws.reduce((a,b)=>a+b,0);
+  if(cr.length&&w+gap+uw>maxW){L.push({c:cr,w});cr=[];w=0}
+  w+=(cr.length?gap:0)+uw;cr.push({u,ws,uw});if(brk&&brk[u.i]){L.push({c:cr,w});cr=[];w=0}}
+ if(cr.length)L.push({c:cr,w});return L}
+function paint(ctx,L,fs,left,right,cy,al,ls){const rh=fs*ls,gap=fs*.14,top=cy-L.length*rh/2;ctx.textAlign='left';ctx.textBaseline='alphabetic';
+ L.forEach((ln,i)=>{let xr=al=='r'?right:al=='l'?left+ln.w:(left+right)/2+ln.w/2;const by=top+i*rh+rh*.68;
+  for(const it of ln.c){ctx.font=fs+'px F'+it.u.f;let x=xr;[...it.u.c].forEach((ch,j)=>{x-=it.ws[j];ctx.fillText(ch,x,by)});xr-=it.uw+gap}})}
+const dl=(b,n)=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)};
+async function quickPng(){const us=WU[cur].map((u,i)=>({...u,i}));await fontsFor(us);const fs=170,pad=fs*.8,c=document.createElement('canvas'),x=c.getContext('2d');
+ const L=lay(x,us,fs,fs*9,null),rh=fs*2.15;c.width=Math.ceil(Math.max(...L.map(l=>l.w))+pad*2);c.height=Math.ceil(L.length*rh+pad);
+ if(!$('#vTr').checked){x.fillStyle=pg()[0];x.fillRect(0,0,c.width,c.height)}
+ x.fillStyle=$('#vTr').checked?$('#vCol').value:(lum(pg()[0])<.45?pg()[1]:$('#vCol').value);paint(x,L,fs,pad,c.width-pad,c.height/2,'c',2.15);
+ return new Promise(r=>c.toBlob(r,'image/png'))}
+$('#vImg').onclick=async()=>{const b=await quickPng();try{await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);flash(T('تم نسخ الصورة'))}catch(e){dl(b,'ayah.png');flash(T('تم حفظ الصورة'))}};
+$('#vDl').onclick=async()=>{dl(await quickPng(),'ayah-'+cur.replace(':','-')+'.png');flash(T('تم حفظ الصورة'))};
+
+/* استوديو التصميم */
+const RAT={'1:1':[1,1],'4:5':[4,5],'3:4':[3,4],'2:3':[2,3],'9:16':[9,16],'16:9':[16,9],'4:3':[4,3],'3:2':[3,2],'21:9':[21,9]};
+const D={s:2,a1:255,a2:255,cut0:0,cut1:0,brk:{},fs:6.4,bw:84,bx:50,by:50,al:'c',col:'#17150f',ls:2.15,bg:'solid',c1:'#fbf6e8',c2:'#e3cf98',ang:160,g0:0,g1:100,img:null,dim:25,ratio:'1:1',cw:1080,ch:1080,res:2,
+ nm:{on:1,x:50,y:13,size:9,col:'#0f4f45'},rf:{on:1,x:50,y:89,size:4.2,col:'#0f4f45'},tgt:'txt',asrc:'none',vsec:8,afile:null,exact:0,sh:{on:0,col:'#000000',a:55,ang:135,d:4,b:6}};
+const gp=(o,p)=>p.split('.').reduce((x,k)=>x[k],o),sp=(o,p,v)=>{const a=p.split('.'),l=a.pop();a.reduce((x,k)=>x[k],o)[l]=v};
+const dims=()=>{if(D.exact&&D.ratio=='c')return[Math.min(8000,D.cw||1),Math.min(8000,D.ch||1)];const[a,b]=D.ratio=='c'?[D.cw||1,D.ch||1]:RAT[D.ratio],S=1080;return a>=b?[Math.round(S*a/b),S]:[S,Math.round(S*b/a)]};
+const allU=()=>{const o=[];for(let a=D.a1;a<=D.a2;a++)(WU[D.s+':'+a]||[]).forEach(u=>o.push({...u,k:D.s+':'+a}));o.forEach((u,i)=>u.i=i);return o};
+const kept=()=>{const a=allU();return a.slice(D.cut0,a.length-D.cut1)};
+SURAHS.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=ar(s.id)+'. '+s.n;$('#dS').appendChild(o)});
+function refresh(){$$('#studio [data-k]').forEach(el=>{const v=gp(D,el.dataset.k);if(el.tagName=='BUTTON')el.classList.toggle('on',String(v)==el.dataset.v);else if(el.type=='checkbox')el.checked=!!v;else el.value=v});syncRg()}
+const PRE=[['iPhone',1179,2556],['iPhone Pro',1206,2622],['iPhone Pro Max',1320,2868]];
+PRE.forEach(p=>{const b=document.createElement('button');b.innerHTML='<b style="font-size:12px">'+p[0]+'</b><br><small>'+p[1]+'×'+p[2]+'</small>';b.onclick=()=>{D.ratio='c';D.cw=p[1];D.ch=p[2];D.exact=1;D.res=1;after('ratio')};$('#presets').appendChild(b)});
+$('#flip').onclick=()=>{if(D.ratio!='c'){const[a,b]=RAT[D.ratio];D.cw=b;D.ch=a;D.ratio='c'}else[D.cw,D.ch]=[D.ch,D.cw];after('ratio')};
+function limits(){const n=allU().length;D.cut0=Math.min(D.cut0,Math.max(0,n-1-D.cut1));D.cut1=Math.min(D.cut1,Math.max(0,n-1-D.cut0));
+ const a=$('[data-k=cut0]'),b=$('[data-k=cut1]');a.max=Math.max(0,n-1-D.cut1);b.max=Math.max(0,n-1-D.cut0);a.value=D.cut0;b.value=D.cut1;$('#c0v').textContent=ar(D.cut0);$('#c1v').textContent=ar(D.cut1);
+ const ch=$('#chips');ch.innerHTML='';kept().forEach(u=>{const s=document.createElement('span');s.className='chip'+(D.brk[u.i]?' br':'');s.textContent=u.t;s.onclick=()=>{D.brk[u.i]=!D.brk[u.i];s.classList.toggle('br');upd()};ch.appendChild(s)});
+ $('#resTx').textContent=T('الناتج: ')+outDims(D.res).join('×')+' '+T('بكسل')}
+function outDims(sc){const[W,H]=dims();while(W*H*sc*sc>16.7e6&&sc>1)sc-=.25;return[Math.round(W*sc),Math.round(H*sc)]}
+async function autoFit(){const us=kept();if(!us.length)return;await fontsFor(us);const[W,H]=dims(),S=Math.min(W,H),x=document.createElement('canvas').getContext('2d');
+ for(let f=9;f>=2;f-=.2){const fs=S*f/100,L=lay(x,us,fs,W*D.bw/100,D.brk);if(L.length*fs*D.ls<=H*(D.nm.on||D.rf.on?.66:.86)){D.fs=+f.toFixed(1);break}D.fs=2}}
+function after(k){if(k=='s'){D.a1=D.a2=1;D.cut0=D.cut1=0;D.brk={}}
+ if(k=='s'||k=='a1'||k=='a2'){const m=CNT[D.s];D.a1=Math.max(1,Math.min(m,D.a1|0||1));D.a2=Math.max(D.a1,Math.min(m,D.a2|0||D.a1));if(k!='s'){D.cut0=D.cut1=0;D.brk={}}}
+ limits();refresh();if(['s','s0','a1','a2','cut0','cut1','ratio','bw','ls'].includes(k))autoFit().then(()=>{refresh();upd()});else upd()}
+$$('#studio [data-k]').forEach(el=>{const k=el.dataset.k;
+ if(el.tagName=='BUTTON')el.onclick=()=>{const v=el.dataset.v;sp(D,k,isNaN(v)?v:+v);if(k=='ratio')D.exact=0;after(k)};
+ else el.oninput=()=>{sp(D,k,el.type=='checkbox'?el.checked:(el.type=='range'||el.type=='number')?+el.value:(k=='s'?+el.value:el.value));after(k)}});
+$$('#stTabs button').forEach(b=>b.onclick=()=>{$$('#stTabs button').forEach(x=>x.classList.toggle('on',x==b));$$('.tp').forEach(t=>t.classList.toggle('on',t.id=='tp-'+b.dataset.t))});
+$('#vDs').onclick=()=>{const[s,a]=cur.split(':').map(Number);shut('#vbar');D.s=s;D.a1=D.a2=a;D.cut0=D.cut1=0;D.brk={};D.rf.on=1;$('#studio').classList.add('on');after('s0');setTimeout(()=>{D.a1=D.a2=a;after('a1')},0)};
+$('#stX').onclick=()=>$('#studio').classList.remove('on');
+function pat(x,W,H,c1,c2){x.fillStyle=c1;x.fillRect(0,0,W,H);const s=Math.min(W,H)/5.5;x.strokeStyle=c2;x.lineWidth=s/30;x.globalAlpha=.6;
+ for(let yy=-s;yy<H+s;yy+=s)for(let xx=-s;xx<W+s;xx+=s){const cx=xx+s/2,cy=yy+s/2,r=s*.42;for(const a of[0,Math.PI/4]){x.save();x.translate(cx,cy);x.rotate(a);x.strokeRect(-r,-r,2*r,2*r);x.restore()}x.beginPath();x.arc(cx,cy,r*.5,0,7);x.stroke()}x.globalAlpha=1}
+const rgba=(h,a)=>{const n=parseInt(h.slice(1),16);return'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a/100+')'};
+function shOn(x,S){if(!D.sh.on)return;const k=x.getTransform().a*S/1080,a=D.sh.ang*Math.PI/180;x.shadowColor=rgba(D.sh.col,D.sh.a);x.shadowOffsetX=Math.cos(a)*D.sh.d*k;x.shadowOffsetY=Math.sin(a)*D.sh.d*k;x.shadowBlur=D.sh.b*k}
+function shOff(x){x.shadowColor='transparent';x.shadowBlur=0;x.shadowOffsetX=x.shadowOffsetY=0}
+function draw(x,W,H,pv){const S=Math.min(W,H);x.clearRect(0,0,W,H);
+ if(D.bg=='solid'){x.fillStyle=D.c1;x.fillRect(0,0,W,H)}
+ else if(D.bg=='grad'){const t=D.ang*Math.PI/180,vx=Math.sin(t),vy=-Math.cos(t),L=Math.abs(W*vx)+Math.abs(H*vy),g=x.createLinearGradient(W/2-vx*L/2,H/2-vy*L/2,W/2+vx*L/2,H/2+vy*L/2),a=Math.min(D.g0,D.g1)/100,b=Math.max(D.g0,D.g1)/100;
+  g.addColorStop(0,D.c1);g.addColorStop(a,D.c1);g.addColorStop(b,D.c2);g.addColorStop(1,D.c2);x.fillStyle=g;x.fillRect(0,0,W,H)}
+ else if(D.bg=='pat')pat(x,W,H,D.c1,D.c2);
+ else if(D.bg=='img'&&D.img){const im=D.img,r=Math.max(W/im.width,H/im.height),w=im.width*r,h=im.height*r;x.drawImage(im,(W-w)/2,(H-h)/2,w,h);if(D.dim){x.fillStyle='rgba(0,0,0,'+D.dim/100+')';x.fillRect(0,0,W,H)}}
+ const us=kept();if(us.length){const fs=S*D.fs/100,bw=W*D.bw/100,L=lay(x,us,fs,bw,D.brk);x.fillStyle=D.col;shOn(x,S);paint(x,L,fs,W*D.bx/100-bw/2,W*D.bx/100+bw/2,H*D.by/100,D.al,D.ls);shOff(x);
+  if(pv&&D.tgt=='txt'){x.save();x.setLineDash([12,10]);x.strokeStyle='#0f4f4599';x.lineWidth=2;const bh=L.length*fs*D.ls;x.strokeRect(W*D.bx/100-bw/2,H*D.by/100-bh/2,bw,bh);x.restore()}}
+ if(D.nm.on){const z=S*D.nm.size/100;x.font=z+'px F0';x.fillStyle=D.nm.col;x.textAlign='center';x.textBaseline='alphabetic';x.fillText(String.fromCodePoint(0xF100+D.s-1),W*D.nm.x/100,H*D.nm.y/100+z*.164)}
+ if(D.rf.on){const z=S*D.rf.size/100;x.font='bold '+z+'px "Noto Naskh Arabic","Amiri","Geeza Pro","Segoe UI",Tahoma,sans-serif';x.fillStyle=D.rf.col;x.textAlign='center';x.textBaseline='middle';x.direction='rtl';
+  x.fillText(D.a1==D.a2?'الآية '+ar(D.a1):'الآيات '+ar(D.a1)+' - '+ar(D.a2),W*D.rf.x/100,H*D.rf.y/100);x.direction='inherit'}}
+let raf=0,rv=0;const upd=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(async()=>{const v=++rv;await fontsFor(kept());if(v!=rv)return;const[W,H]=dims(),c=$('#pv'),sc=.6;c.width=Math.round(W*sc);c.height=Math.round(H*sc);const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,true)})};
+const drag={};
+$('#pv').onpointerdown=e=>{e.target.setPointerCapture(e.pointerId);drag.on=1;drag.x=e.clientX;drag.y=e.clientY};
+$('#pv').onpointermove=e=>{if(!drag.on)return;const r=e.target.getBoundingClientRect(),dx=(e.clientX-drag.x)/r.width*100,dy=(e.clientY-drag.y)/r.height*100;drag.x=e.clientX;drag.y=e.clientY;
+ const o=D.tgt=='txt'?{get x(){return D.bx},set x(v){D.bx=v},get y(){return D.by},set y(v){D.by=v}}:D[D.tgt];o.x=Math.max(0,Math.min(100,o.x+dx));o.y=Math.max(0,Math.min(100,o.y+dy));refresh();upd()};
+$('#pv').onpointerup=$('#pv').onpointercancel=()=>{drag.on=0};
+async function exportBlob(){await fontsFor(kept());const[W,H]=dims(),[ow]=outDims(D.res),sc=ow/W,c=document.createElement('canvas');c.width=ow;c.height=outDims(D.res)[1];const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,false);return new Promise(r=>c.toBlob(r,'image/png'))}
+async function share(b,n,t){const f=new File([b],n,{type:t});if(navigator.canShare&&navigator.canShare({files:[f]}))try{await navigator.share({files:[f]});return}catch(e){if(e.name=='AbortError')return}dl(b,n)}
+$('#xPng').onclick=async()=>dl(await exportBlob(),'ayah-design.png');
+$('#xShP').onclick=async()=>share(await exportBlob(),'ayah-design.png','image/png');
+$('#imF').onclick=()=>$('#imFile').click();
+function setImg(u,cr){const im=new Image();if(!u.startsWith('blob:'))im.crossOrigin='anonymous';im.onload=()=>{D.img=im;D.bg='img';refresh();upd();if(cr)$('#imCr').textContent=cr};im.onerror=()=>{$('#imCr').textContent='تعذّر تحميل الصورة (إنترنت أو منع CORS).'};im.src=u}
+$('#imFile').onchange=e=>{const f=e.target.files[0];if(f)setImg(URL.createObjectURL(f))};
+$('#imGo').onclick=async()=>{const g=$('#gal');g.innerHTML='...';try{const u='https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=18&gsrsearch='+encodeURIComponent($('#imQ').value+' filetype:bitmap')+'&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=500';
+ const j=await(await fetch(u)).json(),ps=Object.values((j.query||{}).pages||{});g.innerHTML='';if(!ps.length)g.textContent=T('لا نتائج');
+ ps.forEach(p=>{const i=p.imageinfo&&p.imageinfo[0];if(!i)return;const m=i.extmetadata||{},im=document.createElement('img');im.src=i.thumburl;im.loading='lazy';
+  im.onclick=()=>{const big=i.width>1920?i.thumburl.replace(/\/\d+px-/,'/1920px-'):i.url,strip=s=>(s||'').replace(/<[^>]*>/g,'');setImg(big,'المصدر: ويكيميديا كومنز — '+strip(m.Artist&&m.Artist.value)+' — '+strip(m.LicenseShortName&&m.LicenseShortName.value))};g.appendChild(im)})}catch(e){g.textContent='تعذّر البحث — يلزم اتصال بالإنترنت.'}};
+$('#auF').onchange=e=>{D.afile=e.target.files[0]||null;if(D.afile){D.asrc='file';refresh()}};
+async function exportVideo(){const msg=$('#exMsg');await fontsFor(kept());
+ const[W0,H0]=dims(),sc=Math.min(1,1920/Math.max(W0,H0)),W=Math.round(W0*sc/2)*2,H=Math.round(H0*sc/2)*2;
+ const base=document.createElement('canvas');base.width=W;base.height=H;const bx=base.getContext('2d');bx.scale(W/W0,H/H0);draw(bx,W0,H0,false);
+ const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');rx.drawImage(base,0,0);
+ const stream=rc.captureStream(30);let dur=D.vsec,ac=null,bufs=[];
+ if(D.asrc!='none'){ac=new(window.AudioContext||window.webkitAudioContext)();msg.textContent=T('جارٍ تجهيز الصوت...');
+  if(D.asrc=='file'){if(!D.afile)throw new Error(T('اختر ملفاً صوتياً أولاً'));bufs=[await ac.decodeAudioData(await D.afile.arrayBuffer())]}
+  else for(let a=D.a1;a<=D.a2;a++){const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw new Error(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}
+  dur=bufs.reduce((s,b)=>s+b.duration,0)+.25*(bufs.length-1);const dest=ac.createMediaStreamDestination();dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
+  let t=ac.currentTime+.3;bufs.forEach(b=>{const s=ac.createBufferSource();s.buffer=b;s.connect(dest);s.start(t);t+=b.duration+.25})}
+ const mt=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t));
+ if(!mt)throw new Error(T('المتصفح لا يدعم تسجيل الفيديو'));
+ const mr=new MediaRecorder(stream,{mimeType:mt,videoBitsPerSecond:8e6}),ch=[];mr.ondataavailable=e=>e.data.size&&ch.push(e.data);
+ return new Promise(res=>{mr.onstop=()=>{ac&&ac.close();res({b:new Blob(ch,{type:mt.split(';')[0]}),ext:mt.includes('mp4')?'mp4':'webm'})};mr.start(200);const t0=performance.now()+300;
+  (function f(){const el=(performance.now()-t0)/1000;rx.drawImage(base,0,0);msg.textContent=T('جارٍ التسجيل... ')+ar(Math.max(0,Math.round(dur-el)))+T(' ث');if(el<dur+.3)requestAnimationFrame(f);else mr.stop()})()})}
+let lastV=null;
+$('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';dl(lastV.b,'ayah-video.'+lastV.ext)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
+$('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();await share(lastV.b,'ayah-video.'+lastV.ext,lastV.b.type)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
+
+/* السطوع */
+const setS=(k,v)=>{st[k]=v;applyBg();save()};
+$('#night').onchange=()=>selTheme(TH[st.th][0]?st.lt:st.dk);
+$('#brR').oninput=e=>setS('br',+e.target.value);$('#fbR').oninput=e=>setS('fb',+e.target.value);
+/* التمرير التلقائي */
+let asOn=false,asRun=true,pos=0,tch=false,lastMove=0,tPrev=0;
+function asLoop(t){if(!asOn)return;const dt=Math.min(.1,(t-tPrev)/1000||0);tPrev=t;const c=pager.scrollTop,ext=Math.abs(c-pos)>1.2;
+ if(ext||tch)lastMove=t;
+ if(!asRun||tch||ext||t-lastMove<220){pos=c}
+ else{const max=pager.scrollHeight-pager.clientHeight;pos=Math.min(max,pos+st.sp*1.5*(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pw'))/360)*dt);pager.scrollTop=pos;if(pos>=max-1){asStop();flash(T('انتهى المصحف'));return}}
+ requestAnimationFrame(asLoop)}
+function asStart(){if(st.m!='v'){st.m='v';ui();build()}asOn=true;asRun=true;pos=pager.scrollTop;lastMove=0;tPrev=performance.now();$('#as').classList.add('on');ico('#asT','pause');requestAnimationFrame(asLoop)}
+function asStop(){asOn=false;$('#as').classList.remove('on');}
+$('#bAs').onclick=()=>{shut('#sSet');asOn?asStop():asStart()};$('#asX').onclick=asStop;
+$('#asT').onclick=()=>{asRun=!asRun;ico('#asT',asRun?'pause':'play');pos=pager.scrollTop};
+const spd=d=>{st.sp=Math.max(1,Math.min(100,st.sp+d));applyBg();save()};
+$('#asM').onclick=()=>spd(st.sp>10?-5:-1);$('#asP').onclick=()=>spd(st.sp>=10?5:1);$('#spR').oninput=e=>setS('sp',+e.target.value);
+['touchstart','pointerdown','mousedown'].forEach(e=>pager.addEventListener(e,()=>{tch=true},{passive:true}));
+['touchend','touchcancel','pointerup','pointercancel','mouseup'].forEach(e=>addEventListener(e,()=>{tch=false},{passive:true}));
+pager.addEventListener('wheel',()=>{lastMove=performance.now()},{passive:true});
+$('#mH').addEventListener('click',asStop);
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&asOn)asRun=false,ico('#asT','play')});
+/* اللغات */
+const DICT={"الفهرس":["Index","Índice","فہرست","सूची","Index","Indeks","Dizin","সূচি","Оглавление"],"الإعدادات":["Settings","Ajustes","ترتیبات","सेटिंग्स","Réglages","Pengaturan","Ayarlar","সেটিংস","Настройки"],"السور":["Surahs","Suras","سورتیں","सूरह","Sourates","Surah","Sureler","সূরা","Суры"],"الأجزاء":["Juz","Yuz","پارے","पारे","Juz","Juz","Cüzler","পারা","Джузы"],"الصفحات":["Pages","Páginas","صفحات","पृष्ठ","Pages","Halaman","Sayfalar","পৃষ্ঠা","Страницы"],"المظهر":["Appearance","Apariencia","ظاہری شکل","दिखावट","Apparence","Tampilan","Görünüm","চেহারা","Оформление"],"الثيم":["Theme","Tema","تھیم","थीम","Thème","Tema","Tema","থিম","Тема"],"القراءة الليلية":["Night reading","Lectura nocturna","رات کا مطالعہ","रात्रि पठन","Lecture de nuit","Mode baca malam","Gece okuma","রাতের পাঠ","Ночное чтение"],"لون خلفية الصفحة":["Page background","Fondo de página","صفحے کا پس منظر","पृष्ठ की पृष्ठभूमि","Fond de page","Latar halaman","Sayfa arka planı","পৃষ্ঠার পটভূমি","Фон страницы"],"لون الخط":["Font color","Color del texto","خط کا رنگ","फ़ॉन्ट रंग","Couleur du texte","Warna huruf","Yazı rengi","ফন্টের রং","Цвет текста"],"إعادة الضبط":["Reset","Restablecer","ری سیٹ","रीसेट","Réinitialiser","Atur ulang","Sıfırla","রিসেট","Сбросить"],"شفافية الخط":["Font opacity","Opacidad del texto","خط کی شفافیت","फ़ॉन्ट पारदर्शिता","Opacité du texte","Opasitas huruf","Yazı opaklığı","ফন্টের স্বচ্ছতা","Прозрачность текста"],"سطوع الشاشة":["Screen brightness","Brillo de pantalla","اسکرین کی روشنی","स्क्रीन की चमक","Luminosité de l'écran","Kecerahan layar","Ekran parlaklığı","স্ক্রিনের উজ্জ্বলতা","Яркость экрана"],"سطوع الخط":["Font brightness","Brillo del texto","خط کی روشنی","फ़ॉन्ट की चमक","Luminosité du texte","Kecerahan huruf","Yazı parlaklığı","ফন্টের উজ্জ্বলতা","Яркость текста"],"القراءة":["Reading","Lectura","مطالعہ","पठन","Lecture","Membaca","Okuma","পড়া","Чтение"],"أفقي":["Horizontal","Horizontal","افقی","क्षैतिज","Horizontal","Horizontal","Yatay","অনুভূমিক","Горизонтально"],"عمودي":["Vertical","Vertical","عمودی","ऊर्ध्वाधर","Vertical","Vertikal","Dikey","উল্লম্ব","Вертикально"],"سرعة التمرير التلقائي":["Auto-scroll speed","Velocidad de desplazamiento","خودکار اسکرول کی رفتار","स्वतः स्क्रॉल गति","Vitesse de défilement","Kecepatan gulir otomatis","Otomatik kaydırma hızı","স্বয়ংক্রিয় স্ক্রলের গতি","Скорость автопрокрутки"],"تمرير تلقائي":["Auto-scroll","Desplazamiento auto","خودکار اسکرول","स्वतः स्क्रॉल","Défilement auto","Gulir otomatis","Otomatik kaydır","স্বয়ংক্রিয় স্ক্রল","Автопрокрутка"],"ملء الشاشة":["Fullscreen","Pantalla completa","مکمل اسکرین","फ़ुलस्क्रीन","Plein écran","Layar penuh","Tam ekran","ফুলস্ক্রিন","Полный экран"],"الطباعة":["Printing","Impresión","پرنٹنگ","प्रिंटिंग","Impression","Cetak","Yazdırma","প্রিন্টিং","Печать"],"من":["From","Desde","سے","से","De","Dari","Başlangıç","থেকে","С"],"إلى":["To","Hasta","تک","तक","À","Sampai","Bitiş","পর্যন্ত","По"],"طباعة":["Print","Imprimir","پرنٹ","प्रिंट","Imprimer","Cetak","Yazdır","প্রিন্ট","Печать"],"تُطبع الصفحات بنفس الشفافية المختارة.":["Pages print with the selected opacity.","Las páginas se imprimen con la opacidad elegida.","صفحات منتخب شفافیت کے ساتھ پرنٹ ہوتے ہیں۔","पृष्ठ चुनी गई पारदर्शिता के साथ छपते हैं।","Les pages s'impriment avec l'opacité choisie.","Halaman dicetak dengan opasitas yang dipilih.","Sayfalar seçilen opaklıkla yazdırılır.","পৃষ্ঠাগুলো নির্বাচিত স্বচ্ছতায় ছাপা হয়।","Страницы печатаются с выбранной прозрачностью."],"اللغة":["Language","Idioma","زبان","भाषा","Langue","Bahasa","Dil","ভাষা","Язык"],"الأوفلاين":["Offline","Sin conexión","آف لائن","ऑफ़लाइन","Hors ligne","Offline","Çevrimdışı","অফলাইন","Офлайн"],"حالة الأوفلاين":["Offline status","Estado sin conexión","آف لائن کی حالت","ऑफ़लाइन स्थिति","État hors ligne","Status offline","Çevrimdışı durum","অফলাইন অবস্থা","Статус офлайн"],"استماع":["Listen","Escuchar","سنیں","सुनें","Écouter","Dengarkan","Dinle","শুনুন","Слушать"],"نسخ النص":["Copy text","Copiar texto","متن کاپی کریں","पाठ कॉपी करें","Copier le texte","Salin teks","Metni kopyala","টেক্সট কপি","Копировать текст"],"مشاركة النص":["Share text","Compartir texto","متن شیئر کریں","पाठ साझा करें","Partager le texte","Bagikan teks","Metni paylaş","টেক্সট শেয়ার","Поделиться текстом"],"صورة سريعة":["Quick image","Imagen rápida","فوری تصویر","त्वरित चित्र","Image rapide","Gambar cepat","Hızlı görsel","দ্রুত ছবি","Быстрое фото"],"تصميم صورة / فيديو":["Design image / video","Diseñar imagen / vídeo","تصویر / ویڈیو ڈیزائن","चित्र / वीडियो डिज़ाइन","Créer image / vidéo","Desain gambar / video","Görsel / video tasarla","ছবি / ভিডিও ডিজাইন","Создать фото / видео"],"مرة":["Once","Una vez","ایک بار","एक बार","Une fois","Sekali","Bir kez","একবার","Один раз"],"متواصل":["Continuous","Continuo","مسلسل","लगातार","Continu","Berlanjut","Sürekli","ধারাবাহিক","Подряд"],"تكرار الآية":["Repeat verse","Repetir aleya","آیت دہرائیں","आयत दोहराएं","Répéter le verset","Ulangi ayat","Ayeti tekrarla","আয়াত পুনরাবৃত্তি","Повтор аята"],"تكرار السورة":["Repeat surah","Repetir sura","سورت دہرائیں","सूरह दोहराएं","Répéter la sourate","Ulangi surah","Sureyi tekrarla","সূরা পুনরাবৃত্তি","Повтор суры"],"تكرار مقطع":["Repeat range","Repetir rango","حصہ دہرائیں","अंश दोहराएं","Répéter un passage","Ulangi bagian","Aralığı tekrarla","অংশ পুনরাবৃত্তি","Повтор отрезка"],"عدد التكرار":["Repeat count","Veces a repetir","تکرار کی تعداد","दोहराने की संख्या","Nombre de répétitions","Jumlah pengulangan","Tekrar sayısı","পুনরাবৃত্তির সংখ্যা","Число повторов"],"(٠ = بلا نهاية)":["(0 = infinite)","(0 = infinito)","(0 = لامحدود)","(0 = अनंत)","(0 = infini)","(0 = tanpa batas)","(0 = sonsuz)","(০ = অসীম)","(0 = бесконечно)"],"تعيين البداية":["Set start","Fijar inicio","آغاز مقرر کریں","आरंभ तय करें","Définir le début","Atur awal","Başlangıcı ayarla","শুরু নির্ধারণ","Задать начало"],"تعيين النهاية":["Set end","Fijar final","اختتام مقرر کریں","अंत तय करें","Définir la fin","Atur akhir","Bitişi ayarla","শেষ নির্ধারণ","Задать конец"],"القارئ والرواية":["Reciter and riwaya","Recitador y riwaya","قاری اور روایت","क़ारी और रिवायत","Récitateur et riwaya","Qari dan riwayat","Kâri ve rivayet","কারী ও রিওয়ায়াত","Чтец и риваят"],"نسخ كصورة":["Copy as image","Copiar como imagen","تصویر کے طور پر کاپی","चित्र के रूप में कॉपी","Copier en image","Salin sebagai gambar","Görsel olarak kopyala","ছবি হিসেবে কপি","Копировать как фото"],"حفظ PNG":["Save PNG","Guardar PNG","PNG محفوظ کریں","PNG सहेजें","Enregistrer PNG","Simpan PNG","PNG kaydet","PNG সংরক্ষণ","Сохранить PNG"],"تصميم صورة":["Design image","Diseñar imagen","تصویر ڈیزائن","चित्र डिज़ाइन","Créer une image","Desain gambar","Görsel tasarla","ছবি ডিজাইন","Создать фото"],"خلفية شفافة (وإلا: لون الصفحة)":["Transparent background (else page color)","Fondo transparente (si no, color de página)","شفاف پس منظر (ورنہ صفحے کا رنگ)","पारदर्शी पृष्ठभूमि (अन्यथा पृष्ठ का रंग)","Fond transparent (sinon couleur de page)","Latar transparan (jika tidak, warna halaman)","Şeffaf arka plan (yoksa sayfa rengi)","স্বচ্ছ পটভূমি (নয়তো পৃষ্ঠার রং)","Прозрачный фон (иначе цвет страницы)"],"إغلاق":["Close","Cerrar","بند کریں","बंद करें","Fermer","Tutup","Kapat","বন্ধ","Закрыть"],"تصميم صورة بالآيات":["Verse image studio","Estudio de imágenes de versículos","آیات کی تصویر ڈیزائن","आयत चित्र स्टूडियो","Studio d'images de versets","Studio gambar ayat","Ayet görseli stüdyosu","আয়াত ছবি স্টুডিও","Студия аятов"],"النص":["Text","Texto","متن","पाठ","Texte","Teks","Metin","টেক্সট","Текст"],"الخلفية":["Background","Fondo","پس منظر","पृष्ठभूमि","Arrière-plan","Latar","Arka plan","পটভূমি","Фон"],"الأبعاد":["Size","Tamaño","سائز","आकार","Taille","Ukuran","Boyut","আকার","Размер"],"العناوين":["Labels","Etiquetas","عنوانات","लेबल","Étiquettes","Label","Etiketler","লেবেল","Подписи"],"التصدير":["Export","Exportar","برآمد","निर्यात","Exporter","Ekspor","Dışa aktar","এক্সপোর্ট","Экспорт"],"من آية":["From verse","Desde la aleya","آیت سے","आयत से","Du verset","Dari ayat","Ayetten","আয়াত থেকে","С аята"],"حذف كلمات من البداية:":["Remove words from start:","Quitar palabras del inicio:","شروع سے الفاظ حذف کریں:","शुरू से शब्द हटाएं:","Retirer des mots au début :","Hapus kata dari awal:","Baştan kelime sil:","শুরু থেকে শব্দ বাদ:","Убрать слова с начала:"],"حذف كلمات من النهاية:":["Remove words from end:","Quitar palabras del final:","آخر سے الفاظ حذف کریں:","अंत से शब्द हटाएं:","Retirer des mots à la fin :","Hapus kata dari akhir:","Sondan kelime sil:","শেষ থেকে শব্দ বাদ:","Убрать слова с конца:"],"اضغط كلمة لإدراج سطر جديد بعدها:":["Tap a word to break the line after it:","Toca una palabra para saltar de línea después:","لفظ دبائیں تاکہ اس کے بعد نئی سطر ہو:","शब्द दबाएं ताकि उसके बाद नई पंक्ति हो:","Touchez un mot pour passer à la ligne après :","Ketuk kata untuk pindah baris setelahnya:","Kelimeye dokunun, ardından satır atlansın:","শব্দে ট্যাপ করুন, এরপর নতুন লাইন হবে:","Нажмите слово, чтобы перенести строку после него:"],"حجم الخط":["Font size","Tamaño del texto","خط کا سائز","फ़ॉन्ट आकार","Taille du texte","Ukuran huruf","Yazı boyutu","ফন্টের আকার","Размер текста"],"عرض مربع النص":["Text box width","Ancho del cuadro","ٹیکسٹ باکس کی چوڑائی","टेक्स्ट बॉक्स की चौड़ाई","Largeur du cadre","Lebar kotak teks","Metin kutusu genişliği","টেক্সট বক্সের প্রস্থ","Ширина блока текста"],"تباعد الأسطر":["Line spacing","Interlineado","سطروں کا فاصلہ","पंक्ति अंतराल","Interligne","Spasi baris","Satır aralığı","লাইনের ব্যবধান","Межстрочный интервал"],"موضع أفقي":["Horizontal position","Posición horizontal","افقی مقام","क्षैतिज स्थिति","Position horizontale","Posisi horizontal","Yatay konum","অনুভূমিক অবস্থান","Положение по горизонтали"],"رأسي":["Vertical position","Posición vertical","عمودی مقام","ऊर्ध्वाधर स्थिति","Position verticale","Posisi vertikal","Dikey konum","উল্লম্ব অবস্থান","Положение по вертикали"],"المحاذاة":["Alignment","Alineación","ترتیب","संरेखण","Alignement","Perataan","Hizalama","সারিবদ্ধতা","Выравнивание"],"يمين":["Right","Derecha","دائیں","दाएं","Droite","Kanan","Sağ","ডান","Справа"],"وسط":["Center","Centro","درمیان","मध्य","Centre","Tengah","Orta","মাঝে","Центр"],"يسار":["Left","Izquierda","بائیں","बाएं","Gauche","Kiri","Sol","বাম","Слева"],"يمكنك أيضاً سحب النص على المعاينة.":["You can also drag the text on the preview.","También puedes arrastrar el texto en la vista previa.","آپ پیش نظارہ پر متن کو گھسیٹ بھی سکتے ہیں۔","आप पूर्वावलोकन पर पाठ को खींच भी सकते हैं।","Vous pouvez aussi faire glisser le texte sur l'aperçu.","Anda juga bisa menggeser teks di pratinjau.","Metni önizlemede sürükleyebilirsiniz.","প্রিভিউতে টেক্সট টেনেও সরাতে পারেন।","Текст можно перетаскивать на превью."],"الظل":["Shadow","Sombra","سایہ","छाया","Ombre","Bayangan","Gölge","ছায়া","Тень"],"إضافة ظل للنص":["Add text shadow","Añadir sombra al texto","متن میں سایہ شامل کریں","पाठ में छाया जोड़ें","Ajouter une ombre","Tambah bayangan teks","Metne gölge ekle","টেক্সটে ছায়া যোগ করুন","Добавить тень тексту"],"لون الظل":["Shadow color","Color de sombra","سائے کا رنگ","छाया का रंग","Couleur de l'ombre","Warna bayangan","Gölge rengi","ছায়ার রং","Цвет тени"],"شفافية الظل":["Shadow opacity","Opacidad de sombra","سائے کی شفافیت","छाया की पारदर्शिता","Opacité de l'ombre","Opasitas bayangan","Gölge opaklığı","ছায়ার স্বচ্ছতা","Прозрачность тени"],"زاوية الظل":["Shadow angle","Ángulo de sombra","سائے کا زاویہ","छाया का कोण","Angle de l'ombre","Sudut bayangan","Gölge açısı","ছায়ার কোণ","Угол тени"],"بُعد الظل":["Shadow distance","Distancia de sombra","سائے کا فاصلہ","छाया की दूरी","Distance de l'ombre","Jarak bayangan","Gölge mesafesi","ছায়ার দূরত্ব","Смещение тени"],"قوة الظل (التمويه)":["Shadow strength (blur)","Intensidad de sombra (desenfoque)","سائے کی شدت (دھندلاہٹ)","छाया की तीव्रता (धुंधलापन)","Intensité de l'ombre (flou)","Kekuatan bayangan (blur)","Gölge gücü (bulanıklık)","ছায়ার তীব্রতা (ঝাপসা)","Сила тени (размытие)"],"شفاف":["Transparent","Transparente","شفاف","पारदर्शी","Transparent","Transparan","Şeffaf","স্বচ্ছ","Прозрачный"],"لون":["Color","Color","رنگ","रंग","Couleur","Warna","Renk","রং","Цвет"],"تدرج":["Gradient","Degradado","گریڈینٹ","ग्रेडिएंट","Dégradé","Gradasi","Gradyan","গ্রেডিয়েন্ট","Градиент"],"زخرفة":["Pattern","Patrón","نقش","पैटर्न","Motif","Pola","Desen","নকশা","Узор"],"صورة":["Image","Imagen","تصویر","चित्र","Image","Gambar","Görsel","ছবি","Изображение"],"اللون ١":["Color 1","Color 1","رنگ 1","रंग 1","Couleur 1","Warna 1","Renk 1","রং ১","Цвет 1"],"اللون ٢":["Color 2","Color 2","رنگ 2","रंग 2","Couleur 2","Warna 2","Renk 2","রং ২","Цвет 2"],"زاوية التدرج":["Gradient angle","Ángulo del degradado","گریڈینٹ کا زاویہ","ग्रेडिएंट कोण","Angle du dégradé","Sudut gradasi","Gradyan açısı","গ্রেডিয়েন্ট কোণ","Угол градиента"],"بداية التدرج ٪":["Gradient start %","Inicio del degradado %","گریڈینٹ آغاز ٪","ग्रेडिएंट आरंभ %","Début du dégradé %","Awal gradasi %","Gradyan başlangıcı %","গ্রেডিয়েন্ট শুরু %","Начало градиента %"],"نهاية التدرج ٪":["Gradient end %","Fin del degradado %","گریڈینٹ اختتام ٪","ग्रेडिएंट अंत %","Fin du dégradé %","Akhir gradasi %","Gradyan bitişi %","গ্রেডিয়েন্ট শেষ %","Конец градиента %"],"صورة الخلفية":["Background image","Imagen de fondo","پس منظر کی تصویر","पृष्ठभूमि चित्र","Image d'arrière-plan","Gambar latar","Arka plan görseli","পটভূমির ছবি","Фоновое изображение"],"من الجهاز":["From device","Del dispositivo","ڈیوائس سے","डिवाइस से","Depuis l'appareil","Dari perangkat","Cihazdan","ডিভাইস থেকে","С устройства"],"بحث":["Search","Buscar","تلاش","खोजें","Rechercher","Cari","Ara","অনুসন্ধান","Поиск"],"المصدر الإلكتروني: ويكيميديا كومنز (صور حرّة الترخيص؛ بعضها يشترط ذكر المصوّر).":["Online source: Wikimedia Commons (freely licensed images; some require crediting the photographer).","Fuente en línea: Wikimedia Commons (imágenes de licencia libre; algunas exigen citar al autor).","آن لائن ماخذ: وکی میڈیا کامنز (آزاد لائسنس کی تصاویر؛ بعض میں فوٹوگرافر کا ذکر لازم)۔","ऑनलाइन स्रोत: विकिमीडिया कॉमन्स (मुक्त लाइसेंस वाले चित्र; कुछ में फ़ोटोग्राफ़र का उल्लेख आवश्यक)।","Source en ligne : Wikimedia Commons (images sous licence libre ; certaines exigent de citer l'auteur).","Sumber daring: Wikimedia Commons (gambar berlisensi bebas; sebagian wajib mencantumkan fotografer).","Çevrimiçi kaynak: Wikimedia Commons (serbest lisanslı görseller; bazıları fotoğrafçıyı anmayı gerektirir).","অনলাইন উৎস: উইকিমিডিয়া কমন্স (মুক্ত লাইসেন্সের ছবি; কিছুতে আলোকচিত্রীর নাম দিতে হয়)।","Онлайн-источник: Wikimedia Commons (свободные лицензии; для некоторых нужно указать автора)."],"تعتيم صورة الخلفية":["Background dimming","Oscurecer fondo","پس منظر کی تاریکی","पृष्ठभूमि मंद करें","Assombrir le fond","Redupkan latar","Arka planı karart","পটভূমি ম্লান","Затемнение фона"],"مخصص":["Custom","Personalizado","حسب ضرورت","कस्टम","Personnalisé","Kustom","Özel","কাস্টম","Свой"],"العرض":["Width","Ancho","چوڑائی","चौड़ाई","Largeur","Lebar","Genişlik","প্রস্থ","Ширина"],"الارتفاع":["Height","Alto","اونچائی","ऊंचाई","Hauteur","Tinggi","Yükseklik","উচ্চতা","Высота"],"أبعاد جاهزة":["Preset sizes","Tamaños predefinidos","پہلے سے طے سائز","पूर्व निर्धारित आकार","Tailles prédéfinies","Ukuran siap pakai","Hazır boyutlar","প্রস্তুত আকার","Готовые размеры"],"قلب الاتجاه (طولي/عرضي)":["Flip orientation (portrait/landscape)","Girar orientación (vertical/horizontal)","رخ بدلیں (عمودی/افقی)","दिशा पलटें (पोर्ट्रेट/लैंडस्केप)","Inverser l'orientation (portrait/paysage)","Balik orientasi (potret/lanskap)","Yönü çevir (dikey/yatay)","দিক বদলান (পোর্ট্রেট/ল্যান্ডস্কেপ)","Повернуть (книжная/альбомная)"],"تحريك: النص":["Move: text","Mover: texto","حرکت: متن","खिसकाएं: पाठ","Déplacer : texte","Geser: teks","Taşı: metin","সরান: টেক্সট","Двигать: текст"],"اسم السورة":["Surah name","Nombre de la sura","سورت کا نام","सूरह का नाम","Nom de la sourate","Nama surah","Sure adı","সূরার নাম","Название суры"],"رقم الآية":["Verse number","Número de aleya","آیت نمبر","आयत संख्या","Numéro du verset","Nomor ayat","Ayet numarası","আয়াত নম্বর","Номер аята"],"إظهار اسم السورة":["Show surah name","Mostrar nombre de sura","سورت کا نام دکھائیں","सूरह का नाम दिखाएं","Afficher le nom de la sourate","Tampilkan nama surah","Sure adını göster","সূরার নাম দেখান","Показать название суры"],"الحجم":["Size","Tamaño","سائز","आकार","Taille","Ukuran","Boyut","আকার","Размер"],"اللون":["Color","Color","رنگ","रंग","Couleur","Warna","Renk","রং","Цвет"],"إظهار رقم الآية / الآيات":["Show verse number(s)","Mostrar número(s) de aleya","آیت نمبر دکھائیں","आयत संख्या दिखाएं","Afficher le(s) numéro(s) de verset","Tampilkan nomor ayat","Ayet numarasını göster","আয়াত নম্বর দেখান","Показать номер(а) аятов"],"الدقة":["Resolution","Resolución","ریزولوشن","रिज़ॉल्यूशन","Résolution","Resolusi","Çözünürlük","রেজোলিউশন","Разрешение"],"أعلى ×٣":["Max ×3","Máx ×3","زیادہ سے زیادہ ×3","अधिकतम ×3","Max ×3","Maks ×3","En yüksek ×3","সর্বোচ্চ ×৩","Макс ×3"],"حفظ صورة PNG":["Save PNG image","Guardar imagen PNG","PNG تصویر محفوظ کریں","PNG चित्र सहेजें","Enregistrer l'image PNG","Simpan gambar PNG","PNG görseli kaydet","PNG ছবি সংরক্ষণ","Сохранить PNG"],"مشاركة الصورة":["Share image","Compartir imagen","تصویر شیئر کریں","चित्र साझा करें","Partager l'image","Bagikan gambar","Görseli paylaş","ছবি শেয়ার","Поделиться фото"],"فيديو — الصوت":["Video — audio","Vídeo — audio","ویڈیو — آڈیو","वीडियो — ऑडियो","Vidéo — audio","Video — audio","Video — ses","ভিডিও — অডিও","Видео — звук"],"بلا صوت":["No audio","Sin audio","بغیر آڈیو","बिना ऑडियो","Sans audio","Tanpa audio","Sessiz","অডিও ছাড়া","Без звука"],"تلاوة الآيات":["Verse recitation","Recitación de aleyas","آیات کی تلاوت","आयतों की तिलावत","Récitation des versets","Bacaan ayat","Ayet tilaveti","আয়াত তিলাওয়াত","Чтение аятов"],"ملف صوتي":["Audio file","Archivo de audio","آڈیو فائل","ऑडियो फ़ाइल","Fichier audio","Berkas audio","Ses dosyası","অডিও ফাইল","Аудиофайл"],"المدة بلا صوت (ثانية)":["Duration without audio (sec)","Duración sin audio (s)","بغیر آڈیو دورانیہ (سیکنڈ)","बिना ऑडियो अवधि (सेकंड)","Durée sans audio (s)","Durasi tanpa audio (detik)","Sessiz süre (sn)","অডিও ছাড়া সময় (সেকেন্ড)","Длительность без звука (сек)"],"تصدير فيديو":["Export video","Exportar vídeo","ویڈیو برآمد کریں","वीडियो निर्यात करें","Exporter la vidéo","Ekspor video","Videoyu dışa aktar","ভিডিও এক্সপোর্ট","Экспорт видео"],"مشاركة الفيديو":["Share video","Compartir vídeo","ویڈیو شیئر کریں","वीडियो साझा करें","Partager la vidéo","Bagikan video","Videoyu paylaş","ভিডিও শেয়ার","Поделиться видео"],"التلاوة تتحمّل من everyayah.com وتحتاج إنترنت.":["Recitation is loaded from everyayah.com and needs internet.","La recitación se carga de everyayah.com y requiere internet.","تلاوت everyayah.com سے لوڈ ہوتی ہے اور انٹرنیٹ درکار ہے۔","तिलावत everyayah.com से लोड होती है, इंटरनेट चाहिए।","La récitation vient d'everyayah.com et nécessite Internet.","Bacaan dimuat dari everyayah.com dan butuh internet.","Tilavet everyayah.com'dan yüklenir, internet gerekir.","তিলাওয়াত everyayah.com থেকে লোড হয়, ইন্টারনেট লাগে।","Чтение загружается с everyayah.com, нужен интернет."],"الآية":["Verse","Aleya","آیت","आयत","Verset","Ayat","Ayet","আয়াত","Аят"],"الجزء":["Juz","Yuz","پارہ","पारा","Juz","Juz","Cüz","পারা","Джуз"],"سورة":["Surah","Sura","سورت","सूरह","Sourate","Surah","Sure","সূরা","Сура"],"صفحة":["Page","Página","صفحہ","पृष्ठ","Page","Halaman","Sayfa","পৃষ্ঠা","Стр."],"آية":["verses","aleyas","آیات","आयतें","versets","ayat","ayet","আয়াত","аятов"],"ص":["p.","p.","ص","पृ.","p.","hlm.","s.","পৃ.","стр."],"الوضع الأوفلاين الكامل يحتاج فتح التطبيق من عنوان http(s) (انظر ملف README).":["Full offline mode requires opening the app from an http(s) address (see README).","El modo sin conexión completo requiere abrir la app desde una dirección http(s) (ver README).","مکمل آف لائن موڈ کے لیے ایپ http(s) پتے سے کھولیں (README دیکھیں)۔","पूर्ण ऑफ़लाइन मोड के लिए ऐप http(s) पते से खोलें (README देखें)।","Le mode hors ligne complet exige d'ouvrir l'app via une adresse http(s) (voir README).","Mode offline penuh perlu membuka aplikasi dari alamat http(s) (lihat README).","Tam çevrimdışı mod için uygulamayı http(s) adresinden açın (README'ye bakın).","পূর্ণ অফলাইন মোডের জন্য অ্যাপটি http(s) ঠিকানা থেকে খুলুন (README দেখুন)।","Для полного офлайн-режима откройте приложение по адресу http(s) (см. README)."],"ملفات محفوظة للأوفلاين:":["Files saved offline:","Archivos guardados sin conexión:","آف لائن محفوظ فائلیں:","ऑफ़लाइन सहेजी फ़ाइलें:","Fichiers hors ligne :","Berkas tersimpan offline:","Çevrimdışı kayıtlı dosyalar:","অফলাইনে সংরক্ষিত ফাইল:","Файлы офлайн:"],"التطبيق يعمل بدون إنترنت.":["The app works without internet.","La app funciona sin internet.","ایپ بغیر انٹرنیٹ چلتی ہے۔","ऐप बिना इंटरनेट चलता है।","L'app fonctionne sans Internet.","Aplikasi berjalan tanpa internet.","Uygulama internetsiz çalışır.","অ্যাপ ইন্টারনেট ছাড়াই চলে।","Приложение работает без интернета."],"استمر بالتصفح ليكتمل.":["Keep browsing to finish caching.","Sigue navegando para completar.","مکمل ہونے تک براؤز کرتے رہیں۔","पूरा होने तक ब्राउज़ करते रहें।","Continuez à naviguer pour terminer.","Teruslah menjelajah hingga selesai.","Tamamlanması için gezinmeye devam edin.","সম্পূর্ণ হতে ব্রাউজ করতে থাকুন।","Продолжайте листать, пока всё не загрузится."],"المقطع:":["Range:","Rango:","حصہ:","अंश:","Passage :","Bagian:","Aralık:","অংশ:","Отрезок:"],"المقطع غير محدد":["Range not set","Rango no definido","حصہ مقرر نہیں","अंश तय नहीं","Passage non défini","Bagian belum diatur","Aralık belirlenmedi","অংশ নির্ধারিত নয়","Отрезок не задан"],"تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ":["Audio failed to load — check connection or change reciter","No se pudo cargar el audio — revisa la conexión o cambia de recitador","آڈیو لوڈ نہ ہو سکا — کنکشن چیک کریں یا قاری بدلیں","ऑडियो लोड नहीं हुआ — कनेक्शन जांचें या क़ारी बदलें","Échec du chargement audio — vérifiez la connexion ou changez de récitateur","Audio gagal dimuat — periksa koneksi atau ganti qari","Ses yüklenemedi — bağlantıyı kontrol edin veya kâriyi değiştirin","অডিও লোড হয়নি — সংযোগ দেখুন বা কারী বদলান","Не удалось загрузить аудио — проверьте сеть или смените чтеца"],"تم نسخ النص":["Text copied","Texto copiado","متن کاپی ہو گیا","पाठ कॉपी हुआ","Texte copié","Teks disalin","Metin kopyalandı","টেক্সট কপি হয়েছে","Текст скопирован"],"تم نسخ الصورة":["Image copied","Imagen copiada","تصویر کاپی ہو گئی","चित्र कॉपी हुआ","Image copiée","Gambar disalin","Görsel kopyalandı","ছবি কপি হয়েছে","Фото скопировано"],"تم حفظ الصورة":["Image saved","Imagen guardada","تصویر محفوظ ہو گئی","चित्र सहेजा गया","Image enregistrée","Gambar disimpan","Görsel kaydedildi","ছবি সংরক্ষিত","Фото сохранено"],"الناتج:":["Output:","Resultado:","نتیجہ:","आउटपुट:","Résultat :","Hasil:","Çıktı:","আউটপুট:","Результат:"],"بكسل":["px","px","پکسل","पिक्सेल","px","px","piksel","পিক্সেল","px"],"لا نتائج":["No results","Sin resultados","کوئی نتیجہ نہیں","कोई परिणाम नहीं","Aucun résultat","Tidak ada hasil","Sonuç yok","ফলাফল নেই","Нет результатов"],"جارٍ تجهيز الصوت...":["Preparing audio...","Preparando audio...","آڈیو تیار ہو رہا ہے...","ऑडियो तैयार हो रहा है...","Préparation de l'audio...","Menyiapkan audio...","Ses hazırlanıyor...","অডিও প্রস্তুত হচ্ছে...","Подготовка звука..."],"اختر ملفاً صوتياً أولاً":["Choose an audio file first","Elige primero un archivo de audio","پہلے آڈیو فائل منتخب کریں","पहले ऑडियो फ़ाइल चुनें","Choisissez d'abord un fichier audio","Pilih berkas audio dulu","Önce bir ses dosyası seçin","আগে অডিও ফাইল বাছুন","Сначала выберите аудиофайл"],"تعذّر تحميل الصوت":["Audio failed to load","No se pudo cargar el audio","آڈیو لوڈ نہ ہو سکا","ऑडियो लोड नहीं हुआ","Échec du chargement audio","Audio gagal dimuat","Ses yüklenemedi","অডিও লোড হয়নি","Не удалось загрузить аудио"],"المتصفح لا يدعم تسجيل الفيديو":["Browser doesn't support video recording","El navegador no admite grabar vídeo","براؤزر ویڈیو ریکارڈنگ سپورٹ نہیں کرتا","ब्राउज़र वीडियो रिकॉर्डिंग समर्थित नहीं करता","Le navigateur ne prend pas en charge l'enregistrement vidéo","Browser tidak mendukung perekaman video","Tarayıcı video kaydını desteklemiyor","ব্রাউজার ভিডিও রেকর্ডিং সমর্থন করে না","Браузер не поддерживает запись видео"],"جارٍ التسجيل...":["Recording...","Grabando...","ریکارڈنگ جاری...","रिकॉर्डिंग जारी...","Enregistrement...","Merekam...","Kaydediliyor...","রেকর্ড হচ্ছে...","Запись..."],"ث":["s","s","سیکنڈ","से","s","dtk","sn","সে","с"],"تم إنشاء الفيديو (":["Video created (","Vídeo creado (","ویڈیو بن گئی (","वीडियो बन गया (","Vidéo créée (","Video dibuat (","Video oluşturuldu (","ভিডিও তৈরি হয়েছে (","Видео создано ("],"خطأ:":["Error:","Error:","خرابی:","त्रुटि:","Erreur :","Kesalahan:","Hata:","ত্রুটি:","Ошибка:"],"انتهى المصحف":["End of the Mushaf","Fin del Mushaf","مصحف ختم","मुसहफ़ समाप्त","Fin du Mushaf","Mushaf selesai","Mushaf bitti","মুসহাফ শেষ","Конец Мусхафа"],"معاني الغريب":["Gharib meanings","Significados de palabras raras","غریب القرآن کے معانی","ग़रीब (कठिन शब्द) अर्थ","Sens des mots rares","Makna kata gharib","Garîb kelime anlamları","গারীব শব্দের অর্থ","Значения редких слов"],"تلوين الكلمات التي لها معنى":["Highlight words that have meanings","Resaltar palabras con significado","معنی والے الفاظ کو رنگین کریں","अर्थ वाले शब्द रंगीन करें","Colorer les mots ayant un sens","Warnai kata yang punya makna","Anlamı olan kelimeleri renklendir","অর্থসহ শব্দ রঙিন করুন","Выделять слова со значениями"],"لون الكلمات":["Words color","Color de palabras","الفاظ کا رنگ","शब्दों का रंग","Couleur des mots","Warna kata","Kelime rengi","শব্দের রং","Цвет слов"],"الكتب":["Books","Libros","کتابیں","पुस्तकें","Livres","Buku","Kitaplar","বই","Книги"],"المصدر:":["Source:","Fuente:","ماخذ:","स्रोत:","Source :","Sumber:","Kaynak:","উৎস:","Источник:"],"المعاني":["Meanings","Significados","معانی","अर्थ","Sens","Makna","Anlamlar","অর্থ","Значения"],"لا توجد معاني لهذه الآية في الكتب المحددة":["No meanings for this verse in the selected books","No hay significados para esta aleya en los libros elegidos","منتخب کتابوں میں اس آیت کے معانی نہیں","चुनी पुस्तकों में इस आयत के अर्थ नहीं","Aucun sens pour ce verset dans les livres choisis","Tidak ada makna ayat ini di buku terpilih","Seçili kitaplarda bu ayet için anlam yok","নির্বাচিত বইয়ে এই আয়াতের অর্থ নেই","Для этого аята нет значений в выбранных книгах"]};
+const LI={en:0,es:1,ur:2,hi:3,fr:4,id:5,tr:6,bn:7,ru:8};
+const T=s=>{if(lang=='ar')return s;const k=s.trim(),e=DICT[k];return e&&e[LI[lang]]?s.replace(k,e[LI[lang]]):s};
+[['ar','العربية'],['en','English'],['es','Español'],['ur','اردو'],['hi','हिन्दी'],['fr','Français'],['id','Bahasa Indonesia'],['tr','Türkçe'],['bn','বাংলা'],['ru','Русский']].forEach(l=>{const o=document.createElement('option');o.value=l[0];o.textContent=l[1];$('#lang').appendChild(o)});
+function applyLang(){const de=document.documentElement;de.lang=lang;de.dir=(lang=='ar'||lang=='ur')?'rtl':'ltr';
+ const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(/^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName))continue;if(n._o==null){if(!/[\u0600-\u06FF]/.test(n.nodeValue))continue;n._o=n.nodeValue}n.nodeValue=T(n._o)}
+ title();modesUi();if($('#sIdx').classList.contains('on'))idx();syncRg();if(window.D)limits()}
+$('#lang').onchange=e=>{lang=st.lang=e.target.value;save();applyLang();build();applyBg()};
+/* بدء */
+decorate();enh();applyBg();ui();title();build();modesUi();refresh();limits();applyLang();
+document.fonts.ready.then(()=>go(st.p,false));
+addEventListener('resize',size);addEventListener('orientationchange',()=>setTimeout(size,250));
+addEventListener('pagehide',save);document.addEventListener('visibilitychange',save);
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
