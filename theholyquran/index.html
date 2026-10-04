@@ -7,7 +7,10 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>المصحف</title>
+<title>القرآن العظيم</title>
+<meta name="application-name" content="القرآن العظيم">
+<meta name="apple-mobile-web-app-title" content="القرآن العظيم">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 @font-face{font-family:F0;src:url(fonts/QCF4_QBSML.woff2) format("woff2");font-display:block}
 @font-face{font-family:F1;src:url(fonts/QCF4_Hafs_01_W.woff2) format("woff2");font-display:block}
@@ -246,8 +249,8 @@ body>*:not(#print){display:none!important}#print{display:block}
 
 <div class="sheet" id="sAbout"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="abX">✕</button></div>
 <p><b>تطوير:</b> Loay Abu Qaoud</p>
-<p><b>التاريخ:</b> <span dir="ltr">2026-10-03</span></p>
-<p><b>الإصدار:</b> <span dir="ltr">1.0.5</span></p>
+<p><b>التاريخ:</b> <span dir="ltr">2026-10-05</span></p>
+<p><b>الإصدار:</b> <span dir="ltr">1.0.6</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -631,14 +634,15 @@ function lay(ctx,units,fs,maxW,brk){const gap=fs*.14,L=[];let cr=[],w=0;
 function paint(ctx,L,fs,left,right,cy,al,ls,ao){const rh=fs*ls,gap=fs*.14,top=cy-L.length*rh/2;ctx.textAlign='left';ctx.textBaseline='alphabetic';
  L.forEach((ln,i)=>{let xr=al=='r'?right:al=='l'?left+ln.w:(left+right)/2+ln.w/2;const by=top+i*rh+rh*.68;
   for(const it of ln.c){const a=ao?ao(it.u):1;if(a>0){ctx.globalAlpha=a;ctx.font=fs+'px F'+it.u.f;let x=xr;[...it.u.c].forEach((ch,j)=>{x-=it.ws[j];ctx.fillText(ch,x,by)})}xr-=it.uw+gap}});ctx.globalAlpha=1}
+const fname=ext=>{const d=new Date(),p=(n,l=2)=>String(n).padStart(l,'0');return 'TheHolyQuranApp_'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds())+'_'+p(d.getMilliseconds(),3)+'.'+ext};
 const dl=(b,n)=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)};
 async function quickPng(){const us=WU[cur].map((u,i)=>({...u,i}));await fontsFor(us);const fs=170,pad=fs*.8,c=document.createElement('canvas'),x=c.getContext('2d');
  const L=lay(x,us,fs,fs*9,null),rh=fs*2.15;c.width=Math.ceil(Math.max(...L.map(l=>l.w))+pad*2);c.height=Math.ceil(L.length*rh+pad);
  if(!$('#vTr').checked){x.fillStyle=pg()[0];x.fillRect(0,0,c.width,c.height)}
  x.fillStyle=$('#vTr').checked?$('#vCol').value:(lum(pg()[0])<.45?pg()[1]:$('#vCol').value);paint(x,L,fs,pad,c.width-pad,c.height/2,'c',2.15);
  return new Promise(r=>c.toBlob(r,'image/png'))}
-$('#vImg').onclick=async()=>{const b=await quickPng();try{await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);flash(T('تم نسخ الصورة'))}catch(e){dl(b,'ayah.png');flash(T('تم حفظ الصورة'))}};
-$('#vDl').onclick=async()=>{dl(await quickPng(),'ayah-'+cur.replace(':','-')+'.png');flash(T('تم حفظ الصورة'))};
+$('#vImg').onclick=async()=>{const b=await quickPng();try{await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);flash(T('تم نسخ الصورة'))}catch(e){dl(b,fname('png'));flash(T('تم حفظ الصورة'))}};
+$('#vDl').onclick=async()=>{dl(await quickPng(),fname('png'));flash(T('تم حفظ الصورة'))};
 
 /* استوديو التصميم */
 const RAT={'1:1':[1,1],'4:5':[4,5],'3:4':[3,4],'2:3':[2,3],'9:16':[9,16],'16:9':[16,9],'4:3':[4,3],'3:2':[3,2],'21:9':[21,9]};
@@ -730,8 +734,8 @@ $('#pv').onpointermove=e=>{if(!drag.on)return;const r=e.target.getBoundingClient
 $('#pv').onpointerup=$('#pv').onpointercancel=()=>{drag.on=0};
 async function exportBlob(){await fontsFor(kept());const[W,H]=dims(),[ow]=outDims(D.res),sc=ow/W,c=document.createElement('canvas');c.width=ow;c.height=outDims(D.res)[1];const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,false);return new Promise(r=>c.toBlob(r,'image/png'))}
 async function share(b,n,t){const f=new File([b],n,{type:t});if(navigator.canShare&&navigator.canShare({files:[f]}))try{await navigator.share({files:[f]});return}catch(e){if(e.name=='AbortError')return}dl(b,n)}
-$('#xPng').onclick=async()=>dl(await exportBlob(),'ayah-design.png');
-$('#xShP').onclick=async()=>share(await exportBlob(),'ayah-design.png','image/png');
+$('#xPng').onclick=async()=>dl(await exportBlob(),fname('png'));
+$('#xShP').onclick=async()=>share(await exportBlob(),fname('png'),'image/png');
 $('#imF').onclick=()=>$('#imFile').click();
 function setImg(u,cr){const im=new Image();if(!u.startsWith('blob:'))im.crossOrigin='anonymous';im.onload=()=>{D.img=im;D.bg='img';refresh();upd();if(cr)$('#imCr').textContent=cr};im.onerror=()=>{$('#imCr').textContent='تعذّر تحميل الصورة (إنترنت أو منع CORS).'};im.src=u}
 $('#imFile').onchange=e=>{const f=e.target.files[0];if(f)setImg(URL.createObjectURL(f))};
@@ -807,8 +811,8 @@ async function exportMp4(){
  }finally{REV=null;STK_T=()=>performance.now()/1000;try{venc.close()}catch(e){}try{aenc&&aenc.close()}catch(e){}}
  return{b:new Blob([muxer.target.buffer],{type:'video/mp4'}),ext:'mp4'}}
 let lastV=null;
-$('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';dl(lastV.b,'ayah-video.'+lastV.ext)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
-$('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();await share(lastV.b,'ayah-video.'+lastV.ext,lastV.b.type)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
+$('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';dl(lastV.b,fname(lastV.ext))}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
+$('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();await share(lastV.b,fname(lastV.ext),lastV.b.type)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
 
 /* خلفية فيديو + قص + ملصقات */
 let prevOn=false,liveOn=false,pa=null;
