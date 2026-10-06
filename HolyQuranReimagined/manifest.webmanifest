@@ -1,0 +1,12 @@
+{
+  "name":"المصحف — قراءة بطمأنينة",
+  "short_name":"المصحف",
+  "lang":"ar",
+  "dir":"rtl",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#0d1110",
+  "theme_color":"#0d1110",
+  "description":"مصحف سريع وهادئ للقراءة والبحث والاستماع وتصميم بطاقات الآيات.",
+  "icons":[{"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
