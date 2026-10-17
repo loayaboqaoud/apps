@@ -88,8 +88,8 @@
 html,body{height:100%;margin:0}
 body{background:var(--bg);font-family:var(--ui);color:var(--txt);overflow:hidden;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
 button,input,select{font:inherit;color:inherit}button{cursor:pointer}
-#bar{flex:none;height:48px;display:flex;align-items:center;gap:4px;padding:0 6px;background:var(--green);color:#f4ecd6}
-#bar button{background:none;border:0;color:inherit;padding:8px 10px;border-radius:8px;font-size:15px}
+#bar{flex:none;height:56px;display:flex;align-items:center;gap:3px;padding:0 4px;background:var(--green);color:#f4ecd6;overflow-x:auto;-webkit-overflow-scrolling:touch}
+#bar button{background:none;border:0;color:inherit;padding:3px 4px;border-radius:8px;font-size:12px;min-width:46px}
 #bar button:active,#bar button:focus-visible{background:#ffffff26;outline:none}
 #ttl{flex:1;text-align:center;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #pager{flex:1;min-height:0;display:flex;direction:rtl;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
@@ -148,7 +148,20 @@ input[type=color]{width:42px;height:34px;padding:0;border:1px solid var(--line);
 .two{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.two label{font-size:14px}
 #chips{display:flex;flex-wrap:wrap;gap:4px;max-height:140px;overflow:auto;padding:6px;background:var(--soft);border-radius:10px;direction:rtl}
 .chip{padding:3px 7px;background:var(--card);border:1px solid var(--line);border-radius:7px;font-size:16px;cursor:pointer}.chip.br{background:color-mix(in srgb,var(--acc) 22%,var(--card));margin-inline-end:100%}
-#gal{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}#gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;cursor:pointer}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;cursor:pointer}
+.hiG{grid-template-columns:repeat(2,1fr)}
+.hiC{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--soft)}
+.hiC img,.hiC video{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.hiC .hiB{position:absolute;top:4px;inset-inline-start:4px;background:#000a;color:#fff;font-size:11px;padding:1px 6px;border-radius:8px;z-index:2}
+.hiC .hiX{position:absolute;top:4px;inset-inline-end:4px;background:#000a;color:#fff;border:0;border-radius:8px;font-size:13px;padding:2px 8px;cursor:pointer;z-index:2}
+.hiC .hiN{position:absolute;bottom:0;left:0;right:0;background:#0009;color:#fff;font-size:11px;padding:3px 6px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:2}
+.hiEmpty{grid-column:1/-1;text-align:center;color:var(--mut);font-size:13px;padding:16px 0}
+.rdC{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--soft)}
+.rdC img{width:100%;aspect-ratio:1;object-fit:cover;display:block;cursor:pointer}
+.rdC .rdP{position:absolute;top:4px;inset-inline-end:4px;background:#000a;color:#fff;border:0;border-radius:8px;font-size:12px;line-height:1;padding:3px 6px;cursor:pointer;z-index:2;opacity:.7}
+.rdC.pin{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.rdC.pin .rdP{opacity:1;background:var(--gold);color:#17150f}
+.rdC .rdD{position:absolute;bottom:0;left:0;right:0;background:#0009;color:#fff;font-size:11px;padding:3px 6px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #dim{position:fixed;inset:0;z-index:99;background:#000;pointer-events:none;opacity:0}
 .lines{filter:brightness(var(--fb,1))}
 #as{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;display:none;align-items:center;gap:6px;background:color-mix(in srgb,var(--green) 92%,transparent);color:#f4ecd6;border-radius:26px;padding:6px 10px;box-shadow:0 2px 12px #0005}
@@ -157,8 +170,8 @@ input[type=color]{width:42px;height:34px;padding:0;border:1px solid var(--line);
 svg.i,.ib svg{width:1.25em;height:1.25em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .ib span{font-size:.86em}
 #bar .ib,.tabs .ib,.seg .ib{flex-direction:column;gap:1px}
-#bar .ib span,.tabs .ib span,.seg .ib span{font-size:11px;line-height:1.15}
-#bar button{padding:2px 8px;min-width:52px}
+#bar .ib span,.tabs .ib span,.seg .ib span{font-size:10px;line-height:1.1}
+#bar button{padding:2px 3px;min-width:44px}
 .rg{display:flex;align-items:center;gap:6px;direction:ltr;flex:1 1 100%}
 .rg input{flex:1;min-width:0}
 .rg .st{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--soft);font-size:20px;line-height:1;padding:0;color:var(--txt)}
@@ -184,7 +197,7 @@ mark.sh{background:#ffc83d99;color:inherit;border-radius:3px;padding:0 1px}
 .bk{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .act{flex-wrap:wrap}.act button{flex:1 1 40%}
 #abar{position:fixed;left:0;right:0;bottom:0;z-index:4;display:none;flex-direction:column;gap:2px;background:var(--green);color:#f4ecd6;padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -2px 10px #0004}
-body.hasbar #abar{display:flex}body.nc #abar{display:none!important}
+body:not(.nc) #abar{display:flex}body.nc #abar{display:none!important}
 #abar .sk{display:flex;align-items:center;gap:8px;direction:ltr}
 #abar .sk input{flex:1;margin:0;accent-color:var(--gold)}
 #abar .sk small{font-size:11px;min-width:30px;text-align:center}
@@ -193,7 +206,7 @@ body.hasbar #abar{display:flex}body.nc #abar{display:none!important}
 #abar .ab button{background:none;border:0;color:inherit;min-width:56px;height:46px;border-radius:10px;padding:2px 6px;flex-direction:column;gap:1px}
 #abar .ab button:active{background:#ffffff30}
 #abar .ab #aPlay svg{width:30px;height:30px}#abar .ib span{font-size:10px}
-body.hasbar #pager{padding-bottom:96px}body.hasbar #as{bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+body:not(.nc) #pager{padding-bottom:96px}body:not(.nc) #as{bottom:calc(112px + env(safe-area-inset-bottom,0px))}
 #stTabs{overflow-x:auto;flex-wrap:nowrap}#stTabs button{flex:1 0 auto;min-width:58px;padding:8px 6px}
 html[lang=ar]{--ui:Tajawal,'Segoe UI',sans-serif}
 html:not([lang=ar]){--ui:Tahoma,'Segoe UI',sans-serif}
@@ -202,6 +215,44 @@ button,input,select,textarea{font-family:var(--ui)}
 #pnl{padding-top:0!important}
 #stTabs{position:sticky;top:0;z-index:3;background:var(--card);margin:0 -14px 8px;padding:10px 14px 0;box-shadow:0 2px 6px rgba(0,0,0,.1);overflow-x:auto;flex-wrap:nowrap}
 #pvw{position:relative}
+#arBar{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:3;display:none;gap:6px;padding:6px 8px;border-radius:30px;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 2px 14px #0006}
+#arBar button{width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+#arBar button:active{background:rgba(255,255,255,.34)}
+#arBar button.rec{background:#c0392b}
+#arBar button.on{background:var(--gold);color:#17150f}
+#arBar button svg{width:22px;height:22px}
+#pvw.fs{position:fixed;inset:0;z-index:12;flex:1;padding:0;background:#000}
+#pvw.fs #pv{max-width:100%;max-height:100%;box-shadow:none;border-radius:0}
+#pvw.fs #rndD{display:none}
+#camBox .act button{flex:1 1 40%}
+#camMsg{margin:6px 0}
+.arCd{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font:700 22vmin/1 system-ui,sans-serif;color:#fff;text-shadow:0 6px 30px #000;z-index:4;pointer-events:none}
+#pvw.cd .arCd{display:flex}
+.arPill{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;background:rgba(0,0,0,.55);color:#fff;font:600 14px system-ui,sans-serif}
+.arPill .rdot{width:12px;height:12px;border-radius:50%;background:#ff3b30;animation:arp 1s infinite}
+@keyframes arp{0%,100%{opacity:1}50%{opacity:.2}}
+#toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:200;max-width:86vw;background:#20242b;color:#fff;padding:11px 16px;border-radius:12px;font-size:14px;line-height:1.6;box-shadow:0 6px 22px #0007;opacity:0;transition:opacity .25s;pointer-events:none;text-align:center}
+#toast.show{opacity:1}
+.consent-backdrop{position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center;padding:18px;background:#0009}
+.consent-backdrop.on{display:flex}
+.consent-card{width:min(520px,100%);max-height:90vh;overflow:auto;padding:20px;border-radius:18px;background:var(--card);color:var(--txt);box-shadow:0 12px 44px #0007}
+.consent-card h2{margin:0 0 10px;color:var(--acc);font-size:20px}
+.consent-card p{margin:8px 0;line-height:1.8}
+.consent-card .act{margin-top:14px}
+.consent-card button{min-width:110px}
+.consent-card button.alt{border:1px solid var(--line)}
+.bgp{display:none}
+.bgp>h4{margin:14px 0 6px;color:var(--acc)}
+.pat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:7px;margin:8px 0}
+.pat-opt{display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px;border:1px solid var(--line);border-radius:9px;background:var(--soft);color:var(--txt);font-size:11px}
+.pat-opt.on{border-color:var(--acc);box-shadow:0 0 0 2px color-mix(in srgb,var(--acc) 24%,transparent)}
+.pat-opt canvas{width:100%;height:46px;border-radius:5px}
+#arOut{margin-top:10px;display:none}
+#arOut .arPrev{width:100%;max-height:44vh;border-radius:10px;background:#000;display:block}
+#camBox .rows{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#camBox .rows label{font-size:14px;display:flex;gap:6px;align-items:center}
+#camBox select{background:var(--card);color:inherit;border:1px solid var(--line);border-radius:8px;padding:6px}
+#camBox .chk{display:flex;align-items:center;gap:7px;font-size:14px;margin:7px 0}
 #rndD{position:absolute;top:8px;inset-inline-end:8px;z-index:2;background:var(--green);color:#fff;border:0;border-radius:20px;padding:6px 12px;font-size:13px;box-shadow:0 2px 8px #0005;display:inline-flex;gap:6px;align-items:center;cursor:pointer}
 #fxG{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;margin:8px 0}
 #fxG button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--txt);cursor:pointer;font-size:12px}
@@ -220,7 +271,7 @@ html.glass .seg button,html.glass .btn.alt,html.glass .rg .st,html.glass input[t
 .stk .pl{margin-bottom:8px}.stk .tabs{margin-bottom:0}
 .card.np{padding-top:0}
 html.glass .stk{-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
-#ttl{display:none}#bar{justify-content:flex-start}#bar #bSet{margin-inline-start:auto}
+#ttl{flex:1;text-align:center;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 4px}#bar{justify-content:flex-start}#bar #bSet{margin-inline-start:auto}
 #setX,#ixX,#seaX,#mX,#vmX,#abX{background:var(--soft)!important;color:var(--txt)!important}
 #print{display:none}
 @media print{#dim,#as{display:none!important}#print .page{--paper:#fff;--pink:#000}#print .lines{filter:none}@page{size:A4 portrait;margin:8mm}
@@ -231,13 +282,20 @@ body>*:not(#print){display:none!important}#print{display:block}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16" /> <path d="M4 12h16" /> <path d="M4 19h16" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /> <rect x="5" y="3" width="5" height="18" rx="1" /></symbol><symbol id="i-square" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /></symbol><symbol id="i-skip-forward" viewBox="0 0 24 24"><path d="M21 4v16" /> <path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z" /></symbol><symbol id="i-skip-back" viewBox="0 0 24 24"><path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z" /> <path d="M3 20V4" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 5v16" /> <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></symbol><symbol id="i-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /> <circle cx="9" cy="9" r="2" /> <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></symbol><symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /> <rect x="2" y="6" width="14" height="12" rx="2" /></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /> <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></symbol><symbol id="i-volume-2" viewBox="0 0 24 24"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" /> <path d="M16 9a5 5 0 0 1 0 6" /> <path d="M19.364 18.364a9 9 0 0 0 0-12.728" /></symbol><symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol><symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /> <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /> <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /> <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /> <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 3v12" /> <path d="m17 8-5-5-5 5" /> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3" /> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <path d="m7 10 5 5 5-5" /></symbol><symbol id="i-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M7 3v18" /> <path d="M3 7.5h4" /> <path d="M3 12h18" /> <path d="M3 16.5h4" /> <path d="M17 3v18" /> <path d="M17 7.5h4" /> <path d="M17 16.5h4" /></symbol><symbol id="i-smile" viewBox="0 0 24 24"><path d="M15 10V9" /> <path d="M16.472 15a6 6 0 01-8.943 0" /> <path d="M9 10V9" /> <circle cx="12" cy="12" r="10" /></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13" /> <circle cx="6" cy="18" r="3" /> <circle cx="18" cy="16" r="3" /></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /> <path d="M3 11v-1a4 4 0 0 1 4-4h14" /> <path d="m7 22-4-4 4-4" /> <path d="M21 13v1a4 4 0 0 1-4 4H3" /></symbol><symbol id="i-repeat-1" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /> <path d="M3 11v-1a4 4 0 0 1 4-4h14" /> <path d="m7 22-4-4 4-4" /> <path d="M21 13v1a4 4 0 0 1-4 4H3" /> <path d="M11 10h1v4" /></symbol><symbol id="i-rotate-cw" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" /></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol><symbol id="i-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="i-align-right" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M21 12H9" /> <path d="M21 19H7" /></symbol><symbol id="i-align-center" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M17 12H7" /> <path d="M19 19H5" /></symbol><symbol id="i-align-left" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M15 12H3" /> <path d="M17 19H3" /></symbol><symbol id="i-arrow-down-to-line" viewBox="0 0 24 24"><path d="M12 17V3" /> <path d="m6 11 6 6 6-6" /> <path d="M19 21H5" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="i-type" viewBox="0 0 24 24"><path d="M12 4v16" /> <path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /> <path d="M9 20h6" /></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="i-hash" viewBox="0 0 24 24"><line x1="4" x2="20" y1="9" y2="9" /> <line x1="4" x2="20" y1="15" y2="15" /> <line x1="10" x2="8" y1="3" y2="21" /> <line x1="16" x2="14" y1="3" y2="21" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></symbol><symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" /> <path d="M8.12 8.12 12 12" /> <path d="M20 4 8.12 15.88" /> <circle cx="6" cy="18" r="3" /> <path d="M14.8 14.8 20 20" /></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6" /> <path d="m4 14 6-6 2-3" /> <path d="M2 5h12" /> <path d="M7 2h1" /> <path d="m22 22-5-10-5 10" /> <path d="M14 18h6" /></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-trash-2" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></symbol><symbol id="i-ellipsis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol><symbol id="i-shuffle" viewBox="0 0 24 24"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"/><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"/><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol></svg>
-<div id="bar"><button id="bIdx">الفهرس</button><button id="bSea">بحث</button><button id="bDes">تصميم</button><div id="ttl"></div><button id="bSet">الإعدادات</button></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16" /> <path d="M4 12h16" /> <path d="M4 19h16" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /> <rect x="5" y="3" width="5" height="18" rx="1" /></symbol><symbol id="i-square" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /></symbol><symbol id="i-skip-forward" viewBox="0 0 24 24"><path d="M21 4v16" /> <path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z" /></symbol><symbol id="i-skip-back" viewBox="0 0 24 24"><path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z" /> <path d="M3 20V4" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 5v16" /> <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></symbol><symbol id="i-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /> <circle cx="9" cy="9" r="2" /> <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></symbol><symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /> <rect x="2" y="6" width="14" height="12" rx="2" /></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /> <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></symbol><symbol id="i-volume-2" viewBox="0 0 24 24"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" /> <path d="M16 9a5 5 0 0 1 0 6" /> <path d="M19.364 18.364a9 9 0 0 0 0-12.728" /></symbol><symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol><symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /> <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /> <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /> <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /> <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 3v12" /> <path d="m17 8-5-5-5 5" /> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3" /> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <path d="m7 10 5 5 5-5" /></symbol><symbol id="i-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M7 3v18" /> <path d="M3 7.5h4" /> <path d="M3 12h18" /> <path d="M3 16.5h4" /> <path d="M17 3v18" /> <path d="M17 7.5h4" /> <path d="M17 16.5h4" /></symbol><symbol id="i-smile" viewBox="0 0 24 24"><path d="M15 10V9" /> <path d="M16.472 15a6 6 0 01-8.943 0" /> <path d="M9 10V9" /> <circle cx="12" cy="12" r="10" /></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13" /> <circle cx="6" cy="18" r="3" /> <circle cx="18" cy="16" r="3" /></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /> <path d="M3 11v-1a4 4 0 0 1 4-4h14" /> <path d="m7 22-4-4 4-4" /> <path d="M21 13v1a4 4 0 0 1-4 4H3" /></symbol><symbol id="i-repeat-1" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /> <path d="M3 11v-1a4 4 0 0 1 4-4h14" /> <path d="m7 22-4-4 4-4" /> <path d="M21 13v1a4 4 0 0 1-4 4H3" /> <path d="M11 10h1v4" /></symbol><symbol id="i-rotate-cw" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" /></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol><symbol id="i-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="i-align-right" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M21 12H9" /> <path d="M21 19H7" /></symbol><symbol id="i-align-center" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M17 12H7" /> <path d="M19 19H5" /></symbol><symbol id="i-align-left" viewBox="0 0 24 24"><path d="M21 5H3" /> <path d="M15 12H3" /> <path d="M17 19H3" /></symbol><symbol id="i-arrow-down-to-line" viewBox="0 0 24 24"><path d="M12 17V3" /> <path d="m6 11 6 6 6-6" /> <path d="M19 21H5" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="i-type" viewBox="0 0 24 24"><path d="M12 4v16" /> <path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /> <path d="M9 20h6" /></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="i-hash" viewBox="0 0 24 24"><line x1="4" x2="20" y1="9" y2="9" /> <line x1="4" x2="20" y1="15" y2="15" /> <line x1="10" x2="8" y1="3" y2="21" /> <line x1="16" x2="14" y1="3" y2="21" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></symbol><symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" /> <path d="M8.12 8.12 12 12" /> <path d="M20 4 8.12 15.88" /> <circle cx="6" cy="18" r="3" /> <path d="M14.8 14.8 20 20" /></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6" /> <path d="m4 14 6-6 2-3" /> <path d="M2 5h12" /> <path d="M7 2h1" /> <path d="m22 22-5-10-5 10" /> <path d="M14 18h6" /></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-trash-2" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></symbol><symbol id="i-ellipsis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol><symbol id="i-shuffle" viewBox="0 0 24 24"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"/><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"/><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M15 5l1.2 2H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.8L9 5z"/><circle cx="12" cy="13" r="3.4"/></symbol><symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2.5a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0v-6a3 3 0 0 1 3-3z"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v3"/></symbol><symbol id="i-mic-off" viewBox="0 0 24 24"><path d="M9 5a3 3 0 0 1 5.6 1.5"/><path d="M9 9.4V11a3 3 0 0 0 4.3 2.7"/><path d="M5.5 11.5a6.5 6.5 0 0 0 9.9 5.4"/><path d="M12 18v3"/><path d="M3 3l18 18"/></symbol></svg>
+<div id="bar"><button id="bIdx" class="ib" title="الفهرس"><svg class="i"><use href="#i-menu"/></svg><span>الفهرس</span></button><button id="bSea" class="ib" title="بحث"><svg class="i"><use href="#i-search"/></svg><span>بحث</span></button><button id="bAsTop" class="ib" title="تمرير تلقائي"><svg class="i"><use href="#i-arrow-down-to-line"/></svg><span>تمرير</span></button><button id="bNight" class="ib" title="الوضع الليلي/النهاري"><svg class="i"><use href="#i-moon"/></svg><span>الوضع</span></button><button id="bMn" class="ib" title="تلوين المعاني"><svg class="i"><use href="#i-book-open"/></svg><span>معاني</span></button><button id="bPg" class="ib" title="حفظ الصفحة صورة"><svg class="i"><use href="#i-download"/></svg><span>صورة</span></button><button id="bFit" class="ib" title="تبديل ملاءمة الصفحة"><svg class="i"><use href="#i-maximize"/></svg><span>ملاءمة</span></button><button id="bKeep" class="ib" title="إبقاء الشاشة مفتوحة"><svg class="i"><use href="#i-eye"/></svg><span>شاشة</span></button><button id="bDes" class="ib" title="تصميم"><svg class="i"><use href="#i-film"/></svg><span>تصميم</span></button><div id="ttl"></div><button id="bSet" class="ib" title="الإعدادات"><svg class="i"><use href="#i-settings"/></svg><span>الإعدادات</span></button></div>
 <div id="pager" class="h"></div>
 <div id="as"><button id="asT">⏸</button><button id="asM">−</button><b id="asV"></b><button id="asP">+</button><button id="asX">✕</button></div>
 <div id="abar"><div class="sk"><small id="aT0">0:00</small><input type="range" id="seek" min="0" max="1000" value="0" data-no><small id="aT1">0:00</small></div><div id="aLb"></div>
 <div class="ab"><button id="aStop">إيقاف</button><button id="aPrev">السابق</button><button id="aPlay">▶</button><button id="aNext">التالي</button><button id="aMore">المزيد</button></div></div>
 <div id="dim"></div>
+<div class="consent-backdrop" id="analyticsConsent" role="dialog" aria-modal="true" aria-labelledby="analyticsTitle" aria-hidden="true">
+<div class="consent-card">
+<h2 id="analyticsTitle">تحسين التطبيق — موافقتك مطلوبة</h2>
+<p>نرغب في جمع إحصاءات استخدام مجمّعة لا ترتبط بحساب لتحسين التطبيق وإصلاح المشكلات. يشمل ذلك الصفحات والسور التي تُفتح، والاستماع والمعاني والتفسير، وعمليات البحث دون نصوصها، والتنقل والإعدادات والمشاركة، وبيانات حجم وأبعاد الصور ومدة وحجم الفيديو المُصدّر.</p>
+<p>لا نرسل نص الآيات أو البحث أو التفسير أو ملفاتك، ولا نستخدم حساباً أو اسماً للتعرّف عليك. منصة التحليلات قد تعالج عنوان IP ومعلومات المتصفح/الجهاز والموقع التقريبي لتقديم الإحصاءات. لا يبدأ تحميل متعقّبها قبل موافقتك. يمكنك الرفض أو تغيير اختيارك من الإعدادات لاحقاً.</p>
+<div class="act"><button id="analyticsAccept">أوافق وأتابع</button><button id="analyticsReject" class="alt">لا أوافق</button><button id="analyticsClose" class="alt">لاحقاً</button></div>
+</div></div>
 
 <div class="sheet" id="sIdx"><div class="card np"><div class="stk"><div class="pl"><b>الفهرس</b><button class="s" id="ixX">✕</button></div>
 <div class="tabs"><button data-t="s" class="on">السور</button><button data-t="j">الأجزاء</button><button data-t="p">الصفحات</button></div></div><div id="idxBody"></div></div></div>
@@ -279,9 +337,11 @@ body>*:not(#print){display:none!important}#print{display:block}
 <h4>الطباعة</h4>
 <div class="two"><label>من <input type="number" id="pFrom" min="1"></label><label>إلى <input type="number" id="pTo" min="1"></label></div>
 <div class="act"><button id="bPrint">طباعة</button></div>
-<p class="note">تُطبع الصفحات بنفس الشفافية المختارة.</p>
+<div class="act"><button id="bPgDl" class="alt">حفظ الصفحة صورة</button><button id="bPgSh" class="alt">مشاركة الصفحة صورة</button></div>
+<p class="note">تُحفظ الصفحة الحالية كصورة بنفس الخط ولون النص وشفافية الكلمات (دون تمييز كلمات المعاني).</p>
 <h4>اللغة</h4><select id="lang" style="width:100%"></select>
 <h4>الأوفلاين</h4><div class="act" style="margin-top:0"><button id="bOff" class="alt">حالة الأوفلاين</button></div><p class="note" id="offMsg"></p>
+<h4>الخصوصية والتحليلات</h4><div class="act" style="margin-top:0"><button id="analyticsManage" class="alt">إدارة موافقة التحليلات</button></div><p class="note" id="analyticsStatus"></p>
 <div class="act" style="margin-top:14px"><button id="bAbout" class="alt">حول التطبيق</button></div>
 </div></div>
 
@@ -308,9 +368,9 @@ body>*:not(#print){display:none!important}#print{display:block}
 
 <div id="studio">
 <div id="stb"><button id="stX">إغلاق</button><b>تصميم صورة بالآيات</b></div>
-<div id="pvw"><button id="rndD">تصميم جاهز</button><canvas id="pv"></canvas></div>
+<div id="pvw"><button id="rndD">تصميم جاهز</button><canvas id="pv"></canvas><div id="arBar"><button id="arShot" title="التقاط صورة"></button><button id="arRec" title="تسجيل فيديو"></button><button id="arAud" title="تلاوة الآيات"></button><button id="arMic" title="المايك (صوتك)"></button><button id="arSwap" title="تبديل الكاميرا"></button><button id="arFs" title="ملء الشاشة"></button><button id="arOff" title="إيقاف الكاميرا"></button></div><div class="arCd" id="arCd"></div><div class="arPill" id="arPill" style="display:none"><span class="rdot"></span><span id="arPillT">0:00</span></div></div>
 <div id="pnl">
-<div class="tabs" id="stTabs"><button data-t="tx" class="on">النص</button><button data-t="bg">الخلفية</button><button data-t="sz">الأبعاد</button><button data-t="lb">العناوين</button><button data-t="sk">الملصقات</button><button data-t="ex">التصدير</button></div>
+<div class="tabs" id="stTabs"><button data-t="tx" class="on">النص</button><button data-t="bg">الخلفية</button><button data-t="sz">الأبعاد</button><button data-t="lb">العناوين</button><button data-t="sk">الملصقات</button><button data-t="ex">التصدير</button><button data-t="hi">السجل</button></div>
 <div class="tp on" id="tp-tx">
 <div class="two"><select data-k="s" id="dS"></select><label>من آية <input type="number" data-k="a1" min="1"></label><label>إلى <input type="number" data-k="a2" min="1"></label></div>
 <label class="f">حذف كلمات من البداية: <b id="c0v"></b></label><input type="range" data-k="cut0" min="0" max="0">
@@ -329,21 +389,69 @@ body>*:not(#print){display:none!important}#print{display:block}
 <label class="f">بُعد الظل</label><input type="range" data-k="sh.d" min="0" max="40" step=".5">
 <label class="f">قوة الظل (التمويه)</label><input type="range" data-k="sh.b" min="0" max="40" step=".5"></div>
 <div class="tp" id="tp-bg">
-<div class="seg"><button data-k="bg" data-v="none">شفاف</button><button data-k="bg" data-v="solid">لون</button><button data-k="bg" data-v="grad">تدرج</button><button data-k="bg" data-v="pat">زخرفة</button><button data-k="bg" data-v="img">صورة</button><button data-k="bg" data-v="vid">فيديو</button></div>
+<div class="seg"><button data-k="bg" data-v="none">شفاف</button><button data-k="bg" data-v="solid">لون</button><button data-k="bg" data-v="grad">تدرج</button><button data-k="bg" data-v="pat">زخرفة</button><button data-k="bg" data-v="img">صورة</button><button data-k="bg" data-v="vid">فيديو</button><button data-k="bg" data-v="cam">الكاميرا (AR)</button></div>
+<div class="bgp" id="bgpC">
+<h4>لون الخلفية</h4>
 <div class="two"><label>اللون ١ <input type="color" data-k="c1"></label><label>اللون ٢ <input type="color" data-k="c2"></label></div>
-<label class="f">زاوية التدرج</label><input type="range" data-k="ang" min="0" max="360">
-<label class="f">بداية التدرج ٪</label><input type="range" data-k="g0" min="0" max="100">
-<label class="f">نهاية التدرج ٪</label><input type="range" data-k="g1" min="0" max="100">
-<label class="f">صورة / فيديو الخلفية</label>
-<div class="act" style="margin-top:0"><button class="btn alt" id="imF">صورة من الجهاز</button><button class="btn alt" id="vdF">فيديو من الجهاز</button><input type="file" id="imFile" accept="image/*" hidden><input type="file" id="vdFile" accept="video/*" hidden></div>
-<div class="two" style="margin-top:8px;grid-template-columns:1fr auto auto"><input type="text" id="imQ" value="islamic geometric pattern"><button class="btn" id="imGo">صور</button><button class="btn" id="vdGo">فيديو</button></div>
-<div id="gal" class="gal"></div><p class="note" id="imCr">المصدر الإلكتروني: ويكيميديا كومنز (صور حرّة الترخيص؛ بعضها يشترط ذكر المصوّر).</p>
+<div class="gradOnly"><label class="f">زاوية التدرج</label><input type="range" data-k="ang" min="0" max="360"><label class="f">بداية التدرج ٪</label><input type="range" data-k="g0" min="0" max="100"><label class="f">نهاية التدرج ٪</label><input type="range" data-k="g1" min="0" max="100"></div>
+<p class="note">«شفاف» بلا خلفية (PNG شفاف)، «لون» لون واحد، «تدرج» لونان بزاوية.</p>
+</div>
+<div class="bgp" id="bgpP">
+<h4>زخرفة</h4>
+<div class="two"><label>اللون ١ <input type="color" data-k="c1"></label><label>اللون ٢ <input type="color" data-k="c2"></label></div>
+<label class="f">اختر نقشاً هندسياً</label><div class="pat-grid" id="patGrid">
+<button type="button" class="pat-opt" data-k="pat" data-v="star" aria-label="نجمة ثمانية"><canvas width="120" height="68" aria-hidden="true"></canvas><span>نجمة ثمانية</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="diamond" aria-label="معيّنات"><canvas width="120" height="68" aria-hidden="true"></canvas><span>معيّنات</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="hex" aria-label="خلايا سداسية"><canvas width="120" height="68" aria-hidden="true"></canvas><span>خلايا سداسية</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="square" aria-label="مربعات متداخلة"><canvas width="120" height="68" aria-hidden="true"></canvas><span>مربعات متداخلة</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="triangle" aria-label="مثلثات"><canvas width="120" height="68" aria-hidden="true"></canvas><span>مثلثات</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="rosette" aria-label="وريدات هندسية"><canvas width="120" height="68" aria-hidden="true"></canvas><span>وريدات هندسية</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="octagon" aria-label="مثمنات"><canvas width="120" height="68" aria-hidden="true"></canvas><span>مثمنات</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="lattice" aria-label="شبكة مائلة"><canvas width="120" height="68" aria-hidden="true"></canvas><span>شبكة مائلة</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="rings" aria-label="دوائر متحدة المركز"><canvas width="120" height="68" aria-hidden="true"></canvas><span>دوائر متحدة المركز</span></button>
+<button type="button" class="pat-opt" data-k="pat" data-v="cross" aria-label="نجوم متقاطعة"><canvas width="120" height="68" aria-hidden="true"></canvas><span>نجوم متقاطعة</span></button>
+</div>
+<p class="note">يمكن تغيير لوني النقش من الأعلى.</p>
+</div>
+<div class="bgp" id="bgpI">
+<h4>صورة</h4>
+<div class="act" style="margin-top:0"><button class="btn alt" id="imF">صورة من الجهاز</button><button class="btn" id="imGo">بحث صور</button></div>
+<input type="file" id="imFile" accept="image/*" hidden>
+<div class="two" style="margin-top:8px"><input type="text" id="imQ" value="islamic geometric pattern"></div>
+<div id="galI" class="gal"></div><p class="note" id="imCr">المصدر الإلكتروني: ويكيميديا كومنز (صور حرّة الترخيص؛ بعضها يشترط ذكر المصوّر).</p>
+<h4 style="margin:14px 0 6px;color:var(--acc)">خلفيات جاهزة <button id="rdR" class="btn alt" style="float:inline-end;padding:2px 8px;font-size:12px">تحديث</button></h4>
+<div id="bgReady" class="gal"></div><p class="note" id="rdMsg">خلفيات مُضمَّنة في التطبيق.</p>
+<label class="f">حجم الخلفية</label><input type="range" data-k="bs" min="100" max="400">
+<label class="f">موضع أفقي</label><input type="range" data-k="bgx" min="-100" max="100">
+<label class="f">رأسي</label><input type="range" data-k="bgy" min="-100" max="100">
+<label class="f">تعتيم صورة الخلفية</label><input type="range" data-k="dim" min="0" max="90">
+</div>
+<div class="bgp" id="bgpV">
+<h4>فيديو</h4>
+<div class="act" style="margin-top:0"><button class="btn alt" id="vdF">فيديو من الجهاز</button><button class="btn" id="vdGo">بحث فيديو</button></div>
+<input type="file" id="vdFile" accept="video/*" hidden>
+<div class="two" style="margin-top:8px"><input type="text" id="vdQ" value="islamic nature"></div>
+<div id="galV" class="gal"></div>
 <p class="note">قد تكون الفيديوهات الأونلاين كبيرة الحجم.</p>
 <label class="f">حجم الخلفية</label><input type="range" data-k="bs" min="100" max="400">
 <label class="f">موضع أفقي</label><input type="range" data-k="bgx" min="-100" max="100">
 <label class="f">رأسي</label><input type="range" data-k="bgy" min="-100" max="100">
 <label class="f">تعتيم صورة الخلفية</label><input type="range" data-k="dim" min="0" max="90">
-<div id="vtrim" style="display:none"><h4>قص الفيديو</h4><label class="f">البداية</label><input type="range" data-k="vt0" min="0" max="1" step=".1"><label class="f">النهاية</label><input type="range" data-k="vt1" min="0" max="1" step=".1"><div class="act"><button id="vPrev">معاينة</button></div></div></div>
+<div id="vtrim" style="display:none"><h4>قص الفيديو</h4><label class="f">البداية</label><input type="range" data-k="vt0" min="0" max="1" step=".1"><label class="f">النهاية</label><input type="range" data-k="vt1" min="0" max="1" step=".1"><div class="act"><button id="vPrev">معاينة</button></div></div>
+</div>
+<div id="camBox" class="bgp" style="display:none"><h4>الكاميرا (الواقع المعزّز)</h4>
+<p class="note" id="camMsg">شغّل الكاميرا لتظهر كخلفية حيّة، ثم عدّل الآيات والمؤثرات والتقط صورة أو سجّل مقطعاً.</p>
+<div class="act"><button id="camShot">التقاط صورة</button><button id="camRec">تسجيل فيديو</button></div>
+<div class="act" style="margin-top:6px"><button class="btn alt" id="camFs">ملء الشاشة</button><button class="btn alt" id="camSwap">تبديل الكاميرا</button><button class="btn alt" id="camOff">إيقاف الكاميرا</button></div>
+<label class="f">جودة الفيديو المسجَّل</label>
+<div class="rows"><select id="camRes"><option value="1920">عالية (1920)</option><option value="1280" selected>متوسطة (1280)</option><option value="854">خفيفة (854)</option><option value="640">منخفضة (640)</option></select><span class="note">يؤثر على الدقة وحجم الملف.</span></div>
+<label class="chk"><input type="checkbox" id="camMic" checked> إدراج صوت المايك (صوتك) في التسجيل</label>
+<label class="chk"><input type="checkbox" id="camAud" checked> تشغيل تلاوة الآيات أثناء تصوير الفيديو</label>
+<label class="f">مستوى صوت التلاوة (أثناء التسجيل وعند التصدير)</label><input type="range" id="camVol" min="0" max="100" value="100">
+<label class="chk"><input type="checkbox" id="camCd" checked> عدّ تنازلي (٣ ثوانٍ) قبل بدء التسجيل</label>
+<label class="chk"><input type="checkbox" id="camAs" checked> إيقاف التسجيل تلقائياً عند انتهاء التلاوة</label>
+<label class="chk"><input type="checkbox" id="camOv"> إظهار مؤشر التسجيل والزمن داخل الفيديو</label>
+<p class="note">التقاط الصورة أو التسجيل يضع الكاميرا كخلفية داخل التصميم (بمعزل عن النص والمؤثرات) فتظل قادراً على تعديل التصميم ومعاينته ثم تصديره. عند تفعيل «تشغيل تلاوة الآيات» تُشغَّل التلاوة بصوت مسموع أثناء التسجيل لتتمكن من تتبعها وتسجيل صوتك فوقها (يُفضَّل استخدام سماعات لتفادي تسجيل صوت التلاوة من مكبر الصوت)، ثم تُضاف التلاوة أخيراً حسب إعدادات لوحة التصدير: إن اخترت «بلا صوت» فلن تُضاف. يلزم اتصال آمن (HTTPS أو localhost) لتشغيل الكاميرا.</p></div></div>
 <div class="tp" id="tp-sz">
 <div class="seg"><button data-k="ratio" data-v="1:1">1:1</button><button data-k="ratio" data-v="4:5">4:5</button><button data-k="ratio" data-v="3:4">3:4</button><button data-k="ratio" data-v="2:3">2:3</button><button data-k="ratio" data-v="9:16">9:16</button><button data-k="ratio" data-v="16:9">16:9</button><button data-k="ratio" data-v="4:3">4:3</button><button data-k="ratio" data-v="3:2">3:2</button><button data-k="ratio" data-v="21:9">21:9</button><button data-k="ratio" data-v="c">مخصص</button></div>
 <div class="two"><label>العرض <input type="number" data-k="cw" min="1"></label><label>الارتفاع <input type="number" data-k="ch" min="1"></label></div>
@@ -367,7 +475,24 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div id="skList" class="seg" style="margin-top:8px"></div>
 <div id="skCtl" style="display:none"><div id="skCw" style="display:none"><label>اللون <input type="color" id="skC"></label></div>
 <div id="skTx" style="display:none"><label class="f">الخط</label><select id="skF"></select><label class="f" style="flex-direction:row;margin-top:8px"><input type="checkbox" id="skB"> عريض</label></div><label class="f">الحجم</label><input type="range" id="skS" min="2" max="90" step=".5"><label class="f">الدوران</label><input type="range" id="skR" min="-180" max="180"><label class="f">موضع أفقي</label><input type="range" id="skX" min="0" max="100"><label class="f">رأسي</label><input type="range" id="skY" min="0" max="100"><div class="act"><button id="skDel" class="alt">حذف</button></div></div>
-<p class="note">يمكنك سحب الملصق على المعاينة.</p></div>
+<p class="note">يمكنك سحب الملصق على المعاينة.</p>
+<h4 style="margin-top:16px">التوقيع الثابت (يُضاف لكل التصاميم)</h4>
+<label class="f" style="flex-direction:row"><input type="checkbox" data-k="wm.on"> إظهار التوقيع على التصاميم</label>
+<div id="wmCtl">
+<label class="f">نص التوقيع</label>
+<input type="text" data-k="wm.text" maxlength="80" placeholder="اسمك أو حسابك">
+<div class="two"><label class="f">الخط</label><select data-k="wm.ff" id="wmF"></select></div>
+<div class="two"><label class="f" style="flex-direction:row"><input type="checkbox" data-k="wm.b"> عريض</label></div>
+<div class="two"><label>اللون <input type="color" data-k="wm.col"></label><label class="f">شفافية اللون</label><input type="range" data-k="wm.ca" min="0" max="100"></div>
+<div class="two"><label class="f">حجم التوقيع</label><input type="range" data-k="wm.size" min="2" max="16" step=".2"><label class="f">استدارة الخلفية</label><input type="range" data-k="wm.rad" min="0" max="40"></div>
+<label class="f" style="flex-direction:row"><input type="checkbox" data-k="wm.shOn"> ظل النص</label>
+<div class="two"><label>لون الظل <input type="color" data-k="wm.shCol"></label><label class="f">شفافية الظل</label><input type="range" data-k="wm.sha" min="0" max="100"></div>
+<div class="two"><label class="f">تمويه الظل</label><input type="range" data-k="wm.shb" min="0" max="40"><label class="f">إزاحة الظل</label><input type="range" data-k="wm.shd" min="0" max="20"></div>
+<label class="f" style="flex-direction:row"><input type="checkbox" data-k="wm.bgOn"> خلفية التوقيع</label>
+<div class="two"><label>لون الخلفية <input type="color" data-k="wm.bgCol"></label><label class="f">شفافية الخلفية</label><input type="range" data-k="wm.bga" min="0" max="100"></div>
+<div class="two"><label class="f">أفقي</label><input type="range" data-k="wm.x" min="0" max="100"><label class="f">رأسي</label><input type="range" data-k="wm.y" min="0" max="100"></div>
+<p class="note">اسحب التوقيع على المعاينة لتحريكه — يبقى داخل التصميم دائماً.</p>
+</div></div>
 <div class="tp" id="tp-ex">
 <label class="f">الدقة</label><div class="seg"><button data-k="res" data-v="1">HD ١٠٨٠</button><button data-k="res" data-v="2">2K/4K ×٢</button><button data-k="res" data-v="3">أعلى ×٣</button></div><p class="note" id="resTx"></p>
 <div class="act"><button id="xPng">حفظ صورة PNG</button><button id="xShP" class="alt">مشاركة الصورة</button></div>
@@ -382,19 +507,119 @@ body>*:not(#print){display:none!important}#print{display:block}
 <p class="note">يوزَّع طول الصوت على كلمات الآية. المعاينة تشغّل تلاوة الآية (أو الملف الصوتي المختار) وتوزّع الكلمات على طولها الفعلي.</p>
 <div class="act"><button id="xVid">تصدير فيديو</button><button id="xShV" class="alt">مشاركة الفيديو</button></div>
 <p class="note" id="exMsg">التلاوة تتحمّل من everyayah.com وتحتاج إنترنت.</p></div>
+<div class="tp" id="tp-hi">
+<h4>التصاميم المحفوظة</h4>
+<div class="act" style="margin-top:0"><button id="hiAlbum">مجلد الألبوم</button><button id="hiOpen" class="alt">السماح بالكتابة</button></div>
+<div class="act"><button id="hiClr" class="alt">مسح السجل</button><button id="hiDlAll" class="alt">تنزيل الكل</button></div>
+<p class="note" id="hiMsg">تُحفظ كل صورة أو فيديو تصدّره تلقائياً هنا. اربط مجلداً على جهازك ليُحفظ فيه أيضاً.</p>
+<div id="hiG" class="gal hiG"></div>
+</div>
 </div></div>
 <div id="print"></div>
 <script src="config.js"></script>
+<script src="analytics.js"></script>
 <script src="mp4-muxer.js"></script>
 <script src="fix-webm-duration.js"></script>
 <script src="data.js"></script>
 <script src="meanings.js"></script>
+<script src="icon-b64.js"></script>
+<script src="backgrounds/list.js"></script>
 <script>
 let lang='ar';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],ar=n=>lang!='ar'?String(n):String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.closest('#analyticsConsent'))return;const area=b.closest('#stTabs')?'design_tabs':b.closest('#studio')?'design':b.closest('#sIdx')?'index':b.closest('#sSea')?'search':b.closest('#sSet')?'settings':b.closest('#bar,#abar')?'navigation':'app';
+ const data={control:b.id||b.dataset.k||b.dataset.t||(b.closest('.sw.th')?'theme_picker':'option'),area};
+ if(b.dataset.v)data.choice=b.dataset.v;if(b.dataset.g)data.target=+b.dataset.g;
+ QuranAnalytics.track('button_click',data)});
+document.addEventListener('change',e=>{const el=e.target;if(el.matches('#studio [data-k]'))QuranAnalytics.track('design_setting_change',{field:el.dataset.k})});
 const JUZ=[1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582],MAXP=604;
 const PAL=[['#fbf6e8','#17150f'],['#ffffff','#111111'],['#f1e4c3','#2b2112'],['#e9e9e6','#1a1a1a'],['#e3efe1','#10281f'],['#16181b','#e9e2cc']];
-const REC=[['حفص عن عاصم',[['الحصري — مرتل','Husary_128kbps'],['الحصري — مجوّد','Husary_Mujawwad_128kbps'],['مشاري العفاسي','Alafasy_128kbps'],['عبد الباسط — مرتل','Abdul_Basit_Murattal_64kbps'],['عبد الباسط — مجوّد','Abdul_Basit_Mujawwad_128kbps'],['المنشاوي — مرتل','Minshawy_Murattal_128kbps'],['المنشاوي — مجوّد','Minshawy_Mujawwad_192kbps'],['السديس','Abdurrahmaan_As-Sudais_192kbps'],['الشريم','Saood_ash-Shuraym_128kbps'],['أبو بكر الشاطري','Abu_Bakr_Ash-Shaatree_128kbps'],['هاني الرفاعي','Hani_Rifai_192kbps'],['ماهر المعيقلي','MaherAlMuaiqly128kbps'],['الحذيفي','Hudhaify_128kbps'],['الغامدي','Ghamadi_40kbps'],['ياسر الدوسري','Yasser_Ad-Dussary_128kbps'],['محمد الطبلاوي','Mohammad_al_Tablaway_128kbps']]],['ورش عن نافع',[['إبراهيم الدوسري','warsh/warsh_ibrahim_aldosary_128kbps'],['ياسين الجزائري','warsh/warsh_yassin_al_jazaery_64kbps']]]];
-const st=Object.assign({p:1,a:100,m:'h',bg:null,rec:'Husary_128kbps',mode:'cont',mv:0,fit:'a',n:1,rs:null,re:null,tap:1,night:0,br:100,fb:100,sp:20,th:null,lt:0,dk:10,fc:null,lang:'ar',mo:1,mc:null,mb:null},(()=>{try{return JSON.parse(localStorage.getItem('mushaf2')||'{}')}catch(e){return{}}})());
+const REC=[
+['حفص عن عاصم',[
+['عبد الباسط عبد الصمد — مرتل (٦٤)','Abdul_Basit_Murattal_64kbps'],
+['عبد الباسط عبد الصمد — مرتل (١٩٢)','Abdul_Basit_Murattal_192kbps'],
+['عبد الباسط عبد الصمد — مجوّد','Abdul_Basit_Mujawwad_128kbps'],
+['عبد الله بصفر (٣٢)','Abdullah_Basfar_32kbps'],
+['عبد الله بصفر (٦٤)','Abdullah_Basfar_64kbps'],
+['عبد الله بصفر (١٩٢)','Abdullah_Basfar_192kbps'],
+['عبد الرحمن السديس (٦٤)','Abdurrahmaan_As-Sudais_64kbps'],
+['عبد الرحمن السديس (١٩٢)','Abdurrahmaan_As-Sudais_192kbps'],
+['عبد الصمد (QuranExplorer)','AbdulSamad_64kbps_QuranExplorer.Com'],
+['أبو بكر الشاطري (٦٤)','Abu_Bakr_Ash-Shaatree_64kbps'],
+['أبو بكر الشاطري (١٢٨)','Abu_Bakr_Ash-Shaatree_128kbps'],
+['أحمد بن علي العجمي — QuranExplorer','Ahmed_ibn_Ali_al-Ajamy_64kbps_QuranExplorer.Com'],
+['أحمد بن علي العجمي — كتاب الله','Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net'],
+['أحمد بن علي العجمي (١٢٨)','ahmed_ibn_ali_al_ajamy_128kbps'],
+['مشاري راشد العفاسي (٦٤)','Alafasy_64kbps'],
+['مشاري راشد العفاسي (١٢٨)','Alafasy_128kbps'],
+['الغامدي','Ghamadi_40kbps'],
+['هاني الرفاعي (٦٤)','Hani_Rifai_64kbps'],
+['هاني الرفاعي (١٩٢)','Hani_Rifai_192kbps'],
+['محمود خليل الحصري — مرتل (٦٤)','Husary_64kbps'],
+['محمود خليل الحصري — مرتل (١٢٨)','Husary_128kbps'],
+['محمود خليل الحصري — مجوّد (٦٤)','Husary_Mujawwad_64kbps'],
+['محمود خليل الحصري — مجوّد (١٢٨)','Husary_128kbps_Mujawwad'],
+['محمود خليل الحصري — معلّم','Husary_Muallim_128kbps'],
+['علي الحذيفي (٣٢)','Hudhaify_32kbps'],
+['علي الحذيفي (٦٤)','Hudhaify_64kbps'],
+['علي الحذيفي (١٢٨)','Hudhaify_128kbps'],
+['إبراهيم الأخضر','Ibrahim_Akhdar_32kbps'],
+['ماهر المعيقلي (٦٤)','Maher_AlMuaiqly_64kbps'],
+['ماهر المعيقلي (١٢٨)','MaherAlMuaiqly128kbps'],
+['المنشاوي (١٦)','Menshawi_16kbps'],
+['المنشاوي (٣٢)','Menshawi_32kbps'],
+['المنشاوي — مجوّد (٦٤)','Minshawy_Mujawwad_64kbps'],
+['المنشاوي — مجوّد (١٩٢)','Minshawy_Mujawwad_192kbps'],
+['المنشاوي — مرتل','Minshawy_Murattal_128kbps'],
+['محمد الطبلاوي (٦٤)','Mohammad_al_Tablaway_64kbps'],
+['محمد الطبلاوي (١٢٨)','Mohammad_al_Tablaway_128kbps'],
+['محمد أيوب (٣٢)','Muhammad_Ayyoub_32kbps'],
+['محمد أيوب (٦٤)','Muhammad_Ayyoub_64kbps'],
+['محمد أيوب (١٢٨)','Muhammad_Ayyoub_128kbps'],
+['محمد جبريل (٦٤)','Muhammad_Jibreel_64kbps'],
+['محمد جبريل (١٢٨)','Muhammad_Jibreel_128kbps'],
+['مصطفى إسماعيل','Mustafa_Ismail_48kbps'],
+['سعود الشريم (٦٤)','Saood_ash-Shuraym_64kbps'],
+['سعود الشريم (١٢٨)','Saood_ash-Shuraym_128kbps'],
+['صالح عبد الرحمن البخيتير','Salaah_AbdulRahman_Bukhatir_128kbps'],
+['محسن القاسم','Muhsin_Al_Qasim_192kbps'],
+['عبد الله عوض الجهني','Abdullaah_3awwaad_Al-Juhaynee_128kbps'],
+['صلاح البدير','Salah_Al_Budair_128kbps'],
+['عبد الله المطرود','Abdullah_Matroud_128kbps'],
+['أحمد نعينع','Ahmed_Neana_128kbps'],
+['محمد عبد الكريم','Muhammad_AbdulKareem_128kbps'],
+['خليفة الطنيجي','khalefa_al_tunaiji_64kbps'],
+['محمود علي البنا','mahmoud_ali_al_banna_32kbps'],
+['كريم منصوري','Karim_Mansoori_40kbps'],
+['خالد عبد الله القحطاني','Khaalid_Abdullaah_al-Qahtaanee_192kbps'],
+['ياسر الدوسري','Yasser_Ad-Dussary_128kbps'],
+['ناصر القطامي','Nasser_Alqatami_128kbps'],
+['علي حجاج السويسي','Ali_Hajjaj_AlSuesy_128kbps'],
+['سهل ياسين','Sahl_Yassin_128kbps'],
+['عزيز الأليلي','aziz_alili_128kbps'],
+['ياسر سلامة','Yaser_Salamah_128kbps'],
+['أكرم العلاقمي','Akram_AlAlaqimy_128kbps'],
+['علي جابر','Ali_Jaber_64kbps'],
+['فارس عباد','Fares_Abbad_64kbps'],
+['أيمن سويد','Ayman_Sowaid_64kbps']
+]],
+['ورش عن نافع',[
+['إبراهيم الدوسري','warsh/warsh_ibrahim_aldosary_128kbps'],
+['ياسين الجزائري','warsh/warsh_yassin_al_jazaery_64kbps'],
+['عبد الباسط عبد الصمد','warsh/warsh_Abdul_Basit_128kbps']
+]],
+['تلاوات بلغات أخرى',[
+['الإنجليزية — صحيح إنترناشيونال (إبراهيم ووك)','English/Sahih_Intnl_Ibrahim_Walk_192kbps'],
+['متعدد اللغات — بصفر ووك','MultiLanguage/Basfar_Walk_192kbps'],
+['الفارسية — مكارم وكبيري','translations/Makarem_Kabiri_16Kbps'],
+['الفارسية — فولادوند وهدايتفر','translations/Fooladvand_Hedayatfar_40Kbps'],
+['الفارسية — پرهیزگار','Parhizgar_48kbps'],
+['الأذرية — بلاييف','translations/azerbaijani/balayev'],
+['الأردية — شمشاد علي خان','translations/urdu_shamshad_ali_khan_46kbps'],
+['الأردية — فرحات هاشمي','translations/urdu_farhat_hashmi'],
+['البوسنية — بسم كركت','translations/besim_korkut_ajet_po_ajet']
+]]
+];
+const st=Object.assign({p:1,a:100,m:'h',bg:null,rec:'Husary_128kbps',mode:'cont',mv:0,fit:'a',n:1,rs:null,re:null,tap:1,night:0,br:100,fb:100,sp:20,th:null,lt:0,dk:10,fc:null,lang:'ar',mo:1,mc:null,mb:null,keepOn:0},(()=>{try{return JSON.parse(localStorage.getItem('mushaf2')||'{}')}catch(e){return{}}})());
 if(st.th==null){st.th=st.night?10:0;st.bg=null}if(!st.mv){st.mode='cont';st.mv=1}lang=st.lang||'ar';
 const save=()=>{try{localStorage.setItem('mushaf2',JSON.stringify(st))}catch(e){}};
 const juzOf=p=>JUZ.filter(s=>p>=s).length;
@@ -421,8 +646,8 @@ function sItem([k,c]){const[s,a]=k.split(':'),d=document.createElement('button')
 function sMore(n){const box=$('#seaR');if(sSent)sSent.remove();const e=Math.min(sR.length,sShown+n);for(;sShown<e;sShown++)box.appendChild(sItem(sR[sShown]));
  if(sShown<sR.length){sSent=document.createElement('div');sSent.style.height='40px';box.appendChild(sSent);new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();sMore(40)}},{root:$('#seaC')}).observe(sSent)}}
 function doSearch(all){const q=nq($('#seaQ').value);const box=$('#seaR');box.innerHTML='';sR=[];sShown=0;sSent=null;sQ=q;
- if(q.replace(/ /g,'').length<2){$('#seaN').textContent=q?T('اكتب حرفين على الأقل'):'';return}
- const{R,tot}=sFind(q);sR=R;if(!R.length){$('#seaN').textContent=T('لا نتائج');return}
+ if(q.replace(/ /g,'').length<2){$('#seaN').textContent=q?T('اكتب حرفين على الأقل'):'';if(all&&q)QuranAnalytics.track('search_submit',{results:0});return}
+ const{R,tot}=sFind(q);sR=R;if(all)QuranAnalytics.track('search_submit',{results:R.length});if(!R.length){$('#seaN').textContent=T('لا نتائج');return}
  $('#seaN').textContent=ar(tot)+' '+T('نتيجة')+' · '+ar(R.length)+' '+T('آية')+(!all&&R.length>10?' · '+T('عرض أول')+' '+ar(10):'');
  box.scrollTop=0;sMore(all?40:10)}
 let sTm=0;$('#seaQ').addEventListener('input',()=>{clearTimeout(sTm);sTm=setTimeout(()=>doSearch(false),90)});
@@ -438,12 +663,13 @@ const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[
 const bname=id=>(MB.find(b=>b.id==id)||{}).n||'';
 const mEnt=k=>(MN[k]||[]).filter(e=>st.mb.includes(e[0]));
 function cover(k,i){if(!st.mo||!MN[k])return null;let m=MWc[k];if(!m){m=MWc[k]={};MN[k].forEach((e,j)=>{if(e[3]>=0)for(let x=e[3];x<e[3]+e[4];x++)(m[x]=m[x]||[]).push(j)})}const r=(m[i]||[]).filter(j=>st.mb.includes(MN[k][j][0]));return r.length?r:null}
-function showMean(el){const k=el.dataset.k,c=cover(k,+el.dataset.i);if(!c)return;$('#mTtl').textContent=vt(k);
+function showMean(el){const k=el.dataset.k,c=cover(k,+el.dataset.i);if(!c)return;QuranAnalytics.track('word_meaning_open',{surah:+k.split(':')[0]});$('#mTtl').textContent=vt(k);
  $('#mBody').innerHTML=c.map(j=>{const e=MN[k][j];return'<div class="me"><b>'+esc(e[1])+'</b><p>'+esc(e[2])+'</p><small>'+esc(bname(e[0]))+'</small></div>'}).join('');open('#sMean')}
-function showVm(k){$('#vmTtl').textContent=vt(k);const E=mEnt(k);
+function showVm(k){QuranAnalytics.track('tafsir_open',{surah:+k.split(':')[0]});$('#vmTtl').textContent=vt(k);const E=mEnt(k);
  $('#vmBody').innerHTML=E.length?MB.filter(b=>st.mb.includes(b.id)).map(b=>{const r=E.filter(e=>e[0]==b.id);return r.length?'<h4>'+esc(b.n)+'</h4>'+r.map(e=>'<div class="me"><b>'+esc(e[1])+'</b><p>'+esc(e[2])+'</p></div>').join(''):''}).join(''):'<p class="note">'+T('لا توجد معاني لهذه الآية في الكتب المحددة')+'</p>';open('#sVm')}
 function buildMb(){const s=$('#mbL');s.innerHTML='';MB.forEach(b=>{const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.checked=st.mb.includes(b.id);
- c.onchange=()=>{st.mb=MB.filter(x=>x.id==b.id?c.checked:st.mb.includes(x.id)).map(x=>x.id);save();build()};l.append(c,' '+b.n);s.appendChild(l)})}
+ c.onchange=()=>{st.mb=MB.filter(x=>x.id==b.id?c.checked:st.mb.includes(x.id)).map(x=>x.id);save();refreshMeaningWords()};l.append(c,' '+b.n);s.appendChild(l)})}
+function refreshMeaningWords(){$$('.w[data-k][data-i]').forEach(w=>w.classList.toggle('mn',!!cover(w.dataset.k,+w.dataset.i)))}
 
 /* الثيمات */
 const TH=[['#0f4f45','#a8823f','#e4dfd0','#fffdf6','#17150f','#fbf6e8','#17150f'],['#2b5d4f','#b08d3c','#eceff1','#ffffff','#111111','#ffffff','#111111'],['#7a4e1d','#c58b3a','#e8dcc3','#fbf3e0','#2b2112','#f1e4c3','#2b2112'],['#1f6f5c','#3a9d84','#dcebe3','#f5fbf7','#10281f','#e3efe1','#10281f'],['#1e5a8a','#4a90c2','#dbe7f2','#f6faff','#0e2236','#eaf2fa','#0e2236'],['#8a2f4f','#c9708c','#f0dfe4','#fff8fa','#2f1018','#fbeef1','#2f1018'],['#5a4a8a','#8f7cc4','#e4e0f0','#fbfaff','#1d1736','#f1eefa','#1d1736'],['#4f5a1f','#8a9a3a','#e6e8d2','#fbfcf1','#1f2410','#f1f3df','#1f2410'],['#3d4650','#7a8793','#e2e5e8','#fafbfc','#15191d','#eef0f2','#15191d'],['#b0541f','#e08b4a','#f3e2d2','#fffaf4','#2d1608','#fdf0e1','#2d1608']].map(a=>[0,...a]).concat([['#10231e','#c9a24d','#0a0b0d','#1a1c1f','#e6dfc8','#14161a','#d8cfb3'],['#1c1c1c','#c9a24d','#000000','#0d0d0d','#dddddd','#000000','#cfc7ad'],['#0f2744','#5aa0e0','#070d17','#111c2b','#dbe6f3','#0c1522','#c9d6e6'],['#2a2d31','#d1a24a','#121315','#1d1f22','#e8e6df','#17181a','#dcd6c4'],['#3b2415','#d9a455','#130c07','#21160e','#f0e4d0','#1a110a','#e6d6bb'],['#123524','#7fbf8f','#07110b','#0f1c14','#dcebdf','#0c1710','#cfe2d3'],['#3a1f4d','#c08be0','#0e0713','#1a1023','#eadcf5','#140b1b','#ddcdea'],['#4a1a24','#e08a8a','#12070a','#200e13','#f3dcdf','#190a0d','#e8cdd0'],['#11474c','#5fc4c9','#071314','#0f2224','#d6eced','#0b1b1d','#c7e2e4'],['#3d2e1a','#d1a24a','#14100a','#221b11','#efe3c9','#1a140b','#e0d2b3']].map(a=>[1,...a])).concat([[0,'rgba(48,96,210,.72)','#7a5af8','#cfe3ff','rgba(255,255,255,.42)','#12203a','rgba(255,255,255,.55)','#12203a',1],[1,'rgba(32,52,118,.72)','#8ab4ff','#0b1630','rgba(28,34,64,.5)','#eef2ff','rgba(18,22,44,.55)','#e8ecff',1]]);
@@ -456,8 +682,15 @@ function applyBg(){const t=TH[st.th],r=document.documentElement.style;
  $('#dim').style.opacity=(1-st.br/100)*.88;$('#night').checked=!!t[0];$('#brR').value=st.br;$('#fbR').value=st.fb;$('#spR').value=st.sp;$('#asV').textContent=ar(st.sp);$('#fcol').value=st.fc||pb[1];
  const mc=st.mc||(t[0]?'#6fb3ff':'#1565c0');r.setProperty('--mn',mc);$('#mcol').value=mc;$('#mnOn').checked=!!st.mo;
  document.querySelector('meta[name=theme-color]').content=t[1].startsWith('#')?t[1]:(t[0]?'#14234f':'#4a74e0');syncRg()}
-function selTheme(i){st.th=i;st.bg=null;st.fc=null;if(TH[i][0])st.dk=i;else st.lt=i;applyBg();save();buildTh();buildSw()}
+let wakeLock=null;
+async function keepToggle(){if('wakeLock' in navigator){if(wakeLock){try{await wakeLock.release();wakeLock=null}catch(e){}st.keepOn=0;$('#bKeep').classList.remove('on');toast(T('تم إيقاف إبقاء الشاشة'));save();return}try{wakeLock=await navigator.wakeLock.request('screen');st.keepOn=1;wakeLock.addEventListener('release',()=>{wakeLock=null;if(!document.hidden){st.keepOn=0;$('#bKeep').classList.remove('on')}});$('#bKeep').classList.add('on');toast(T('تم تفعيل إبقاء الشاشة'));save();return}catch(e){toast(T('لا يدعم المتصفح هذه الميزة'))}}else{toast(T('لا يدعم المتصفح إبقاء الشاشة'))}}
+function applyKeep(){
+ const acquire=()=>navigator.wakeLock.request('screen').then(wl=>{wakeLock=wl;$('#bKeep').classList.add('on');wakeLock.addEventListener('release',()=>{wakeLock=null;if(!document.hidden){st.keepOn=0;$('#bKeep').classList.remove('on')}})});
+ if(st.keepOn&&'wakeLock' in navigator)acquire().catch(()=>{});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)return;if(st.keepOn&&'wakeLock' in navigator&&!wakeLock)acquire().catch(()=>{})});
+}
 function buildTh(){['#thL','#thD','#thG'].forEach((id,k)=>{const s=$(id);s.innerHTML='';TH.forEach((x,i)=>{if(k<2?(x[8]||x[0]!=k):!x[8])return;const b=document.createElement('button');b.style.background=x[8]?(x[0]?'linear-gradient(135deg,#2b4fb8,#6a2fb0 55%,#0e7c86)':'linear-gradient(135deg,#a8d8ff,#e3c4ff 55%,#ffd1e6)'):'linear-gradient(135deg,'+x[1]+' 50%,'+x[6]+' 50%)';b.className=i==st.th?'on':'';b.onclick=()=>selTheme(i);s.appendChild(b)})})}
+function selTheme(i){const t=TH[i];if(!t)return;st.th=i;st.night=t[0]?1:0;st.bg=null;if(t[0])st.dk=i;else st.lt=i;QuranAnalytics.track('theme_change',{theme:i,night:!!t[0]});applyBg();buildTh();buildSw();save()}
 function lum(h){const n=parseInt(h.slice(1),16);return(.299*(n>>16)+.587*((n>>8)&255)+.114*(n&255))/255}
 function buildSw(){const s=$('#sw');s.innerHTML='';const d=document.createElement('button');d.style.background=TH[st.th][6];d.className=st.bg?'':'on';d.onclick=()=>{st.bg=null;applyBg();save();buildSw()};s.appendChild(d);
  PAL.forEach(p=>{const b=document.createElement('button');b.style.background=p[0];b.className=st.bg&&st.bg[0]==p[0]?'on':'';b.onclick=()=>{st.bg=p;applyBg();save();buildSw()};s.appendChild(b)});
@@ -475,14 +708,15 @@ const ico=(s,n)=>{const e=$(s),u=e.querySelector('use');if(u)u.setAttribute('hre
 const IC=[['#bIdx','menu'],['#bDes','film'],['#setX','x'],['#ixX','x'],['#clrR','trash-2'],['#cRs','chevron-right'],['#cRe','chevron-left'],['#bSea','search'],['#seaGo','search'],['#seaX','x'],['#bSet','settings'],['#bAs','arrow-down-to-line'],['#bFs','maximize'],['#bPrint','printer'],['#bOff','wifi'],['#mH','layers'],['#mV','list'],['#fcR','rotate-cw'],
 ['#aPlay','play'],['#aPrev','skip-back'],['#aNext','skip-forward'],['#vX','x'],['#cX','x'],['#setS','chevron-right'],['#setE','chevron-left'],['#vTxt','copy'],['#vImg','image'],['#vDl','download'],['#vDs','film'],
 ['#cPlay','volume-2'],['#aStop','square'],['#wPrev','play'],['[data-k=rv][data-v="0"]','x'],['[data-k=rv][data-v="1"]','eye'],['[data-k=rv][data-v="2"]','layers'],['[data-k=rv][data-v="3"]','chevron-right'],['#rndD','shuffle'],['#bAbout','info'],['#abX','x'],['#aMore','ellipsis'],['#vdF','film'],['#vdGo','film'],['#imGo','search'],['#vPrev','play'],['#aPrv','play'],['#skIm','image'],['#skEmAdd','plus'],['#gifGo','search'],['#skDel','trash-2'],['[data-k=bg][data-v=vid]','video'],['#stTabs [data-t=sk]','smile'],['#cMn','book-open'],['#mX','x'],['#vmX','x'],['#mcR','rotate-cw'],['#cCopy','copy'],['#cShare','share-2'],['#cImg','download'],['#cDs','film'],['#asT','pause'],['#asM','minus'],['#asP','plus'],['#asX','x'],
-['#stX','x'],['#imF','upload'],['#imGo','search'],['#xPng','download'],['#xShP','share-2'],['#xVid','video'],['#xShV','share-2'],['#flip','rotate-cw'],
+['#stX','x'],['#imF','upload'],['#imGo','search'],['#vdF','upload'],['#vdGo','search'],['#xPng','download'],['#xShP','share-2'],['#xVid','video'],['#xShV','share-2'],['#flip','rotate-cw'],
 ['#sIdx [data-t=s]','book-open'],['#sIdx [data-t=j]','layers'],['#sIdx [data-t=p]','list'],
 ['#stTabs [data-t=tx]','type'],['#stTabs [data-t=bg]','palette'],['#stTabs [data-t=sz]','ruler'],['#stTabs [data-t=lb]','hash'],['#stTabs [data-t=ex]','download'],
 ['#modes [data-v=once]','play'],['#modes [data-v=cont]','skip-forward'],['#modes [data-v=v]','repeat-1'],['#modes [data-v=s]','repeat'],['#modes [data-v=r]','scissors'],
 ['[data-k=al][data-v=r]','align-right'],['[data-k=al][data-v=c]','align-center'],['[data-k=al][data-v=l]','align-left'],
 ['[data-k=bg][data-v=none]','x'],['[data-k=bg][data-v=solid]','palette'],['[data-k=bg][data-v=grad]','layers'],['[data-k=bg][data-v=pat]','sparkles'],['[data-k=bg][data-v=img]','image'],
 ['[data-k=asrc][data-v=none]','x'],['[data-k=asrc][data-v=ayat]','volume-2'],['[data-k=asrc][data-v=file]','music'],
-['[data-k=tgt][data-v=txt]','type'],['[data-k=tgt][data-v=nm]','book-open'],['[data-k=tgt][data-v=rf]','hash']];
+['[data-k=tgt][data-v=txt]','type'],['[data-k=tgt][data-v=nm]','book-open'],['[data-k=tgt][data-v=rf]','hash'],
+['[data-k=bg][data-v=cam]','camera'],['#arShot','image'],['#camShot','image'],['#arRec','circle'],['#camRec','circle'],['#arAud','volume-2'],['#arMic','mic'],['#arSwap','rotate-cw'],['#camSwap','rotate-cw'],['#arFs','maximize'],['#camFs','maximize'],['#arOff','x'],['#camOff','x']];
 function fitUi(){$$('[data-fit]').forEach(b=>b.classList.toggle('on',b.dataset.fit==st.fit))}
 function decorate(){const FI={w:'<path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/>',h:'<path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/>','2':'<rect x="3" y="5" width="8" height="14" rx="1"/><rect x="13" y="5" width="8" height="14" rx="1"/>',a:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M4 12h16" opacity=".35"/>'};
  $$('[data-fit]').forEach(b=>{if(b.querySelector('svg'))return;const x=b.textContent.trim();b.classList.add('ib');b.innerHTML='<svg viewBox="0 0 24 24">'+FI[b.dataset.fit]+'</svg><span>'+x+'</span>';b.onclick=()=>{st.fit=b.dataset.fit;save();fitUi();build();size()}});$$('[data-k=ratio]').forEach(b=>{if(b.querySelector('svg'))return;const v=b.dataset.v,x=b.textContent.trim();b.classList.add('ib');let ic;if(v=='c')ic='<svg><use href="#i-ruler"/></svg>';else{const[a,c]=v.split(':').map(Number),m=Math.max(a,c),w=a/m*16,h=c/m*16;ic='<svg viewBox="0 0 24 24"><rect x="'+(12-w/2)+'" y="'+(12-h/2)+'" width="'+w+'" height="'+h+'" rx="2"/></svg>'}b.innerHTML=ic+'<span>'+x+'</span>'});
@@ -516,7 +750,7 @@ function size(){
  document.documentElement.style.setProperty('--pw',Math.max(240,pw)+'px');go(st.p,false)}
 function go(n,smooth){n=Math.max(1,Math.min(MAXP,n|0||1));lock=true;const two=st.fit=='2',tg=two&&st.m=='h'?(n%2?n:n-1):n,s=pager.querySelector('.slide[data-p="'+tg+'"]');
  if(s)s.scrollIntoView({behavior:smooth?'smooth':'instant',block:'start',inline:two&&st.m=='h'?'start':'center'});setPage(n,true);setTimeout(()=>{lock=false},smooth?700:150)}
-function setPage(n,f){if(n==st.p&&!f)return;st.p=n;save();title()}
+function setPage(n,f){if(n==st.p&&!f)return;st.p=n;save();title();QuranAnalytics.page(n,DATA[n].s)}
 function title(){$('#ttl').textContent=T('صفحة ')+ar(st.p)+' · '+T('الجزء ')+ar(juzOf(st.p))+' · '+sName(DATA[st.p].s)}
 function flash(t){$('#ttl').textContent=t;setTimeout(title,1800)}
 
@@ -542,6 +776,8 @@ const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement,de=d
 if(!(de.requestFullscreen||de.webkitRequestFullscreen))$('#bFs').style.display='none';
 $('#bFs').onclick=()=>{fsEl()?(document.exitFullscreen||document.webkitExitFullscreen).call(document):(de.requestFullscreen||de.webkitRequestFullscreen).call(de)};
 ['fullscreenchange','webkitfullscreenchange'].forEach(e=>document.addEventListener(e,()=>setTimeout(size,150)));
+$$('input[type=number]').forEach(el=>{el.enterKeyHint='done';el.inputMode='numeric'});
+['#pFrom','#pTo'].forEach(id=>{const el=$(id);el.onchange=()=>{const n=+el.value;if(el.value!==''&&!isNaN(n))el.value=Math.max(1,Math.min(MAXP,Math.round(n)))};el.onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();el.blur()}}});
 $('#bPrint').onclick=async()=>{let a=Math.max(1,Math.min(MAXP,+$('#pFrom').value||st.p)),b=Math.max(1,Math.min(MAXP,+$('#pTo').value||a));if(b<a)[a,b]=[b,a];
  const P=$('#print');P.innerHTML='';for(let n=a;n<=b;n++)P.appendChild(pageEl(n));shut('#sSet');P.offsetHeight;
  await document.fonts.ready;setTimeout(()=>window.print(),400)};
@@ -552,14 +788,19 @@ $('#bOff').onclick=async()=>{const m=$('#offMsg');if(!('serviceWorker' in naviga
 /* الصوت */
 const au=new Audio();au.preload='auto';let pl=null;
 const recSel=$('#rec');REC.forEach(g=>{const o=document.createElement('optgroup');o.label=g[0];g[1].forEach(r=>{const x=document.createElement('option');x.value=r[1];x.textContent=r[0];o.appendChild(x)});recSel.appendChild(o)});
-recSel.value=st.rec;recSel.onchange=()=>{st.rec=recSel.value;save();if(pl)playAt()};
+if(st.rec=='Husary_Mujawwad_128kbps')st.rec='Husary_128kbps_Mujawwad';
+if(!REC.some(g=>g[1].some(r=>r[1]==st.rec)))st.rec='Husary_128kbps';save();
+recSel.addEventListener('change',()=>QuranAnalytics.track('reciter_selected'));
+const recName=()=>{for(const g of REC)for(const r of g[1])if(r[1]==st.rec)return r[0];return st.rec};
+recSel.value=st.rec;recSel.onchange=()=>{st.rec=recSel.value;save();if(pl)playAt();else $('#aLb').textContent=recName()};
+$('#aLb').textContent=recName();
 const aUrl=k=>{const[s,a]=k.split(':');return 'https://everyayah.com/data/'+st.rec+'/'+String(s).padStart(3,'0')+String(a).padStart(3,'0')+'.mp3'};
 let cur=null;
 function modesUi(){$$('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.v==st.mode));$('#rN').value=st.n;
  $('#rgTx').textContent=st.rs?(T('المقطع: ')+kn(st.rs)+' ← '+kn(st.re||st.rs)):T('المقطع غير محدد')}
 const kn=k=>{const[s,a]=k.split(':');return sName(s)+' '+ar(a)};
 $('#modes').onclick=e=>{const b=e.target.closest('button');if(!b)return;st.mode=b.dataset.v;save();modesUi()};
-$('#rN').onchange=e=>{st.n=Math.max(0,Math.min(99,+e.target.value||0));save()};
+$('#rN').onchange=e=>{st.n=Math.max(0,Math.min(99,+e.target.value||0));e.target.value=st.n;save()};$('#rN').onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();e.target.blur()}};
 const ck=()=>pl?pl.k:cur;
 function setRange(w,k){if(!k)return;if(w=='s'){st.rs=k;if(!st.re||IDX[st.re]<IDX[k])st.re=k}else{st.re=k;if(!st.rs||IDX[st.rs]>IDX[k])st.rs=k}st.mode='r';save();modesUi();flash(T('المقطع: ')+kn(st.rs)+' ← '+kn(st.re))}
 $('#setS').onclick=()=>setRange('s',ck());$('#clrR').onclick=()=>{st.rs=st.re=null;save();modesUi()};
@@ -570,7 +811,7 @@ function follow(k){const ws=[...pager.querySelectorAll('.w[data-k="'+k+'"]')],pr
  if(vis)return;if(ws.length&&Date.now()-lastTouch<2500)return;
  if(ws.length){ws[0].scrollIntoView({block:'center',inline:'center',behavior:'smooth'});return}
  go(PAGEOF[k],true);setTimeout(()=>{const w=pager.querySelector('.w[data-k="'+k+'"]');w&&w.scrollIntoView({block:'center',inline:'center'})},750)}
-function startPlay(k){const m=st.mode,s=+k.split(':')[0];let list,i=0,loops=1;
+function startPlay(k){const m=st.mode,s=+k.split(':')[0];let list,i=0,loops=1;QuranAnalytics.track('recitation_start',{surah:s,mode:m});
  if(m=='once')list=[k];else if(m=='cont'){list=ORDER.slice(IDX[k],IDX[s+':'+CNT[s]]+1)}
  else if(m=='v'){list=[k];loops=st.n}
  else if(m=='s'){list=ORDER.slice(IDX[s+':1'],IDX[s+':'+CNT[s]]+1);i=IDX[k]-IDX[s+':1'];loops=st.n}
@@ -581,10 +822,12 @@ function playAt(){if(!pl)return;const k=pl.list[pl.i];au.src=aUrl(k);au.play().c
  const nx=pl.list[pl.i+1];if(nx){const pre=new Audio();pre.preload='auto';pre.src=aUrl(nx)}}
 au.onended=()=>{if(!pl)return;pl.i++;if(pl.i>=pl.list.length){pl.loop++;if(pl.loops&&pl.loop>=pl.loops){stopPlay();return}pl.i=0}playAt()};
 au.onerror=()=>{if(pl){stopPlay();flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
-function stopPlay(){au.pause();pl=null;document.body.classList.remove('hasbar');ico('#aPlay','play');markPlay()}
+function stopPlay(){if(pl)QuranAnalytics.track('recitation_stop',{surah:+pl.k.split(':')[0]});au.pause();pl=null;document.body.classList.remove('hasbar');ico('#aPlay','play');markPlay();$('#aLb').textContent=recName()}
 function markPlay(root){const k=pl&&pl.k;(root?[root]:[document]).forEach(r=>r.querySelectorAll('.w.play').forEach(x=>x.classList.remove('play')));if(k)(root?root:document).querySelectorAll('.w[data-k="'+k+'"]').forEach(x=>x.classList.add('play'))}
-$('#aPlay').onclick=()=>{if(pl&&!au.paused){au.pause();ico('#aPlay','play')}else if(pl){au.play();ico('#aPlay','pause')}else startPlay(cur)};
-const step=d=>{const j=IDX[ck()]+d;if(j<0||j>=ORDER.length)return;cur=ORDER[j];startPlay(cur);follow(cur)};
+const pageKey=()=>{const s=pager.querySelector('.slide[data-p="'+st.p+'"]')||pager.querySelector('.slide'),w=s&&s.querySelector('.w[data-k]');return w?w.dataset.k:null};
+const barKey=()=>ck()||pageKey();
+$('#aPlay').onclick=()=>{if(pl&&!au.paused){QuranAnalytics.track('recitation_pause');au.pause();ico('#aPlay','play')}else if(pl){QuranAnalytics.track('recitation_resume');au.play();ico('#aPlay','pause')}else{const k=barKey();if(k)startPlay(k)}};
+const step=d=>{const k=barKey();if(!k)return;const j=IDX[k]+d;if(j<0||j>=ORDER.length)return;cur=ORDER[j];startPlay(cur);follow(cur)};
 $('#aPrev').onclick=()=>step(-1);$('#aNext').onclick=()=>step(1);$('#aStop').onclick=()=>stopPlay();
 const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};let seeking=false;
 au.addEventListener('timeupdate',()=>{if(seeking)return;$('#seek').value=au.duration?au.currentTime/au.duration*1000:0;$('#aT0').textContent=fmt(au.currentTime);$('#aT1').textContent=fmt(au.duration)});
@@ -611,19 +854,19 @@ $('#cX').onclick=()=>{shut('#sCtx');clrSel()};
 $('#cRs').onclick=()=>{shut('#sCtx');setRange('s',cur);clrSel()};$('#cRe').onclick=()=>{shut('#sCtx');setRange('e',cur);clrSel()};
 $('#cMn').onclick=()=>{shut('#sCtx');showVm(cur);clrSel()};
 $('#mX').onclick=()=>shut('#sMean');$('#vmX').onclick=()=>shut('#sVm');
-$('#mnOn').onchange=e=>{st.mo=e.target.checked?1:0;save();build()};$('#mcol').oninput=e=>{st.mc=e.target.value;applyBg();save()};$('#mcR').onclick=()=>{st.mc=null;applyBg();save()};
+$('#mnOn').onchange=e=>{st.mo=e.target.checked?1:0;save();refreshMeaningWords()};$('#mcol').oninput=e=>{st.mc=e.target.value;applyBg();save()};$('#mcR').onclick=()=>{st.mc=null;applyBg();save()};
 $('#cPlay').onclick=()=>{shut('#sCtx');clrSel();startPlay(cur)};
 $('#cCopy').onclick=()=>{shut('#sCtx');$('#vTxt').onclick();clrSel()};
 $('#cImg').onclick=()=>{shut('#sCtx');$('#vDl').onclick();clrSel()};
 $('#cDs').onclick=()=>{shut('#sCtx');$('#vDs').onclick()};
-$('#cShare').onclick=async()=>{shut('#sCtx');const x=verseText(cur);clrSel();if(navigator.share)try{await navigator.share({text:x});return}catch(e){if(e.name=='AbortError')return}$('#vTxt').onclick()};
+$('#cShare').onclick=async()=>{shut('#sCtx');const x=verseText(cur);clrSel();if(navigator.share)try{await navigator.share({text:x});QuranAnalytics.track('text_shared');return}catch(e){if(e.name=='AbortError')return}$('#vTxt').onclick()};
 $('#vX').onclick=()=>shut('#vbar');
 $('#setX').onclick=()=>shut('#sSet');$('#ixX').onclick=()=>shut('#sIdx');
 function firstOnPage(){const L=DATA[st.p].l;let f=null;for(const l of L)if(l.t=='t')for(const w of l.w){if(w[2]==0&&w[1]){if(w[4]===0)return w[1];f=f||w[1]}}return f||ORDER[0]}
-$('#bDes').onclick=()=>{const s=document.querySelector('.w.sel');cur=(s&&s.dataset.k)||firstOnPage();$('#vDs').onclick()};
+$('#bDes').onclick=()=>{QuranAnalytics.track('design_open');const s=document.querySelector('.w.sel');cur=(s&&s.dataset.k)||firstOnPage();$('#vDs').onclick()};
 $('#bAbout').onclick=()=>{shut('#sSet');open('#sAbout')};$('#abX').onclick=()=>shut('#sAbout');
 $('#vTxt').onclick=async()=>{const t=verseText(cur);try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove()}flash(T('تم نسخ النص'))};
-async function fontsFor(us){await stkFonts();await Promise.all([...new Set([0,...us.map(u=>u.f)])].map(f=>document.fonts.load('40px F'+f,'\uF100')))}
+async function fontsFor(us){await stkFonts();await Promise.all([...new Set([0,...us.map(u=>u.f)])].map(f=>document.fonts.load('40px F'+f,'\uF100')));if(D.wm.on)try{await document.fonts.load(stkFont({ff:D.wm.ff,b:D.wm.b},40),D.wm.text||'ا')}catch(e){}}
 /* رسم النص على canvas */
 const cw=(ctx,u,fs)=>{ctx.font=fs+'px F'+u.f;return[...u.c].map(ch=>ctx.measureText(ch).width)};
 function lay(ctx,units,fs,maxW,brk){const gap=fs*.14,L=[];let cr=[],w=0;
@@ -640,20 +883,22 @@ async function quickPng(){const us=WU[cur].map((u,i)=>({...u,i}));await fontsFor
  const L=lay(x,us,fs,fs*9,null),rh=fs*2.15;c.width=Math.ceil(Math.max(...L.map(l=>l.w))+pad*2);c.height=Math.ceil(L.length*rh+pad);
  if(!$('#vTr').checked){x.fillStyle=pg()[0];x.fillRect(0,0,c.width,c.height)}
  x.fillStyle=$('#vTr').checked?$('#vCol').value:(lum(pg()[0])<.45?pg()[1]:$('#vCol').value);paint(x,L,fs,pad,c.width-pad,c.height/2,'c',2.15);
- return new Promise(r=>c.toBlob(r,'image/png'))}
-$('#vImg').onclick=async()=>{const b=await quickPng();try{await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);flash(T('تم نسخ الصورة'))}catch(e){dl(b,fname('png'));flash(T('تم حفظ الصورة'))}};
-$('#vDl').onclick=async()=>{dl(await quickPng(),fname('png'));flash(T('تم حفظ الصورة'))};
+ const blob=await new Promise(r=>c.toBlob(r,'image/png'));return{blob,width:c.width,height:c.height}}
+$('#vImg').onclick=async()=>{const image=await quickPng(),b=image.blob;QuranAnalytics.track('media_created',{media_type:'image',source:'quick_verse',bytes:b.size,width:image.width,height:image.height,surah:+cur.split(':')[0],verse_count:1});try{await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);flash(T('تم نسخ الصورة'))}catch(e){dl(b,fname('png'));flash(T('تم حفظ الصورة'))}};
+$('#vDl').onclick=async()=>{const image=await quickPng(),b=image.blob;QuranAnalytics.track('media_created',{media_type:'image',source:'quick_verse',bytes:b.size,width:image.width,height:image.height,surah:+cur.split(':')[0],verse_count:1});dl(b,fname('png'));flash(T('تم حفظ الصورة'))};
 
 /* استوديو التصميم */
 const RAT={'1:1':[1,1],'4:5':[4,5],'3:4':[3,4],'2:3':[2,3],'9:16':[9,16],'16:9':[16,9],'4:3':[4,3],'3:2':[3,2],'21:9':[21,9]};
-const D={s:2,a1:255,a2:255,cut0:0,cut1:0,brk:{},fs:6.4,bw:84,bx:50,by:50,al:'c',col:'#17150f',ls:2.15,bg:'solid',c1:'#fbf6e8',c2:'#e3cf98',ang:160,g0:0,g1:100,img:null,dim:25,ratio:'1:1',cw:1080,ch:1080,res:2,
- nm:{on:1,x:50,y:13,size:9,col:'#0f4f45'},rf:{on:1,x:50,y:89,size:4.2,col:'#0f4f45'},tgt:'txt',asrc:'none',vsec:8,afile:null,exact:0,rv:0,wf:.25,bs:100,bgx:0,bgy:0,vt0:0,vt1:0,at0:0,at1:0,stk:[],ss:-1,vid:null,sh:{on:0,col:'#000000',a:55,ang:135,d:4,b:6}};
+const D={s:2,a1:255,a2:255,cut0:0,cut1:0,brk:{},fs:6.4,bw:84,bx:50,by:50,al:'c',col:'#17150f',ls:2.15,bg:'solid',pat:'star',c1:'#fbf6e8',c2:'#e3cf98',ang:160,g0:0,g1:100,img:null,dim:25,ratio:'1:1',cw:1080,ch:1080,res:2,
+  nm:{on:1,x:50,y:13,size:9,col:'#0f4f45'},rf:{on:1,x:50,y:89,size:4.2,col:'#0f4f45'},tgt:'txt',asrc:'none',vsec:8,afile:null,exact:0,rv:0,wf:.25,bs:100,bgx:0,bgy:0,vt0:0,vt1:0,at0:0,at1:0,stk:[],ss:-1,vid:null,vclipAudio:null,sh:{on:0,col:'#000000',a:55,ang:135,d:4,b:6},
+  wm:{on:0,text:'القرآن الكريم',ff:'Tajawal',b:1,size:5,col:'#ffffff',ca:100,shOn:1,shCol:'#000000',sha:60,shb:8,shd:3,bgOn:0,bgCol:'#000000',bga:35,rad:6,x:50,y:93,pad:55,gap:45}};
 const gp=(o,p)=>p.split('.').reduce((x,k)=>x[k],o),sp=(o,p,v)=>{const a=p.split('.'),l=a.pop();a.reduce((x,k)=>x[k],o)[l]=v};
 const dims=()=>{if(D.exact&&D.ratio=='c')return[Math.min(8000,D.cw||1),Math.min(8000,D.ch||1)];const[a,b]=D.ratio=='c'?[D.cw||1,D.ch||1]:RAT[D.ratio],S=1080;return a>=b?[Math.round(S*a/b),S]:[S,Math.round(S*b/a)]};
 const allU=()=>{const o=[];for(let a=D.a1;a<=D.a2;a++)(WU[D.s+':'+a]||[]).forEach(u=>o.push({...u,k:D.s+':'+a}));o.forEach((u,i)=>u.i=i);return o};
 const kept=()=>{const a=allU();return a.slice(D.cut0,a.length-D.cut1)};
 SURAHS.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=ar(s.id)+'. '+s.n;$('#dS').appendChild(o)});
-function refresh(){$$('#studio [data-k]').forEach(el=>{const v=gp(D,el.dataset.k);if(el.tagName=='BUTTON')el.classList.toggle('on',String(v)==el.dataset.v);else if(el.type=='checkbox')el.checked=!!v;else el.value=v});$('#atrim').style.display=D.asrc=='file'&&D.afile?'block':'none';$('#vtrim').style.display=D.vid?'block':'none';syncRg()}
+function refresh(){$$('#studio [data-k]').forEach(el=>{const v=gp(D,el.dataset.k);if(el.tagName=='BUTTON')el.classList.toggle('on',String(v)==el.dataset.v);else if(el.type=='checkbox')el.checked=!!v;else el.value=v});$('#atrim').style.display=D.asrc=='file'&&D.afile?'block':'none';$('#vtrim').style.display=D.vid?'block':'none';syncRg();bgPanels();camUi()}
+function bgPanels(){const b=D.bg;const set=(id,on)=>{const e=$(id);if(e)e.style.display=on?'block':'none'};set('#bgpC',b=='none'||b=='solid'||b=='grad');set('#bgpP',b=='pat');set('#bgpI',b=='img');set('#bgpV',b=='vid');$$('.gradOnly').forEach(e=>e.style.display=b=='grad'?'block':'none')}
 const PRE=[['iPhone',1179,2556],['iPhone Pro',1206,2622],['iPhone Pro Max',1320,2868]];
 PRE.forEach(p=>{const b=document.createElement('button');b.classList.add('ib');b.innerHTML='<svg><use href="#i-smartphone"/></svg><span><b>'+p[0]+'</b><br><small>'+p[1]+'×'+p[2]+'</small></span>';b.onclick=()=>{D.ratio='c';D.cw=p[1];D.ch=p[2];D.exact=1;D.res=1;after('ratio')};$('#presets').appendChild(b)});
 $('#flip').onclick=()=>{if(D.ratio!='c'){const[a,b]=RAT[D.ratio];D.cw=b;D.ch=a;D.ratio='c'}else[D.cw,D.ch]=[D.ch,D.cw];after('ratio')};
@@ -664,17 +909,37 @@ function limits(){const n=allU().length;D.cut0=Math.min(D.cut0,Math.max(0,n-1-D.
 function outDims(sc){const[W,H]=dims();while(W*H*sc*sc>16.7e6&&sc>1)sc-=.25;return[Math.round(W*sc),Math.round(H*sc)]}
 async function autoFit(){const us=kept();if(!us.length)return;await fontsFor(us);const[W,H]=dims(),S=Math.min(W,H),x=document.createElement('canvas').getContext('2d');
  for(let f=9;f>=2;f-=.2){const fs=S*f/100,L=lay(x,us,fs,W*D.bw/100,D.brk);if(L.length*fs*D.ls<=H*(D.nm.on||D.rf.on?.66:.86)){D.fs=+f.toFixed(1);break}D.fs=2}}
-function after(k){preAfter(k);if(k=='s'){D.a1=D.a2=1;D.cut0=D.cut1=0;D.brk={}}
+function after(k){preAfter(k);if(k.indexOf('wm')==0)try{document.fonts.load(stkFont({ff:D.wm.ff,b:D.wm.b},40),D.wm.text||'ا').then(()=>upd())}catch(e){}
+ if(k=='s'){D.a1=D.a2=1;D.cut0=D.cut1=0;D.brk={}}
  if(k=='s'||k=='a1'||k=='a2'){const m=CNT[D.s];D.a1=Math.max(1,Math.min(m,D.a1|0||1));D.a2=Math.max(D.a1,Math.min(m,D.a2|0||D.a1));if(k!='s'){D.cut0=D.cut1=0;D.brk={}}}
  limits();refresh();if(['s','s0','a1','a2','cut0','cut1','ratio','bw','ls'].includes(k))autoFit().then(()=>{refresh();upd()});else upd()}
 $$('#studio [data-k]').forEach(el=>{const k=el.dataset.k;
  if(el.tagName=='BUTTON')el.onclick=()=>{const v=el.dataset.v;sp(D,k,isNaN(v)?v:+v);if(k=='ratio')D.exact=0;after(k)};
- else el.oninput=()=>{sp(D,k,el.type=='checkbox'?el.checked:(el.type=='range'||el.type=='number')?+el.value:(k=='s'?+el.value:el.value));after(k)}});
-$$('#stTabs button').forEach(b=>b.onclick=()=>{$$('#stTabs button').forEach(x=>x.classList.toggle('on',x==b));$$('.tp').forEach(t=>t.classList.toggle('on',t.id=='tp-'+b.dataset.t))});
+ else if(el.type=='number'){el.onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();el.blur()}};el.onchange=()=>{const n=+el.value;if(el.value!==''&&!isNaN(n)){const mn=el.min===''?-1/0:+el.min,mx=el.max===''?1/0:+el.max;sp(D,k,Math.max(mn,Math.min(mx,Math.round(n))))}after(k)}}
+ else el.oninput=()=>{sp(D,k,el.type=='checkbox'?el.checked:el.type=='range'?+el.value:(k=='s'?+el.value:el.value));after(k)}});
+$$('#stTabs button').forEach(b=>b.onclick=()=>{$$('#stTabs button').forEach(x=>x.classList.toggle('on',x==b));$$('.tp').forEach(t=>t.classList.toggle('on',t.id=='tp-'+b.dataset.t));if(b.dataset.t=='hi')histRender()});
 $('#vDs').onclick=()=>{const[s,a]=cur.split(':').map(Number);shut('#vbar');D.s=s;D.a1=D.a2=a;D.cut0=D.cut1=0;D.brk={};D.rf.on=1;$('#studio').classList.add('on');after('s0');setTimeout(()=>{D.a1=D.a2=a;after('a1')},0)};
-$('#stX').onclick=()=>{$('#studio').classList.remove('on');if(wpOn||wpBusy)wpStop()};
-function pat(x,W,H,c1,c2){x.fillStyle=c1;x.fillRect(0,0,W,H);const s=Math.min(W,H)/5.5;x.strokeStyle=c2;x.lineWidth=s/30;x.globalAlpha=.6;
- for(let yy=-s;yy<H+s;yy+=s)for(let xx=-s;xx<W+s;xx+=s){const cx=xx+s/2,cy=yy+s/2,r=s*.42;for(const a of[0,Math.PI/4]){x.save();x.translate(cx,cy);x.rotate(a);x.strokeRect(-r,-r,2*r,2*r);x.restore()}x.beginPath();x.arc(cx,cy,r*.5,0,7);x.stroke()}x.globalAlpha=1}
+$('#stX').onclick=()=>{$('#studio').classList.remove('on');if(wpOn||wpBusy)wpStop();if(D.bg=='cam')camOff()};
+const PATS=[['star','نجمة ثمانية'],['diamond','معيّنات'],['hex','خلايا سداسية'],['square','مربعات متداخلة'],['triangle','مثلثات'],['rosette','وريدات هندسية'],['octagon','مثمنات'],['lattice','شبكة مائلة'],['rings','دوائر متحدة المركز'],['cross','نجوم متقاطعة']];
+function pat(x,W,H,c1,c2,type='star',preview=false){x.fillStyle=c1;x.fillRect(0,0,W,H);const s=Math.min(W,H)/(preview?2.5:5.5);x.strokeStyle=c2;x.lineWidth=Math.max(1,s/30);x.globalAlpha=.65;
+ const polygon=(cx,cy,r,n,rot=0,inner)=>{x.beginPath();for(let i=0;i<n*(inner?2:1);i++){const a=rot+i*Math.PI/(n*(inner?1:0.5)),rr=inner&&i%2?r*inner:r;x.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr)}x.closePath();x.stroke()};
+ for(let yy=-s;yy<H+s;yy+=s)for(let xx=-s;xx<W+s;xx+=s){const cx=xx+s/2,cy=yy+s/2,r=s*.42;
+  if(type=='hex'){const ox=(Math.round(yy/s)%2)*s*.5;polygon(xx+ox+s/2,cy,r,6,Math.PI/6);continue}
+  x.save();x.translate(cx,cy);
+  if(type=='star'){polygon(0,0,r,8,Math.PI/8,.48);x.rotate(Math.PI/4);x.strokeRect(-r*.58,-r*.58,r*1.16,r*1.16);x.beginPath();x.arc(0,0,r*.2,0,Math.PI*2);x.stroke()}
+  else if(type=='diamond'){polygon(0,0,r,4,Math.PI/4);polygon(0,0,r*.52,4,Math.PI/4);x.beginPath();x.arc(0,0,s*.035,0,Math.PI*2);x.stroke()}
+  else if(type=='square'){x.strokeRect(-r,-r,2*r,2*r);x.rotate(Math.PI/4);x.strokeRect(-r*.7,-r*.7,r*1.4,r*1.4);x.strokeRect(-r*.3,-r*.3,r*.6,r*.6)}
+  else if(type=='triangle'){for(let j=-1;j<=1;j++){x.beginPath();x.moveTo(-s/2,j*s/2);x.lineTo(s/2,j*s/2);x.lineTo(0,(j-1)*s/2);x.closePath();x.stroke()}x.beginPath();x.moveTo(-s/2,0);x.lineTo(0,s/2);x.lineTo(s/2,0);x.stroke()}
+  else if(type=='rosette'){for(let i=0;i<8;i++){x.save();x.rotate(i*Math.PI/4);x.beginPath();x.ellipse(0,-r*.43,r*.22,r*.48,0,0,Math.PI*2);x.stroke();x.restore()}x.beginPath();x.arc(0,0,r*.22,0,Math.PI*2);x.stroke()}
+  else if(type=='octagon'){polygon(0,0,r,8,Math.PI/8);x.rotate(Math.PI/4);x.strokeRect(-r*.42,-r*.42,r*.84,r*.84);x.beginPath();x.arc(0,0,r*.18,0,Math.PI*2);x.stroke()}
+  else if(type=='lattice'){for(const a of[0,Math.PI/4,-Math.PI/4]){x.save();x.rotate(a);x.strokeRect(-r,-r,2*r,2*r);x.restore()}x.beginPath();x.arc(0,0,r*.16,0,Math.PI*2);x.stroke()}
+  else if(type=='rings'){for(let i=1;i<=3;i++){x.beginPath();x.arc(0,0,r*i/3,0,Math.PI*2);x.stroke()}for(let i=0;i<8;i++){const a=i*Math.PI/4;x.beginPath();x.arc(Math.cos(a)*r*.78,Math.sin(a)*r*.78,s*.035,0,Math.PI*2);x.stroke()}}
+  else if(type=='cross'){polygon(0,0,r,4,Math.PI/4);polygon(0,0,r*.72,4,0);x.strokeRect(-r*.3,-r*.3,r*.6,r*.6)}
+  else {polygon(0,0,r,8,Math.PI/8);polygon(0,0,r*.72,4,Math.PI/4);x.beginPath();x.moveTo(-r,0);x.lineTo(r,0);x.moveTo(0,-r);x.lineTo(0,r);x.stroke()}
+  x.restore()}
+ x.globalAlpha=1}
+function initPatGrid(){$$('#patGrid .pat-opt').forEach(b=>{const c=b.querySelector('canvas');pat(c.getContext('2d'),c.width,c.height,'#fbf6e8','#75571f',b.dataset.v,true)})}
+initPatGrid();
 const rgba=(h,a)=>{const n=parseInt(h.slice(1),16);return'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a/100+')'};
 function shOn(x,S){if(!D.sh.on)return;const k=x.getTransform().a*S/1080,a=D.sh.ang*Math.PI/180;x.shadowColor=rgba(D.sh.col,D.sh.a);x.shadowOffsetX=Math.cos(a)*D.sh.d*k;x.shadowOffsetY=Math.sin(a)*D.sh.d*k;x.shadowBlur=D.sh.b*k}
 function shOff(x){x.shadowColor='transparent';x.shadowBlur=0;x.shadowOffsetX=x.shadowOffsetY=0}
@@ -682,8 +947,8 @@ function drawBg(x,W,H){const S=Math.min(W,H);x.clearRect(0,0,W,H);
  if(D.bg=='solid'){x.fillStyle=D.c1;x.fillRect(0,0,W,H)}
  else if(D.bg=='grad'){const t=D.ang*Math.PI/180,vx=Math.sin(t),vy=-Math.cos(t),L=Math.abs(W*vx)+Math.abs(H*vy),g=x.createLinearGradient(W/2-vx*L/2,H/2-vy*L/2,W/2+vx*L/2,H/2+vy*L/2),a=Math.min(D.g0,D.g1)/100,b=Math.max(D.g0,D.g1)/100;
   g.addColorStop(0,D.c1);g.addColorStop(a,D.c1);g.addColorStop(b,D.c2);g.addColorStop(1,D.c2);x.fillStyle=g;x.fillRect(0,0,W,H)}
- else if(D.bg=='pat')pat(x,W,H,D.c1,D.c2);
- else if((D.bg=='img'&&D.img)||(D.bg=='vid'&&D.vid)){const m=D.bg=='img'?D.img:D.vid,mw=m.videoWidth||m.width,mh=m.videoHeight||m.height;if(mw&&mh){const r=Math.max(W/mw,H/mh)*D.bs/100,w=mw*r,h=mh*r;x.drawImage(m,(W-w)/2+W*D.bgx/100,(H-h)/2+H*D.bgy/100,w,h)}if(D.dim){x.fillStyle='rgba(0,0,0,'+D.dim/100+')';x.fillRect(0,0,W,H)}}}
+ else if(D.bg=='pat')pat(x,W,H,D.c1,D.c2,D.pat);
+ else if((D.bg=='img'&&D.img)||(D.bg=='vid'&&D.vid)||(D.bg=='cam'&&camVid)){const cam=D.bg=='cam',m=cam?camVid:D.bg=='img'?D.img:D.vid,mw=m.videoWidth||m.width,mh=m.videoHeight||m.height;if(mw&&mh){const r=Math.max(W/mw,H/mh)*D.bs/100,w=mw*r,h=mh*r,mir=cam&&camFacing=='user';x.save();if(mir){x.translate(W,0);x.scale(-1,1)}x.drawImage(m,(W-w)/2+W*D.bgx/100,(H-h)/2+H*D.bgy/100,w,h);x.restore()}if(D.dim){x.fillStyle='rgba(0,0,0,'+D.dim/100+')';x.fillRect(0,0,W,H)}}}
 function drawFg(x,W,H,pv){const S=Math.min(W,H);
  const us=kept();if(us.length){const fs=S*D.fs/100,bw=W*D.bw/100,L=lay(x,us,fs,bw,D.brk);x.fillStyle=D.col;shOn(x,S);const bl=W*D.bx/100-bw/2,br=W*D.bx/100+bw/2,bc=H*D.by/100;
   if(REV&&D.rv==1){for(const u of us){const a=revAlpha(u.i-D.cut0,REV.t,REV.times);if(a>0)paint(x,lay(x,[u],fs,bw,null),fs,bl,br,bc,D.al,D.ls,()=>a)}}
@@ -724,22 +989,38 @@ function drawStk(x,W,H,pv){const S=Math.min(W,H),tm=STK_T();D.stk.forEach((s,i)=
  if(s.t=='e'){x.font=stkFont(s,z);x.fillStyle=s.c||'#ffffff';x.textAlign='center';x.textBaseline='middle';x.fillText(s.ch,0,z*.06)}
  else{const im=stkImg(s,tm);if(im){const w=im.width||im.naturalWidth,h=im.height||im.naturalHeight,k=z/Math.max(w,h);x.drawImage(im,-w*k/2,-h*k/2,w*k,h*k)}}
  if(pv&&i==D.ss&&D.tgt=='stk'){const[hw,hh]=stkHalf(s,S);x.strokeStyle='#0f4f4599';x.setLineDash([10,8]);x.lineWidth=2;x.strokeRect(-hw-4,-hh,2*hw+8,2*hh)}x.restore()})}
-function draw(x,W,H,pv){drawBg(x,W,H);drawFg(x,W,H,pv);drawStk(x,W,H,pv)}
+const WM_ICON=new Image();let WM_OK=0;WM_ICON.onload=()=>{WM_OK=1;try{upd()}catch(e){}};WM_ICON.src=(window.__ICON_B64||'icon-192.png');
+function rr(x,x0,y0,w,h,r){r=Math.max(0,Math.min(r,Math.min(w,h)/2));x.beginPath();x.moveTo(x0+r,y0);x.arcTo(x0+w,y0,x0+w,y0+h,r);x.arcTo(x0+w,y0+h,x0,y0+h,r);x.arcTo(x0,y0+h,x0,y0,r);x.arcTo(x0,y0,x0+w,y0,r);x.closePath()}
+function wmGeom(W,H){const wm=D.wm,S=Math.min(W,H),fs=S*wm.size/100;mctx.font=stkFont({ff:wm.ff,b:wm.b},fs);const txt=wm.text||'',tw=txt?mctx.measureText(txt).width:0,icS=fs*1.25,gap=(tw)?fs*(wm.gap/100):0,pad=fs*(wm.pad/100);
+ const w=icS+gap+tw+pad*2,h=Math.max(fs*1.35,icS)+pad*2;let cx=W*wm.x/100,cy=H*wm.y/100;
+ cx=Math.min(Math.max(cx,w/2),Math.max(w/2,W-w/2));cy=Math.min(Math.max(cy,h/2),Math.max(h/2,H-h/2));return{fs,icS,gap,pad,tw,w,h,cx,cy,txt}}
+function drawWM(x,W,H,pv){const wm=D.wm;if(!wm.on)return;const g=wmGeom(W,H),bx=g.cx-g.w/2,by=g.cy-g.h/2;
+ x.save();
+  if(wm.bgOn){x.fillStyle=rgba(wm.bgCol,wm.bga);rr(x,bx,by,g.w,g.h,wm.rad/100*g.fs*2);x.fill()}
+ if(wm.shOn){x.shadowColor=rgba(wm.shCol,wm.sha);x.shadowBlur=wm.shb/100*g.fs;x.shadowOffsetX=wm.shd/100*g.fs;x.shadowOffsetY=wm.shd/100*g.fs}
+ x.font=stkFont({ff:wm.ff,b:wm.b},g.fs);x.textBaseline='middle';x.textAlign='left';
+ let ix=bx+g.pad;if(WM_OK){x.save();x.beginPath();x.arc(bx+g.pad+g.icS/2,g.cy,g.icS/2,0,Math.PI*2);x.closePath();x.fillStyle='#ffffff';x.fill();x.clip();x.drawImage(WM_ICON,bx+g.pad,g.cy-g.icS/2,g.icS,g.icS);x.restore();ix+=g.icS+g.gap}
+ x.fillStyle=rgba(wm.col,wm.ca);x.fillText(g.txt,ix,g.cy+g.fs*.03);
+ x.restore();
+ if(pv&&D.tgt=='wm'){x.save();x.setLineDash([10,8]);x.strokeStyle='#0f4f4599';x.lineWidth=2;x.strokeRect(bx-4,by-4,g.w+8,g.h+8);x.restore()}}
+function draw(x,W,H,pv){drawBg(x,W,H);drawFg(x,W,H,pv);drawStk(x,W,H,pv);drawWM(x,W,H,pv)}
 let raf=0,rv=0;const upd=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(async()=>{const v=++rv;await fontsFor(kept());if(v!=rv)return;const[W,H]=dims(),c=$('#pv'),sc=.6;c.width=Math.round(W*sc);c.height=Math.round(H*sc);const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,true);kick()})};
 const drag={};
 $('#pv').onpointerdown=e=>{e.target.setPointerCapture(e.pointerId);drag.on=1;drag.x=e.clientX;drag.y=e.clientY;const r=e.target.getBoundingClientRect(),[W,H]=dims(),px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*H,S=Math.min(W,H);
+ if(D.wm.on){const wg=wmGeom(W,H),bx=wg.cx-wg.w/2,by=wg.cy-wg.h/2,m=Math.max(8,S*.05);if(px>=bx-m&&px<=bx+wg.w+m&&py>=by-m&&py<=by+wg.h+m){D.tgt='wm';refresh();return}}
  for(let i=D.stk.length-1;i>=0;i--){const s=D.stk[i];const hf=stkHalf(s,S);if(Math.abs(px-W*s.x/100)<=Math.max(hf[0],S*.04)&&Math.abs(py-H*s.y/100)<=Math.max(hf[1],S*.04)){D.ss=i;D.tgt='stk';skUi();refresh();break}}};
 $('#pv').onpointermove=e=>{if(!drag.on)return;const r=e.target.getBoundingClientRect(),dx=(e.clientX-drag.x)/r.width*100,dy=(e.clientY-drag.y)/r.height*100;drag.x=e.clientX;drag.y=e.clientY;
  const o=D.tgt=='txt'?{get x(){return D.bx},set x(v){D.bx=v},get y(){return D.by},set y(v){D.by=v}}:D.tgt=='stk'?D.stk[D.ss]:D[D.tgt];if(!o)return;o.x=Math.max(0,Math.min(100,o.x+dx));o.y=Math.max(0,Math.min(100,o.y+dy));refresh();skSync();upd()};
 $('#pv').onpointerup=$('#pv').onpointercancel=()=>{drag.on=0};
 async function exportBlob(){await fontsFor(kept());const[W,H]=dims(),[ow]=outDims(D.res),sc=ow/W,c=document.createElement('canvas');c.width=ow;c.height=outDims(D.res)[1];const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,false);return new Promise(r=>c.toBlob(r,'image/png'))}
-async function share(b,n,t){const f=new File([b],n,{type:t});if(navigator.canShare&&navigator.canShare({files:[f]}))try{await navigator.share({files:[f]});return}catch(e){if(e.name=='AbortError')return}dl(b,n)}
-$('#xPng').onclick=async()=>dl(await exportBlob(),fname('png'));
-$('#xShP').onclick=async()=>share(await exportBlob(),fname('png'),'image/png');
+async function share(b,n,t){const f=new File([b],n,{type:t});if(navigator.canShare&&navigator.canShare({files:[f]}))try{await navigator.share({files:[f]});QuranAnalytics.track('media_shared',{media_type:t.indexOf('video')===0?'video':'image'});return}catch(e){if(e.name=='AbortError')return}dl(b,n)}
+$('#xPng').onclick=async()=>{const b=await exportBlob(),n=fname('png'),[width,height]=outDims(D.res);histAdd(b,{name:n,type:'image',width,height,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(b,n)};
+$('#xShP').onclick=async()=>{const b=await exportBlob(),n=fname('png'),[width,height]=outDims(D.res);histAdd(b,{name:n,type:'image',width,height,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});share(b,n,'image/png')};
 $('#imF').onclick=()=>$('#imFile').click();
-function setImg(u,cr){const im=new Image();if(!u.startsWith('blob:'))im.crossOrigin='anonymous';im.onload=()=>{D.img=im;D.bg='img';refresh();upd();if(cr)$('#imCr').textContent=cr};im.onerror=()=>{$('#imCr').textContent='تعذّر تحميل الصورة (إنترنت أو منع CORS).'};im.src=u}
+function isXO(u){try{const x=new URL(u,location.href);return /^https?:$/.test(x.protocol)&&x.origin!==location.origin}catch(e){return false}}
+function setImg(u,cr){const im=new Image();if(isXO(u))im.crossOrigin='anonymous';im.onload=()=>{D.vclipAudio=null;D.img=im;D.bg='img';refresh();upd();if(cr)$('#imCr').textContent=cr};im.onerror=()=>{$('#imCr').textContent='تعذّر تحميل الصورة (إنترنت أو منع CORS).'};im.src=u}
 $('#imFile').onchange=e=>{const f=e.target.files[0];if(f)setImg(URL.createObjectURL(f))};
-$('#imGo').onclick=async()=>{const g=$('#gal');g.innerHTML='...';try{const u='https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=18&gsrsearch='+encodeURIComponent($('#imQ').value+' filetype:bitmap')+'&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=500';
+$('#imGo').onclick=async()=>{const g=$('#galI');g.innerHTML='...';try{const u='https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=18&gsrsearch='+encodeURIComponent($('#imQ').value+' filetype:bitmap')+'&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=500';
  const j=await(await fetch(u)).json(),ps=Object.values((j.query||{}).pages||{});g.innerHTML='';if(!ps.length)g.textContent=T('لا نتائج');
  ps.forEach(p=>{const i=p.imageinfo&&p.imageinfo[0];if(!i)return;const m=i.extmetadata||{},im=document.createElement('img');im.src=i.thumburl;im.loading='lazy';
   im.onclick=()=>{const big=i.width>1920?i.thumburl.replace(/\/\d+px-/,'/1920px-'):i.url,strip=s=>(s||'').replace(/<[^>]*>/g,'');setImg(big,'المصدر: ويكيميديا كومنز — '+strip(m.Artist&&m.Artist.value)+' — '+strip(m.LicenseShortName&&m.LicenseShortName.value))};g.appendChild(im)})}catch(e){g.textContent='تعذّر البحث — يلزم اتصال بالإنترنت.'}};
@@ -748,22 +1029,32 @@ async function exportRec(){const msg=$('#exMsg');await fontsFor(kept());
  const[W0,H0]=dims(),sc=Math.min(1,1920/Math.max(W0,H0)),W=Math.round(W0*sc/2)*2,H=Math.round(H0*sc/2)*2;
  const fg=document.createElement('canvas');fg.width=W;fg.height=H;const fx=fg.getContext('2d');fx.scale(W/W0,H/H0);drawFg(fx,W0,H0,false);
  const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');
- const frame=()=>{const v2=D.bg=='vid'&&D.vid;if(v2&&(v2.ended||v2.currentTime>=D.vt1-.03)){v2.currentTime=D.vt0;v2.play().catch(()=>{})};if(REV0){REV={times:REV0,t:STK_T()};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawStk(rx,W0,H0,false)};frame();
+ const frame=()=>{const v2=D.bg=='vid'&&D.vid;if(v2&&(v2.ended||v2.currentTime>=D.vt1-.03)){v2.currentTime=D.vt0;v2.play().catch(()=>{})};if(REV0){REV={times:REV0,t:STK_T()};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawStk(rx,W0,H0,false);drawWM(rx,W0,H0,false)};frame();
  const stream=rc.captureStream(30);let dur=D.vsec,ac=null,bufs=[],lens=[];
- if(D.asrc!='none'){ac=new(window.AudioContext||window.webkitAudioContext)();msg.textContent=T('جارٍ تجهيز الصوت...');
-  if(D.asrc=='file'){if(!D.afile)throw new Error(T('اختر ملفاً صوتياً أولاً'));bufs=[await ac.decodeAudioData(await D.afile.arrayBuffer())]}
-  else for(let a=D.a1;a<=D.a2;a++){const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw new Error(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}
-  lens=bufs.map(b=>D.asrc=='file'?Math.max(.2,Math.min(b.duration,D.at1||b.duration)-D.at0):b.duration);dur=lens.reduce((s,l)=>s+l,0)+.25*(bufs.length-1);const dest=ac.createMediaStreamDestination();dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
-  let t=ac.currentTime+.3;bufs.forEach((b,i)=>{const s=ac.createBufferSource();s.buffer=b;s.connect(dest);s.start(t,D.asrc=='file'?D.at0:0,lens[i]);t+=lens[i]+.25})}
- if(D.asrc=='none'&&D.bg=='vid'&&D.vid)dur=Math.max(1,D.vt1-D.vt0);
+ const clip=D.vclipAudio,rcSrc=D.asrc!='none';
+ if(clip||rcSrc){
+  ac=new(window.AudioContext||window.webkitAudioContext)();msg.textContent=T('جارٍ تجهيز الصوت...');
+  const dest=ac.createMediaStreamDestination();dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
+  const t0=ac.currentTime+.3,rvol=Math.max(0,Math.min(1,(+($('#camVol')&&$('#camVol').value)||100)/100));
+  if(clip){const s0=ac.createBufferSource();s0.buffer=clip;s0.connect(dest);s0.start(t0);dur=clip.duration}
+  if(rcSrc){
+   let gain=dest;if(rvol<1){gain=ac.createGain();gain.gain.value=rvol;gain.connect(dest)}
+   if(D.asrc=='file'){if(!D.afile)throw new Error(T('اختر ملفاً صوتياً أولاً'));bufs=[await ac.decodeAudioData(await D.afile.arrayBuffer())]}
+   else for(let a=D.a1;a<=D.a2;a++){const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw new Error(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}
+   lens=bufs.map(b=>D.asrc=='file'?Math.max(.2,Math.min(b.duration,D.at1||b.duration)-D.at0):b.duration);
+   const rd=lens.reduce((s,l)=>s+l,0)+.25*(bufs.length-1);dur=clip?Math.max(dur,rd):rd;
+   let t=t0;bufs.forEach((b,i)=>{const s=ac.createBufferSource();s.buffer=b;s.connect(gain);s.start(t,D.asrc=='file'?D.at0:0,lens[i]);t+=lens[i]+.25})
+  }
+ }
+ if(!clip&&D.asrc=='none'&&D.bg=='vid'&&D.vid)dur=Math.max(1,D.vt1-D.vt0);
  REV0=D.rv?revTimes(kept(),dur,D.asrc=='ayat'?ayatSegs(lens):null):null;
  const mt=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t));
  if(!mt)throw new Error(T('المتصفح لا يدعم تسجيل الفيديو'));
  const mr=new MediaRecorder(stream,{mimeType:mt,videoBitsPerSecond:8e6}),ch=[];mr.ondataavailable=e=>e.data.size&&ch.push(e.data);
- return new Promise(res=>{mr.onstop=()=>{REV0=null;REV=null;ac&&ac.close();if(D.vid){D.vid.pause();D.vid.currentTime=D.vt0}STK_T=()=>performance.now()/1000;const bl=new Blob(ch,{type:mt.split(';')[0]}),ext=mt.includes('mp4')?'mp4':'webm';if(ext=='webm'&&window.ysFixWebmDuration)ysFixWebmDuration(bl,Math.round(dur*1000),f=>res({b:f,ext}));else res({b:bl,ext})};mr.start(200);const t0=performance.now()+300;const vd=D.bg=='vid'&&D.vid?D.vid:null;if(vd){vd.currentTime=D.vt0;vd.play().catch(()=>{})}STK_T=()=>Math.max(0,(performance.now()-t0)/1000);
+ return new Promise(res=>{mr.onstop=()=>{REV0=null;REV=null;ac&&ac.close();if(D.vid){D.vid.pause();D.vid.currentTime=D.vt0}STK_T=()=>performance.now()/1000;const bl=new Blob(ch,{type:mt.split(';')[0]}),ext=mt.includes('mp4')?'mp4':'webm';if(ext=='webm'&&window.ysFixWebmDuration)ysFixWebmDuration(bl,Math.round(dur*1000),f=>res({b:f,ext,duration:dur,width:W,height:H}));else res({b:bl,ext,duration:dur,width:W,height:H})};mr.start(200);const t0=performance.now()+300;const vd=D.bg=='vid'&&D.vid?D.vid:null;if(vd){vd.currentTime=D.vt0;vd.play().catch(()=>{})}STK_T=()=>Math.max(0,(performance.now()-t0)/1000);
   (function f(){const el=(performance.now()-t0)/1000;frame();msg.textContent=T('جارٍ التسجيل... ')+ar(Math.max(0,Math.round(dur-el)))+T(' ث');if(el<dur+.3)requestAnimationFrame(f);else mr.stop()})()})}
 const uerr=m=>Object.assign(new Error(m),{user:1});
-async function exportVideo(){let r=null;try{r=await exportMp4()}catch(e){if(e&&e.user)throw e;console.warn('mp4 export failed, falling back',e)}return r||exportRec()}
+async function exportVideo(){if(D.bg=='cam'||D.vclipAudio)return exportRec();let r=null;try{r=await exportMp4()}catch(e){if(e&&e.user)throw e;console.warn('mp4 export failed, falling back',e)}return r||exportRec()}
 async function exportMp4(){
  if(!window.VideoEncoder||!window.VideoFrame||!window.Mp4Muxer)return null;
  const msg=$('#exMsg');await fontsFor(kept());
@@ -799,7 +1090,7 @@ async function exportMp4(){
  try{
   for(let i=0;i<n;i++){if(err)throw err;const tm=i/fps;STK_T=()=>tm;if(vd)await seek(vd,D.vt0+(tm%span));
    if(times){REV={times,t:tm};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}
-   rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawStk(rx,W0,H0,false);
+   rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawStk(rx,W0,H0,false);drawWM(rx,W0,H0,false);
    const vf=new VideoFrame(rc,{timestamp:Math.round(i*1e6/fps),duration:Math.round(1e6/fps)});venc.encode(vf,{keyFrame:i%(fps*2)==0});vf.close();
    while(venc.encodeQueueSize>8)await new Promise(r=>setTimeout(r,4));
    if(i%6==0){msg.textContent=T('جارٍ تصدير الفيديو')+' '+ar(Math.round(i/n*100))+(lang=='ar'?'٪':'%');await new Promise(r=>setTimeout(r))}}
@@ -809,25 +1100,25 @@ async function exportMp4(){
     while(aenc.encodeQueueSize>16)await new Promise(r=>setTimeout(r,4))}}
   await venc.flush();if(aenc)await aenc.flush();if(err)throw err;muxer.finalize();
  }finally{REV=null;STK_T=()=>performance.now()/1000;try{venc.close()}catch(e){}try{aenc&&aenc.close()}catch(e){}}
- return{b:new Blob([muxer.target.buffer],{type:'video/mp4'}),ext:'mp4'}}
+ return{b:new Blob([muxer.target.buffer],{type:'video/mp4'}),ext:'mp4',duration:dur,width:W,height:H}}
 let lastV=null;
-$('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';dl(lastV.b,fname(lastV.ext))}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
-$('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();await share(lastV.b,fname(lastV.ext),lastV.b.type)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
+$('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(lastV.b,n)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
+$('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});await share(lastV.b,n,lastV.b.type)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
 
 /* خلفية فيديو + قص + ملصقات */
 let prevOn=false,liveOn=false,pa=null;
 const trimClamp=(k,p)=>{const a=p+'0',b=p+'1';if(k==a&&D[a]>D[b]-.2)D[a]=Math.max(0,D[b]-.2);if(k==b&&D[b]<D[a]+.2)D[b]=D[a]+.2};
-function preAfter(k){if(k=='vt0'||k=='vt1'){trimClamp(k,'vt');if(D.vid&&!prevOn)D.vid.currentTime=k=='vt0'?D.vt0:Math.max(D.vt0,D.vt1-.05)}if(k=='at0'||k=='at1')trimClamp(k,'at');if(k=='bg'&&D.bg!='vid'&&D.vid){D.vid.pause();prevOn=false;ico('#vPrev','play')}}
-const needLive=()=>$('#studio').classList.contains('on')&&((D.bg=='vid'&&D.vid)||D.stk.some(s=>s.t=='g'||s.t=='f')||prevOn||wpOn);
+function preAfter(k){if(k=='vt0'||k=='vt1'){trimClamp(k,'vt');if(D.vid&&!prevOn)D.vid.currentTime=k=='vt0'?D.vt0:Math.max(D.vt0,D.vt1-.05)}if(k=='at0'||k=='at1')trimClamp(k,'at');if(k=='bg'&&D.bg!='vid')D.vclipAudio=null;if(k=='bg'&&D.bg!='vid'&&D.vid){D.vid.pause();prevOn=false;ico('#vPrev','play')}if(k=='bg'&&D.bg!='cam'&&camStream)camRelease()}
+const needLive=()=>$('#studio').classList.contains('on')&&((D.bg=='cam'&&camVid)||(D.bg=='vid'&&D.vid)||D.stk.some(s=>s.t=='g'||s.t=='f')||prevOn||wpOn);
 function drawPv(){if(wpOn){const tt=(performance.now()-wpT0)/1000;if(tt>wpDur){wpStop()}else{REV={times:wpTimes,t:tt};wpAud.forEach(a=>{if(!a.st&&tt>=a.t0){a.st=1;a.el.currentTime=a.off||0;a.el.play().catch(()=>{})}if(a.st&&tt>=a.t0+a.len)try{a.el.pause()}catch(e){}})}}const c=$('#pv'),[W,H]=dims();if(c.width!=Math.round(W*.6))return;const x=c.getContext('2d');x.setTransform(c.width/W,0,0,c.width/W,0,0);draw(x,W,H,true)}
 function liveLoop(){if(!needLive()){liveOn=false;if(wpOn||wpBusy)wpStop();return}const v=D.vid;if(prevOn&&v&&v.currentTime>=D.vt1){v.pause();v.currentTime=D.vt0;prevOn=false;ico('#vPrev','play')}drawPv();requestAnimationFrame(liveLoop)}
 function kick(){if(!liveOn&&needLive()){liveOn=true;requestAnimationFrame(liveLoop)}}
-function setVid(u,cr){const v=document.createElement('video');v.muted=true;v.playsInline=true;v.preload='auto';if(!u.startsWith('blob:'))v.crossOrigin='anonymous';
- const fin=()=>{const d=+v.duration.toFixed(1);D.vt0=0;D.vt1=d;$('[data-k=vt0]').max=$('[data-k=vt1]').max=d;D.vid=v;D.bg='vid';v.currentTime=.01;refresh();upd();kick();if(cr)$('#imCr').textContent=cr};
+function setVid(u,cr){const v=document.createElement('video');v.muted=true;v.playsInline=true;v.preload='auto';if(isXO(u))v.crossOrigin='anonymous';
+ const fin=()=>{const d=+v.duration.toFixed(1);D.vt0=0;D.vt1=d;$('[data-k=vt0]').max=$('[data-k=vt1]').max=d;D.vclipAudio=null;D.vid=v;D.bg='vid';v.currentTime=.01;refresh();upd();kick();if(cr)$('#imCr').textContent=cr};
  v.onloadedmetadata=()=>{v.onloadedmetadata=null;if(isFinite(v.duration))return fin();v.ontimeupdate=()=>{if(isFinite(v.duration)){v.ontimeupdate=null;fin()}};v.currentTime=1e7};
  v.onerror=()=>{$('#imCr').textContent=T('تعذّر تحميل الفيديو (إنترنت أو منع CORS).')};v.src=u}
 $('#vdF').onclick=()=>$('#vdFile').click();$('#vdFile').onchange=e=>{const f=e.target.files[0];if(f)setVid(URL.createObjectURL(f))};
-$('#vdGo').onclick=async()=>{const g=$('#gal');g.innerHTML='...';try{const u='https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=18&gsrsearch='+encodeURIComponent($('#imQ').value+' filetype:video')+'&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiurlwidth=320';
+$('#vdGo').onclick=async()=>{const g=$('#galV');g.innerHTML='...';try{const u='https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=18&gsrsearch='+encodeURIComponent($('#vdQ').value+' filetype:video')+'&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiurlwidth=320';
  const j=await(await fetch(u)).json(),ps=Object.values((j.query||{}).pages||{});g.innerHTML='';let n=0;
  ps.forEach(p=>{const i=p.imageinfo&&p.imageinfo[0];if(!i||!/webm|mp4/.test(i.mime||''))return;n++;const m=i.extmetadata||{},im=document.createElement('img'),strip=s=>(s||'').replace(/<[^>]*>/g,'');im.src=i.thumburl||'';im.loading='lazy';
   im.onclick=()=>setVid(i.url,'المصدر: ويكيميديا كومنز — '+strip(m.Artist&&m.Artist.value)+' — '+strip(m.LicenseShortName&&m.LicenseShortName.value));g.appendChild(im)});if(!n)g.textContent=T('لا نتائج')}catch(e){g.textContent='تعذّر البحث — يلزم اتصال بالإنترنت.'}};
@@ -835,10 +1126,105 @@ $('#vPrev').onclick=()=>{const v=D.vid;if(!v)return;if(prevOn){v.pause();prevOn=
 $('#wPrev').onclick=async()=>{if(wpOn||wpBusy){wpStop();return}wpBusy=true;ico('#wPrev','pause');const p=await wpPlan();if(!wpBusy)return;wpBusy=false;wpTimes=p.times;wpDur=p.total+.8;wpAud=p.aud;
  const f=wpAud[0];if(f){try{f.el.currentTime=f.off||0;await f.el.play()}catch(e){}f.st=1}wpT0=performance.now();wpOn=true;kick()};
 $('#aPrv').onclick=()=>{if(pa){pa.pause();pa=null;ico('#aPrv','play');return}if(!D.afile)return;pa=new Audio(URL.createObjectURL(D.afile));pa.onloadedmetadata=()=>{pa.currentTime=D.at0};pa.ontimeupdate=()=>{if(pa&&pa.currentTime>=D.at1){pa.pause();pa=null;ico('#aPrv','play')}};pa.onended=()=>{pa=null;ico('#aPrv','play')};pa.play();ico('#aPrv','pause')};
+/* الكاميرا (الواقع المعزّز) */
+let camStream=null,camVid=null,camFacing='user',camMicOn=true,arAudOn=true,arRec=null,arStream=null,arChunks=[],arAC=null,arGain=null,arDest=null,arMicSrc=null,arMicGain=null,arSrcs=[],arRAF=0,arDur=0,arStopT=0,arOut=null,arPending=false,arCancel=false;
+const camChk=(id,d)=>{const e=$(id);return e?!!e.checked:d};
+const camNote=t=>{const e=$('#camMsg');if(e)e.textContent=t};
+const camReady=()=>!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia);
+function toast(m){let t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t)}t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),4500)}
+const micErrMsg=e=>e&&e.name=='NotAllowedError'?'الميكروفون محظور — اسمح به من إعدادات الموقع/النظام (رمز القفل بجانب العنوان).':e&&e.name=='NotFoundError'?'لم يُعثر على ميكروفون على هذا الجهاز.':e&&e.name=='NotReadableError'?'الميكروفون مستخدم من تطبيق آخر.':'تعذّر تشغيل الميكروفون.';
+function camUi(){const on=D.bg=='cam';const b=$('#arBar');if(b)b.style.display=on?'flex':'none';const x=$('#camBox');if(x)x.style.display=on?'block':'none';if(!on){const pw=$('#pvw');if(pw&&pw.classList.contains('fs'))pw.classList.remove('fs')}
+ const r=$('#arRec');if(r)r.classList.toggle('rec',!!arRec);const r2=$('#arRec');if(r2&&r2.querySelector('svg'))ico('#arRec',arRec?'square':'circle');
+ const cr=$('#camRec'),cs=cr&&cr.querySelector('span');if(cs)cs.textContent=arRec?T('إيقاف التسجيل'):T('تسجيل فيديو');
+ const a=$('#arAud');if(a)a.classList.toggle('on',arAudOn);const cb=$('#camAud');if(cb)cb.checked=arAudOn;
+ const mb=$('#arMic');if(mb){mb.classList.toggle('on',camMicOn);if(mb.querySelector('svg'))ico('#arMic',camMicOn?'mic':'mic-off')}
+ const pl=$('#arPill');if(pl)pl.style.display=arRec?'flex':'none'}
+function camRelease(){camStream&&camStream.getTracks().forEach(t=>t.stop());camStream=null;if(camVid)camVid.srcObject=null}
+function camFs(){$('#pvw').classList.toggle('fs');upd()}
+document.addEventListener('keydown',e=>{if(e.key=='Escape'){const pw=$('#pvw');if(pw.classList.contains('fs')){pw.classList.remove('fs');upd()}}});
+async function camStart(){
+ if(!camReady()||!window.isSecureContext){const m='تشغيل الكاميرا يتطلّب اتصالاً آمناً. عند فتح الصفحة عبر عنوان IP محلي (http) لن تعمل الكاميرا — استخدم localhost أو HTTPS.';toast(m);camNote(m);return}
+ camNote('جارٍ تشغيل الكاميرا...');
+  try{camRelease();const vc={facingMode:camFacing,width:{ideal:1920},height:{ideal:1080}};let wantM=camChk('#camMic',true),st,micErr=null;
+   try{st=await navigator.mediaDevices.getUserMedia({video:vc,audio:wantM?{echoCancellation:true,noiseSuppression:true,autoGainControl:true}:false})}
+   catch(e0){if(wantM){wantM=false;micErr=e0;st=await navigator.mediaDevices.getUserMedia({video:vc,audio:false})}else throw e0}
+   camStream=st;camMicOn=wantM&&camStream.getAudioTracks().length>0;
+  if(!camVid){camVid=document.createElement('video');camVid.muted=true;camVid.playsInline=true;camVid.setAttribute('playsinline','');camVid.autoplay=true;camVid.style.cssText='position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px';document.body.appendChild(camVid)}
+  camVid.srcObject=camStream;await camVid.play().catch(()=>{});
+  D.bg='cam';D.img=null;D.vclipAudio=null;const cb=$('#camMic');if(cb)cb.checked=camMicOn;camUi();
+  if(camMicOn)camNote('الكاميرا والمايك يعملان — عدّل النص والمؤثرات ثم سجّل أو التقط صورة.');
+  else{const m='الكاميرا تعمل بدون صوت — '+micErrMsg(micErr)+' ثم فعّل زر/مربع المايك لتشغيله.';toast(m);camNote(m)}}
+  catch(e){const m=e&&e.name=='NotAllowedError'?'رُفض إذن الكاميرا — فعّل الإذن من إعدادات المتصفح.':e&&e.name=='NotFoundError'?'لا توجد كاميرا متاحة على هذا الجهاز.':'تعذّر تشغيل الكاميرا.';toast(m);camNote(m);camRelease();D.bg=D.img?'img':(D.vid?'vid':'solid')}
+  refresh();upd();kick()}
+function camOff(){camRelease();if(arRec)arStopRec();D.bg=D.img?'img':(D.vid?'vid':'solid');$('#pvw').classList.remove('fs');refresh();upd()}
+function camSwap(){camFacing=camFacing=='user'?'environment':'user';camStart()}
+function arSetAud(on){arAudOn=on;if(on){if(D.asrc=='none')D.asrc='ayat'}else{if(D.asrc=='ayat')D.asrc='none'}refresh();camUi()}
+function camGrabBg(){const c=document.createElement('canvas');c.width=camVid.videoWidth||1280;c.height=camVid.videoHeight||720;const x=c.getContext('2d');if(camFacing=='user'){x.translate(c.width,0);x.scale(-1,1)}x.drawImage(camVid,0,0,c.width,c.height);return c}
+const camShot=()=>{if(D.bg!='cam'||!camVid)return;try{const url=camGrabBg().toDataURL('image/jpeg',.92),im=new Image();im.onload=()=>{D.vclipAudio=null;D.img=im;D.vid=null;D.bg='img';camRelease();camNote(T('تم استخدام الصورة كخلفية داخل التصميم — عدّل النص والمؤثرات ثم صدّر.'));refresh();upd()};im.src=url}catch(e){camNote('تعذّر التقاط الصورة: '+e.message)}};
+function camUseClip(blob){const url=URL.createObjectURL(blob),v=document.createElement('video');v.src=url;v.loop=true;v.muted=false;v.volume=1;v.playsInline=true;v.setAttribute('playsinline','');v.crossOrigin='anonymous';
+ v.onloadedmetadata=()=>{try{D.vid&&D.vid.pause&&D.vid.pause()}catch(e){}D.img=null;D.vid=v;D.bg='vid';D.vt0=0;D.vt1=Math.max(.1,+v.duration.toFixed(1));const a=$('[data-k=vt0]'),b=$('[data-k=vt1]');if(a)a.max=D.vt1;if(b)b.max=D.vt1;D.asrc=arAudOn?'ayat':'none';v.currentTime=.01;camRelease();camNote(T('تم استخدام المقطع كخلفية فيديو داخل التصميم — يمكنك سماع صوتك في المعاينة. الصوت النهائي من لوحة التصدير. عدّل النص والمؤثرات ثم صدّر.'));refresh();upd();kick();v.play().catch(()=>{})};
+ v.onerror=()=>camNote(T('تعذّر تحميل المقطع المسجَّل.'))}
+function syncMic(){if(arMicGain)try{arMicGain.gain.value=camMicOn?1:0}catch(e){}const b=$('#arMic');if(b)b.classList.toggle('on',camMicOn);const cb=$('#camMic');if(cb)cb.checked=camMicOn;if(!arRec)camNote(camMicOn?T('المايك يعمل'):T('المايك صامت'));camUi()}
+function connectMic(){if(arAC&&arDest&&!arMicSrc&&camStream&&camStream.getAudioTracks().length){try{arMicSrc=arAC.createMediaStreamSource(new MediaStream(camStream.getAudioTracks()));arMicGain=arAC.createGain();arMicGain.gain.value=camMicOn?1:0;arMicSrc.connect(arMicGain);arMicGain.connect(arDest)}catch(e){}}}
+function arSetMic(on){camMicOn=on;const hasTrack=!!(camStream&&camStream.getAudioTracks().length);
+ if(on&&camStream&&!hasTrack){navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}}).then(ms=>{ms.getAudioTracks().forEach(t=>{t.enabled=true;try{camStream.addTrack(t)}catch(e){}});connectMic()}).catch(e=>{camMicOn=false;const m=micErrMsg(e);toast(m);camNote(m)}).then(syncMic);return}
+ connectMic();syncMic()}
+function arStopRec(){if(arStopT){clearTimeout(arStopT);arStopT=0}const r=arRec;arSrcs.forEach(s=>{try{s.stop()}catch(e){}});arSrcs=[];if(r){try{r.stop()}catch(e){}}else camNote('')}
+async function arStartRec(){
+ if(arRec||arPending)return;
+ if(!camVid||D.bg!='cam'){camNote('شغّل الكاميرا أولاً.');return}
+ const mt=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t));
+ if(!mt){camNote('المتصفح لا يدعم تسجيل الفيديو.');return}
+ arPending=true;arCancel=false;
+ try{
+  if(arAudOn&&D.asrc=='none')D.asrc='ayat';
+  if(camChk('#camCd',true)){const cd=$('#arCd'),pw=$('#pvw');if(pw)pw.classList.add('cd');for(let n=3;n>0;n--){if(arCancel)break;if(cd)cd.textContent=ar(n);camNote(T('يبدأ التسجيل خلال')+' '+ar(n)+'…');await new Promise(r=>setTimeout(r,800))}if(cd)cd.textContent='';if(pw)pw.classList.remove('cd');if(arCancel){camNote('');return}}
+  const qv=+($('#camRes')?$('#camRes').value:1280)||1280,br=Math.max(1e6,Math.min(12e6,Math.round(8e6*qv/1920)));
+  const[W0,H0]=dims(),sc=Math.min(1,qv/Math.max(W0,H0)),W=Math.round(W0*sc/2)*2,H=Math.round(H0*sc/2)*2;
+  const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');
+  const frame=()=>{rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);
+   if(arRec&&$('#camOv')&&$('#camOv').checked){const s=Math.max(.5,W/1600);rx.fillStyle='rgba(0,0,0,.4)';rx.fillRect(W-200*s,16*s,186*s,44*s);rx.fillStyle='#ff3b30';rx.beginPath();rx.arc(W-170*s,38*s,10*s,0,7);rx.fill();rx.fillStyle='#fff';rx.font='600 '+(26*s)+'px system-ui,sans-serif';rx.textBaseline='middle';rx.fillText(fmt(arDur),W-146*s,39*s)}};
+  frame();
+  const stream=rc.captureStream(30);arStream=stream;let dur=0,lens=[];
+  const micTrack=!!(camStream&&camStream.getAudioTracks().length);
+  const monRec=arAudOn&&D.asrc!='none';
+  const needBuf=monRec||(camChk('#camAs',true)&&D.asrc!='none');
+  if(micTrack||needBuf){
+   try{
+    arAC=new(window.AudioContext||window.webkitAudioContext)();if(arAC.state=='suspended')try{arAC.resume()}catch(e){}
+    if(micTrack){arDest=arAC.createMediaStreamDestination();if(camMicOn)connectMic();else{try{arMicSrc=arAC.createMediaStreamSource(new MediaStream(camStream.getAudioTracks()));arMicGain=arAC.createGain();arMicGain.gain.value=0;arMicSrc.connect(arMicGain);arMicGain.connect(arDest)}catch(e){}}arDest.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}
+    if(needBuf){let bufs=[];
+     if(D.asrc=='file'){if(D.afile){bufs=[await arAC.decodeAudioData(await D.afile.arrayBuffer())];lens=[Math.max(.2,Math.min(bufs[0].duration,D.at1||bufs[0].duration)-D.at0)]}}
+     else{for(let a=D.a1;a<=D.a2;a++){const r=await fetch(aUrl(D.s+':'+a));if(r.ok){const b=await arAC.decodeAudioData(await r.arrayBuffer());bufs.push(b);lens.push(b.duration)}}}
+     if(lens.length)dur=lens.reduce((s,l)=>s+l,0)+.25*(bufs.length-1);
+     if(monRec){const g=arAC.createGain();g.gain.value=Math.max(0,Math.min(1,(+($('#camVol')&&$('#camVol').value)||100)/100));g.connect(arAC.destination);let t=arAC.currentTime+.1;bufs.forEach((b,i)=>{const s=arAC.createBufferSource();s.buffer=b;s.connect(g);s.start(t,D.asrc=='file'?D.at0:0,lens[i]);t+=lens[i]+.25;arSrcs.push(s)})}
+    }
+   }catch(e){camNote('تعذّر تجهيز الصوت: '+e.message)}
+  }
+  arChunks=[];arRec=new MediaRecorder(stream,{mimeType:mt,videoBitsPerSecond:br});arRec.ondataavailable=e=>e.data.size&&arChunks.push(e.data);
+  arRec.onstop=()=>{arRec=null;arStream=null;if(arStopT){clearTimeout(arStopT);arStopT=0}arSrcs.forEach(s=>{try{s.stop()}catch(e){}});arSrcs=[];try{arAC&&arAC.close()}catch(e){}arAC=null;arGain=null;arDest=null;arMicSrc=null;arMicGain=null;STK_T=()=>performance.now()/1000;cancelAnimationFrame(arRAF);
+   const bl=new Blob(arChunks,{type:mt.split(';')[0]}),ext=mt.includes('mp4')?'mp4':'webm';
+   const fin=async()=>{try{const ac=new(window.AudioContext||window.webkitAudioContext)();D.vclipAudio=await ac.decodeAudioData(await bl.arrayBuffer());ac.close()}catch(e){D.vclipAudio=null}camUseClip(bl)};
+   if(ext=='webm'&&window.ysFixWebmDuration)ysFixWebmDuration(bl,Math.max(1,Math.round(arDur*1000)),fin);else fin();camUi()};
+  arRec.start(200);const t0=performance.now();STK_T=()=>Math.max(0,(performance.now()-t0)/1000);
+  if(camChk('#camAs',true)&&D.asrc!='none'&&dur>0)arStopT=setTimeout(()=>{if(arRec)arStopRec()},(dur+0.6)*1000);
+  (function loop(){if(!arRec)return;frame();arDur=(performance.now()-t0)/1000;const tt=$('#arPillT');if(tt)tt.textContent=fmt(arDur);camNote(T('جارٍ التسجيل')+' — '+fmt(arDur)+' — '+(camMicOn?T('المايك يعمل'):T('المايك صامت'))+' — '+(arAudOn?T('التلاوة تعمل'):T('بلا تلاوة')));arRAF=requestAnimationFrame(loop)})();
+ }finally{arPending=false;arCancel=false;camUi()}}
+$('#arFs').onclick=$('#camFs').onclick=camFs;
+$('#arSwap').onclick=$('#camSwap').onclick=camSwap;
+$('#arOff').onclick=$('#camOff').onclick=camOff;
+$('#arShot').onclick=$('#camShot').onclick=camShot;
+$('#arRec').onclick=$('#camRec').onclick=()=>{if(arRec)arStopRec();else if(arPending)arCancel=true;else arStartRec()};
+$('#arAud').onclick=()=>arSetAud(!arAudOn);
+$('#camAud').onchange=()=>arSetAud($('#camAud').checked);
+$('#arAud').title='تشغيل تلاوة الآيات أثناء التسجيل';
+$('#arMic').onclick=()=>arSetMic(!camMicOn);
+$('#camMic').onchange=()=>arSetMic($('#camMic').checked);
+$$('[data-k=bg][data-v=cam]').forEach(b=>b.onclick=camStart);
 /* الملصقات */
 const EMO='🕌 🕋 ☪️ 🌙 ⭐ ✨ 📖 🤲 🙏 ❤️ 💚 🤍 🌹 🌸 🌿 🌴 🌳 ☀️ 🌤️ 🌈 🕊️ 💫 🔆 👑 💎 🏔️ 🌊 🕯️ 📿 🎁 🎉 😊 😍 🥰 🤗 😇 🌟 💛 💙 🧡 🔥 ☁️ 🌺 🌻 🍃 🦋'.split(' ');
 EMO.forEach(e=>{const b=document.createElement('button');b.textContent=e;b.onclick=()=>addStk({t:'e',ch:e,s:14,c:'#ffffff'});$('#emG').appendChild(b)});
-SKF.forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;$('#skF').appendChild(o)});
+SKF.forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;$('#skF').appendChild(o);$('#wmF').appendChild(o.cloneNode(true))});
 $('#skEmAdd').onclick=async()=>{const v=$('#skEmT').value.trim();if(!v)return;const tx=/[A-Za-z\u0600-\u06FF0-9]/.test(v);const o={t:'e',ch:v,s:tx?7:14,c:tx?D.col:'#ffffff',ff:'Tajawal',b:0,sig:tx?1:0};D.stk.push({x:50,y:90,r:0,...o});D.ss=D.stk.length-1;D.tgt='stk';await stkFonts();skUi();refresh();upd();kick();$('#skEmT').value=''};
 $('#skF').addEventListener('change',async e=>{const s=D.stk[D.ss];if(s){s.ff=e.target.value;await stkFonts();upd()}});$('#skB').addEventListener('change',async e=>{const s=D.stk[D.ss];if(s){s.b=e.target.checked?1:0;await stkFonts();upd()}});
 function addStk(o){D.stk.push({x:50,y:50,r:0,s:14,...o});D.ss=D.stk.length-1;D.tgt='stk';skUi();refresh();upd();kick()}
@@ -912,9 +1298,36 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden&&asOn)asRun
 /* اللغات */
 const DICT={"الفهرس":["Index","Índice","فہرست","सूची","Index","Indeks","Dizin","সূচি","Оглавление"],"الإعدادات":["Settings","Ajustes","ترتیبات","सेटिंग्स","Réglages","Pengaturan","Ayarlar","সেটিংস","Настройки"],"السور":["Surahs","Suras","سورتیں","सूरह","Sourates","Surah","Sureler","সূরা","Суры"],"الأجزاء":["Juz","Yuz","پارے","पारे","Juz","Juz","Cüzler","পারা","Джузы"],"الصفحات":["Pages","Páginas","صفحات","पृष्ठ","Pages","Halaman","Sayfalar","পৃষ্ঠা","Страницы"],"المظهر":["Appearance","Apariencia","ظاہری شکل","दिखावट","Apparence","Tampilan","Görünüm","চেহারা","Оформление"],"الثيم":["Theme","Tema","تھیم","थीम","Thème","Tema","Tema","থিম","Тема"],"القراءة الليلية":["Night reading","Lectura nocturna","رات کا مطالعہ","रात्रि पठन","Lecture de nuit","Mode baca malam","Gece okuma","রাতের পাঠ","Ночное чтение"],"لون خلفية الصفحة":["Page background","Fondo de página","صفحے کا پس منظر","पृष्ठ की पृष्ठभूमि","Fond de page","Latar halaman","Sayfa arka planı","পৃষ্ঠার পটভূমি","Фон страницы"],"لون الخط":["Font color","Color del texto","خط کا رنگ","फ़ॉन्ट रंग","Couleur du texte","Warna huruf","Yazı rengi","ফন্টের রং","Цвет текста"],"إعادة الضبط":["Reset","Restablecer","ری سیٹ","रीसेट","Réinitialiser","Atur ulang","Sıfırla","রিসেট","Сбросить"],"شفافية الخط":["Font opacity","Opacidad del texto","خط کی شفافیت","फ़ॉन्ट पारदर्शिता","Opacité du texte","Opasitas huruf","Yazı opaklığı","ফন্টের স্বচ্ছতা","Прозрачность текста"],"سطوع الشاشة":["Screen brightness","Brillo de pantalla","اسکرین کی روشنی","स्क्रीन की चमक","Luminosité de l'écran","Kecerahan layar","Ekran parlaklığı","স্ক্রিনের উজ্জ্বলতা","Яркость экрана"],"سطوع الخط":["Font brightness","Brillo del texto","خط کی روشنی","फ़ॉन्ट की चमक","Luminosité du texte","Kecerahan huruf","Yazı parlaklığı","ফন্টের উজ্জ্বলতা","Яркость текста"],"القراءة":["Reading","Lectura","مطالعہ","पठन","Lecture","Membaca","Okuma","পড়া","Чтение"],"أفقي":["Horizontal","Horizontal","افقی","क्षैतिज","Horizontal","Horizontal","Yatay","অনুভূমিক","Горизонтально"],"عمودي":["Vertical","Vertical","عمودی","ऊर्ध्वाधर","Vertical","Vertikal","Dikey","উল্লম্ব","Вертикально"],"سرعة التمرير التلقائي":["Auto-scroll speed","Velocidad de desplazamiento","خودکار اسکرول کی رفتار","स्वतः स्क्रॉल गति","Vitesse de défilement","Kecepatan gulir otomatis","Otomatik kaydırma hızı","স্বয়ংক্রিয় স্ক্রলের গতি","Скорость автопрокрутки"],"تمرير تلقائي":["Auto-scroll","Desplazamiento auto","خودکار اسکرول","स्वतः स्क्रॉल","Défilement auto","Gulir otomatis","Otomatik kaydır","স্বয়ংক্রিয় স্ক্রল","Автопрокрутка"],"ملء الشاشة":["Fullscreen","Pantalla completa","مکمل اسکرین","फ़ुलस्क्रीन","Plein écran","Layar penuh","Tam ekran","ফুলস্ক্রিন","Полный экран"],"الطباعة":["Printing","Impresión","پرنٹنگ","प्रिंटिंग","Impression","Cetak","Yazdırma","প্রিন্টিং","Печать"],"من":["From","Desde","سے","से","De","Dari","Başlangıç","থেকে","С"],"إلى":["To","Hasta","تک","तक","À","Sampai","Bitiş","পর্যন্ত","По"],"طباعة":["Print","Imprimir","پرنٹ","प्रिंट","Imprimer","Cetak","Yazdır","প্রিন্ট","Печать"],"تُطبع الصفحات بنفس الشفافية المختارة.":["Pages print with the selected opacity.","Las páginas se imprimen con la opacidad elegida.","صفحات منتخب شفافیت کے ساتھ پرنٹ ہوتے ہیں۔","पृष्ठ चुनी गई पारदर्शिता के साथ छपते हैं।","Les pages s'impriment avec l'opacité choisie.","Halaman dicetak dengan opasitas yang dipilih.","Sayfalar seçilen opaklıkla yazdırılır.","পৃষ্ঠাগুলো নির্বাচিত স্বচ্ছতায় ছাপা হয়।","Страницы печатаются с выбранной прозрачностью."],"اللغة":["Language","Idioma","زبان","भाषा","Langue","Bahasa","Dil","ভাষা","Язык"],"الأوفلاين":["Offline","Sin conexión","آف لائن","ऑफ़लाइन","Hors ligne","Offline","Çevrimdışı","অফলাইন","Офлайн"],"حالة الأوفلاين":["Offline status","Estado sin conexión","آف لائن کی حالت","ऑफ़लाइन स्थिति","État hors ligne","Status offline","Çevrimdışı durum","অফলাইন অবস্থা","Статус офлайн"],"استماع":["Listen","Escuchar","سنیں","सुनें","Écouter","Dengarkan","Dinle","শুনুন","Слушать"],"نسخ النص":["Copy text","Copiar texto","متن کاپی کریں","पाठ कॉपी करें","Copier le texte","Salin teks","Metni kopyala","টেক্সট কপি","Копировать текст"],"مشاركة النص":["Share text","Compartir texto","متن شیئر کریں","पाठ साझा करें","Partager le texte","Bagikan teks","Metni paylaş","টেক্সট শেয়ার","Поделиться текстом"],"صورة سريعة":["Quick image","Imagen rápida","فوری تصویر","त्वरित चित्र","Image rapide","Gambar cepat","Hızlı görsel","দ্রুত ছবি","Быстрое фото"],"تصميم صورة / فيديو":["Design image / video","Diseñar imagen / vídeo","تصویر / ویڈیو ڈیزائن","चित्र / वीडियो डिज़ाइन","Créer image / vidéo","Desain gambar / video","Görsel / video tasarla","ছবি / ভিডিও ডিজাইন","Создать фото / видео"],"مرة":["Once","Una vez","ایک بار","एक बार","Une fois","Sekali","Bir kez","একবার","Один раз"],"متواصل":["Continuous","Continuo","مسلسل","लगातार","Continu","Berlanjut","Sürekli","ধারাবাহিক","Подряд"],"تكرار الآية":["Repeat verse","Repetir aleya","آیت دہرائیں","आयत दोहराएं","Répéter le verset","Ulangi ayat","Ayeti tekrarla","আয়াত পুনরাবৃত্তি","Повтор аята"],"تكرار السورة":["Repeat surah","Repetir sura","سورت دہرائیں","सूरह दोहराएं","Répéter la sourate","Ulangi surah","Sureyi tekrarla","সূরা পুনরাবৃত্তি","Повтор суры"],"تكرار مقطع":["Repeat range","Repetir rango","حصہ دہرائیں","अंश दोहराएं","Répéter un passage","Ulangi bagian","Aralığı tekrarla","অংশ পুনরাবৃত্তি","Повтор отрезка"],"عدد التكرار":["Repeat count","Veces a repetir","تکرار کی تعداد","दोहराने की संख्या","Nombre de répétitions","Jumlah pengulangan","Tekrar sayısı","পুনরাবৃত্তির সংখ্যা","Число повторов"],"(٠ = بلا نهاية)":["(0 = infinite)","(0 = infinito)","(0 = لامحدود)","(0 = अनंत)","(0 = infini)","(0 = tanpa batas)","(0 = sonsuz)","(০ = অসীম)","(0 = бесконечно)"],"تعيين البداية":["Set start","Fijar inicio","آغاز مقرر کریں","आरंभ तय करें","Définir le début","Atur awal","Başlangıcı ayarla","শুরু নির্ধারণ","Задать начало"],"تعيين النهاية":["Set end","Fijar final","اختتام مقرر کریں","अंत तय करें","Définir la fin","Atur akhir","Bitişi ayarla","শেষ নির্ধারণ","Задать конец"],"القارئ والرواية":["Reciter and riwaya","Recitador y riwaya","قاری اور روایت","क़ारी और रिवायत","Récitateur et riwaya","Qari dan riwayat","Kâri ve rivayet","কারী ও রিওয়ায়াত","Чтец и риваят"],"نسخ كصورة":["Copy as image","Copiar como imagen","تصویر کے طور پر کاپی","चित्र के रूप में कॉपी","Copier en image","Salin sebagai gambar","Görsel olarak kopyala","ছবি হিসেবে কপি","Копировать как фото"],"حفظ PNG":["Save PNG","Guardar PNG","PNG محفوظ کریں","PNG सहेजें","Enregistrer PNG","Simpan PNG","PNG kaydet","PNG সংরক্ষণ","Сохранить PNG"],"تصميم صورة":["Design image","Diseñar imagen","تصویر ڈیزائن","चित्र डिज़ाइन","Créer une image","Desain gambar","Görsel tasarla","ছবি ডিজাইন","Создать фото"],"خلفية شفافة (وإلا: لون الصفحة)":["Transparent background (else page color)","Fondo transparente (si no, color de página)","شفاف پس منظر (ورنہ صفحے کا رنگ)","पारदर्शी पृष्ठभूमि (अन्यथा पृष्ठ का रंग)","Fond transparent (sinon couleur de page)","Latar transparan (jika tidak, warna halaman)","Şeffaf arka plan (yoksa sayfa rengi)","স্বচ্ছ পটভূমি (নয়তো পৃষ্ঠার রং)","Прозрачный фон (иначе цвет страницы)"],"إغلاق":["Close","Cerrar","بند کریں","बंद करें","Fermer","Tutup","Kapat","বন্ধ","Закрыть"],"تصميم صورة بالآيات":["Verse image studio","Estudio de imágenes de versículos","آیات کی تصویر ڈیزائن","आयत चित्र स्टूडियो","Studio d'images de versets","Studio gambar ayat","Ayet görseli stüdyosu","আয়াত ছবি স্টুডিও","Студия аятов"],"النص":["Text","Texto","متن","पाठ","Texte","Teks","Metin","টেক্সট","Текст"],"الخلفية":["Background","Fondo","پس منظر","पृष्ठभूमि","Arrière-plan","Latar","Arka plan","পটভূমি","Фон"],"الأبعاد":["Size","Tamaño","سائز","आकार","Taille","Ukuran","Boyut","আকার","Размер"],"العناوين":["Labels","Etiquetas","عنوانات","लेबल","Étiquettes","Label","Etiketler","লেবেল","Подписи"],"التصدير":["Export","Exportar","برآمد","निर्यात","Exporter","Ekspor","Dışa aktar","এক্সপোর্ট","Экспорт"],"من آية":["From verse","Desde la aleya","آیت سے","आयत से","Du verset","Dari ayat","Ayetten","আয়াত থেকে","С аята"],"حذف كلمات من البداية:":["Remove words from start:","Quitar palabras del inicio:","شروع سے الفاظ حذف کریں:","शुरू से शब्द हटाएं:","Retirer des mots au début :","Hapus kata dari awal:","Baştan kelime sil:","শুরু থেকে শব্দ বাদ:","Убрать слова с начала:"],"حذف كلمات من النهاية:":["Remove words from end:","Quitar palabras del final:","آخر سے الفاظ حذف کریں:","अंत से शब्द हटाएं:","Retirer des mots à la fin :","Hapus kata dari akhir:","Sondan kelime sil:","শেষ থেকে শব্দ বাদ:","Убрать слова с конца:"],"اضغط كلمة لإدراج سطر جديد بعدها:":["Tap a word to break the line after it:","Toca una palabra para saltar de línea después:","لفظ دبائیں تاکہ اس کے بعد نئی سطر ہو:","शब्द दबाएं ताकि उसके बाद नई पंक्ति हो:","Touchez un mot pour passer à la ligne après :","Ketuk kata untuk pindah baris setelahnya:","Kelimeye dokunun, ardından satır atlansın:","শব্দে ট্যাপ করুন, এরপর নতুন লাইন হবে:","Нажмите слово, чтобы перенести строку после него:"],"حجم الخط":["Font size","Tamaño del texto","خط کا سائز","फ़ॉन्ट आकार","Taille du texte","Ukuran huruf","Yazı boyutu","ফন্টের আকার","Размер текста"],"عرض مربع النص":["Text box width","Ancho del cuadro","ٹیکسٹ باکس کی چوڑائی","टेक्स्ट बॉक्स की चौड़ाई","Largeur du cadre","Lebar kotak teks","Metin kutusu genişliği","টেক্সট বক্সের প্রস্থ","Ширина блока текста"],"تباعد الأسطر":["Line spacing","Interlineado","سطروں کا فاصلہ","पंक्ति अंतराल","Interligne","Spasi baris","Satır aralığı","লাইনের ব্যবধান","Межстрочный интервал"],"موضع أفقي":["Horizontal position","Posición horizontal","افقی مقام","क्षैतिज स्थिति","Position horizontale","Posisi horizontal","Yatay konum","অনুভূমিক অবস্থান","Положение по горизонтали"],"رأسي":["Vertical position","Posición vertical","عمودی مقام","ऊर्ध्वाधर स्थिति","Position verticale","Posisi vertikal","Dikey konum","উল্লম্ব অবস্থান","Положение по вертикали"],"المحاذاة":["Alignment","Alineación","ترتیب","संरेखण","Alignement","Perataan","Hizalama","সারিবদ্ধতা","Выравнивание"],"يمين":["Right","Derecha","دائیں","दाएं","Droite","Kanan","Sağ","ডান","Справа"],"وسط":["Center","Centro","درمیان","मध्य","Centre","Tengah","Orta","মাঝে","Центр"],"يسار":["Left","Izquierda","بائیں","बाएं","Gauche","Kiri","Sol","বাম","Слева"],"يمكنك أيضاً سحب النص على المعاينة.":["You can also drag the text on the preview.","También puedes arrastrar el texto en la vista previa.","آپ پیش نظارہ پر متن کو گھسیٹ بھی سکتے ہیں۔","आप पूर्वावलोकन पर पाठ को खींच भी सकते हैं।","Vous pouvez aussi faire glisser le texte sur l'aperçu.","Anda juga bisa menggeser teks di pratinjau.","Metni önizlemede sürükleyebilirsiniz.","প্রিভিউতে টেক্সট টেনেও সরাতে পারেন।","Текст можно перетаскивать на превью."],"الظل":["Shadow","Sombra","سایہ","छाया","Ombre","Bayangan","Gölge","ছায়া","Тень"],"إضافة ظل للنص":["Add text shadow","Añadir sombra al texto","متن میں سایہ شامل کریں","पाठ में छाया जोड़ें","Ajouter une ombre","Tambah bayangan teks","Metne gölge ekle","টেক্সটে ছায়া যোগ করুন","Добавить тень тексту"],"لون الظل":["Shadow color","Color de sombra","سائے کا رنگ","छाया का रंग","Couleur de l'ombre","Warna bayangan","Gölge rengi","ছায়ার রং","Цвет тени"],"شفافية الظل":["Shadow opacity","Opacidad de sombra","سائے کی شفافیت","छाया की पारदर्शिता","Opacité de l'ombre","Opasitas bayangan","Gölge opaklığı","ছায়ার স্বচ্ছতা","Прозрачность тени"],"زاوية الظل":["Shadow angle","Ángulo de sombra","سائے کا زاویہ","छाया का कोण","Angle de l'ombre","Sudut bayangan","Gölge açısı","ছায়ার কোণ","Угол тени"],"بُعد الظل":["Shadow distance","Distancia de sombra","سائے کا فاصلہ","छाया की दूरी","Distance de l'ombre","Jarak bayangan","Gölge mesafesi","ছায়ার দূরত্ব","Смещение тени"],"قوة الظل (التمويه)":["Shadow strength (blur)","Intensidad de sombra (desenfoque)","سائے کی شدت (دھندلاہٹ)","छाया की तीव्रता (धुंधलापन)","Intensité de l'ombre (flou)","Kekuatan bayangan (blur)","Gölge gücü (bulanıklık)","ছায়ার তীব্রতা (ঝাপসা)","Сила тени (размытие)"],"شفاف":["Transparent","Transparente","شفاف","पारदर्शी","Transparent","Transparan","Şeffaf","স্বচ্ছ","Прозрачный"],"لون":["Color","Color","رنگ","रंग","Couleur","Warna","Renk","রং","Цвет"],"تدرج":["Gradient","Degradado","گریڈینٹ","ग्रेडिएंट","Dégradé","Gradasi","Gradyan","গ্রেডিয়েন্ট","Градиент"],"زخرفة":["Pattern","Patrón","نقش","पैटर्न","Motif","Pola","Desen","নকশা","Узор"],"صورة":["Image","Imagen","تصویر","चित्र","Image","Gambar","Görsel","ছবি","Изображение"],"اللون ١":["Color 1","Color 1","رنگ 1","रंग 1","Couleur 1","Warna 1","Renk 1","রং ১","Цвет 1"],"اللون ٢":["Color 2","Color 2","رنگ 2","रंग 2","Couleur 2","Warna 2","Renk 2","রং ২","Цвет 2"],"زاوية التدرج":["Gradient angle","Ángulo del degradado","گریڈینٹ کا زاویہ","ग्रेडिएंट कोण","Angle du dégradé","Sudut gradasi","Gradyan açısı","গ্রেডিয়েন্ট কোণ","Угол градиента"],"بداية التدرج ٪":["Gradient start %","Inicio del degradado %","گریڈینٹ آغاز ٪","ग्रेडिएंट आरंभ %","Début du dégradé %","Awal gradasi %","Gradyan başlangıcı %","গ্রেডিয়েন্ট শুরু %","Начало градиента %"],"نهاية التدرج ٪":["Gradient end %","Fin del degradado %","گریڈینٹ اختتام ٪","ग्रेडिएंट अंत %","Fin du dégradé %","Akhir gradasi %","Gradyan bitişi %","গ্রেডিয়েন্ট শেষ %","Конец градиента %"],"صورة الخلفية":["Background image","Imagen de fondo","پس منظر کی تصویر","पृष्ठभूमि चित्र","Image d'arrière-plan","Gambar latar","Arka plan görseli","পটভূমির ছবি","Фоновое изображение"],"من الجهاز":["From device","Del dispositivo","ڈیوائس سے","डिवाइस से","Depuis l'appareil","Dari perangkat","Cihazdan","ডিভাইস থেকে","С устройства"],"بحث":["Search","Buscar","تلاش","खोजें","Rechercher","Cari","Ara","অনুসন্ধান","Поиск"],"المصدر الإلكتروني: ويكيميديا كومنز (صور حرّة الترخيص؛ بعضها يشترط ذكر المصوّر).":["Online source: Wikimedia Commons (freely licensed images; some require crediting the photographer).","Fuente en línea: Wikimedia Commons (imágenes de licencia libre; algunas exigen citar al autor).","آن لائن ماخذ: وکی میڈیا کامنز (آزاد لائسنس کی تصاویر؛ بعض میں فوٹوگرافر کا ذکر لازم)۔","ऑनलाइन स्रोत: विकिमीडिया कॉमन्स (मुक्त लाइसेंस वाले चित्र; कुछ में फ़ोटोग्राफ़र का उल्लेख आवश्यक)।","Source en ligne : Wikimedia Commons (images sous licence libre ; certaines exigent de citer l'auteur).","Sumber daring: Wikimedia Commons (gambar berlisensi bebas; sebagian wajib mencantumkan fotografer).","Çevrimiçi kaynak: Wikimedia Commons (serbest lisanslı görseller; bazıları fotoğrafçıyı anmayı gerektirir).","অনলাইন উৎস: উইকিমিডিয়া কমন্স (মুক্ত লাইসেন্সের ছবি; কিছুতে আলোকচিত্রীর নাম দিতে হয়)।","Онлайн-источник: Wikimedia Commons (свободные лицензии; для некоторых нужно указать автора)."],"تعتيم صورة الخلفية":["Background dimming","Oscurecer fondo","پس منظر کی تاریکی","पृष्ठभूमि मंद करें","Assombrir le fond","Redupkan latar","Arka planı karart","পটভূমি ম্লান","Затемнение фона"],"مخصص":["Custom","Personalizado","حسب ضرورت","कस्टम","Personnalisé","Kustom","Özel","কাস্টম","Свой"],"العرض":["Width","Ancho","چوڑائی","चौड़ाई","Largeur","Lebar","Genişlik","প্রস্থ","Ширина"],"الارتفاع":["Height","Alto","اونچائی","ऊंचाई","Hauteur","Tinggi","Yükseklik","উচ্চতা","Высота"],"أبعاد جاهزة":["Preset sizes","Tamaños predefinidos","پہلے سے طے سائز","पूर्व निर्धारित आकार","Tailles prédéfinies","Ukuran siap pakai","Hazır boyutlar","প্রস্তুত আকার","Готовые размеры"],"قلب الاتجاه (طولي/عرضي)":["Flip orientation (portrait/landscape)","Girar orientación (vertical/horizontal)","رخ بدلیں (عمودی/افقی)","दिशा पलटें (पोर्ट्रेट/लैंडस्केप)","Inverser l'orientation (portrait/paysage)","Balik orientasi (potret/lanskap)","Yönü çevir (dikey/yatay)","দিক বদলান (পোর্ট্রেট/ল্যান্ডস্কেপ)","Повернуть (книжная/альбомная)"],"تحريك: النص":["Move: text","Mover: texto","حرکت: متن","खिसकाएं: पाठ","Déplacer : texte","Geser: teks","Taşı: metin","সরান: টেক্সট","Двигать: текст"],"اسم السورة":["Surah name","Nombre de la sura","سورت کا نام","सूरह का नाम","Nom de la sourate","Nama surah","Sure adı","সূরার নাম","Название суры"],"رقم الآية":["Verse number","Número de aleya","آیت نمبر","आयत संख्या","Numéro du verset","Nomor ayat","Ayet numarası","আয়াত নম্বর","Номер аята"],"إظهار اسم السورة":["Show surah name","Mostrar nombre de sura","سورت کا نام دکھائیں","सूरह का नाम दिखाएं","Afficher le nom de la sourate","Tampilkan nama surah","Sure adını göster","সূরার নাম দেখান","Показать название суры"],"الحجم":["Size","Tamaño","سائز","आकार","Taille","Ukuran","Boyut","আকার","Размер"],"اللون":["Color","Color","رنگ","रंग","Couleur","Warna","Renk","রং","Цвет"],"إظهار رقم الآية / الآيات":["Show verse number(s)","Mostrar número(s) de aleya","آیت نمبر دکھائیں","आयत संख्या दिखाएं","Afficher le(s) numéro(s) de verset","Tampilkan nomor ayat","Ayet numarasını göster","আয়াত নম্বর দেখান","Показать номер(а) аятов"],"الدقة":["Resolution","Resolución","ریزولوشن","रिज़ॉल्यूशन","Résolution","Resolusi","Çözünürlük","রেজোলিউশন","Разрешение"],"أعلى ×٣":["Max ×3","Máx ×3","زیادہ سے زیادہ ×3","अधिकतम ×3","Max ×3","Maks ×3","En yüksek ×3","সর্বোচ্চ ×৩","Макс ×3"],"حفظ صورة PNG":["Save PNG image","Guardar imagen PNG","PNG تصویر محفوظ کریں","PNG चित्र सहेजें","Enregistrer l'image PNG","Simpan gambar PNG","PNG görseli kaydet","PNG ছবি সংরক্ষণ","Сохранить PNG"],"مشاركة الصورة":["Share image","Compartir imagen","تصویر شیئر کریں","चित्र साझा करें","Partager l'image","Bagikan gambar","Görseli paylaş","ছবি শেয়ার","Поделиться фото"],"فيديو — الصوت":["Video — audio","Vídeo — audio","ویڈیو — آڈیو","वीडियो — ऑडियो","Vidéo — audio","Video — audio","Video — ses","ভিডিও — অডিও","Видео — звук"],"بلا صوت":["No audio","Sin audio","بغیر آڈیو","बिना ऑडियो","Sans audio","Tanpa audio","Sessiz","অডিও ছাড়া","Без звука"],"تلاوة الآيات":["Verse recitation","Recitación de aleyas","آیات کی تلاوت","आयतों की तिलावत","Récitation des versets","Bacaan ayat","Ayet tilaveti","আয়াত তিলাওয়াত","Чтение аятов"],"ملف صوتي":["Audio file","Archivo de audio","آڈیو فائل","ऑडियो फ़ाइल","Fichier audio","Berkas audio","Ses dosyası","অডিও ফাইল","Аудиофайл"],"المدة بلا صوت (ثانية)":["Duration without audio (sec)","Duración sin audio (s)","بغیر آڈیو دورانیہ (سیکنڈ)","बिना ऑडियो अवधि (सेकंड)","Durée sans audio (s)","Durasi tanpa audio (detik)","Sessiz süre (sn)","অডিও ছাড়া সময় (সেকেন্ড)","Длительность без звука (сек)"],"تصدير فيديو":["Export video","Exportar vídeo","ویڈیو برآمد کریں","वीडियो निर्यात करें","Exporter la vidéo","Ekspor video","Videoyu dışa aktar","ভিডিও এক্সপোর্ট","Экспорт видео"],"مشاركة الفيديو":["Share video","Compartir vídeo","ویڈیو شیئر کریں","वीडियो साझा करें","Partager la vidéo","Bagikan video","Videoyu paylaş","ভিডিও শেয়ার","Поделиться видео"],"التلاوة تتحمّل من everyayah.com وتحتاج إنترنت.":["Recitation is loaded from everyayah.com and needs internet.","La recitación se carga de everyayah.com y requiere internet.","تلاوت everyayah.com سے لوڈ ہوتی ہے اور انٹرنیٹ درکار ہے۔","तिलावत everyayah.com से लोड होती है, इंटरनेट चाहिए।","La récitation vient d'everyayah.com et nécessite Internet.","Bacaan dimuat dari everyayah.com dan butuh internet.","Tilavet everyayah.com'dan yüklenir, internet gerekir.","তিলাওয়াত everyayah.com থেকে লোড হয়, ইন্টারনেট লাগে।","Чтение загружается с everyayah.com, нужен интернет."],"الآية":["Verse","Aleya","آیت","आयत","Verset","Ayat","Ayet","আয়াত","Аят"],"الجزء":["Juz","Yuz","پارہ","पारा","Juz","Juz","Cüz","পারা","Джуз"],"سورة":["Surah","Sura","سورت","सूरह","Sourate","Surah","Sure","সূরা","Сура"],"صفحة":["Page","Página","صفحہ","पृष्ठ","Page","Halaman","Sayfa","পৃষ্ঠা","Стр."],"آية":["verses","aleyas","آیات","आयतें","versets","ayat","ayet","আয়াত","аятов"],"ص":["p.","p.","ص","पृ.","p.","hlm.","s.","পৃ.","стр."],"الوضع الأوفلاين الكامل يحتاج فتح التطبيق من عنوان http(s) (انظر ملف README).":["Full offline mode requires opening the app from an http(s) address (see README).","El modo sin conexión completo requiere abrir la app desde una dirección http(s) (ver README).","مکمل آف لائن موڈ کے لیے ایپ http(s) پتے سے کھولیں (README دیکھیں)۔","पूर्ण ऑफ़लाइन मोड के लिए ऐप http(s) पते से खोलें (README देखें)।","Le mode hors ligne complet exige d'ouvrir l'app via une adresse http(s) (voir README).","Mode offline penuh perlu membuka aplikasi dari alamat http(s) (lihat README).","Tam çevrimdışı mod için uygulamayı http(s) adresinden açın (README'ye bakın).","পূর্ণ অফলাইন মোডের জন্য অ্যাপটি http(s) ঠিকানা থেকে খুলুন (README দেখুন)।","Для полного офлайн-режима откройте приложение по адресу http(s) (см. README)."],"ملفات محفوظة للأوفلاين:":["Files saved offline:","Archivos guardados sin conexión:","آف لائن محفوظ فائلیں:","ऑफ़लाइन सहेजी फ़ाइलें:","Fichiers hors ligne :","Berkas tersimpan offline:","Çevrimdışı kayıtlı dosyalar:","অফলাইনে সংরক্ষিত ফাইল:","Файлы офлайн:"],"التطبيق يعمل بدون إنترنت.":["The app works without internet.","La app funciona sin internet.","ایپ بغیر انٹرنیٹ چلتی ہے۔","ऐप बिना इंटरनेट चलता है।","L'app fonctionne sans Internet.","Aplikasi berjalan tanpa internet.","Uygulama internetsiz çalışır.","অ্যাপ ইন্টারনেট ছাড়াই চলে।","Приложение работает без интернета."],"استمر بالتصفح ليكتمل.":["Keep browsing to finish caching.","Sigue navegando para completar.","مکمل ہونے تک براؤز کرتے رہیں۔","पूरा होने तक ब्राउज़ करते रहें।","Continuez à naviguer pour terminer.","Teruslah menjelajah hingga selesai.","Tamamlanması için gezinmeye devam edin.","সম্পূর্ণ হতে ব্রাউজ করতে থাকুন।","Продолжайте листать, пока всё не загрузится."],"المقطع:":["Range:","Rango:","حصہ:","अंश:","Passage :","Bagian:","Aralık:","অংশ:","Отрезок:"],"المقطع غير محدد":["Range not set","Rango no definido","حصہ مقرر نہیں","अंश तय नहीं","Passage non défini","Bagian belum diatur","Aralık belirlenmedi","অংশ নির্ধারিত নয়","Отрезок не задан"],"تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ":["Audio failed to load — check connection or change reciter","No se pudo cargar el audio — revisa la conexión o cambia de recitador","آڈیو لوڈ نہ ہو سکا — کنکشن چیک کریں یا قاری بدلیں","ऑडियो लोड नहीं हुआ — कनेक्शन जांचें या क़ारी बदलें","Échec du chargement audio — vérifiez la connexion ou changez de récitateur","Audio gagal dimuat — periksa koneksi atau ganti qari","Ses yüklenemedi — bağlantıyı kontrol edin veya kâriyi değiştirin","অডিও লোড হয়নি — সংযোগ দেখুন বা কারী বদলান","Не удалось загрузить аудио — проверьте сеть или смените чтеца"],"تم نسخ النص":["Text copied","Texto copiado","متن کاپی ہو گیا","पाठ कॉपी हुआ","Texte copié","Teks disalin","Metin kopyalandı","টেক্সট কপি হয়েছে","Текст скопирован"],"تم نسخ الصورة":["Image copied","Imagen copiada","تصویر کاپی ہو گئی","चित्र कॉपी हुआ","Image copiée","Gambar disalin","Görsel kopyalandı","ছবি কপি হয়েছে","Фото скопировано"],"تم حفظ الصورة":["Image saved","Imagen guardada","تصویر محفوظ ہو گئی","चित्र सहेजा गया","Image enregistrée","Gambar disimpan","Görsel kaydedildi","ছবি সংরক্ষিত","Фото сохранено"],"الناتج:":["Output:","Resultado:","نتیجہ:","आउटपुट:","Résultat :","Hasil:","Çıktı:","আউটপুট:","Результат:"],"بكسل":["px","px","پکسل","पिक्सेल","px","px","piksel","পিক্সেল","px"],"لا نتائج":["No results","Sin resultados","کوئی نتیجہ نہیں","कोई परिणाम नहीं","Aucun résultat","Tidak ada hasil","Sonuç yok","ফলাফল নেই","Нет результатов"],"جارٍ تجهيز الصوت...":["Preparing audio...","Preparando audio...","آڈیو تیار ہو رہا ہے...","ऑडियो तैयार हो रहा है...","Préparation de l'audio...","Menyiapkan audio...","Ses hazırlanıyor...","অডিও প্রস্তুত হচ্ছে...","Подготовка звука..."],"اختر ملفاً صوتياً أولاً":["Choose an audio file first","Elige primero un archivo de audio","پہلے آڈیو فائل منتخب کریں","पहले ऑडियो फ़ाइल चुनें","Choisissez d'abord un fichier audio","Pilih berkas audio dulu","Önce bir ses dosyası seçin","আগে অডিও ফাইল বাছুন","Сначала выберите аудиофайл"],"تعذّر تحميل الصوت":["Audio failed to load","No se pudo cargar el audio","آڈیو لوڈ نہ ہو سکا","ऑडियो लोड नहीं हुआ","Échec du chargement audio","Audio gagal dimuat","Ses yüklenemedi","অডিও লোড হয়নি","Не удалось загрузить аудио"],"المتصفح لا يدعم تسجيل الفيديو":["Browser doesn't support video recording","El navegador no admite grabar vídeo","براؤزر ویڈیو ریکارڈنگ سپورٹ نہیں کرتا","ब्राउज़र वीडियो रिकॉर्डिंग समर्थित नहीं करता","Le navigateur ne prend pas en charge l'enregistrement vidéo","Browser tidak mendukung perekaman video","Tarayıcı video kaydını desteklemiyor","ব্রাউজার ভিডিও রেকর্ডিং সমর্থন করে না","Браузер не поддерживает запись видео"],"جارٍ التسجيل...":["Recording...","Grabando...","ریکارڈنگ جاری...","रिकॉर्डिंग जारी...","Enregistrement...","Merekam...","Kaydediliyor...","রেকর্ড হচ্ছে...","Запись..."],"ث":["s","s","سیکنڈ","से","s","dtk","sn","সে","с"],"تم إنشاء الفيديو (":["Video created (","Vídeo creado (","ویڈیو بن گئی (","वीडियो बन गया (","Vidéo créée (","Video dibuat (","Video oluşturuldu (","ভিডিও তৈরি হয়েছে (","Видео создано ("],"خطأ:":["Error:","Error:","خرابی:","त्रुटि:","Erreur :","Kesalahan:","Hata:","ত্রুটি:","Ошибка:"],"انتهى المصحف":["End of the Mushaf","Fin del Mushaf","مصحف ختم","मुसहफ़ समाप्त","Fin du Mushaf","Mushaf selesai","Mushaf bitti","মুসহাফ শেষ","Конец Мусхафа"],"معاني الغريب":["Gharib meanings","Significados de palabras raras","غریب القرآن کے معانی","ग़रीब (कठिन शब्द) अर्थ","Sens des mots rares","Makna kata gharib","Garîb kelime anlamları","গারীব শব্দের অর্থ","Значения редких слов"],"تلوين الكلمات التي لها معنى":["Highlight words that have meanings","Resaltar palabras con significado","معنی والے الفاظ کو رنگین کریں","अर्थ वाले शब्द रंगीन करें","Colorer les mots ayant un sens","Warnai kata yang punya makna","Anlamı olan kelimeleri renklendir","অর্থসহ শব্দ রঙিন করুন","Выделять слова со значениями"],"لون الكلمات":["Words color","Color de palabras","الفاظ کا رنگ","शब्दों का रंग","Couleur des mots","Warna kata","Kelime rengi","শব্দের রং","Цвет слов"],"الكتب":["Books","Libros","کتابیں","पुस्तकें","Livres","Buku","Kitaplar","বই","Книги"],"المصدر:":["Source:","Fuente:","ماخذ:","स्रोत:","Source :","Sumber:","Kaynak:","উৎস:","Источник:"],"المعاني":["Meanings","Significados","معانی","अर्थ","Sens","Makna","Anlamlar","অর্থ","Значения"],"لا توجد معاني لهذه الآية في الكتب المحددة":["No meanings for this verse in the selected books","No hay significados para esta aleya en los libros elegidos","منتخب کتابوں میں اس آیت کے معانی نہیں","चुनी पुस्तकों में इस आयत के अर्थ नहीं","Aucun sens pour ce verset dans les livres choisis","Tidak ada makna ayat ini di buku terpilih","Seçili kitaplarda bu ayet için anlam yok","নির্বাচিত বইয়ে এই আয়াতের অর্থ নেই","Для этого аята нет значений в выбранных книгах"],"نتيجة":["results","resultados","نتائج","परिणाम","résultats","hasil","sonuç","ফলাফল","результатов"],"عرض أول":["showing first","mostrando los primeros","پہلے دکھائے گئے","पहले दिखाए","affichage des","menampilkan","ilk gösterilen","প্রথম দেখানো","показаны первые"],"اكتب حرفين على الأقل":["Type at least 2 letters","Escribe al menos 2 letras","کم از کم دو حروف لکھیں","कम से कम 2 अक्षर लिखें","Saisissez au moins 2 lettres","Ketik minimal 2 huruf","En az 2 harf yazın","কমপক্ষে ২টি অক্ষর লিখুন","Введите минимум 2 буквы"],"ابحث في المصحف...":["Search the Quran...","Buscar en el Corán...","قرآن میں تلاش کریں...","कुरआन में खोजें...","Rechercher dans le Coran...","Cari di Al-Qur'an...","Kur'an'da ara...","কুরআনে খুঁজুন...","Поиск по Корану..."],"إيقاف":["Stop","Detener","روکیں","रोकें","Arrêter","Berhenti","Durdur","থামান","Стоп"],"السابق":["Previous","Anterior","پچھلا","पिछला","Précédent","Sebelumnya","Önceki","আগের","Назад"],"التالي":["Next","Siguiente","اگلا","अगला","Suivant","Berikutnya","Sonraki","পরের","Далее"],"المزيد":["More","Más","مزید","और","Plus","Lainnya","Daha fazla","আরও","Ещё"],"صورة / فيديو الخلفية":["Background image / video","Imagen / vídeo de fondo","پس منظر تصویر / ویڈیو","पृष्ठभूमि चित्र / वीडियो","Image / vidéo d'arrière-plan","Gambar / video latar","Arka plan görseli / videosu","পটভূমির ছবি / ভিডিও","Фоновое фото / видео"],"صورة من الجهاز":["Image from device","Imagen del dispositivo","ڈیوائس سے تصویر","डिवाइस से चित्र","Image de l'appareil","Gambar dari perangkat","Cihazdan görsel","ডিভাইস থেকে ছবি","Фото с устройства"],"فيديو من الجهاز":["Video from device","Vídeo del dispositivo","ڈیوائس سے ویڈیو","डिवाइस से वीडियो","Vidéo de l'appareil","Video dari perangkat","Cihazdan video","ডিভাইস থেকে ভিডিও","Видео с устройства"],"صور":["Images","Imágenes","تصاویر","चित्र","Images","Gambar","Görseller","ছবি","Фото"],"فيديو":["Video","Vídeo","ویڈیو","वीडियो","Vidéo","Video","Video","ভিডিও","Видео"],"قد تكون الفيديوهات الأونلاين كبيرة الحجم.":["Online videos may be large.","Los vídeos en línea pueden ser pesados.","آن لائن ویڈیوز بڑی ہو سکتی ہیں۔","ऑनलाइन वीडियो बड़े हो सकते हैं।","Les vidéos en ligne peuvent être volumineuses.","Video daring bisa berukuran besar.","Çevrimiçi videolar büyük olabilir.","অনলাইন ভিডিও বড় হতে পারে।","Онлайн-видео могут быть большими."],"حجم الخلفية":["Background scale","Escala del fondo","پس منظر کا سائز","पृष्ठभूमि का आकार","Échelle du fond","Skala latar","Arka plan ölçeği","পটভূমির আকার","Масштаб фона"],"قص الفيديو":["Trim video","Recortar vídeo","ویڈیو تراشیں","वीडियो ट्रिम करें","Couper la vidéo","Potong video","Videoyu kırp","ভিডিও ট্রিম","Обрезать видео"],"البداية":["Start","Inicio","آغاز","शुरू","Début","Awal","Başlangıç","শুরু","Начало"],"النهاية":["End","Final","اختتام","अंत","Fin","Akhir","Bitiş","শেষ","Конец"],"معاينة":["Preview","Vista previa","پیش نظارہ","पूर्वावलोकन","Aperçu","Pratinjau","Önizleme","প্রিভিউ","Просмотр"],"قص الصوت":["Trim audio","Recortar audio","آڈیو تراشیں","ऑडियो ट्रिम करें","Couper l'audio","Potong audio","Sesi kırp","অডিও ট্রিম","Обрезать звук"],"القص متاح للملف الصوتي فقط.":["Trimming is available for audio files only.","El recorte solo está disponible para archivos de audio.","تراش صرف آڈیو فائل کے لیے ہے۔","ट्रिम केवल ऑडियो फ़ाइल के लिए है।","La coupe est disponible pour les fichiers audio uniquement.","Pemotongan hanya untuk berkas audio.","Kırpma yalnızca ses dosyaları içindir.","ট্রিম শুধু অডিও ফাইলের জন্য।","Обрезка доступна только для аудиофайлов."],"الملصقات":["Stickers","Pegatinas","اسٹکرز","स्टिकर","Autocollants","Stiker","Çıkartmalar","স্টিকার","Стикеры"],"إضافة":["Add","Añadir","شامل کریں","जोड़ें","Ajouter","Tambah","Ekle","যোগ করুন","Добавить"],"حذف":["Delete","Eliminar","حذف کریں","हटाएं","Supprimer","Hapus","Sil","মুছুন","Удалить"],"الدوران":["Rotation","Rotación","گردش","घुमाव","Rotation","Rotasi","Döndürme","ঘূর্ণন","Поворот"],"صورة / GIF":["Image / GIF","Imagen / GIF","تصویر / GIF","चित्र / GIF","Image / GIF","Gambar / GIF","Görsel / GIF","ছবি / GIF","Фото / GIF"],"بحث GIF":["Search GIF","Buscar GIF","GIF تلاش","GIF खोजें","Chercher un GIF","Cari GIF","GIF ara","GIF খুঁজুন","Поиск GIF"],"يمكنك سحب الملصق على المعاينة.":["You can drag the sticker on the preview.","Puedes arrastrar la pegatina en la vista previa.","آپ اسٹکر کو پیش نظارہ پر گھسیٹ سکتے ہیں۔","आप स्टिकर को पूर्वावलोकन पर खींच सकते हैं।","Vous pouvez faire glisser l'autocollant sur l'aperçu.","Anda bisa menggeser stiker di pratinjau.","Çıkartmayı önizlemede sürükleyebilirsiniz.","প্রিভিউতে স্টিকার টেনে সরাতে পারেন।","Стикер можно перетаскивать на превью."],"ضع مفتاح Giphy في ملف config.js":["Put your Giphy key in config.js","Pon tu clave de Giphy en config.js","اپنی Giphy کلید config.js میں رکھیں","अपनी Giphy कुंजी config.js में रखें","Mettez votre clé Giphy dans config.js","Letakkan kunci Giphy di config.js","Giphy anahtarınızı config.js'e koyun","আপনার Giphy কী config.js এ দিন","Укажите ключ Giphy в config.js"],"تعذّر تحميل الملصق":["Couldn't load sticker","No se pudo cargar la pegatina","اسٹکر لوڈ نہ ہو سکا","स्टिकर लोड नहीं हुआ","Échec du chargement","Stiker gagal dimuat","Çıkartma yüklenemedi","স্টিকার লোড হয়নি","Не удалось загрузить стикер"],"تعذّر تحميل الفيديو (إنترنت أو منع CORS).":["Couldn't load video (internet or CORS block).","No se pudo cargar el vídeo (internet o bloqueo CORS).","ویڈیو لوڈ نہ ہو سکی (انٹرنیٹ یا CORS)۔","वीडियो लोड नहीं हुआ (इंटरनेट या CORS)।","Échec du chargement vidéo (Internet ou blocage CORS).","Video gagal dimuat (internet atau blokir CORS).","Video yüklenemedi (internet veya CORS engeli).","ভিডিও লোড হয়নি (ইন্টারনেট বা CORS)।","Не удалось загрузить видео (сеть или CORS)."],"حول التطبيق":["About","Acerca de","ایپ کے بارے میں","ऐप के बारे में","À propos","Tentang aplikasi","Hakkında","অ্যাপ সম্পর্কে","О приложении"],"تطوير":["Developed by","Desarrollado por","تیار کردہ","विकसित द्वारा","Développé par","Dikembangkan oleh","Geliştiren","তৈরি করেছেন","Разработчик"],"التاريخ":["Date","Fecha","تاریخ","तारीख़","Date","Tanggal","Tarih","তারিখ","Дата"],"الإصدار":["Version","Versión","ورژن","संस्करण","Version","Versi","Sürüm","সংস্করণ","Версия"],"تعود حقوق جميع المصادر لأصحابها.":["All sources' rights belong to their owners.","Los derechos de todas las fuentes pertenecen a sus propietarios.","تمام ماخذ کے حقوق ان کے مالکان کے ہیں۔","सभी स्रोतों के अधिकार उनके स्वामियों के हैं।","Les droits de toutes les sources appartiennent à leurs propriétaires.","Hak semua sumber milik pemiliknya.","Tüm kaynakların hakları sahiplerine aittir.","সব উৎসের অধিকার তাদের মালিকের।","Права на все источники принадлежат их владельцам."],"للمقترحات والملاحظات يمكن التواصل على:":["For suggestions and feedback, contact:","Para sugerencias y comentarios, contacta:","تجاویز اور آراء کے لیے رابطہ کریں:","सुझाव और प्रतिक्रिया के लिए संपर्क करें:","Pour vos suggestions et remarques, contactez :","Untuk saran dan masukan, hubungi:","Öneri ve geri bildirim için iletişim:","পরামর্শ ও মতামতের জন্য যোগাযোগ করুন:","Для предложений и отзывов пишите:"],"دعواتكم 🤲🏻":["Your prayers 🤲🏻","Sus oraciones 🤲🏻","آپ کی دعاؤں کا طالب 🤲🏻","आपकी दुआओं का इंतज़ार 🤲🏻","Vos prières 🤲🏻","Doa Anda 🤲🏻","Dualarınızı bekliyorum 🤲🏻","আপনাদের দোয়া 🤲🏻","Ваши молитвы 🤲🏻"],"تصميم جاهز":["Ready design","Diseño listo","تیار ڈیزائن","तैयार डिज़ाइन","Design prêt","Desain siap","Hazır tasarım","রেডি ডিজাইন","Готовый дизайн"],"مؤثرات متحركة":["Animated effects","Efectos animados","متحرک اثرات","एनिमेटेड प्रभाव","Effets animés","Efek animasi","Animasyonlu efektler","অ্যানিমেটেড ইফেক্ট","Анимированные эффекты"],"ثلج":["Snow","Nieve","برف","बर्फ़","Neige","Salju","Kar","তুষার","Снег"],"مطر":["Rain","Lluvia","بارش","बारिश","Pluie","Hujan","Yağmur","বৃষ্টি","Дождь"],"نجوم":["Stars","Estrellas","ستارے","तारे","Étoiles","Bintang","Yıldızlar","তারা","Звёзды"],"أضواء":["Lights","Luces","روشنیاں","रोशनियाँ","Lumières","Cahaya","Işıklar","আলো","Огни"],"شرر":["Sparks","Chispas","چنگاریاں","चिंगारियाँ","Étincelles","Percikan","Kıvılcımlar","স্ফুলিঙ্গ","Искры"],"ورد":["Roses","Rosas","گلاب","गुलाब","Roses","Mawar","Güller","গোলাপ","Розы"],"طيور":["Birds","Aves","پرندے","पक्षी","Oiseaux","Burung","Kuşlar","পাখি","Птицы"],"مرئي الصوت":["Visualizer","Visualizador","ساؤنڈ ویژولائزر","साउंड विज़ुअलाइज़र","Visualiseur","Visualizer suara","Ses görselleştirici","সাউন্ড ভিজুয়ালাইজার","Визуализатор"],"دخان":["Smoke","Humo","دھواں","धुआँ","Fumée","Asap","Duman","ধোঁয়া","Дым"],"نار":["Flames","Llamas","آگ","आग","Flammes","Api","Alev","আগুন","Пламя"],"تعذّر التصدير":["Export failed","Error al exportar","برآمد ناکام","निर्यात विफल","Échec de l'export","Ekspor gagal","Dışa aktarma başarısız","এক্সপোর্ট ব্যর্থ","Ошибка экспорта"],"جارٍ تصدير الفيديو":["Exporting video","Exportando vídeo","ویڈیو برآمد ہو رہی ہے","वीडियो निर्यात हो रहा है","Export de la vidéo","Mengekspor video","Video dışa aktarılıyor","ভিডিও এক্সপোর্ট হচ্ছে","Экспорт видео"],"تصميم":["Design","Diseño","ڈیزائن","डिज़ाइन","Créer","Desain","Tasarım","ডিজাইন","Дизайн"],"بداية المقطع":["Range start","Inicio del rango","حصے کا آغاز","अंश का आरंभ","Début du passage","Awal bagian","Aralık başı","অংশের শুরু","Начало отрезка"],"نهاية المقطع":["Range end","Fin del rango","حصے کا اختتام","अंश का अंत","Fin du passage","Akhir bagian","Aralık sonu","অংশের শেষ","Конец отрезка"],"مسح المقطع":["Clear range","Borrar rango","حصہ صاف کریں","अंश साफ़ करें","Effacer le passage","Hapus bagian","Aralığı temizle","অংশ মুছুন","Сбросить отрезок"],"اضغط مطولاً على آية ثم اختر «بداية المقطع» و«نهاية المقطع».":["Long-press a verse, then choose \"Range start\" and \"Range end\".","Mantén pulsada una aleya y elige «Inicio del rango» y «Fin del rango».","کسی آیت کو دیر تک دبائیں، پھر «حصے کا آغاز» اور «حصے کا اختتام» چنیں۔","किसी आयत को देर तक दबाएं, फिर «अंश का आरंभ» और «अंश का अंत» चुनें।","Appuyez longuement sur un verset puis choisissez « Début » et « Fin du passage ».","Tekan lama sebuah ayat, lalu pilih «Awal bagian» dan «Akhir bagian».","Bir ayete uzun basın, ardından «Aralık başı» ve «Aralık sonu»nu seçin.","একটি আয়াতে দীর্ঘক্ষণ চাপুন, তারপর «অংশের শুরু» ও «অংশের শেষ» বাছুন।","Удерживайте аят и выберите «Начало отрезка» и «Конец отрезка»."],"ظهور الكلمات":["Word-by-word reveal","Aparición palabra por palabra","لفظ بہ لفظ ظاہر کرنا","शब्द-दर-शब्द प्रदर्शन","Apparition mot à mot","Tampil kata demi kata","Kelime kelime gösterim","শব্দে শব্দে প্রদর্শন","Слово за словом"],"بدون":["None","Ninguno","کوئی نہیں","कोई नहीं","Aucun","Tidak ada","Yok","কোনোটি নয়","Нет"],"ظهور ثم اختفاء":["Show then hide","Mostrar y ocultar","ظاہر پھر غائب","दिखाएं फिर छिपाएं","Afficher puis masquer","Tampil lalu hilang","Göster sonra gizle","দেখান তারপর লুকান","Показать и скрыть"],"ظهور وإبقاء":["Show and keep","Mostrar y mantener","ظاہر اور برقرار","दिखाएं और रखें","Afficher et garder","Tampil dan tetap","Göster ve tut","দেখান ও রাখুন","Показать и оставить"],"نعومة الظهور والاختفاء (ثانية)":["Fade in/out smoothness (sec)","Suavidad del fundido (s)","دھیمے پن کا دورانیہ (سیکنڈ)","फ़ेड की कोमलता (सेकंड)","Douceur du fondu (s)","Kehalusan pudar (detik)","Geçiş yumuşaklığı (sn)","ফেডের কোমলতা (সেকেন্ড)","Плавность появления (сек)"],"معاينة الكلمات":["Preview words","Vista previa de palabras","الفاظ کا پیش نظارہ","शब्दों का पूर्वावलोकन","Aperçu des mots","Pratinjau kata","Kelime önizleme","শব্দের প্রিভিউ","Просмотр слов"],"يوزَّع طول الصوت على كلمات الآية. المعاينة بأزمنة تقديرية للتلاوة، والتصدير يستخدم الطول الفعلي.":["The audio length is split across the verse's words. Preview uses estimated recitation times; export uses the real length.","La duración del audio se reparte entre las palabras. La vista previa usa tiempos estimados; la exportación usa la duración real.","آڈیو کا دورانیہ آیت کے الفاظ پر تقسیم ہوتا ہے۔ پیش نظارہ میں اندازاً وقت ہے، برآمد اصل دورانیہ استعمال کرتی ہے۔","ऑडियो की अवधि आयत के शब्दों में बाँटी जाती है। पूर्वावलोकन में अनुमानित समय है, निर्यात में असली अवधि।","La durée audio est répartie entre les mots. L'aperçu utilise des durées estimées ; l'export la durée réelle.","Durasi audio dibagi ke kata-kata ayat. Pratinjau memakai waktu perkiraan; ekspor memakai durasi asli.","Ses süresi ayetin kelimelerine bölünür. Önizleme tahmini süre kullanır; dışa aktarma gerçek süreyi.","অডিওর দৈর্ঘ্য আয়াতের শব্দে ভাগ হয়। প্রিভিউতে আনুমানিক সময়, এক্সপোর্টে আসল দৈর্ঘ্য।","Длительность звука делится между словами. В превью — оценка, при экспорте — реальная длина."],"يوزَّع طول الصوت على كلمات الآية. المعاينة تشغّل تلاوة الآية (أو الملف الصوتي المختار) وتوزّع الكلمات على طولها الفعلي.":["The audio length is split across the verse's words. Preview plays the verse recitation (or the chosen audio file) and times the words to its real length.","La duración del audio se reparte entre las palabras. La vista previa reproduce la recitación (o el archivo elegido) y ajusta las palabras a su duración real.","آڈیو کا دورانیہ آیت کے الفاظ پر تقسیم ہوتا ہے۔ پیش نظارہ آیت کی تلاوت (یا منتخب آڈیو فائل) چلاتا ہے اور الفاظ کو اس کے اصل دورانیے سے ملاتا ہے۔","ऑडियो की अवधि आयत के शब्दों में बाँटी जाती है। पूर्वावलोकन आयत की तिलावत (या चुनी फ़ाइल) चलाता है और शब्दों को उसकी असली अवधि से मिलाता है।","La durée audio est répartie entre les mots. L'aperçu joue la récitation (ou le fichier choisi) et cale les mots sur sa durée réelle.","Durasi audio dibagi ke kata-kata ayat. Pratinjau memutar bacaan ayat (atau berkas terpilih) dan menyesuaikan kata dengan durasi aslinya.","Ses süresi ayetin kelimelerine bölünür. Önizleme ayet tilavetini (veya seçilen dosyayı) çalar ve kelimeleri gerçek süreye göre ayarlar.","অডিওর দৈর্ঘ্য আয়াতের শব্দে ভাগ হয়। প্রিভিউ আয়াতের তিলাওয়াত (বা বাছাই করা ফাইল) চালায় এবং শব্দগুলো আসল দৈর্ঘ্যের সাথে মেলায়।","Длительность звука делится между словами. Превью воспроизводит чтение аята (или выбранный файл) и подгоняет слова под реальную длину."],"تمرير بسطر واحد":["Single-line ticker","Línea desplazable única","ایک سطر میں اسکرول","एक पंक्ति में स्क्रॉल","Défilement sur une ligne","Teks berjalan satu baris","Tek satır kayan yazı","এক লাইনে স্ক্রল","Бегущая строка"],"عرض الصفحة":["Page view","Vista de página","صفحے کا منظر","पृष्ठ दृश्य","Affichage de la page","Tampilan halaman","Sayfa görünümü","পৃষ্ঠার দৃশ্য","Вид страницы"],"تلقائي":["Auto","Automático","خودکار","स्वचालित","Auto","Otomatis","Otomatik","স্বয়ংক্রিয়","Авто"],"ملاءمة العرض":["Fit width","Ajustar al ancho","چوڑائی کے مطابق","चौड़ाई के अनुसार","Ajuster la largeur","Sesuaikan lebar","Genişliğe sığdır","প্রস্থে মানানো","По ширине"],"ملاءمة الارتفاع":["Fit height","Ajustar al alto","اونچائی کے مطابق","ऊँचाई के अनुसार","Ajuster la hauteur","Sesuaikan tinggi","Yüksekliğe sığdır","উচ্চতায় মানানো","По высоте"],"صفحتان":["Two pages","Dos páginas","دو صفحات","दो पृष्ठ","Deux pages","Dua halaman","İki sayfa","দুই পৃষ্ঠা","Две страницы"],"نص أو إيموجي (مثلاً توقيعك)":["Text or emoji (e.g. your signature)","Texto o emoji (p. ej., tu firma)","متن یا ایموجی (مثلاً آپ کے دستخط)","पाठ या इमोजी (जैसे आपके हस्ताक्षर)","Texte ou emoji (ex. votre signature)","Teks atau emoji (mis. tanda tangan Anda)","Metin veya emoji (örn. imzanız)","টেক্সট বা ইমোজি (যেমন আপনার স্বাক্ষর)","Текст или эмодзи (например, подпись)"],"الخط":["Font","Fuente","فونٹ","फ़ॉन्ट","Police","Font","Yazı tipi","ফন্ট","Шрифт"],"عريض":["Bold","Negrita","گہرا","बोल्ड","Gras","Tebal","Kalın","গাঢ়","Жирный"]};
 const LI={en:0,es:1,ur:2,hi:3,fr:4,id:5,tr:6,bn:7,ru:8};
+Object.assign(DICT,{
+ "تمرير":["Scroll","Desplazar","اسکرول","स्क्रॉल","Défilement","Gulir","Kaydır","স্ক্রল","Прокрутка"],
+ "الوضع":["Mode","Modo","موڈ","मोड","Mode","Mode","Mod","মোড","Режим"],
+ "معاني":["Meanings","Significados","معانی","अर्थ","Sens","Makna","Anlamlar","অর্থ","Значения"],
+ "صورة":["Image","Imagen","تصویر","चित्र","Image","Gambar","Resim","ছবি","Изображение"],
+ "ملاءمة":["Fit","Ajuste","فٹ","फ़िट","Ajuster","Sesuaikan","Sığdır","ফিট","Подгонка"],
+ "شاشة":["Screen","Pantalla","اسکرین","स्क्रीन","Écran","Layar","Ekran","স্ক্রিন","Экран"],
+ "الوضع الليلي/النهاري":["Night mode","Modo nocturno","رات کا موڈ","नाइट मोड","Mode nuit","Mode malam","Gece modu","নাইট মোড","Ночной режим"],
+ "تلوين المعاني":["Color meaning words","Colorear significados","معانی کو رنگیں","अर्थों को रंगें","Colorer les sens","Warnai makna","Anlamları renklendir","অর্থের রং","Раскрашивать значения"],
+ "حفظ الصفحة كصورة":["Save page as image","Guardar página como imagen","صفحہ بطور تصویر محفوظ کریں","पृष्ठ को चित्र के रूप में सहेजें","Enregistrer la page en image","Simpan halaman sebagai gambar","Sayfayı resim olarak kaydet","পৃষ্ঠা ছবি হিসেবে সংরক্ষণ","Сохранить страницу как изображение"],
+ "تبديل ملاءمة الصفحة":["Cycle page fit","Cambiar ajuste de página","صفحے کی پیمائش بدلیں","पृष्ठ फ़िट बदलें","Changer l'ajustement de page","Ubah penyesuaian halaman","Sayfa sığdırmayı değiştir","পৃষ্ঠা ফিট বদলান","Переключить режим подгонки"],
+ "إبقاء الشاشة مفتوحة":["Keep screen on","Mantener pantalla encendida","اسکرین آن رکھیں","स्क्रीन चालू रखें","Garder l’écran allumé","Biarkan layar tetap menyala","Ekranı açık tut","স্ক্রিন চালু রাখুন","Не выключать экран"],
+ "تم تفعيل إبقاء الشاشة":["Screen will stay on","La pantalla permanecerá encendida","اسکرین آن رہے گی","स्क्रीन चालू रहेगी","L’écran restera allumé","Layar akan tetap menyala","Ekran açık kalacak","স্ক্রিন চালু থাকবে","Экран останется включённым"],
+ "تم إيقاف إبقاء الشاشة":["Keep screen on disabled","Se desactivó mantener la pantalla","اسکرین آن رکھنا بند","स्क्रीन चालू रखना बंद","Maintien de l’écran désactivé","Layar tetap menyala dinonaktifkan","Ekranı açık tutma kapalı","স্ক্রিন চালু রাখা বন্ধ","Экран не будет оставаться включённым"],
+ "لا يدعم المتصفح هذه الميزة":["This browser does not support this feature","Este navegador no admite esta función","یہ براؤزر اس سہولت کی معاونت نہیں کرتا","यह ब्राउज़र इस सुविधा का समर्थन नहीं करता","Ce navigateur ne prend pas en charge cette fonction","Browser ini tidak mendukung fitur ini","Bu tarayıcı bu özelliği desteklemiyor","এই ব্রাউজার এই সুবিধা সমর্থন করে না","Браузер не поддерживает эту функцию"],
+ "لا يدعم المتصفح إبقاء الشاشة":["This browser does not support keeping the screen on","Este navegador no permite mantener la pantalla encendida","یہ براؤزر اسکرین آن رکھنے کی معاونت نہیں کرتا","यह ब्राउज़र स्क्रीन चालू रखने का समर्थन नहीं करता","Ce navigateur ne permet pas de garder l’écran allumé","Browser ini tidak mendukung layar tetap menyala","Bu tarayıcı ekranı açık tutmayı desteklemiyor","এই ব্রাউজার স্ক্রিন চালু রাখা সমর্থন করে না","Браузер не поддерживает постоянное включение экрана"],
+ "وضع الملاءمة":["Page fit","Ajuste de página","صفحے کی فٹنگ","पृष्ठ फ़िट","Ajustement de page","Penyesuaian halaman","Sayfa sığdırma","পৃষ্ঠা ফিট","Подгонка страницы"],
+ "تلقائي":["Auto","Automático","خودکار","स्वतः","Auto","Otomatis","Otomatik","স্বয়ংক্রিয়","Авто"],
+ "ملاءمة العرض":["Fit width","Ajustar al ancho","چوڑائی کے مطابق","चौड़ाई में फ़िट","Ajuster à la largeur","Sesuaikan lebar","Genişliğe sığdır","প্রস্থে ফিট","По ширине"],
+ "ملاءمة الارتفاع":["Fit height","Ajustar al alto","اونچائی کے مطابق","ऊँचाई में फ़िट","Ajuster à la hauteur","Sesuaikan tinggi","Yüksekliğe sığdır","উচ্চতায় ফিট","По высоте"],
+ "صفحتان":["Two pages","Dos páginas","دو صفحات","दो पृष्ठ","Deux pages","Dua halaman","İki sayfa","দুই পৃষ্ঠা","Две страницы"],
+ "حفظ الصفحة صورة":["Save page as image","Guardar página como imagen","صفحہ بطور تصویر محفوظ کریں","पृष्ठ को चित्र के रूप में सहेजें","Enregistrer la page en image","Simpan halaman sebagai gambar","Sayfayı resim olarak kaydet","পৃষ্ঠা ছবি হিসেবে সংরক্ষণ","Сохранить страницу как изображение"],
+ "التوقيع الثابت (يُضاف لكل التصاميم)":["Fixed signature (included in all designs)","Firma fija (se añade a todos los diseños)","مستقل دستخط (تمام ڈیزائنوں میں شامل)","स्थायी हस्ताक्षर (सभी डिज़ाइनों में शामिल)","Signature fixe (ajoutée à tous les designs)","Tanda tangan tetap (ditambahkan ke semua desain)","Sabit imza (tüm tasarımlara eklenir)","স্থায়ী স্বাক্ষর (সব ডিজাইনে যুক্ত)","Постоянная подпись (добавляется ко всем дизайнам)"],
+ "إظهار التوقيع على التصاميم":["Show signature on designs","Mostrar firma en los diseños","ڈیزائنوں پر دستخط دکھائیں","डिज़ाइनों पर हस्ताक्षर दिखाएँ","Afficher la signature sur les designs","Tampilkan tanda tangan pada desain","Tasarımlarda imzayı göster","ডিজাইনে স্বাক্ষর দেখান","Показывать подпись на дизайнах"],
+ "تم تفعيل تلوين المعاني":["Meaning colors enabled","Se activó el color de significados","معانی کے رنگ فعال","अर्थों के रंग चालू","Couleurs des sens activées","Warna makna diaktifkan","Anlam renkleri açıldı","অর্থের রং চালু","Цветовая разметка значений включена"],
+ "تم إيقاف تلوين المعاني":["Meaning colors disabled","Se desactivó el color de significados","معانی کے رنگ بند","अर्थों के रंग बंद","Couleurs des sens désactivées","Warna makna dinonaktifkan","Anlam renkleri kapatıldı","অর্থের রং বন্ধ","Цветовая разметка значений выключена"]
+});
 const T=s=>{if(lang=='ar')return s;const k=s.trim(),e=DICT[k];return e&&e[LI[lang]]?s.replace(k,e[LI[lang]]):s};
 [['ar','العربية'],['en','English'],['es','Español'],['ur','اردو'],['hi','हिन्दी'],['fr','Français'],['id','Bahasa Indonesia'],['tr','Türkçe'],['bn','বাংলা'],['ru','Русский']].forEach(l=>{const o=document.createElement('option');o.value=l[0];o.textContent=l[1];$('#lang').appendChild(o)});
-function applyLang(){$('#seaQ').placeholder=T('ابحث في المصحف...');const de=document.documentElement;de.lang=lang;de.dir=(lang=='ar'||lang=='ur')?'rtl':'ltr';
+function applyLang(){$('#seaQ').placeholder=T('ابحث في المصحف...');const de=document.documentElement;de.lang=lang;de.dir=(lang=='ar'||lang=='ur')?'rtl':'ltr';$$('#bar [title]').forEach(e=>{if(!e.dataset.titleSource)e.dataset.titleSource=e.title;e.title=T(e.dataset.titleSource);e.setAttribute('aria-label',e.title)});
  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(/^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName))continue;if(n._o==null){if(!/[\u0600-\u06FF]/.test(n.nodeValue))continue;n._o=n.nodeValue}n.nodeValue=T(n._o)}
  title();modesUi();if($('#sIdx').classList.contains('on'))idx();syncRg();if(window.D)limits()}
 $('#lang').onchange=e=>{lang=st.lang=e.target.value;save();applyLang();build();applyBg()};
@@ -927,11 +1340,146 @@ const ovObs=new MutationObserver(ms=>ms.forEach(m=>{const el=m.target,on=el.clas
 ovEls.forEach(e=>ovObs.observe(e,{attributes:true,attributeFilter:['class']}));
 window.addEventListener('popstate',()=>{if(ignorePop){ignorePop--;return}const el=OV.pop();if(!el)return;
  if(el.id=='studio'){el.classList.remove('on')}else{el.classList.remove('on');if(el.id=='sCtx')clrSel()}});
+/* ===== السجل + مجلد الألبوم + خلفيات جاهزة + صورة الصفحة ===== */
+let _db=null;
+function idb(){return _db||(_db=new Promise((res,rej)=>{const r=indexedDB.open('mushaf3',1);
+ r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('designs'))d.createObjectStore('designs',{keyPath:'id'});if(!d.objectStoreNames.contains('meta'))d.createObjectStore('meta')};
+ r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}))}
+function tx(store,mode,fn){return idb().then(db=>new Promise((res,rej)=>{const t=db.transaction(store,mode),rq=fn(t.objectStore(store));
+ t.oncomplete=()=>res(rq&&rq.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)}))}
+const histList=()=>tx('designs','readonly',s=>s.getAll()).then(a=>(a||[]).sort((x,y)=>y.ts-x.ts));
+function histAdd(blob,meta){if(!blob)return Promise.resolve(null);
+ const info=meta||{},page=Number(info.page)||0;QuranAnalytics.track('media_created',{media_type:info.type||'file',source:info.source||'export',bytes:blob.size,width:Number(info.width)||0,height:Number(info.height)||0,duration_seconds:Number(info.duration)||0,surah:Number(info.surah)||page&&DATA[page].s||0,verse_count:Number(info.verseCount)||0,page});
+ const rec=Object.assign({id:Date.now()+'_'+Math.random().toString(36).slice(2,7),ts:Date.now(),mime:blob.type||'application/octet-stream',size:blob.size},meta||{});rec.blob=blob;
+ return tx('designs','readwrite',s=>s.put(rec)).then(()=>{albumSave(blob,rec.name);return rec}).catch(e=>{console.warn('histAdd',e);return null})}
+const histDel=id=>tx('designs','readwrite',s=>s.delete(id));
+const histClear=()=>tx('designs','readwrite',s=>s.clear());
+const metaGet=k=>tx('meta','readonly',s=>s.get(k));
+const metaSet=(k,v)=>tx('meta','readwrite',s=>s.put(v,k));
+
+/* مجلد الألبوم على الجهاز (File System Access API) */
+let _dir=null,_perm=null;
+function hiMsg(t){const m=$('#hiMsg');if(m)m.textContent=t}
+function albumUi(){const b=$('#hiAlbum');if(b)b.textContent=_dir?('الألبوم: '+_dir.name).slice(0,30):'مجلد الألبوم'}
+async function albumInit(){try{if(!window.showDirectoryPicker)return;_dir=await metaGet('album')||null;if(_dir)_perm=await _dir.queryPermission({mode:'readwrite'})}catch(e){}albumUi()}
+async function albumSave(blob,name){if(!_dir||_perm!=='granted'||!name)return;try{const fh=await _dir.getFileHandle(name,{create:true}),w=await fh.createWritable();await w.write(blob);await w.close();hiMsg('حُفظ في مجلد الألبوم: '+name)}catch(e){if(e&&e.name=='NotAllowedError')_perm='prompt'}}
+async function albumPick(){if(!window.showDirectoryPicker){hiMsg('المتصفح لا يدعم اختيار مجلد — استخدم Chrome أو Edge.');return}try{const d=await window.showDirectoryPicker({id:'quranAlbum',mode:'readwrite'});_dir=d;_perm='granted';await metaSet('album',d);hiMsg('تم ربط مجلد الألبوم: '+d.name+' — تُحفظ الصادرات الجديدة فيه تلقائياً.');toast('الألبوم: '+d.name)}catch(e){if(e&&e.name!=='AbortError')hiMsg('تعذّر اختيار المجلد.')}albumUi()}
+async function albumPerm(){if(!_dir){albumPick();return}try{_perm=await _dir.requestPermission({mode:'readwrite'});hiMsg(_perm=='granted'?'تم السماح بالكتابة إلى مجلد الألبوم.':'لم يُمنح إذن الكتابة للمجلد.')}catch(e){hiMsg('تعذّر طلب الإذن.')}albumUi()}
+
+/* عرض السجل داخل الاستوديو */
+async function histRender(){const g=$('#hiG');if(!g)return;let list=[];try{list=await histList()}catch(e){}g.innerHTML='';
+ if(!list.length){g.innerHTML='<div class="hiEmpty">لا توجد تصاميم محفوظة بعد. كل صورة أو فيديو تصدّره يُضاف هنا تلقائياً.</div>';albumUi();return}
+ list.forEach(r=>{const c=document.createElement('div');c.className='hiC';
+  const url=URL.createObjectURL(r.blob),vid=String(r.mime||'').indexOf('video')===0;
+  if(vid){const v=document.createElement('video');v.src=url;v.muted=true;v.loop=true;v.setAttribute('playsinline','');v.onmouseenter=()=>v.play().catch(()=>0);v.onmouseleave=()=>v.pause();c.appendChild(v)}
+  else{const im=document.createElement('img');im.src=url;im.loading='lazy';c.appendChild(im)}
+  const dt=new Date(r.ts),lab=(vid?'فيديو':'صورة')+' · '+dt.toLocaleDateString();
+  c.insertAdjacentHTML('beforeend','<span class="hiB">'+(vid?'فيديو':'صورة')+'</span><button class="hiX" title="حذف">✕</button><div class="hiN">'+lab+'</div>');
+  if(!vid){const a=document.createElement('button');a.textContent='خلفية';a.style.cssText='position:absolute;bottom:24px;inset-inline-start:6px;z-index:3;background:#000a;color:#fff;border:0;border-radius:8px;font-size:11px;padding:2px 8px;cursor:pointer';
+   a.onclick=ev=>{ev.stopPropagation();setImg(url,'من السجل');toast('تم تعيين الخلفية')};c.appendChild(a)}
+  c.querySelector('.hiX').onclick=async ev=>{ev.stopPropagation();try{await histDel(r.id)}catch(e){}URL.revokeObjectURL(url);histRender()};
+  c.onclick=()=>share(r.blob,r.name,r.mime);
+  g.appendChild(c)})}
+const histGo=()=>{$('#studio').classList.add('on');$$('#stTabs button').forEach(b=>b.classList.toggle('on',b.dataset.t=='hi'));$$('.tp').forEach(t=>t.classList.toggle('on',t.id=='tp-hi'));histRender()};
+
+/* خلفيات جاهزة من مجلد backgrounds/ */
+const RD_EXT=/\.(jpe?g|jfif|jpe|png|apng|webp|avif|gif|bmp|svg|ico)$/i;
+function ghRepo(){const c=String((window.CONFIG&&CONFIG.BG_REPO)||'').trim();if(c.indexOf('/')>0){const i=c.indexOf('/');return{owner:c.slice(0,i),repo:c.slice(i+1)}}
+ const h=location.hostname;if(!/\.github\.io$/i.test(h))return null;const o=h.replace(/\.github\.io$/i,''),seg=location.pathname.split('/').filter(Boolean);return{owner:o,repo:seg.length?seg[0]:o+'.github.io'}}
+const rdEnc=n=>String(n).split('/').map(encodeURIComponent).join('/');
+function rdName(u){try{return decodeURIComponent(String(u).split(/[?#]/)[0].split('/').pop())}catch(e){return String(u).split(/[?#]/)[0].split('/').pop()}}
+function rdFromText(txt){const names=[];
+ try{const doc=new DOMParser().parseFromString(txt,'text/html');doc.querySelectorAll('a[href]').forEach(a=>{const h=a.getAttribute('href');if(!h||/^[a-z]+:|^[\/?#]/.test(h)||h.indexOf('://')>=0)return;const n=rdName(h);if(n&&RD_EXT.test(n))names.push(n)})}catch(e){}
+ if(!names.length)try{const j=JSON.parse(txt);if(Array.isArray(j))j.forEach(x=>{const n=typeof x=='string'?x:(x&&(x.name||x.file||x.url));if(n&&RD_EXT.test(n))names.push(rdName(n))})}catch(e){}
+ return names}
+async function rdScanDir(){for(const u of ['backgrounds/','backgrounds']){try{const r=await fetch(u,{cache:'no-store'});if(!r||!r.ok)continue;const txt=await r.text();const names=rdFromText(txt);if(names.length)return names}catch(e){}}return []}
+async function rdApi(){const g=ghRepo();if(!g)return [];try{const r=await fetch('https://api.github.com/repos/'+g.owner+'/'+g.repo+'/contents/backgrounds',{headers:{Accept:'application/vnd.github+json'}});if(!r||!r.ok)return [];const j=await r.json();if(!Array.isArray(j))return [];return j.filter(it=>it&&it.type=='file'&&RD_EXT.test(it.name)).map(it=>it.name)}catch(e){return []}}
+function rdNorm(x){if(typeof x=='string'){const u=x;return RD_EXT.test(rdName(u))?{name:rdName(u),url:/^https?:\/\//i.test(u)?u:'backgrounds/'+rdEnc(String(u).replace(/^\.\//,'')),added:0}:null}
+ if(x&&typeof x=='object'){const n=x.file||x.name||x.url;if(!n||!RD_EXT.test(rdName(n)))return null;return{name:rdName(n),url:/^https?:\/\//i.test(n)?n:'backgrounds/'+rdEnc(String(n).replace(/^\.\//,'')),added:+x.added||0}}return null}
+async function rdManifest(){try{const r=await fetch('backgrounds/manifest.json',{cache:'no-store'});if(!r||!r.ok)return [];const j=await r.json();if(!Array.isArray(j))return [];return j.map(rdNorm).filter(Boolean)}catch(e){return []}}
+function rdScript(){try{const j=window.__READY_BG;if(!Array.isArray(j))return [];return j.map(rdNorm).filter(Boolean)}catch(e){return []}}
+async function rdHead(url){try{const r=await fetch(url,{method:'HEAD'});const lm=r&&r.headers.get('last-modified');return lm?Date.parse(lm)||0:0}catch(e){return 0}}
+function rdPins(){try{const p=JSON.parse(localStorage.getItem('mushafPins')||'[]');return Array.isArray(p)?p:[]}catch(e){return []}}
+function rdPin(name){try{const p=rdPins(),i=p.indexOf(name);if(i<0)p.push(name);else p.splice(i,1);localStorage.setItem('mushafPins',JSON.stringify(p))}catch(e){}return rdPins()}
+function rdSorted(list){const pins=rdPins(),rank=n=>{const i=pins.indexOf(n);return i<0?1e9:i};
+ return list.slice().sort((a,b)=>{const ra=rank(a.name),rb=rank(b.name);if(ra!=rb)return ra-rb;return (b.added||0)-(a.added||0)||String(a.name).localeCompare(String(b.name))})}
+async function readyList(force){let cache=null;try{cache=JSON.parse(localStorage.getItem('mushafReady')||'null')}catch(e){}
+ if(cache&&!force&&Date.now()-cache.t<18e5&&Array.isArray(cache.u)&&cache.u.length)return cache.u;
+ const man=await rdManifest(),scr=rdScript(),dir=await rdScanDir(),api=await rdApi(),map=new Map();
+ man.concat(scr).forEach(x=>{const k=x.name.toLowerCase();if(!map.has(k))map.set(k,x)});
+ const addN=(n,url)=>{const k=String(n).toLowerCase();if(map.has(k))return;map.set(k,{name:n,url:url||('backgrounds/'+rdEnc(n)),added:0})};
+ dir.forEach(n=>addN(n));api.forEach(n=>addN(n));
+ const list=[...map.values()];
+ await Promise.all(list.map(async x=>{if(!x.added){const t=await rdHead(x.url);if(t)x.added=t}}));
+ list.sort((a,b)=>(b.added||0)-(a.added||0)||String(a.name).localeCompare(String(b.name)));
+ if(!list.length&&cache&&Array.isArray(cache.u)&&cache.u.length)return cache.u;
+ try{localStorage.setItem('mushafReady',JSON.stringify({t:Date.now(),u:list}))}catch(e){}
+ return list}
+async function renderReady(force){const g=$('#bgReady');if(!g)return;g.innerHTML='<div class="hiEmpty">جارٍ التحميل…</div>';let list=[];try{list=await readyList(force)}catch(e){}g.innerHTML='';const m=$('#rdMsg');
+ if(!list.length){if(m)m.textContent='لا توجد خلفيات جاهزة. ضَع الصور في مجلد backgrounds/ ثم اضغط «تحديث».';return}
+ const pins=rdPins();if(m)m.textContent='خلفيات جاهزة ('+ar(list.length)+') — اضغط صورةً لاختيارها، و📌 للتثبيت.';
+ rdSorted(list).forEach(x=>{const c=document.createElement('div');c.className='rdC'+(pins.indexOf(x.name)>=0?' pin':'');
+  const im=document.createElement('img');im.src=x.url;im.loading='lazy';im.alt=x.name;im.onclick=()=>{setImg(x.url,'خلفية جاهزة');toast('تم تعيين الخلفية')};
+  im.onerror=()=>{im.style.display='none';if(!c.querySelector('.rdD')){const l=document.createElement('div');l.className='rdD';l.textContent=x.name;c.appendChild(l)}};c.appendChild(im);
+  const p=document.createElement('button');p.className='rdP';p.type='button';p.title='تثبيت في المقدمة';p.textContent='📌';p.onclick=ev=>{ev.stopPropagation();rdPin(x.name);renderReady(false)};c.appendChild(p);
+  if(x.added){const d=new Date(x.added),l=document.createElement('div');l.className='rdD';l.textContent=ar(d.getDate())+'/'+ar(d.getMonth()+1)+'/'+ar(d.getFullYear());c.appendChild(l)}
+  g.appendChild(c)})}
+
+/* حفظ/مشاركة الصفحة الحالية كصورة (بلا تمييز كلمات المعاني) */
+async function pagePng(n){n=Math.max(1,Math.min(MAXP,n|0||1));const d=DATA[n];
+ const fset=new Set();for(const L of d.l)fset.add(L.t=='h'?0:L.f);
+ try{await Promise.all([...fset].map(f=>document.fonts.load('100px F'+f,'\uF100')));await document.fonts.load('700 40px Tajawal');await document.fonts.ready}catch(e){}
+ const W=1080,H=Math.round(W*1.6),S=2,c=document.createElement('canvas');c.width=W*S;c.height=H*S;
+ const x=c.getContext('2d');x.scale(S,S);
+ const paper=pg()[0],ink=st.fc||pg()[1],A=st.a/100,padX=.05*W,ct=.07*W,cb=H-.06*W,ch=cb-ct;
+ const gold=(getComputedStyle(document.documentElement).getPropertyValue('--gold').trim())||'#a8823c';
+ x.fillStyle=paper;x.fillRect(0,0,W,H);x.strokeStyle='rgba(0,0,0,.13)';x.lineWidth=1;x.strokeRect(.5,.5,W-1,H-1);
+ const hf=.032*W;x.font='700 '+Math.round(hf)+'px Tajawal,system-ui,sans-serif';x.textBaseline='middle';x.fillStyle=ink;x.globalAlpha=.6;x.direction='rtl';
+ x.textAlign='right';x.fillText(T('الجزء ')+ar(juzOf(n)),W-padX,.02*W+.6*hf);
+ x.textAlign='left';x.fillText(T('سورة ')+sName(d.s),padX,.02*W+.6*hf);
+ x.textAlign='center';x.fillText(ar(n),W/2,H-.016*W-.6*hf);
+ const lh=.098*W,N=d.l.length,few=N<15,hs=d.l.map(L=>L.t=='h'?.107*W:lh);
+ let total=0;for(const h of hs)total+=h;
+ const slack=Math.max(0,ch-total),gap=few?slack/(N+1):(N>1?slack/(N-1):0);let y=ct;if(few)y+=gap;
+ const rr=(X,Y,Wd,Hd,r)=>{x.beginPath();if(x.roundRect)x.roundRect(X,Y,Wd,Hd,r);else x.rect(X,Y,Wd,Hd)};
+ d.l.forEach((L,i)=>{
+  if(L.t=='h'){const bt=y+.006*W,bh=.095*W,bw=W-2*padX;
+   x.fillStyle=gold;x.globalAlpha=A*.14;rr(padX,bt,bw,bh,.012*W);x.fill();
+   x.globalAlpha=A;x.strokeStyle=gold;x.lineWidth=1.5;rr(padX,bt,bw,bh,.012*W);x.stroke();
+   const io=.008*W;x.lineWidth=1;rr(padX+io,bt+io,bw-2*io,bh-2*io,.012*W);x.stroke();
+   x.fillStyle=ink;x.font=Math.round(.0694*W)+'px F0';x.fillText(L.c,W/2,bt+bh/2)}
+  else{const fs=.0559*W;x.fillStyle=ink;x.globalAlpha=A;
+   if(L.t=='b'){x.font=Math.round(fs)+'px F'+L.f;x.fillText(L.c,W/2,y+lh/2+.13*fs)}
+   else{const R=L.e>=14.5?(.9/L.e):.0559,v=R*W;x.font=Math.round(v)+'px F'+L.f;x.textAlign='right';const words=L.w.map(w=>w[0]),widths=words.map(w=>x.measureText(w).width);let right=(W+widths.reduce((sum,width)=>sum+width,0))/2;words.forEach((word,j)=>{x.fillText(word,right,y+lh/2+.13*v);right-=widths[j]})}}
+  y+=hs[i];if(i<N-1||few)y+=gap});
+ x.globalAlpha=1;
+ return new Promise(r=>c.toBlob(r,'image/png'))}
+async function savePageImage(sh){try{toast('جارٍ تجهيز صورة الصفحة…');const b=await pagePng(st.p);const n=fname('png');await histAdd(b,{name:n,type:'image',page:st.p,width:2160,height:3456,source:'reader_page'});
+  if(sh)await share(b,n,'image/png');else dl(b,n);flash('تم حفظ صورة الصفحة')}catch(e){console.warn(e);toast('تعذّر إنشاء صورة الصفحة')}}
+
+/* وصل الأزرار */
+$('#bPgDl').onclick=()=>savePageImage(false);
+$('#bPgSh').onclick=()=>savePageImage(true);
+$('#bPg').onclick=()=>savePageImage(false);
+$('#hiAlbum').onclick=albumPick;
+$('#hiOpen').onclick=albumPerm;
+$('#hiClr').onclick=async()=>{if(!confirm('مسح كل التصاميم المحفوظة؟'))return;try{await histClear()}catch(e){}histRender()};
+$('#hiDlAll').onclick=async()=>{try{const l=await histList();l.forEach((r,i)=>setTimeout(()=>dl(r.blob,r.name),i*350))}catch(e){}};
+$('#rdR').onclick=()=>renderReady(true);
+$('#bAsTop').onclick=()=>{shut('#sSet');asOn?asStop():asStart()};
+$('#bNight').onclick=()=>{st.night=!st.night;const t=TH[st.night?st.dk:st.lt];if(t)selTheme(st.night?st.dk:st.lt);else{document.documentElement.classList.toggle('nc',st.night);applyBg()}};
+$('#bMn').onclick=()=>{st.mo=st.mo?0:1;$('#mnOn').checked=!!st.mo;refreshMeaningWords();save();toast(T(st.mo?'تم تفعيل تلوين المعاني':'تم إيقاف تلوين المعاني'))};
+$('#bFit').onclick=()=>{const fs=['a','w','h','2'],i=fs.indexOf(st.fit);st.fit=fs[(i+1)%fs.length];save();fitUi();build();size();toast(T('وضع الملاءمة')+': '+T(({'a':'تلقائي','w':'ملاءمة العرض','h':'ملاءمة الارتفاع','2':'صفحتان'}[st.fit])))};
+$('#bKeep').onclick=keepToggle;
+albumInit();renderReady();
+
 /* بدء */
 decorate();fitUi();enh();applyBg();ui();title();build();modesUi();refresh();limits();applyLang();
+$('#analyticsManage').onclick=()=>QuranAnalytics.manage();
+QuranAnalytics.init(()=>({page:st.p,surah:DATA[st.p].s}));
 document.fonts.ready.then(()=>go(st.p,false));
 addEventListener('resize',size);addEventListener('orientationchange',()=>setTimeout(size,250));
-addEventListener('pagehide',save);document.addEventListener('visibilitychange',save);
+addEventListener('pagehide',save);document.addEventListener('visibilitychange',save);applyKeep();
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
