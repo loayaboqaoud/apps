@@ -308,7 +308,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="abX">✕</button></div>
 <p><b>تطوير:</b> Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-10-05</span></p>
-<p><b>الإصدار:</b> <span dir="ltr">1.0.7</span></p>
+<p><b>الإصدار:</b> <span dir="ltr">1.0.8</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -1054,7 +1054,7 @@ async function exportRec(){const msg=$('#exMsg');await fontsFor(kept());
  return new Promise(res=>{mr.onstop=()=>{REV0=null;REV=null;ac&&ac.close();if(D.vid){D.vid.pause();D.vid.currentTime=D.vt0}STK_T=()=>performance.now()/1000;const bl=new Blob(ch,{type:mt.split(';')[0]}),ext=mt.includes('mp4')?'mp4':'webm';if(ext=='webm'&&window.ysFixWebmDuration)ysFixWebmDuration(bl,Math.round(dur*1000),f=>res({b:f,ext,duration:dur,width:W,height:H}));else res({b:bl,ext,duration:dur,width:W,height:H})};mr.start(200);const t0=performance.now()+300;const vd=D.bg=='vid'&&D.vid?D.vid:null;if(vd){vd.currentTime=D.vt0;vd.play().catch(()=>{})}STK_T=()=>Math.max(0,(performance.now()-t0)/1000);
   (function f(){const el=(performance.now()-t0)/1000;frame();msg.textContent=T('جارٍ التسجيل... ')+ar(Math.max(0,Math.round(dur-el)))+T(' ث');if(el<dur+.3)requestAnimationFrame(f);else mr.stop()})()})}
 const uerr=m=>Object.assign(new Error(m),{user:1});
-async function exportVideo(){if(D.bg=='cam'||D.vclipAudio)return exportRec();let r=null;try{r=await exportMp4()}catch(e){if(e&&e.user)throw e;console.warn('mp4 export failed, falling back',e)}return r||exportRec()}
+async function exportVideo(){if(D.bg=='cam')return exportRec();let r=null;try{r=await exportMp4()}catch(e){if(e&&e.user)throw e;console.warn('mp4 export failed, falling back',e)}return r||exportRec()}
 async function exportMp4(){
  if(!window.VideoEncoder||!window.VideoFrame||!window.Mp4Muxer)return null;
  const msg=$('#exMsg');await fontsFor(kept());
@@ -1064,20 +1064,22 @@ async function exportMp4(){
  for(const c of ['avc1.640028','avc1.4D4028','avc1.42E028','avc1.42001F']){const cfg={codec:c,width:W,height:H,bitrate:br,framerate:fps,avc:{format:'avc'}};try{if((await VideoEncoder.isConfigSupported(cfg)).supported){vcfg=cfg;break}}catch(e){}}
  if(!vcfg&&window.__allowVp9){const cfg={codec:'vp09.00.10.08',width:W,height:H,bitrate:br,framerate:fps};try{if((await VideoEncoder.isConfigSupported(cfg)).supported){vcfg=cfg;vm='vp9'}}catch(e){}}
  if(!vcfg)return null;
- let dur=D.vsec,mix=null,acfg=null,am='aac',segs=null;
- if(D.asrc!='none'){if(!window.AudioEncoder||!window.AudioData)return null;
+ let dur=D.vclipAudio?Math.max(D.vsec,D.vclipAudio.duration):D.vsec,mix=null,acfg=null,am='aac',segs=null;
+ if(D.asrc!='none'||D.vclipAudio){if(!window.AudioEncoder||!window.AudioData)return null;
   const cf=[{codec:'mp4a.40.2',sampleRate:48000,numberOfChannels:2,bitrate:128000}];if(window.__allowVp9)cf.push({codec:'opus',sampleRate:48000,numberOfChannels:2,bitrate:96000});
   for(const c of cf){try{if((await AudioEncoder.isConfigSupported(c)).supported){acfg=c;am=c.codec=='opus'?'opus':'aac';break}}catch(e){}}
   if(!acfg)return null;msg.textContent=T('جارٍ تجهيز الصوت...');
-  const ac=new(window.AudioContext||window.webkitAudioContext)({sampleRate:48000});let bufs=[];
-  if(D.asrc=='file'){if(!D.afile)throw uerr(T('اختر ملفاً صوتياً أولاً'));bufs=[await ac.decodeAudioData(await D.afile.arrayBuffer())]}
-  else for(let a=D.a1;a<=D.a2;a++){const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw uerr(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}
-  const lens=bufs.map(b=>D.asrc=='file'?Math.max(.2,Math.min(b.duration,D.at1||b.duration)-D.at0):b.duration);
-  dur=lens.reduce((s,l)=>s+l,0)+.25*(bufs.length-1);
+  let bufs=[],lens=[];const ac=new(window.AudioContext||window.webkitAudioContext)({sampleRate:48000});
+  try{if(D.asrc=='file'){if(!D.afile)throw uerr(T('اختر ملفاً صوتياً أولاً'));bufs=[await ac.decodeAudioData(await D.afile.arrayBuffer())]}
+  else if(D.asrc=='ayat')for(let a=D.a1;a<=D.a2;a++){const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw uerr(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}}
+  finally{await ac.close()}
+  lens=bufs.map(b=>D.asrc=='file'?Math.max(.2,Math.min(b.duration,D.at1||b.duration)-D.at0):b.duration);
+  const rd=lens.reduce((s,l)=>s+l,0)+.25*Math.max(0,bufs.length-1);dur=Math.max(dur,rd);
   if(D.asrc=='ayat')segs=ayatSegs(lens);
-  const oc=new OfflineAudioContext(2,Math.ceil(dur*48000),48000);let q=0;
+  const oc=new OfflineAudioContext(2,Math.max(1,Math.ceil(dur*48000)),48000);let q=0;
+  if(D.vclipAudio){const s=oc.createBufferSource();s.buffer=D.vclipAudio;s.connect(oc.destination);s.start(0)}
   bufs.forEach((b,i)=>{const s=oc.createBufferSource();s.buffer=b;s.connect(oc.destination);s.start(q,D.asrc=='file'?D.at0:0,lens[i]);q+=lens[i]+.25});
-  mix=await oc.startRendering();ac.close()}
+  mix=await oc.startRendering()}
  else if(D.bg=='vid'&&D.vid)dur=Math.max(1,D.vt1-D.vt0);
  const fg=document.createElement('canvas');fg.width=W;fg.height=H;const fx=fg.getContext('2d');fx.scale(W/W0,H/H0);drawFg(fx,W0,H0,false);
  const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');
@@ -1086,18 +1088,18 @@ async function exportMp4(){
  const muxer=new Mp4Muxer.Muxer({target:new Mp4Muxer.ArrayBufferTarget(),video:{codec:vm=='vp9'?'vp9':'avc',width:W,height:H},audio:mix?{codec:am,sampleRate:48000,numberOfChannels:2}:undefined,fastStart:'in-memory',firstTimestampBehavior:'offset'});
  let err=null;const venc=new VideoEncoder({output:(c,m)=>muxer.addVideoChunk(c,m),error:e=>err=e});venc.configure(vcfg);
  let aenc=null;if(mix){aenc=new AudioEncoder({output:(c,m)=>muxer.addAudioChunk(c,m),error:e=>err=e});aenc.configure(acfg)}
- const n=Math.max(1,Math.round(dur*fps)),times=D.rv?revTimes(kept(),dur,segs):null;
+ const n=Math.max(1,Math.ceil(dur*fps)),times=D.rv?revTimes(kept(),dur,segs):null;
  try{
   for(let i=0;i<n;i++){if(err)throw err;const tm=i/fps;STK_T=()=>tm;if(vd)await seek(vd,D.vt0+(tm%span));
    if(times){REV={times,t:tm};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}
    rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawStk(rx,W0,H0,false);drawWM(rx,W0,H0,false);
    const vf=new VideoFrame(rc,{timestamp:Math.round(i*1e6/fps),duration:Math.round(1e6/fps)});venc.encode(vf,{keyFrame:i%(fps*2)==0});vf.close();
-   while(venc.encodeQueueSize>8)await new Promise(r=>setTimeout(r,4));
+   while(venc.encodeQueueSize>8){if(err)throw err;await new Promise(r=>setTimeout(r,4))}
    if(i%6==0){msg.textContent=T('جارٍ تصدير الفيديو')+' '+ar(Math.round(i/n*100))+(lang=='ar'?'٪':'%');await new Promise(r=>setTimeout(r))}}
   if(mix){const sr=48000,c0=mix.getChannelData(0),c1=mix.numberOfChannels>1?mix.getChannelData(1):c0,CH=4800;
    for(let p=0;p<mix.length;p+=CH){const k=Math.min(CH,mix.length-p),d=new Float32Array(k*2);d.set(c0.subarray(p,p+k),0);d.set(c1.subarray(p,p+k),k);
     const ad=new AudioData({format:'f32-planar',sampleRate:sr,numberOfFrames:k,numberOfChannels:2,timestamp:Math.round(p/sr*1e6),data:d});aenc.encode(ad);ad.close();
-    while(aenc.encodeQueueSize>16)await new Promise(r=>setTimeout(r,4))}}
+    while(aenc.encodeQueueSize>16){if(err)throw err;await new Promise(r=>setTimeout(r,4))}}}
   await venc.flush();if(aenc)await aenc.flush();if(err)throw err;muxer.finalize();
  }finally{REV=null;STK_T=()=>performance.now()/1000;try{venc.close()}catch(e){}try{aenc&&aenc.close()}catch(e){}}
  return{b:new Blob([muxer.target.buffer],{type:'video/mp4'}),ext:'mp4',duration:dur,width:W,height:H}}
