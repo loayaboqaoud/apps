@@ -308,7 +308,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="abX">✕</button></div>
 <p><b>تطوير:</b> Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-10-05</span></p>
-<p><b>الإصدار:</b> <span dir="ltr">1.0.8</span></p>
+<p><b>الإصدار:</b> <span dir="ltr">1.0.9</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -1025,15 +1025,19 @@ $('#imGo').onclick=async()=>{const g=$('#galI');g.innerHTML='...';try{const u='h
  ps.forEach(p=>{const i=p.imageinfo&&p.imageinfo[0];if(!i)return;const m=i.extmetadata||{},im=document.createElement('img');im.src=i.thumburl;im.loading='lazy';
   im.onclick=()=>{const big=i.width>1920?i.thumburl.replace(/\/\d+px-/,'/1920px-'):i.url,strip=s=>(s||'').replace(/<[^>]*>/g,'');setImg(big,'المصدر: ويكيميديا كومنز — '+strip(m.Artist&&m.Artist.value)+' — '+strip(m.LicenseShortName&&m.LicenseShortName.value))};g.appendChild(im)})}catch(e){g.textContent='تعذّر البحث — يلزم اتصال بالإنترنت.'}};
 $('#auF').onchange=e=>{D.afile=e.target.files[0]||null;if(D.afile){D.asrc='file';const a=new Audio(URL.createObjectURL(D.afile));a.onloadedmetadata=()=>{D.at0=0;D.at1=+a.duration.toFixed(1);$('[data-k=at0]').max=$('[data-k=at1]').max=D.at1;refresh()};refresh()}};
-async function exportRec(){const msg=$('#exMsg');await fontsFor(kept());
+async function exportRec(){const msg=$('#exMsg'),clip=D.vclipAudio,rcSrc=D.asrc!='none';let ac=null,audioReady=Promise.resolve(null);
+ if(clip||rcSrc){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));ac=new AC();audioReady=ac.resume().then(()=>null).catch(e=>e)}
+ await fontsFor(kept());
  const[W0,H0]=dims(),sc=Math.min(1,1920/Math.max(W0,H0)),W=Math.round(W0*sc/2)*2,H=Math.round(H0*sc/2)*2;
  const fg=document.createElement('canvas');fg.width=W;fg.height=H;const fx=fg.getContext('2d');fx.scale(W/W0,H/H0);drawFg(fx,W0,H0,false);
  const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');
  const frame=()=>{const v2=D.bg=='vid'&&D.vid;if(v2&&(v2.ended||v2.currentTime>=D.vt1-.03)){v2.currentTime=D.vt0;v2.play().catch(()=>{})};if(REV0){REV={times:REV0,t:STK_T()};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawStk(rx,W0,H0,false);drawWM(rx,W0,H0,false)};frame();
- const stream=rc.captureStream(30);let dur=D.vsec,ac=null,bufs=[],lens=[];
- const clip=D.vclipAudio,rcSrc=D.asrc!='none';
+ const stream=rc.captureStream(30);let dur=D.vsec,bufs=[],lens=[];
  if(clip||rcSrc){
-  ac=new(window.AudioContext||window.webkitAudioContext)();msg.textContent=T('جارٍ تجهيز الصوت...');
+  const resumeError=await audioReady;if(resumeError)throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));
+  if(ac.state=='suspended')await ac.resume();
+  if(ac.state!='running')throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));
+  msg.textContent=T('جارٍ تجهيز الصوت...');
   const dest=ac.createMediaStreamDestination();dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
   const t0=ac.currentTime+.3,rvol=Math.max(0,Math.min(1,(+($('#camVol')&&$('#camVol').value)||100)/100));
   if(clip){const s0=ac.createBufferSource();s0.buffer=clip;s0.connect(dest);s0.start(t0);dur=clip.duration}
@@ -1053,8 +1057,8 @@ async function exportRec(){const msg=$('#exMsg');await fontsFor(kept());
  const mr=new MediaRecorder(stream,{mimeType:mt,videoBitsPerSecond:8e6}),ch=[];mr.ondataavailable=e=>e.data.size&&ch.push(e.data);
  return new Promise(res=>{mr.onstop=()=>{REV0=null;REV=null;ac&&ac.close();if(D.vid){D.vid.pause();D.vid.currentTime=D.vt0}STK_T=()=>performance.now()/1000;const bl=new Blob(ch,{type:mt.split(';')[0]}),ext=mt.includes('mp4')?'mp4':'webm';if(ext=='webm'&&window.ysFixWebmDuration)ysFixWebmDuration(bl,Math.round(dur*1000),f=>res({b:f,ext,duration:dur,width:W,height:H}));else res({b:bl,ext,duration:dur,width:W,height:H})};mr.start(200);const t0=performance.now()+300;const vd=D.bg=='vid'&&D.vid?D.vid:null;if(vd){vd.currentTime=D.vt0;vd.play().catch(()=>{})}STK_T=()=>Math.max(0,(performance.now()-t0)/1000);
   (function f(){const el=(performance.now()-t0)/1000;frame();msg.textContent=T('جارٍ التسجيل... ')+ar(Math.max(0,Math.round(dur-el)))+T(' ث');if(el<dur+.3)requestAnimationFrame(f);else mr.stop()})()})}
-const uerr=m=>Object.assign(new Error(m),{user:1});
-async function exportVideo(){if(D.bg=='cam')return exportRec();let r=null;try{r=await exportMp4()}catch(e){if(e&&e.user)throw e;console.warn('mp4 export failed, falling back',e)}return r||exportRec()}
+const uerr=m=>Object.assign(new Error(m),{user:1}),isIOSDevice=()=>/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform=='MacIntel'&&navigator.maxTouchPoints>1);
+async function exportVideo(){if(D.bg=='cam'||(isIOSDevice()&&(D.asrc!='none'||D.vclipAudio)))return exportRec();let r=null;try{r=await exportMp4()}catch(e){if(e&&e.user)throw e;console.warn('mp4 export failed, falling back',e)}return r||exportRec()}
 async function exportMp4(){
  if(!window.VideoEncoder||!window.VideoFrame||!window.Mp4Muxer)return null;
  const msg=$('#exMsg');await fontsFor(kept());
@@ -1326,7 +1330,8 @@ Object.assign(DICT,{
  "إظهار التوقيع على التصاميم":["Show signature on designs","Mostrar firma en los diseños","ڈیزائنوں پر دستخط دکھائیں","डिज़ाइनों पर हस्ताक्षर दिखाएँ","Afficher la signature sur les designs","Tampilkan tanda tangan pada desain","Tasarımlarda imzayı göster","ডিজাইনে স্বাক্ষর দেখান","Показывать подпись на дизайнах"],
  "تم تفعيل تلوين المعاني":["Meaning colors enabled","Se activó el color de significados","معانی کے رنگ فعال","अर्थों के रंग चालू","Couleurs des sens activées","Warna makna diaktifkan","Anlam renkleri açıldı","অর্থের রং চালু","Цветовая разметка значений включена"],
  "تم إيقاف تلوين المعاني":["Meaning colors disabled","Se desactivó el color de significados","معانی کے رنگ بند","अर्थों के रंग बंद","Couleurs des sens désactivées","Warna makna dinonaktifkan","Anlam renkleri kapatıldı","অর্থের রং বন্ধ","Цветовая разметка значений выключена"],
- "الإبلاغ عن مشكلة":["Report a problem","Informar de un problema","مسئلے کی اطلاع دیں","समस्या की रिपोर्ट करें","Signaler un problème","Laporkan masalah","Sorun bildir","সমস্যার প্রতিবেদন করুন","Сообщить о проблеме"]
+ "الإبلاغ عن مشكلة":["Report a problem","Informar de un problema","مسئلے کی اطلاع دیں","समस्या की रिपोर्ट करें","Signaler un problème","Laporkan masalah","Sorun bildir","সমস্যার প্রতিবেদন করুন","Сообщить о проблеме"],
+ "تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.":["Could not enable audio for export. Please press Export and try again.","No se pudo activar el audio para exportar. Pulsa Exportar e inténtalo de nuevo.","ایکسپورٹ کے لیے آڈیو فعال نہیں ہو سکی۔ ایکسپورٹ بٹن دبا کر دوبارہ کوشش کریں۔","निर्यात के लिए ऑडियो चालू नहीं हो सका। कृपया निर्यात दबाकर फिर कोशिश करें।","Impossible d’activer le son pour l’exportation. Appuyez sur Exporter et réessayez.","Audio tidak dapat diaktifkan untuk ekspor. Tekan Ekspor lalu coba lagi.","Dışa aktarma için ses açılamadı. Lütfen Dışa Aktar’a basıp yeniden deneyin.","এক্সপোর্টের জন্য অডিও চালু করা যায়নি। এক্সপোর্ট বোতাম টিপে আবার চেষ্টা করুন।","Не удалось включить звук для экспорта. Нажмите «Экспорт» и попробуйте снова."]
 });
 const T=s=>{if(lang=='ar')return s;const k=s.trim(),e=DICT[k];return e&&e[LI[lang]]?s.replace(k,e[LI[lang]]):s};
 [['ar','العربية'],['en','English'],['es','Español'],['ur','اردو'],['hi','हिन्दी'],['fr','Français'],['id','Bahasa Indonesia'],['tr','Türkçe'],['bn','বাংলা'],['ru','Русский']].forEach(l=>{const o=document.createElement('option');o.value=l[0];o.textContent=l[1];$('#lang').appendChild(o)});
