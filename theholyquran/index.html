@@ -308,7 +308,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="abX">✕</button></div>
 <p><b>تطوير:</b> Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-10-05</span></p>
-<p><b>الإصدار:</b> <span dir="ltr">1.0.9</span></p>
+<p><b>الإصدار:</b> <span dir="ltr">1.1.0</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -527,11 +527,21 @@ body>*:not(#print){display:none!important}#print{display:block}
 <script src="backgrounds/list.js"></script>
 <script>
 let lang='ar';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],ar=n=>lang!='ar'?String(n):String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
-document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.closest('#analyticsConsent'))return;const area=b.closest('#stTabs')?'design_tabs':b.closest('#studio')?'design':b.closest('#sIdx')?'index':b.closest('#sSea')?'search':b.closest('#sSet')?'settings':b.closest('#bar,#abar')?'navigation':'app';
+const analyticsArea=el=>el.closest('#stTabs')?'design_tabs':el.closest('#studio')?'design':el.closest('#sIdx')?'index':el.closest('#sSea')?'search':el.closest('#sSet')?'settings':el.closest('#bar,#abar')?'navigation':'app';
+document.addEventListener('click',e=>{const w=e.target.closest('#pager .w[data-k]');if(w){const[sur,verse]=w.dataset.k.split(':').map(Number);QuranAnalytics.track('verse_select',{surah:sur,verse,page:st.p,juz:juzOf(st.p),source:'reader'})}
+ const b=e.target.closest('button');if(!b||b.closest('#analyticsConsent'))return;const area=analyticsArea(b);
  const data={control:b.id||b.dataset.k||b.dataset.t||(b.closest('.sw.th')?'theme_picker':'option'),area};
- if(b.dataset.v)data.choice=b.dataset.v;if(b.dataset.g)data.target=+b.dataset.g;
- QuranAnalytics.track('button_click',data)});
-document.addEventListener('change',e=>{const el=e.target;if(el.matches('#studio [data-k]'))QuranAnalytics.track('design_setting_change',{field:el.dataset.k})});
+ if(b.dataset.v)data.choice=b.dataset.v;if(b.dataset.t)data.choice=b.dataset.t;if(b.dataset.g)data.target=+b.dataset.g;
+ QuranAnalytics.track('button_click',data);
+ if(area=='index'&&Number.isInteger(+b.dataset.g)){const target=+b.dataset.g;
+  if(tab=='s')QuranAnalytics.track('surah_select',{surah:+b.dataset.surah,page:target,juz:juzOf(target)});
+  else if(tab=='j')QuranAnalytics.track('juz_select',{juz:JUZ.indexOf(target)+1,page:target});
+  else QuranAnalytics.track('quran_page_select',{page:target,surah:DATA[target].s,juz:juzOf(target)})}});
+document.addEventListener('change',e=>{const el=e.target,studio=el.matches('#studio [data-k]'),area=analyticsArea(el),control=el.id||el.dataset.k;if(!control)return;
+ let value;if(el.type=='checkbox')value=el.checked;else if(el.type=='range'||el.type=='number')value=Number(el.value);else if(el.tagName=='SELECT')value=el.value;else if(el.type=='color')value=el.value;
+ if(value===undefined)return;
+ if(studio)QuranAnalytics.track('design_setting_change',{field:el.dataset.k,value});
+ else if(el.id!='rec')QuranAnalytics.track('control_change',{control,area,value})});
 const JUZ=[1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582],MAXP=604;
 const PAL=[['#fbf6e8','#17150f'],['#ffffff','#111111'],['#f1e4c3','#2b2112'],['#e9e9e6','#1a1a1a'],['#e3efe1','#10281f'],['#16181b','#e9e2cc']];
 const REC=[
@@ -624,9 +634,9 @@ const st=Object.assign({p:1,a:100,m:'h',bg:null,rec:'Husary_128kbps',mode:'cont'
 if(st.th==null){st.th=st.night?10:0;st.bg=null}if(!st.mv){st.mode='cont';st.mv=1}lang=st.lang||'ar';
 const save=()=>{try{localStorage.setItem('mushaf2',JSON.stringify(st))}catch(e){}};
 const juzOf=p=>JUZ.filter(s=>p>=s).length;
-const CNT={},ORDER=[],IDX={},PAGEOF={},WU={};
+const CNT={},ORDER=[],IDX={},PAGEOF={},WU={},PAGE_SURAHS={};
 SURAHS.forEach(s=>{CNT[s.id]=s.c;for(let a=1;a<=s.c;a++){const k=s.id+':'+a;IDX[k]=ORDER.length;ORDER.push(k)}});
-for(let p=1;p<=MAXP;p++)for(const L of DATA[p].l)if(L.t=='t')for(const w of L.w){if(w[2]==2)continue;const k=w[1];if(!(k in PAGEOF))PAGEOF[k]=p;const u=WU[k]=WU[k]||[];if(w[2]==0){w[4]=u.length;u.push({c:w[0],f:L.f,t:w[3]})}else if(u.length)u[u.length-1].c+=w[0]}
+for(let p=1;p<=MAXP;p++){const surahs=new Set([DATA[p].s]);for(const L of DATA[p].l)if(L.t=='t')for(const w of L.w){if(w[2]==2)continue;const k=w[1];surahs.add(+k.split(':')[0]);if(!(k in PAGEOF))PAGEOF[k]=p;const u=WU[k]=WU[k]||[];if(w[2]==0){w[4]=u.length;u.push({c:w[0],f:L.f,t:w[3]})}else if(u.length)u[u.length-1].c+=w[0]}PAGE_SURAHS[p]=[...surahs]}
 const vt=k=>{const[s,a]=k.split(':');return sName(s)+' — '+T('الآية')+' '+ar(a)};
 const verseText=k=>WU[k].map(u=>u.t).join(' ')+' \u06DD'+ar(k.split(':')[1]);
 const sName=id=>SURAHS[id-1].n;
@@ -647,15 +657,15 @@ function sItem([k,c]){const[s,a]=k.split(':'),d=document.createElement('button')
 function sMore(n){const box=$('#seaR');if(sSent)sSent.remove();const e=Math.min(sR.length,sShown+n);for(;sShown<e;sShown++)box.appendChild(sItem(sR[sShown]));
  if(sShown<sR.length){sSent=document.createElement('div');sSent.style.height='40px';box.appendChild(sSent);new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();sMore(40)}},{root:$('#seaC')}).observe(sSent)}}
 function doSearch(all){const q=nq($('#seaQ').value);const box=$('#seaR');box.innerHTML='';sR=[];sShown=0;sSent=null;sQ=q;
- if(q.replace(/ /g,'').length<2){$('#seaN').textContent=q?T('اكتب حرفين على الأقل'):'';if(all&&q)QuranAnalytics.track('search_submit',{results:0});return}
- const{R,tot}=sFind(q);sR=R;if(all)QuranAnalytics.track('search_submit',{results:R.length});if(!R.length){$('#seaN').textContent=T('لا نتائج');return}
+ if(q.replace(/ /g,'').length<2){$('#seaN').textContent=q?T('اكتب حرفين على الأقل'):'';if(all&&q)QuranAnalytics.track('search_submit',{results:0,query_length:q.replace(/ /g,'').length});return}
+ const{R,tot}=sFind(q);sR=R;if(all)QuranAnalytics.track('search_submit',{results:R.length,matches:tot,query_length:q.replace(/ /g,'').length});if(!R.length){$('#seaN').textContent=T('لا نتائج');return}
  $('#seaN').textContent=ar(tot)+' '+T('نتيجة')+' · '+ar(R.length)+' '+T('آية')+(!all&&R.length>10?' · '+T('عرض أول')+' '+ar(10):'');
  box.scrollTop=0;sMore(all?40:10)}
 let sTm=0;$('#seaQ').addEventListener('input',()=>{clearTimeout(sTm);sTm=setTimeout(()=>doSearch(false),90)});
 $('#seaQ').addEventListener('keydown',e=>{if(e.key=='Enter'){e.preventDefault();$('#seaQ').blur();doSearch(true)}});
 $('#seaGo').onclick=()=>{$('#seaQ').blur();doSearch(true)};
 $('#bSea').onclick=()=>{open('#sSea');setTimeout(()=>$('#seaQ').focus(),250)};$('#seaX').onclick=()=>shut('#sSea');
-function goVerse(k){shut('#sSea');hlK=k;cur=k;go(PAGEOF[k],false);let n=0;const iv=setInterval(()=>{const ws=$$('.w[data-k="'+k+'"]');if(ws.length||++n>25){clearInterval(iv);ws.forEach(x=>x.classList.add('sel'));if(ws[0]&&st.m=='v')ws[0].scrollIntoView({block:'center'})}},100)}
+function goVerse(k){shut('#sSea');hlK=k;cur=k;const[s,a]=k.split(':').map(Number),page=PAGEOF[k];QuranAnalytics.track('search_result_open',{surah:s,verse:a,page,juz:juzOf(page)});go(page,false);let n=0;const iv=setInterval(()=>{const ws=$$('.w[data-k="'+k+'"]');if(ws.length||++n>25){clearInterval(iv);ws.forEach(x=>x.classList.add('sel'));if(ws[0]&&st.m=='v')ws[0].scrollIntoView({block:'center'})}},100)}
 
 /* معاني الغريب */
 const MB=typeof MEAN_BOOKS!='undefined'?MEAN_BOOKS:[],MN=typeof MEAN!='undefined'?MEAN:{},MWc={};
@@ -664,9 +674,9 @@ const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[
 const bname=id=>(MB.find(b=>b.id==id)||{}).n||'';
 const mEnt=k=>(MN[k]||[]).filter(e=>st.mb.includes(e[0]));
 function cover(k,i){if(!st.mo||!MN[k])return null;let m=MWc[k];if(!m){m=MWc[k]={};MN[k].forEach((e,j)=>{if(e[3]>=0)for(let x=e[3];x<e[3]+e[4];x++)(m[x]=m[x]||[]).push(j)})}const r=(m[i]||[]).filter(j=>st.mb.includes(MN[k][j][0]));return r.length?r:null}
-function showMean(el){const k=el.dataset.k,c=cover(k,+el.dataset.i);if(!c)return;QuranAnalytics.track('word_meaning_open',{surah:+k.split(':')[0]});$('#mTtl').textContent=vt(k);
+function showMean(el){const k=el.dataset.k,c=cover(k,+el.dataset.i);if(!c)return;const[s,a]=k.split(':').map(Number),page=PAGEOF[k];QuranAnalytics.track('word_meaning_open',{surah:s,verse:a,page,juz:juzOf(page)});$('#mTtl').textContent=vt(k);
  $('#mBody').innerHTML=c.map(j=>{const e=MN[k][j];return'<div class="me"><b>'+esc(e[1])+'</b><p>'+esc(e[2])+'</p><small>'+esc(bname(e[0]))+'</small></div>'}).join('');open('#sMean')}
-function showVm(k){QuranAnalytics.track('tafsir_open',{surah:+k.split(':')[0]});$('#vmTtl').textContent=vt(k);const E=mEnt(k);
+function showVm(k){const[s,a]=k.split(':').map(Number),page=PAGEOF[k];QuranAnalytics.track('tafsir_open',{surah:s,verse:a,page,juz:juzOf(page)});$('#vmTtl').textContent=vt(k);const E=mEnt(k);
  $('#vmBody').innerHTML=E.length?MB.filter(b=>st.mb.includes(b.id)).map(b=>{const r=E.filter(e=>e[0]==b.id);return r.length?'<h4>'+esc(b.n)+'</h4>'+r.map(e=>'<div class="me"><b>'+esc(e[1])+'</b><p>'+esc(e[2])+'</p></div>').join(''):''}).join(''):'<p class="note">'+T('لا توجد معاني لهذه الآية في الكتب المحددة')+'</p>';open('#sVm')}
 function buildMb(){const s=$('#mbL');s.innerHTML='';MB.forEach(b=>{const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.checked=st.mb.includes(b.id);
  c.onchange=()=>{st.mb=MB.filter(x=>x.id==b.id?c.checked:st.mb.includes(x.id)).map(x=>x.id);save();refreshMeaningWords()};l.append(c,' '+b.n);s.appendChild(l)})}
@@ -691,11 +701,11 @@ function applyKeep(){
  document.addEventListener('visibilitychange',()=>{if(document.hidden)return;if(st.keepOn&&'wakeLock' in navigator&&!wakeLock)acquire().catch(()=>{})});
 }
 function buildTh(){['#thL','#thD','#thG'].forEach((id,k)=>{const s=$(id);s.innerHTML='';TH.forEach((x,i)=>{if(k<2?(x[8]||x[0]!=k):!x[8])return;const b=document.createElement('button');b.style.background=x[8]?(x[0]?'linear-gradient(135deg,#2b4fb8,#6a2fb0 55%,#0e7c86)':'linear-gradient(135deg,#a8d8ff,#e3c4ff 55%,#ffd1e6)'):'linear-gradient(135deg,'+x[1]+' 50%,'+x[6]+' 50%)';b.className=i==st.th?'on':'';b.onclick=()=>selTheme(i);s.appendChild(b)})})}
-function selTheme(i){const t=TH[i];if(!t)return;st.th=i;st.night=t[0]?1:0;st.bg=null;if(t[0])st.dk=i;else st.lt=i;QuranAnalytics.track('theme_change',{theme:i,night:!!t[0]});applyBg();buildTh();buildSw();save()}
+function selTheme(i){const t=TH[i];if(!t)return;st.th=i;st.night=t[0]?1:0;st.bg=null;if(t[0])st.dk=i;else st.lt=i;QuranAnalytics.track('theme_change',{theme:'theme_'+i,theme_index:i,theme_mode:t[0]?'dark':'light'});applyBg();buildTh();buildSw();save()}
 function lum(h){const n=parseInt(h.slice(1),16);return(.299*(n>>16)+.587*((n>>8)&255)+.114*(n&255))/255}
 function buildSw(){const s=$('#sw');s.innerHTML='';const d=document.createElement('button');d.style.background=TH[st.th][6];d.className=st.bg?'':'on';d.onclick=()=>{st.bg=null;applyBg();save();buildSw()};s.appendChild(d);
  PAL.forEach(p=>{const b=document.createElement('button');b.style.background=p[0];b.className=st.bg&&st.bg[0]==p[0]?'on':'';b.onclick=()=>{st.bg=p;applyBg();save();buildSw()};s.appendChild(b)});
- const c=document.createElement('input');c.type='color';c.value=pg()[0];c.oninput=()=>{st.bg=[c.value,lum(c.value)<.45?'#f1ead6':'#17150f'];applyBg();save();$$('#sw button').forEach(x=>x.className='')};s.appendChild(c)}
+ const c=document.createElement('input');c.id='customBackgroundColor';c.type='color';c.value=pg()[0];c.oninput=()=>{st.bg=[c.value,lum(c.value)<.45?'#f1ead6':'#17150f'];applyBg();save();$$('#sw button').forEach(x=>x.className='')};s.appendChild(c)}
 $('#fcol').oninput=e=>{st.fc=e.target.value;applyBg();save()};$('#fcR').onclick=()=>{st.fc=null;applyBg();save()};
 /* أزرار ± للمنزلقات */
 const PCT=['aRng','brR','fbR','bw','g0','g1','dim','bx','by','nm.x','nm.y','rf.x','rf.y','sh.a'];
@@ -751,13 +761,13 @@ function size(){
  document.documentElement.style.setProperty('--pw',Math.max(240,pw)+'px');go(st.p,false)}
 function go(n,smooth){n=Math.max(1,Math.min(MAXP,n|0||1));lock=true;const two=st.fit=='2',tg=two&&st.m=='h'?(n%2?n:n-1):n,s=pager.querySelector('.slide[data-p="'+tg+'"]');
  if(s)s.scrollIntoView({behavior:smooth?'smooth':'instant',block:'start',inline:two&&st.m=='h'?'start':'center'});setPage(n,true);setTimeout(()=>{lock=false},smooth?700:150)}
-function setPage(n,f){if(n==st.p&&!f)return;st.p=n;save();QuranAnalytics.page(n,DATA[n].s)}
+function setPage(n,f){if(n==st.p&&!f)return;st.p=n;save();QuranAnalytics.page(n,PAGE_SURAHS[n],juzOf(n))}
 function flash(t){toast(t)}
 
 /* الفهرس */
 let tab='s';
 function idx(){const b=$('#idxBody');$$('#sIdx .tabs button').forEach(x=>x.classList.toggle('on',x.dataset.t==tab));let h='';
- if(tab=='s')for(const s of SURAHS)h+='<button class="row" data-g="'+s.p+'"><b>'+ar(s.id)+'</b><span>'+s.n+'</span><i>'+ar(s.c)+' '+T('آية')+' · '+T('ص')+' '+ar(s.p)+'</i></button>';
+ if(tab=='s')for(const s of SURAHS)h+='<button class="row" data-g="'+s.p+'" data-surah="'+s.id+'"><b>'+ar(s.id)+'</b><span>'+s.n+'</span><i>'+ar(s.c)+' '+T('آية')+' · '+T('ص')+' '+ar(s.p)+'</i></button>';
  if(tab=='j')JUZ.forEach((p,i)=>{h+='<button class="row" data-g="'+p+'"><b>'+ar(i+1)+'</b><span>'+T('الجزء ')+ar(i+1)+'</span><i>'+T('ص')+' '+ar(p)+'</i></button>'});
  if(tab=='p'){h='<div class="grid">';for(let p=1;p<=MAXP;p++)h+='<button data-g="'+p+'"'+(p==st.p?' class="cur"':'')+'>'+ar(p)+'</button>';h+='</div>'}
  b.innerHTML=h;const c=b.querySelector('.cur');c&&c.scrollIntoView({block:'center'})}
@@ -771,7 +781,7 @@ $$('.sheet').forEach(s=>s.addEventListener('click',e=>{if(e.target===s){s.classL
 function ui(){document.documentElement.style.setProperty('--a',st.a/100);$('#aRng').value=st.a;$('#mH').classList.toggle('on',st.m=='h');$('#mV').classList.toggle('on',st.m=='v')}
 $('#bSet').onclick=()=>{$('#pFrom').value=$('#pTo').value=st.p;$('#pFrom').max=$('#pTo').max=MAXP;buildSw();buildTh();buildMb();$('#lang').value=lang;syncRg();open('#sSet')};
 $('#aRng').oninput=e=>{st.a=+e.target.value;ui();save()};
-$('#mH').onclick=()=>{st.m='h';ui();build()};$('#mV').onclick=()=>{st.m='v';ui();build()};
+$('#mH').onclick=()=>{st.m='h';ui();build();QuranAnalytics.track('reading_mode_change',{mode:st.m})};$('#mV').onclick=()=>{st.m='v';ui();build();QuranAnalytics.track('reading_mode_change',{mode:st.m})};
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement,de=document.documentElement;
 if(!(de.requestFullscreen||de.webkitRequestFullscreen))$('#bFs').style.display='none';
 $('#bFs').onclick=()=>{fsEl()?(document.exitFullscreen||document.webkitExitFullscreen).call(document):(de.requestFullscreen||de.webkitRequestFullscreen).call(de)};
@@ -790,9 +800,8 @@ const au=new Audio();au.preload='auto';let pl=null;
 const recSel=$('#rec');REC.forEach(g=>{const o=document.createElement('optgroup');o.label=g[0];g[1].forEach(r=>{const x=document.createElement('option');x.value=r[1];x.textContent=r[0];o.appendChild(x)});recSel.appendChild(o)});
 if(st.rec=='Husary_Mujawwad_128kbps')st.rec='Husary_128kbps_Mujawwad';
 if(!REC.some(g=>g[1].some(r=>r[1]==st.rec)))st.rec='Husary_128kbps';save();
-recSel.addEventListener('change',()=>QuranAnalytics.track('reciter_selected'));
 const recName=()=>{for(const g of REC)for(const r of g[1])if(r[1]==st.rec)return r[0];return st.rec};
-recSel.value=st.rec;recSel.onchange=()=>{st.rec=recSel.value;save();if(pl)playAt();else $('#aLb').textContent=recName()};
+recSel.value=st.rec;recSel.onchange=()=>{st.rec=recSel.value;save();QuranAnalytics.track('reciter_selected',{reciter:st.rec,reciter_name:recName()});if(pl)playAt();else $('#aLb').textContent=recName()};
 $('#aLb').textContent=recName();
 const aUrl=k=>{const[s,a]=k.split(':');return 'https://everyayah.com/data/'+st.rec+'/'+String(s).padStart(3,'0')+String(a).padStart(3,'0')+'.mp3'};
 let cur=null;
@@ -811,22 +820,22 @@ function follow(k){const ws=[...pager.querySelectorAll('.w[data-k="'+k+'"]')],pr
  if(vis)return;if(ws.length&&Date.now()-lastTouch<2500)return;
  if(ws.length){ws[0].scrollIntoView({block:'center',inline:'center',behavior:'smooth'});return}
  go(PAGEOF[k],true);setTimeout(()=>{const w=pager.querySelector('.w[data-k="'+k+'"]');w&&w.scrollIntoView({block:'center',inline:'center'})},750)}
-function startPlay(k){const m=st.mode,s=+k.split(':')[0];let list,i=0,loops=1;QuranAnalytics.track('recitation_start',{surah:s,mode:m});
+function startPlay(k){const m=st.mode,s=+k.split(':')[0];let list,i=0,loops=1;
  if(m=='once')list=[k];else if(m=='cont'){list=ORDER.slice(IDX[k],IDX[s+':'+CNT[s]]+1)}
  else if(m=='v'){list=[k];loops=st.n}
  else if(m=='s'){list=ORDER.slice(IDX[s+':1'],IDX[s+':'+CNT[s]]+1);i=IDX[k]-IDX[s+':1'];loops=st.n}
  else{if(!st.rs){st.rs=st.re=k}list=ORDER.slice(IDX[st.rs],IDX[st.re]+1);loops=st.n}
- pl={list,i,loops,loop:0,first:true};playAt()}
+ pl={list,i,loops,loop:0,first:true};playAt();const verse=+k.split(':')[1],page=PAGEOF[k];QuranAnalytics.track('recitation_start',{reciter:st.rec,reciter_name:recName(),surah:s,verse,page,juz:juzOf(page),mode:m})}
 function playAt(){if(!pl)return;const k=pl.list[pl.i];au.src=aUrl(k);au.play().catch(()=>{});pl.k=k;markPlay();document.body.classList.add('hasbar');$('#aLb').textContent=vt(k);
  if(!pl.first)follow(k);pl.first=false;ico('#aPlay','pause');
  const nx=pl.list[pl.i+1];if(nx){const pre=new Audio();pre.preload='auto';pre.src=aUrl(nx)}}
 au.onended=()=>{if(!pl)return;pl.i++;if(pl.i>=pl.list.length){pl.loop++;if(pl.loops&&pl.loop>=pl.loops){stopPlay();return}pl.i=0}playAt()};
-au.onerror=()=>{if(pl){stopPlay();flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
-function stopPlay(){if(pl)QuranAnalytics.track('recitation_stop',{surah:+pl.k.split(':')[0]});au.pause();pl=null;document.body.classList.remove('hasbar');ico('#aPlay','play');markPlay();$('#aLb').textContent=recName()}
+au.onerror=()=>{if(pl){QuranAnalytics.track('recitation_error',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],kind:au.error&&au.error.code||0});stopPlay();flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
+function stopPlay(){const data=pl?{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],verse:+pl.k.split(':')[1]}:{};au.pause();pl=null;document.body.classList.remove('hasbar');ico('#aPlay','play');markPlay();$('#aLb').textContent=recName();if(data.surah)QuranAnalytics.track('recitation_stop',data)}
 function markPlay(root){const k=pl&&pl.k;(root?[root]:[document]).forEach(r=>r.querySelectorAll('.w.play').forEach(x=>x.classList.remove('play')));if(k)(root?root:document).querySelectorAll('.w[data-k="'+k+'"]').forEach(x=>x.classList.add('play'))}
 const pageKey=()=>{const s=pager.querySelector('.slide[data-p="'+st.p+'"]')||pager.querySelector('.slide'),w=s&&s.querySelector('.w[data-k]');return w?w.dataset.k:null};
 const barKey=()=>ck()||pageKey();
-$('#aPlay').onclick=()=>{if(pl&&!au.paused){QuranAnalytics.track('recitation_pause');au.pause();ico('#aPlay','play')}else if(pl){QuranAnalytics.track('recitation_resume');au.play();ico('#aPlay','pause')}else{const k=barKey();if(k)startPlay(k)}};
+$('#aPlay').onclick=()=>{if(pl&&!au.paused){au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play')}else if(pl){au.play();QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause')}else{const k=barKey();if(k)startPlay(k)}};
 const step=d=>{const k=barKey();if(!k)return;const j=IDX[k]+d;if(j<0||j>=ORDER.length)return;cur=ORDER[j];startPlay(cur);follow(cur)};
 $('#aPrev').onclick=()=>step(-1);$('#aNext').onclick=()=>step(1);$('#aStop').onclick=()=>stopPlay();
 const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};let seeking=false;
@@ -859,13 +868,13 @@ $('#cPlay').onclick=()=>{shut('#sCtx');clrSel();startPlay(cur)};
 $('#cCopy').onclick=()=>{shut('#sCtx');$('#vTxt').onclick();clrSel()};
 $('#cImg').onclick=()=>{shut('#sCtx');$('#vDl').onclick();clrSel()};
 $('#cDs').onclick=()=>{shut('#sCtx');$('#vDs').onclick()};
-$('#cShare').onclick=async()=>{shut('#sCtx');const x=verseText(cur);clrSel();if(navigator.share)try{await navigator.share({text:x});QuranAnalytics.track('text_shared');return}catch(e){if(e.name=='AbortError')return}$('#vTxt').onclick()};
+$('#cShare').onclick=async()=>{shut('#sCtx');const x=verseText(cur),[surah,verse]=cur.split(':').map(Number),page=PAGEOF[cur];clrSel();if(navigator.share)try{await navigator.share({text:x});QuranAnalytics.track('text_shared',{surah,verse,page,juz:juzOf(page)});return}catch(e){if(e.name=='AbortError')return}$('#vTxt').onclick()};
 $('#vX').onclick=()=>shut('#vbar');
 $('#setX').onclick=()=>shut('#sSet');$('#ixX').onclick=()=>shut('#sIdx');
 function firstOnPage(){const L=DATA[st.p].l;let f=null;for(const l of L)if(l.t=='t')for(const w of l.w){if(w[2]==0&&w[1]){if(w[4]===0)return w[1];f=f||w[1]}}return f||ORDER[0]}
-$('#bDes').onclick=()=>{QuranAnalytics.track('design_open');const s=document.querySelector('.w.sel');cur=(s&&s.dataset.k)||firstOnPage();$('#vDs').onclick()};
+$('#bDes').onclick=()=>{const s=document.querySelector('.w.sel');cur=(s&&s.dataset.k)||firstOnPage();$('#vDs').onclick()};
 $('#bAbout').onclick=()=>{shut('#sSet');open('#sAbout')};$('#abX').onclick=()=>shut('#sAbout');
-$('#vTxt').onclick=async()=>{const t=verseText(cur);try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove()}flash(T('تم نسخ النص'))};
+$('#vTxt').onclick=async()=>{const t=verseText(cur),[surah,verse]=cur.split(':').map(Number),page=PAGEOF[cur];try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove()}QuranAnalytics.track('verse_text_copied',{surah,verse,page,juz:juzOf(page)});flash(T('تم نسخ النص'))};
 async function fontsFor(us){await stkFonts();await Promise.all([...new Set([0,...us.map(u=>u.f)])].map(f=>document.fonts.load('40px F'+f,'\uF100')));if(D.wm.on)try{await document.fonts.load(stkFont({ff:D.wm.ff,b:D.wm.b},40),D.wm.text||'ا')}catch(e){}}
 /* رسم النص على canvas */
 const cw=(ctx,u,fs)=>{ctx.font=fs+'px F'+u.f;return[...u.c].map(ch=>ctx.measureText(ch).width)};
@@ -884,8 +893,8 @@ async function quickPng(){const us=WU[cur].map((u,i)=>({...u,i}));await fontsFor
  if(!$('#vTr').checked){x.fillStyle=pg()[0];x.fillRect(0,0,c.width,c.height)}
  x.fillStyle=$('#vTr').checked?$('#vCol').value:(lum(pg()[0])<.45?pg()[1]:$('#vCol').value);paint(x,L,fs,pad,c.width-pad,c.height/2,'c',2.15);
  const blob=await new Promise(r=>c.toBlob(r,'image/png'));return{blob,width:c.width,height:c.height}}
-$('#vImg').onclick=async()=>{const image=await quickPng(),b=image.blob;QuranAnalytics.track('media_created',{media_type:'image',source:'quick_verse',bytes:b.size,width:image.width,height:image.height,surah:+cur.split(':')[0],verse_count:1});try{await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);flash(T('تم نسخ الصورة'))}catch(e){dl(b,fname('png'));flash(T('تم حفظ الصورة'))}};
-$('#vDl').onclick=async()=>{const image=await quickPng(),b=image.blob;QuranAnalytics.track('media_created',{media_type:'image',source:'quick_verse',bytes:b.size,width:image.width,height:image.height,surah:+cur.split(':')[0],verse_count:1});dl(b,fname('png'));flash(T('تم حفظ الصورة'))};
+$('#vImg').onclick=async()=>{const image=await quickPng(),b=image.blob,[surah,verse]=cur.split(':').map(Number),page=PAGEOF[cur];QuranAnalytics.track('media_created',{media_type:'image',source:'quick_verse',bytes:b.size,width:image.width,height:image.height,surah,verse,page,juz:juzOf(page),verse_count:1});try{await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);flash(T('تم نسخ الصورة'))}catch(e){dl(b,fname('png'));flash(T('تم حفظ الصورة'))}};
+$('#vDl').onclick=async()=>{const image=await quickPng(),b=image.blob,[surah,verse]=cur.split(':').map(Number),page=PAGEOF[cur];QuranAnalytics.track('media_created',{media_type:'image',source:'quick_verse',bytes:b.size,width:image.width,height:image.height,surah,verse,page,juz:juzOf(page),verse_count:1});dl(b,fname('png'));flash(T('تم حفظ الصورة'))};
 
 /* استوديو التصميم */
 const RAT={'1:1':[1,1],'4:5':[4,5],'3:4':[3,4],'2:3':[2,3],'9:16':[9,16],'16:9':[16,9],'4:3':[4,3],'3:2':[3,2],'21:9':[21,9]};
@@ -918,8 +927,8 @@ $$('#studio [data-k]').forEach(el=>{const k=el.dataset.k;
  else if(el.type=='number'){el.onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();el.blur()}};el.onchange=()=>{const n=+el.value;if(el.value!==''&&!isNaN(n)){const mn=el.min===''?-1/0:+el.min,mx=el.max===''?1/0:+el.max;sp(D,k,Math.max(mn,Math.min(mx,Math.round(n))))}after(k)}}
  else el.oninput=()=>{sp(D,k,el.type=='checkbox'?el.checked:el.type=='range'?+el.value:(k=='s'?+el.value:el.value));after(k)}});
 $$('#stTabs button').forEach(b=>b.onclick=()=>{$$('#stTabs button').forEach(x=>x.classList.toggle('on',x==b));$$('.tp').forEach(t=>t.classList.toggle('on',t.id=='tp-'+b.dataset.t));if(b.dataset.t=='hi')histRender()});
-$('#vDs').onclick=()=>{const[s,a]=cur.split(':').map(Number);shut('#vbar');D.s=s;D.a1=D.a2=a;D.cut0=D.cut1=0;D.brk={};D.rf.on=1;$('#studio').classList.add('on');after('s0');setTimeout(()=>{D.a1=D.a2=a;after('a1')},0)};
-$('#stX').onclick=()=>{$('#studio').classList.remove('on');if(wpOn||wpBusy)wpStop();if(D.bg=='cam')camOff()};
+$('#vDs').onclick=()=>{const[s,a]=cur.split(':').map(Number);QuranAnalytics.track('design_open',{source:'verse',surah:s,verse:a});shut('#vbar');D.s=s;D.a1=D.a2=a;D.cut0=D.cut1=0;D.brk={};D.rf.on=1;$('#studio').classList.add('on');after('s0');setTimeout(()=>{D.a1=D.a2=a;after('a1')},0)};
+$('#stX').onclick=()=>{$('#studio').classList.remove('on');QuranAnalytics.track('design_close');if(wpOn||wpBusy)wpStop();if(D.bg=='cam')camOff()};
 const PATS=[['star','نجمة ثمانية'],['diamond','معيّنات'],['hex','خلايا سداسية'],['square','مربعات متداخلة'],['triangle','مثلثات'],['rosette','وريدات هندسية'],['octagon','مثمنات'],['lattice','شبكة مائلة'],['rings','دوائر متحدة المركز'],['cross','نجوم متقاطعة']];
 function pat(x,W,H,c1,c2,type='star',preview=false){x.fillStyle=c1;x.fillRect(0,0,W,H);const s=Math.min(W,H)/(preview?2.5:5.5);x.strokeStyle=c2;x.lineWidth=Math.max(1,s/30);x.globalAlpha=.65;
  const polygon=(cx,cy,r,n,rot=0,inner)=>{x.beginPath();for(let i=0;i<n*(inner?2:1);i++){const a=rot+i*Math.PI/(n*(inner?1:0.5)),rr=inner&&i%2?r*inner:r;x.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr)}x.closePath();x.stroke()};
@@ -1108,8 +1117,8 @@ async function exportMp4(){
  }finally{REV=null;STK_T=()=>performance.now()/1000;try{venc.close()}catch(e){}try{aenc&&aenc.close()}catch(e){}}
  return{b:new Blob([muxer.target.buffer],{type:'video/mp4'}),ext:'mp4',duration:dur,width:W,height:H}}
 let lastV=null;
-$('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(lastV.b,n)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
-$('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});await share(lastV.b,n,lastV.b.type)}catch(e){$('#exMsg').textContent=T('خطأ: ')+e.message}};
+$('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(lastV.b,n)}catch(e){QuranAnalytics.track('media_export_failed',{media_type:'video',source:'studio',kind:e&&e.name||'error'});$('#exMsg').textContent=T('خطأ: ')+e.message}};
+$('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});await share(lastV.b,n,lastV.b.type)}catch(e){QuranAnalytics.track('media_export_failed',{media_type:'video',source:'studio',kind:e&&e.name||'error',action:'share'});$('#exMsg').textContent=T('خطأ: ')+e.message}};
 
 /* خلفية فيديو + قص + ملصقات */
 let prevOn=false,liveOn=false,pa=null;
@@ -1343,11 +1352,12 @@ $('#lang').onchange=e=>{lang=st.lang=e.target.value;save();applyLang();build();a
 const OV=[];let ignorePop=0;
 const ovEls=[...$$('.sheet'),$('#studio')];
 const ovObs=new MutationObserver(ms=>ms.forEach(m=>{const el=m.target,on=el.classList.contains('on'),i=OV.indexOf(el);
+ if(el.id!='analyticsConsent')QuranAnalytics.track('overlay_change',{overlay:el.id,open:on});
  if(on&&i<0){OV.push(el);history.pushState({ov:OV.length},'')}
  else if(!on&&i>=0){OV.splice(i,1);ignorePop++;history.back()}}));
 ovEls.forEach(e=>ovObs.observe(e,{attributes:true,attributeFilter:['class']}));
 window.addEventListener('popstate',()=>{if(ignorePop){ignorePop--;return}const el=OV.pop();if(!el)return;
- if(el.id=='studio'){el.classList.remove('on')}else{el.classList.remove('on');if(el.id=='sCtx')clrSel()}});
+ if(el.id=='studio'){el.classList.remove('on');QuranAnalytics.track('design_close',{source:'back'})}else{el.classList.remove('on');if(el.id=='sCtx')clrSel()}});
 /* ===== السجل + مجلد الألبوم + خلفيات جاهزة + صورة الصفحة ===== */
 let _db=null;
 function idb(){return _db||(_db=new Promise((res,rej)=>{const r=indexedDB.open('mushaf3',1);
@@ -1357,7 +1367,8 @@ function tx(store,mode,fn){return idb().then(db=>new Promise((res,rej)=>{const t
  t.oncomplete=()=>res(rq&&rq.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)}))}
 const histList=()=>tx('designs','readonly',s=>s.getAll()).then(a=>(a||[]).sort((x,y)=>y.ts-x.ts));
 function histAdd(blob,meta){if(!blob)return Promise.resolve(null);
- const info=meta||{},page=Number(info.page)||0;QuranAnalytics.track('media_created',{media_type:info.type||'file',source:info.source||'export',bytes:blob.size,width:Number(info.width)||0,height:Number(info.height)||0,duration_seconds:Number(info.duration)||0,surah:Number(info.surah)||page&&DATA[page].s||0,verse_count:Number(info.verseCount)||0,page});
+ const info=meta||{},page=Number(info.page)||0,data={media_type:info.type||'file',source:info.source||'export',bytes:blob.size,width:Number(info.width)||0,height:Number(info.height)||0,duration_seconds:Number(info.duration)||0,surah:Number(info.surah)||page&&DATA[page].s||0,verse_count:Number(info.verseCount)||0,page};
+ if(info.type=='video')Object.assign(data,{theme:st.th,background:D.bg,pattern:D.bg=='pat'?D.pat:'none',ratio:D.ratio,audio_source:D.asrc,reciter:D.asrc=='ayat'?st.rec:'none'});QuranAnalytics.track('media_created',data);
  const rec=Object.assign({id:Date.now()+'_'+Math.random().toString(36).slice(2,7),ts:Date.now(),mime:blob.type||'application/octet-stream',size:blob.size},meta||{});rec.blob=blob;
  return tx('designs','readwrite',s=>s.put(rec)).then(()=>{albumSave(blob,rec.name);return rec}).catch(e=>{console.warn('histAdd',e);return null})}
 const histDel=id=>tx('designs','readwrite',s=>s.delete(id));
@@ -1388,7 +1399,7 @@ async function histRender(){const g=$('#hiG');if(!g)return;let list=[];try{list=
   c.querySelector('.hiX').onclick=async ev=>{ev.stopPropagation();try{await histDel(r.id)}catch(e){}URL.revokeObjectURL(url);histRender()};
   c.onclick=()=>share(r.blob,r.name,r.mime);
   g.appendChild(c)})}
-const histGo=()=>{$('#studio').classList.add('on');$$('#stTabs button').forEach(b=>b.classList.toggle('on',b.dataset.t=='hi'));$$('.tp').forEach(t=>t.classList.toggle('on',t.id=='tp-hi'));histRender()};
+const histGo=()=>{$('#studio').classList.add('on');QuranAnalytics.track('design_open',{source:'history'});$$('#stTabs button').forEach(b=>b.classList.toggle('on',b.dataset.t=='hi'));$$('.tp').forEach(t=>t.classList.toggle('on',t.id=='tp-hi'));histRender()};
 
 /* خلفيات جاهزة من مجلد backgrounds/ */
 const RD_EXT=/\.(jpe?g|jfif|jpe|png|apng|webp|avif|gif|bmp|svg|ico)$/i;
@@ -1474,17 +1485,17 @@ $('#hiOpen').onclick=albumPerm;
 $('#hiClr').onclick=async()=>{if(!confirm('مسح كل التصاميم المحفوظة؟'))return;try{await histClear()}catch(e){}histRender()};
 $('#hiDlAll').onclick=async()=>{try{const l=await histList();l.forEach((r,i)=>setTimeout(()=>dl(r.blob,r.name),i*350))}catch(e){}};
 $('#rdR').onclick=()=>renderReady(true);
-$('#bAsTop').onclick=()=>{shut('#sSet');asOn?asStop():asStart()};
+$('#bAsTop').onclick=()=>{shut('#sSet');asOn?asStop():asStart();QuranAnalytics.track('autoscroll_change',{enabled:!!asOn,speed:st.sp})};
 $('#bNight').onclick=()=>{st.night=!st.night;const t=TH[st.night?st.dk:st.lt];if(t)selTheme(st.night?st.dk:st.lt);else{document.documentElement.classList.toggle('nc',st.night);applyBg()}};
-$('#bMn').onclick=()=>{st.mo=st.mo?0:1;$('#mnOn').checked=!!st.mo;refreshMeaningWords();save();toast(T(st.mo?'تم تفعيل تلوين المعاني':'تم إيقاف تلوين المعاني'))};
-$('#bFit').onclick=()=>{const fs=['a','w','h','2'],i=fs.indexOf(st.fit);st.fit=fs[(i+1)%fs.length];save();fitUi();build();size();toast(T('وضع الملاءمة')+': '+T(({'a':'تلقائي','w':'ملاءمة العرض','h':'ملاءمة الارتفاع','2':'صفحتان'}[st.fit])))};
+$('#bMn').onclick=()=>{st.mo=st.mo?0:1;$('#mnOn').checked=!!st.mo;refreshMeaningWords();save();QuranAnalytics.track('meaning_highlight_change',{enabled:!!st.mo});toast(T(st.mo?'تم تفعيل تلوين المعاني':'تم إيقاف تلوين المعاني'))};
+$('#bFit').onclick=()=>{const fs=['a','w','h','2'],i=fs.indexOf(st.fit);st.fit=fs[(i+1)%fs.length];save();fitUi();build();size();QuranAnalytics.track('page_fit_change',{fit:st.fit});toast(T('وضع الملاءمة')+': '+T(({'a':'تلقائي','w':'ملاءمة العرض','h':'ملاءمة الارتفاع','2':'صفحتان'}[st.fit])))};
 $('#bKeep').onclick=keepToggle;
 albumInit();renderReady();
 
 /* بدء */
 decorate();fitUi();enh();applyBg();ui();build();modesUi();refresh();limits();applyLang();
 $('#analyticsManage').onclick=()=>QuranAnalytics.manage();
-QuranAnalytics.init(()=>({page:st.p,surah:DATA[st.p].s}));
+QuranAnalytics.init(()=>({page:st.p,surah:DATA[st.p].s,surahs:PAGE_SURAHS[st.p],juz:juzOf(st.p),mode:st.m,reader_active:!$('.sheet.on')&&!$('#studio').classList.contains('on'),theme:'theme_'+st.th,theme_index:st.th,theme_mode:st.night?'dark':'light',reciter:st.rec,reciter_name:recName(),recitation_active:!!(pl&&!au.paused),recitation_surah:pl?+pl.k.split(':')[0]:undefined,recitation_page:pl?PAGEOF[pl.k]:undefined,recitation_juz:pl?juzOf(PAGEOF[pl.k]):undefined,studio_open:$('#studio').classList.contains('on'),design_surah:D.s,design_background:D.bg,design_pattern:D.bg=='pat'?D.pat:'none',design_ratio:D.ratio}));
 document.fonts.ready.then(()=>go(st.p,false));
 addEventListener('resize',size);addEventListener('orientationchange',()=>setTimeout(size,250));
 addEventListener('pagehide',save);document.addEventListener('visibilitychange',save);applyKeep();
