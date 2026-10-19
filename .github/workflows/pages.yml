@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'theholyquran/**'
+      - 'prayerz/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -28,12 +29,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Include custom domain
-        run: cp CNAME theholyquran/CNAME
-      - name: Upload Quran app as site root
+      - name: Prepare site with Quran app at the root
+        run: |
+          mkdir _site
+          cp -R theholyquran/. _site/
+          cp -R prayerz _site/prayerz
+          cp CNAME _site/CNAME
+      - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./theholyquran
+          path: ./_site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
