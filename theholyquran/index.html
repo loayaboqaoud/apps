@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f4f45">
-<meta name="app-version" content="1.1.6">
+<meta name="app-version" content="1.1.7">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -311,7 +311,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout" data-analytics-name="About app"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="aboutCloseButton" aria-label="إغلاق حول التطبيق" data-aria-source="إغلاق حول التطبيق" data-analytics-name="Close about app">✕</button></div>
 <p><b>تطوير:</b> Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-10-05</span></p>
-<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.1.6</span></p>
+<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.1.7</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -345,7 +345,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <h4>اللغة</h4><select id="lang" style="width:100%"></select>
 <h4>الأوفلاين</h4><div class="act" style="margin-top:0"><button id="bOff" class="alt">حالة الأوفلاين</button></div><p class="note" id="offMsg"></p>
 <h4>الخصوصية والتحليلات</h4><div class="act" style="margin-top:0"><button id="analyticsManage" class="alt">إدارة موافقة التحليلات</button></div><p class="note" id="analyticsStatus"></p>
-<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.1.6</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
+<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.1.7</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
 <p class="note" id="updateStatus" aria-live="polite"></p>
 <div class="act"><a id="reportProblem" class="btn alt" href="mailto:loqasoftware@gmail.com">الإبلاغ عن مشكلة</a></div>
 <div class="act" style="margin-top:14px"><button id="bAbout" class="alt">حول التطبيق</button></div>
@@ -645,7 +645,7 @@ const CNT={},ORDER=[],IDX={},PAGEOF={},WU={},PAGE_SURAHS={};
 SURAHS.forEach(s=>{CNT[s.id]=s.c;for(let a=1;a<=s.c;a++){const k=s.id+':'+a;IDX[k]=ORDER.length;ORDER.push(k)}});
 for(let p=1;p<=MAXP;p++){const surahs=new Set([DATA[p].s]);for(const L of DATA[p].l)if(L.t=='t')for(const w of L.w){if(w[2]==2)continue;const k=w[1];surahs.add(+k.split(':')[0]);if(!(k in PAGEOF))PAGEOF[k]=p;const u=WU[k]=WU[k]||[];if(w[2]==0){w[4]=u.length;u.push({c:w[0],f:L.f,t:w[3]})}else if(u.length)u[u.length-1].c+=w[0]}PAGE_SURAHS[p]=[...surahs]}
 const vt=k=>{const[s,a]=k.split(':');return sName(s)+' — '+T('الآية')+' '+ar(a)};
-const verseText=k=>WU[k].map(u=>u.t).join(' ')+' \u06DD'+ar(k.split(':')[1]);
+const verseText=k=>{const[s,a]=k.split(':').map(Number);const sn=SURAHS.find(x=>x.id==s);const snm=sn?sn.n:'';return WU[k].map(u=>u.t).join(' ')+' \u06DD'+ar(a)+' ['+snm+' '+ar(a)+']'};
 const sName=id=>SURAHS[id-1].n;
 
 /* البحث */
@@ -916,7 +916,7 @@ $('#settingsCloseButton').onclick=()=>closeOverlay('#sSet');$('#indexCloseButton
 function firstOnPage(){const L=DATA[st.p].l;let f=null;for(const l of L)if(l.t=='t')for(const w of l.w){if(w[2]==0&&w[1]){if(w[4]===0)return w[1];f=f||w[1]}}return f||ORDER[0]}
 $('#bDes').onclick=()=>{const s=document.querySelector('.w.sel');cur=(s&&s.dataset.k)||firstOnPage();$('#vDs').onclick()};
 $('#bAbout').onclick=()=>{closeOverlay('#sSet');openOverlay('#sAbout')};$('#aboutCloseButton').onclick=()=>closeOverlay('#sAbout');
-$('#vTxt').onclick=async()=>{const t=verseText(cur),[surah,verse]=cur.split(':').map(Number),page=PAGEOF[cur];try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove()}QuranAnalytics.track('verse_text_copied',{surah,verse,page,juz:juzOf(page)});flash(T('تم نسخ النص'))};
+$('#vTxt').onclick=()=>{const t=verseText(cur),[surah,verse]=cur.split(':').map(Number),page=PAGEOF[cur];let copied=false;const doFallback=()=>{try{const x=document.createElement('textarea');x.value=t;x.style.position='fixed';x.style.left='-9999px';x.style.top='0';x.setAttribute('readonly','');document.body.appendChild(x);if(navigator.userAgent.match(/iPhone|iPad|iPod/i)){const range=document.createRange();range.selectNodeContents(x);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);x.setSelectionRange(0,t.length)}else{x.select()}const ok=document.execCommand('copy');x.remove();return ok}catch(e){return false}};if(navigator.clipboard&&typeof navigator.clipboard.writeText==='function'){try{const p=navigator.clipboard.writeText(t);copied=true;if(p&&typeof p.then==='function'){p.then(()=>{}).catch(()=>{doFallback()})}}catch(e){copied=doFallback()}}else{copied=doFallback()}QuranAnalytics.track('verse_text_copied',{surah,verse,page,juz:juzOf(page)});flash(T('تم نسخ النص'))};
 async function fontsFor(us){await stkFonts();await Promise.all([...new Set([0,...us.map(u=>u.f)])].map(f=>document.fonts.load('40px F'+f,'\uF100')));if(D.wm.on)try{await document.fonts.load(stkFont({ff:D.wm.ff,b:D.wm.b},40),D.wm.text||'ا')}catch(e){}}
 /* رسم النص على canvas */
 const cw=(ctx,u,fs)=>{ctx.font=fs+'px F'+u.f;return[...u.c].map(ch=>ctx.measureText(ch).width)};
