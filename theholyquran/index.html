@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f4f45">
-<meta name="app-version" content="1.1.7">
+<meta name="app-version" content="1.1.8">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -100,6 +100,7 @@ button,input,select{font:inherit;color:inherit}button{cursor:pointer}
 .v .slide{width:100%;height:calc(var(--pw)*1.64 + 34px)}
 #pager.spread .slide{width:max(calc(var(--pw) + 16px),50%)}
 #pager.spread .slide:nth-child(odd){align-items:flex-end}#pager.spread .slide:nth-child(even){align-items:flex-start}
+#pager.h.spread .slide{overflow-y:hidden;align-items:center;padding:0 8px}
 #pager.h.spread .slide:nth-child(odd){scroll-snap-align:start}#pager.h.spread .slide:nth-child(even){scroll-snap-align:none}
 #pager.v.spread{flex-direction:row;flex-wrap:wrap;align-content:flex-start;justify-content:center}
 .page{direction:rtl;flex:none;width:var(--pw);height:calc(var(--pw)*1.64);margin:auto;position:relative;color:var(--pink);
@@ -645,16 +646,16 @@ const CNT={},ORDER=[],IDX={},PAGEOF={},WU={},PAGE_SURAHS={};
 SURAHS.forEach(s=>{CNT[s.id]=s.c;for(let a=1;a<=s.c;a++){const k=s.id+':'+a;IDX[k]=ORDER.length;ORDER.push(k)}});
 for(let p=1;p<=MAXP;p++){const surahs=new Set([DATA[p].s]);for(const L of DATA[p].l)if(L.t=='t')for(const w of L.w){if(w[2]==2)continue;const k=w[1];surahs.add(+k.split(':')[0]);if(!(k in PAGEOF))PAGEOF[k]=p;const u=WU[k]=WU[k]||[];if(w[2]==0){w[4]=u.length;u.push({c:w[0],f:L.f,t:w[3]})}else if(u.length)u[u.length-1].c+=w[0]}PAGE_SURAHS[p]=[...surahs]}
 const vt=k=>{const[s,a]=k.split(':');return sName(s)+' — '+T('الآية')+' '+ar(a)};
-const verseText=k=>{const[s,a]=k.split(':').map(Number);const sn=SURAHS.find(x=>x.id==s);const snm=sn?sn.n:'';return WU[k].map(u=>u.t).join(' ')+' \u06DD'+ar(a)+' ['+snm+' '+ar(a)+']'};
+const verseText=k=>{const[s,a]=k.split(':').map(Number);const sn=SURAHS.find(x=>x.id==s);const snm=sn?sn.n:'';return '('+WU[k].map(u=>u.t).join(' ')+' \u06DD'+ar(a)+')['+snm+' '+ar(a)+']'};
 const sName=id=>SURAHS[id-1].n;
 
 /* البحث */
 let hlK=null;
 const SSTRIP=/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u08D3-\u08FF]/;
-const SMAP={'أ':'ا','إ':'ا','آ':'ا','ٱ':'ا','ى':'ي','ة':'ه','ؤ':'و','ئ':'ي'};
-const nq=s=>{let o='';for(const c of s){if(SSTRIP.test(c))continue;const x=SMAP[c]||c;if(x=='ا')continue;o+=/[\u0621-\u064A]/.test(x)?x:' '}return o.replace(/\s+/g,' ').trim()};
+const SMAP={'أ':'ا','إ':'ا','آ':'ا','ٱ':'ا','ا':'ا','ى':'ي','ي':'ي','ة':'ه','ه':'ه','ؤ':'و','و':'و','ئ':'ي','ء':'','':''};
+const nq=s=>{let o='';for(const c of s){if(SSTRIP.test(c))continue;const x=SMAP.hasOwnProperty(c)?SMAP[c]:c;if(x==='')continue;if(!/[\u0621-\u064A]/.test(x)){if(x===' ')o+=' ';continue}o+=x;}return o.replace(/\s+/g,' ').trim()};
 let VN=null;
-function vnBuild(){VN={};for(const k of ORDER){const o=WU[k].map(u=>u.t).join(' ');let n='',m=[];for(let i=0;i<o.length;i++){const c=o[i];if(SSTRIP.test(c))continue;if(c==' '){if(n&&n[n.length-1]!=' '){n+=' ';m.push(i)}continue}const x=SMAP[c]||c;if(x=='ا'||!/[\u0621-\u064A]/.test(x))continue;n+=x;m.push(i)}VN[k]={o,n,m}}}
+function vnBuild(){VN={};for(const k of ORDER){const o=WU[k].map(u=>u.t).join(' ');let n='',m=[];for(let i=0;i<o.length;i++){const c=o[i];if(SSTRIP.test(c))continue;if(c==' '){if(n&&n[n.length-1]!=' '){n+=' ';m.push(i)}continue}const x=SMAP.hasOwnProperty(c)?SMAP[c]:c;if(x==='')continue;if(!/[\u0621-\u064A]/.test(x))continue;n+=x;m.push(i)}VN[k]={o,n,m}}}
 function sFind(q){if(!VN)vnBuild();const R=[];let tot=0;for(const k of ORDER){const n=VN[k].n;let c=0,i=n.indexOf(q);if(i<0)continue;while(i>=0){c++;i=n.indexOf(q,i+q.length)}R.push([k,c]);tot+=c}return{R,tot}}
 function sHtml(k,q){const{o,n,m}=VN[k];const rg=[];let i=n.indexOf(q);while(i>=0){let a=m[i],b=m[i+q.length-1]+1;while(b<o.length&&SSTRIP.test(o[b]))b++;rg.push([a,b]);i=n.indexOf(q,i+q.length)}
  let h='',p=0;for(const[a,b]of rg){h+=esc(o.slice(p,a))+'<mark class="sh">'+esc(o.slice(a,b))+'</mark>';p=b}return h+esc(o.slice(p))}
@@ -701,11 +702,13 @@ function applyBg(){const t=TH[st.th],r=document.documentElement.style;
  const mc=st.mc||(t[0]?'#6fb3ff':'#1565c0');r.setProperty('--mn',mc);$('#mcol').value=mc;$('#mnOn').checked=!!st.mo;
  document.querySelector('meta[name=theme-color]').content=t[1].startsWith('#')?t[1]:(t[0]?'#14234f':'#4a74e0');syncRg()}
 let wakeLock=null;
-async function keepToggle(){if('wakeLock' in navigator){if(wakeLock){try{await wakeLock.release();wakeLock=null}catch(e){}st.keepOn=0;$('#bKeep').classList.remove('on');toast(T('تم إيقاف إبقاء الشاشة'));save();return}try{wakeLock=await navigator.wakeLock.request('screen');st.keepOn=1;wakeLock.addEventListener('release',()=>{wakeLock=null;if(!document.hidden){st.keepOn=0;$('#bKeep').classList.remove('on')}});$('#bKeep').classList.add('on');toast(T('تم تفعيل إبقاء الشاشة'));save();return}catch(e){toast(T('لا يدعم المتصفح هذه الميزة'))}}else{toast(T('لا يدعم المتصفح إبقاء الشاشة'))}}
+async function acquireWakeLock(){if(!('wakeLock' in navigator))return false;try{if(wakeLock){try{await wakeLock.release()}catch(e){}}wakeLock=await navigator.wakeLock.request('screen');wakeLock.addEventListener('release',()=>{wakeLock=null;if(document.hidden&&pl&&!au.paused){acquireWakeLock().catch(()=>{})}});$('#bKeep').classList.add('on');return true}catch(e){return false}}
+async function releaseWakeLock(){if(wakeLock){try{await wakeLock.release()}catch(e){}wakeLock=null}$('#bKeep').classList.toggle('on',!!st.keepOn&&!!wakeLock)}
+async function keepToggle(){if(!('wakeLock' in navigator)){toast(T('لا يدعم المتصفح إبقاء الشاشة'));return}if(wakeLock){try{await wakeLock.release();wakeLock=null}catch(e){}st.keepOn=0;$('#bKeep').classList.remove('on');toast(T('تم إيقاف إبقاء الشاشة'));save();return}const ok=await acquireWakeLock();if(ok){st.keepOn=1;save();toast(T('تم تفعيل إبقاء الشاشة'))}else{toast(T('لا يدعم المتصفح هذه الميزة'))}}
 function applyKeep(){
- const acquire=()=>navigator.wakeLock.request('screen').then(wl=>{wakeLock=wl;$('#bKeep').classList.add('on');wakeLock.addEventListener('release',()=>{wakeLock=null;if(!document.hidden){st.keepOn=0;$('#bKeep').classList.remove('on')}})});
- if(st.keepOn&&'wakeLock' in navigator)acquire().catch(()=>{});
- document.addEventListener('visibilitychange',()=>{if(document.hidden)return;if(st.keepOn&&'wakeLock' in navigator&&!wakeLock)acquire().catch(()=>{})});
+ if(st.keepOn&&'wakeLock' in navigator)acquireWakeLock().catch(()=>{});
+ document.addEventListener('visibilitychange',async()=>{if(document.hidden){if(pl&&!au.paused&&'wakeLock' in navigator&&!wakeLock)await acquireWakeLock().catch(()=>{})}else{if((pl&&!au.paused||st.keepOn)&&'wakeLock' in navigator&&!wakeLock)await acquireWakeLock().catch(()=>{});else if(!pl&&!st.keepOn&&wakeLock)await releaseWakeLock().catch(()=>{})}});
+ window.addEventListener('pagehide',()=>{if(wakeLock){try{wakeLock.release()}catch(e){}wakeLock=null}});
 }
 function buildTh(){['#thL','#thD','#thG'].forEach((id,k)=>{const s=$(id);s.innerHTML='';TH.forEach((x,i)=>{if(k<2?(x[8]||x[0]!=k):!x[8])return;const b=document.createElement('button');b.style.background=x[8]?(x[0]?'linear-gradient(135deg,#2b4fb8,#6a2fb0 55%,#0e7c86)':'linear-gradient(135deg,#a8d8ff,#e3c4ff 55%,#ffd1e6)'):'linear-gradient(135deg,'+x[1]+' 50%,'+x[6]+' 50%)';b.className=i==st.th?'on':'';b.onclick=()=>selTheme(i);s.appendChild(b)})})}
 function selTheme(i){const t=TH[i];if(!t)return;st.th=i;st.night=t[0]?1:0;st.bg=null;if(t[0])st.dk=i;else st.lt=i;QuranAnalytics.track('theme_change',{theme:'theme_'+i,theme_index:i,theme_mode:t[0]?'dark':'light'});applyBg();buildTh();buildSw();save()}
@@ -764,7 +767,7 @@ let baseH=0,lastW=0;
 function size(){
  const W=innerWidth;if(W!=lastW||innerHeight>baseH){baseH=innerHeight;lastW=W}
  const cw=pager.clientWidth,pH=(baseH-48-36)/PAGE_HEIGHT_RATIO;let pw;
- if(st.fit=='w')pw=cw-16;else if(st.fit=='h')pw=Math.min(pH,cw-16);else if(st.fit=='2')pw=Math.min((cw-24)/2-16,pH);
+ if(st.fit=='w')pw=cw-16;else if(st.fit=='h')pw=Math.min(pH,cw-16);else if(st.fit=='2'){if(st.m=='h'){pw=Math.min((cw-32)/2,pH);document.documentElement.style.setProperty('--pw',Math.max(200,pw)+'px');go(st.p,false);return}else{pw=Math.min((cw-24)/2-16,pH);}}
  else{pw=Math.min(cw-16,780);if(W<=baseH)pw=Math.min(pw,(baseH-48-20)/PAGE_HEIGHT_RATIO)} /* الارتفاع لا يتغير مع لوحة المفاتيح */
  document.documentElement.style.setProperty('--pw',Math.max(240,pw)+'px');go(st.p,false)}
 function go(n,smooth){n=Math.max(1,Math.min(MAXP,n|0||1));lock=true;const two=st.fit=='2',tg=two&&st.m=='h'?(n%2?n:n-1):n,s=pager.querySelector('.slide[data-p="'+tg+'"]');
@@ -867,17 +870,18 @@ function startPlay(k){const m=st.mode,s=+k.split(':')[0];let list,i=0,loops=1;
  else if(m=='v'){list=[k];loops=st.n}
  else if(m=='s'){list=ORDER.slice(IDX[s+':1'],IDX[s+':'+CNT[s]]+1);i=IDX[k]-IDX[s+':1'];loops=st.n}
  else{if(!st.rs){st.rs=st.re=k}list=ORDER.slice(IDX[st.rs],IDX[st.re]+1);loops=st.n}
- pl={list,i,loops,loop:0,first:true};playAt();const verse=+k.split(':')[1],page=PAGEOF[k];QuranAnalytics.track('recitation_start',{reciter:st.rec,reciter_name:recName(),surah:s,verse,page,juz:juzOf(page),mode:m})}
-function playAt(){if(!pl)return;const k=pl.list[pl.i];au.src=aUrl(k);au.play().catch(()=>{});pl.k=k;markPlay();document.body.classList.add('hasbar');$('#aLb').textContent=vt(k);
- if(!pl.first)follow(k);pl.first=false;ico('#aPlay','pause');
+ pl={list,i,loops,loop:0,first:true};if('wakeLock' in navigator)acquireWakeLock().catch(()=>{});playAt();const verse=+k.split(':')[1],page=PAGEOF[k];QuranAnalytics.track('recitation_start',{reciter:st.rec,reciter_name:recName(),surah:s,verse,page,juz:juzOf(page),mode:m})}
+function updateMediaSession(k){if(!('mediaSession' in navigator))return;try{const[s,a]=k.split(':').map(Number);try{navigator.mediaSession.metadata=new MediaMetadata({title:T('الآية')+' '+ar(a),artist:sName(s),album:recName(),artwork:[{src:'icon-192.png',sizes:'192x192',type:'image/png'},{src:'icon-512.png',sizes:'512x512',type:'image/png'}]})}catch(e){}try{navigator.mediaSession.setActionHandler('play',()=>{if(pl){au.play().catch(()=>{});QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause');if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{});try{navigator.mediaSession.playbackState='playing'}catch(e){}}})}catch(e){}try{navigator.mediaSession.setActionHandler('pause',()=>{if(pl){au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play');if(!st.keepOn&&'wakeLock' in navigator)releaseWakeLock().catch(()=>{});try{navigator.mediaSession.playbackState='paused'}catch(e){}}})}catch(e){}try{navigator.mediaSession.setActionHandler('previoustrack',()=>{$('#aPrev').click()})}catch(e){}try{navigator.mediaSession.setActionHandler('nexttrack',()=>{$('#aNext').click()})}catch(e){}try{navigator.mediaSession.playbackState='playing'}catch(e){}}catch(e){}}
+function playAt(){if(!pl)return;const k=pl.list[pl.i];au.src=aUrl(k);au.play().catch(()=>{});pl.k=k;markPlay();document.body.classList.add('hasbar');$('#aLb').textContent=vt(k);updateMediaSession(k);
+ if(!pl.first)follow(k);pl.first=false;ico('#aPlay','pause');if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{});
  const nx=pl.list[pl.i+1];if(nx){const pre=new Audio();pre.preload='auto';pre.src=aUrl(nx)}}
-au.onended=()=>{if(!pl)return;pl.i++;if(pl.i>=pl.list.length){pl.loop++;if(pl.loops&&pl.loop>=pl.loops){stopPlay();return}pl.i=0}playAt()};
-au.onerror=()=>{if(pl){QuranAnalytics.track('recitation_error',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],kind:au.error&&au.error.code||0});stopPlay();flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
-function stopPlay(){const data=pl?{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],verse:+pl.k.split(':')[1]}:{};au.pause();pl=null;document.body.classList.remove('hasbar');ico('#aPlay','play');markPlay();$('#aLb').textContent=recName();if(data.surah)QuranAnalytics.track('recitation_stop',data)}
+au.onended=()=>{if(!pl)return;pl.i++;if(pl.i>=pl.list.length){pl.loop++;if(pl.loops&&pl.loop>=pl.loops){if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='none';navigator.mediaSession.metadata=null}catch(e){}}stopPlay();return}pl.i=0}playAt()};
+au.onerror=()=>{if(pl){QuranAnalytics.track('recitation_error',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],kind:au.error&&au.error.code||0});flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
+function stopPlay(){const data=pl?{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],verse:+pl.k.split(':')[1]}:{};au.pause();pl=null;document.body.classList.remove('hasbar');ico('#aPlay','play');markPlay();$('#aLb').textContent=recName();if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='none';navigator.mediaSession.metadata=null}catch(e){}}if('wakeLock' in navigator&&!st.keepOn)releaseWakeLock().catch(()=>{});if(data.surah)QuranAnalytics.track('recitation_stop',data)}
 function markPlay(root){const k=pl&&pl.k;(root?[root]:[document]).forEach(r=>r.querySelectorAll('.w.play').forEach(x=>x.classList.remove('play')));if(k)(root?root:document).querySelectorAll('.w[data-k="'+k+'"]').forEach(x=>x.classList.add('play'))}
 const pageKey=()=>{const s=pager.querySelector('.slide[data-p="'+st.p+'"]')||pager.querySelector('.slide'),w=s&&s.querySelector('.w[data-k]');return w?w.dataset.k:null};
 const barKey=()=>ck()||pageKey();
-$('#aPlay').onclick=()=>{if(pl&&!au.paused){au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play')}else if(pl){au.play();QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause')}else{const k=barKey();if(k)startPlay(k)}};
+$('#aPlay').onclick=()=>{if(pl&&!au.paused){au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play');if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='paused'}catch(e){}}if(!st.keepOn&&'wakeLock' in navigator)releaseWakeLock().catch(()=>{})}else if(pl){au.play().catch(()=>{});QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause');if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='playing'}catch(e){}}if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{})}else{const k=barKey();if(k)startPlay(k)}};
 const step=d=>{const k=barKey();if(!k)return;const j=IDX[k]+d;if(j<0||j>=ORDER.length)return;cur=ORDER[j];startPlay(cur);follow(cur)};
 $('#aPrev').onclick=()=>step(-1);$('#aNext').onclick=()=>step(1);$('#aStop').onclick=()=>stopPlay();
 const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};let seeking=false;
@@ -1529,9 +1533,9 @@ async function pagePng(n){n=Math.max(1,Math.min(MAXP,n|0||1));const d=DATA[n];
    x.fillStyle=gold;x.globalAlpha=A*.14;rr(padX,bt,bw,bh,.012*W);x.fill();
    x.globalAlpha=A;x.strokeStyle=gold;x.lineWidth=1.5;rr(padX,bt,bw,bh,.012*W);x.stroke();
    const io=.008*W;x.lineWidth=1;rr(padX+io,bt+io,bw-2*io,bh-2*io,.012*W);x.stroke();
-   x.fillStyle=ink;x.font=Math.round(.0694*W)+'px F0';x.fillText(L.c,W/2,bt+bh/2)}
+   x.fillStyle=ink;x.textAlign='center';x.font=Math.round(.0694*W)+'px F0';x.fillText(L.c,W/2,bt+bh/2+.13*(.0694*W))}
   else{const fs=.0559*W;x.fillStyle=ink;x.globalAlpha=A;
-   if(L.t=='b'){x.font=Math.round(fs)+'px F'+L.f;x.fillText(L.c,W/2,y+lh/2+.13*fs)}
+   if(L.t=='b'){x.textAlign='center';x.font=Math.round(fs)+'px F'+L.f;x.fillText(L.c,W/2,y+lh/2+.13*fs)}
    else{const R=L.e>=14.5?(.9/L.e):.0559,v=R*W;x.font=Math.round(v)+'px F'+L.f;x.textAlign='right';const words=L.w.map(w=>w[0]),widths=words.map(w=>x.measureText(w).width);let right=(W+widths.reduce((sum,width)=>sum+width,0))/2;words.forEach((word,j)=>{x.fillText(word,right,y+lh/2+.13*v);right-=widths[j]})}}
   y+=hs[i];if(i<N-1||few)y+=gap});
  x.globalAlpha=1;
