@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f4f45">
-<meta name="app-version" content="1.1.8">
+<meta name="app-version" content="1.1.9">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -752,8 +752,10 @@ function pageEl(n){
   else if(L.t=='b')h+='<div class="ln"><span class="w" style="font-family:F'+L.f+';font-size:calc(var(--pw)*.0559)">'+L.c+'</span></div>';
   else{const R=L.e>=14.5?(.9/L.e):.0559;
    h+='<div class="ln" style="font-size:calc(var(--pw)*'+R.toFixed(5)+');font-family:F'+L.f+'">'+L.w.map(w=>'<span class="w'+(w[2]==0&&cover(w[1],w[4])?' mn':'')+'"'+(w[2]==2?'':' data-k="'+w[1]+'"')+(w[2]==0?' data-i="'+w[4]+'"':'')+'>'+w[0]+'</span>').join('')+'</div>'}}
- const nextWords=[];if(n<MAXP){for(const line of DATA[n+1].l){if(line.t!='t')continue;for(const word of line.w)if(word[2]===0&&nextWords.length<3)nextWords.push('<span class="nextPageCueWord" style="font-family:F'+line.f+'">'+word[0]+'</span>');if(nextWords.length===3)break}}
- el.classList.toggle('hasNextPageCue',nextWords.length>0);el.innerHTML=h+'</div><div class="pf">'+ar(n)+'</div>'+(nextWords.length?'<div class="nextPageCue" aria-label="بداية الصفحة التالية">'+nextWords.join(' ')+'</div>':'');
+ const nextWords=[];let nextSurahGlyph='',nextSurahName='';if(n<MAXP){const nd=DATA[n+1];let fk='';for(const line of nd.l){if(line.t!='t')continue;if(!fk&&line.w.length)fk=line.w[0][1];for(const word of line.w)if(word[2]===0&&nextWords.length<3)nextWords.push('<span class="nextPageCueWord" style="font-family:F'+line.f+'">'+word[0]+'</span>');if(nextWords.length===3)break}
+  const fa=fk.split(':');if(fa.length===2&&+fa[1]===1){const hl=nd.l.find(L=>L.t=='h');if(hl)nextSurahGlyph=hl.c;else nextSurahName=sName(+fa[0]);nextWords.length=0}}
+ const cueTxt=nextSurahGlyph?'<span style="font-family:F0">'+nextSurahGlyph+'</span>':nextSurahName;
+ el.classList.toggle('hasNextPageCue',nextWords.length>0||!!cueTxt);el.innerHTML=h+'</div><div class="pf">'+ar(n)+'</div>'+(cueTxt?'<div class="nextPageCue" aria-label="بداية السورة التالية">'+cueTxt+'</div>':(nextWords.length?'<div class="nextPageCue" aria-label="بداية الصفحة التالية">'+nextWords.join(' ')+'</div>':''));
  markPlay(el);if(hlK)el.querySelectorAll('.w[data-k="'+hlK+'"]').forEach(x=>x.classList.add('sel'));return el}
 const pager=$('#pager');let rio,cio,lock=false,ratios={};
 function build(){
