@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f4f45">
-<meta name="app-version" content="1.1.9">
+<meta name="app-version" content="1.1.11">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>القرآن العظيم</title>
-<meta name="application-name" content="القرآن العظيم">
-<meta name="apple-mobile-web-app-title" content="القرآن العظيم">
+<title>Quran Studio</title>
+<meta name="application-name" content="Quran Studio">
+<meta name="apple-mobile-web-app-title" content="Quran Studio">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 @font-face{font-family:F0;src:url(fonts/QCF4_QBSML.woff2) format("woff2");font-display:block}
@@ -727,7 +727,7 @@ function enh(){$$('input[type=range]').forEach(r=>{if(r._v||r.dataset.no!=null)r
 /* الأيقونات */
 const ico=(s,n)=>{const e=$(s),u=e.querySelector('use');if(u)u.setAttribute('href','#i-'+n);else e.innerHTML='<svg><use href="#i-'+n+'"/></svg>'};
 const IC=[['#reportProblem','info'],['#bIdx','menu'],['#bDes','film'],['#settingsCloseButton','x'],['#indexCloseButton','x'],['#clrR','trash-2'],['#cRs','chevron-right'],['#cRe','chevron-left'],['#bSea','search'],['#seaGo','search'],['#searchCloseButton','x'],['#bSet','settings'],['#bAs','arrow-down-to-line'],['#bFs','maximize'],['#bPrint','printer'],['#bOff','wifi'],['#mH','layers'],['#mV','list'],['#fcR','rotate-cw'],
-['#aPlay','play'],['#aPrev','skip-back'],['#aNext','skip-forward'],['#verseActionsCloseButton','x'],['#verseContextCloseButton','x'],['#setS','chevron-right'],['#setE','chevron-left'],['#vTxt','copy'],['#vImg','image'],['#vDl','download'],['#vDs','film'],
+['#aPlay','play'],['#aPrev','skip-forward'],['#aNext','skip-back'],['#verseActionsCloseButton','x'],['#verseContextCloseButton','x'],['#setS','chevron-right'],['#setE','chevron-left'],['#vTxt','copy'],['#vImg','image'],['#vDl','download'],['#vDs','film'],
 ['#cPlay','volume-2'],['#aStop','square'],['#wPrev','play'],['[data-k=rv][data-v="0"]','x'],['[data-k=rv][data-v="1"]','eye'],['[data-k=rv][data-v="2"]','layers'],['[data-k=rv][data-v="3"]','chevron-right'],['#rndD','shuffle'],['#bAbout','info'],['#aboutCloseButton','x'],['#aMore','ellipsis'],['#vdF','film'],['#vdGo','film'],['#imGo','search'],['#vPrev','play'],['#aPrv','play'],['#skIm','image'],['#skEmAdd','plus'],['#gifGo','search'],['#skDel','trash-2'],['[data-k=bg][data-v=vid]','video'],['#stTabs [data-t=sk]','smile'],['#cMn','book-open'],['#wordMeaningCloseButton','x'],['#verseMeaningsCloseButton','x'],['#mcR','rotate-cw'],['#cCopy','copy'],['#cShare','share-2'],['#cImg','download'],['#cDs','film'],['#asT','pause'],['#asM','minus'],['#asP','plus'],['#autoScrollCloseButton','x'],
 ['#designStudioCloseButton','x'],['#imF','upload'],['#imGo','search'],['#vdF','upload'],['#vdGo','search'],['#xPng','download'],['#xShP','share-2'],['#xVid','video'],['#xShV','share-2'],['#flip','rotate-cw'],
 ['#sIdx [data-t=s]','book-open'],['#sIdx [data-t=j]','layers'],['#sIdx [data-t=p]','list'],
@@ -743,6 +743,70 @@ function decorate(){const FI={w:'<path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/>'
  $$('[data-fit]').forEach(b=>{if(b.querySelector('svg'))return;const x=b.textContent.trim();b.classList.add('ib');b.innerHTML='<svg viewBox="0 0 24 24">'+FI[b.dataset.fit]+'</svg><span>'+x+'</span>';b.onclick=()=>{st.fit=b.dataset.fit;save();fitUi();build();size()}});$$('[data-k=ratio]').forEach(b=>{if(b.querySelector('svg'))return;const v=b.dataset.v,x=b.textContent.trim();b.classList.add('ib');let ic;if(v=='c')ic='<svg><use href="#i-ruler"/></svg>';else{const[a,c]=v.split(':').map(Number),m=Math.max(a,c),w=a/m*16,h=c/m*16;ic='<svg viewBox="0 0 24 24"><rect x="'+(12-w/2)+'" y="'+(12-h/2)+'" width="'+w+'" height="'+h+'" rx="2"/></svg>'}b.innerHTML=ic+'<span>'+x+'</span>'});
  $$('[data-k=res]').forEach(b=>{if(b.querySelector('svg'))return;const x=b.textContent.trim();b.classList.add('ib');b.innerHTML='<svg><use href="#i-image"/></svg><span>'+x+'</span>'});IC.forEach(([s,n])=>$$(s).forEach(b=>{if(b.querySelector('svg'))return;const x=b.textContent.trim();b.classList.add('ib');b.innerHTML='<svg><use href="#i-'+n+'"/></svg>'+(x&&!/^[▶⏸⏮⏭✕+−⇣]$/.test(x)?'<span>'+x+'</span>':'')}))}
 
+/* الخطوط: تحميل مبكر وتخزين دائم */
+const FONT_CACHE='mushaf-fonts-v1';
+const QCF_FONT=f=>f==0?'fonts/QCF4_QBSML.woff2':'fonts/QCF4_Hafs_'+String(f).padStart(2,'0')+'_W.woff2';
+const UI_FONTS=['fonts/tajawal-arabic-400-normal.woff2','fonts/tajawal-arabic-500-normal.woff2','fonts/tajawal-arabic-700-normal.woff2'];
+const fontLoads={};
+async function cacheFontFile(url){
+ if(!('caches'in window))return;
+ try{
+  const abs=new URL(url,location.href).href,c=await caches.open(FONT_CACHE);
+  if(await c.match(abs,{ignoreSearch:true}))return;
+  const res=await fetch(abs);
+  if(res.ok)await c.put(abs,res)
+ }catch(e){}
+}
+function loadMushafFont(f){
+ if(fontLoads[f])return fontLoads[f];
+ return fontLoads[f]=(async()=>{
+  let ok=false;
+  try{const faces=await document.fonts.load('40px F'+f,'\uF100');ok=!!(faces&&faces.length)||document.fonts.check('40px F'+f,'\uF100')}catch(e){}
+  cacheFontFile(QCF_FONT(f));
+  if(!ok)delete fontLoads[f];
+  return ok
+ })()
+}
+function pageFontSet(n){
+ const s=new Set([0]),d=DATA[n];
+ for(const L of d.l)s.add(L.t=='h'?0:(L.f|0));
+ if(n<MAXP&&DATA[n+1]){const nd=DATA[n+1];for(const L of nd.l)if(L.t=='t'&&L.w.length){s.add(L.f|0);break}if(nd.l.some(L=>L.t=='h'))s.add(0)}
+ return [...s]
+}
+function ensurePageFonts(n){return Promise.all(pageFontSet(n).map(loadMushafFont))}
+function prefetchNear(n,r){
+ const fs=[];
+ for(let d=0;d<=r;d++)for(const p of(d?[n+d,n-d]:[n]))if(p>=1&&p<=MAXP)for(const f of pageFontSet(p))fs.push(f);
+ [...new Set(fs)].forEach(loadMushafFont)
+}
+let fontCacheWarming=false;
+function warmFontCache(){
+ if(fontCacheWarming||!('caches'in window))return;
+ fontCacheWarming=true;
+ const start=()=>{
+  const list=[];
+  for(let p=Math.max(1,st.p-3);p<=Math.min(MAXP,st.p+3);p++)for(const f of pageFontSet(p))list.push(QCF_FONT(f));
+  for(let f=0;f<=47;f++)list.push(QCF_FONT(f));
+  UI_FONTS.forEach(u=>list.push(u));
+  const queue=[...new Set(list)];let i=0;
+  const worker=async()=>{while(i<queue.length)await cacheFontFile(queue[i++])};
+  Promise.all([worker(),worker()])
+ };
+ if('requestIdleCallback'in window)requestIdleCallback(start,{timeout:4000});else setTimeout(start,3000)
+}
+function redraw(el){
+ if(!el)return;
+ el.style.visibility='hidden';void el.offsetWidth;
+ el.style.visibility='';void el.offsetHeight;
+ el.getBoundingClientRect()
+}
+function showSlide(s){
+ const n=+s.dataset.p;
+ if(s.dataset.keep!=='1'||!s.isConnected)return;
+ if(!s.firstChild||s.dataset.fontsReady!==String(n)){s.replaceChildren(pageEl(n));s.dataset.fontsReady=String(n);redraw(s.firstChild)}
+ ensurePageFonts(n).then(()=>{if(s.isConnected&&s.dataset.fontsReady===String(n)&&s.firstChild)redraw(s.firstChild)})
+}
+
 /* الصفحات */
 function pageEl(n){
  const d=DATA[n],el=document.createElement('div');el.className='page';el.dataset.p=n;
@@ -757,14 +821,15 @@ function pageEl(n){
  const cueTxt=nextSurahGlyph?'<span style="font-family:F0">'+nextSurahGlyph+'</span>':nextSurahName;
  el.classList.toggle('hasNextPageCue',nextWords.length>0||!!cueTxt);el.innerHTML=h+'</div><div class="pf">'+ar(n)+'</div>'+(cueTxt?'<div class="nextPageCue" aria-label="بداية السورة التالية">'+cueTxt+'</div>':(nextWords.length?'<div class="nextPageCue" aria-label="بداية الصفحة التالية">'+nextWords.join(' ')+'</div>':''));
  markPlay(el);if(hlK)el.querySelectorAll('.w[data-k="'+hlK+'"]').forEach(x=>x.classList.add('sel'));return el}
-const pager=$('#pager');let rio,cio,lock=false,ratios={};
+const pager=$('#pager');let rio,cio,fio,lock=false,ratios={};
 function build(){
  pager.className=st.m+(st.fit=='2'?' spread':'');pager.innerHTML='';ratios={};
  for(let n=1;n<=MAXP;n++){const s=document.createElement('section');s.className='slide';s.dataset.p=n;pager.appendChild(s)}
- rio&&rio.disconnect();cio&&cio.disconnect();
- rio=new IntersectionObserver(es=>es.forEach(e=>{const s=e.target;if(e.isIntersecting){if(!s.firstChild)s.appendChild(pageEl(+s.dataset.p))}else s.textContent=''}),{root:pager,rootMargin:st.m=='h'?'0px 200% 0px 200%':'200% 0px 200% 0px'});
+ rio&&rio.disconnect();cio&&cio.disconnect();fio&&fio.disconnect();
+ rio=new IntersectionObserver(es=>es.forEach(e=>{const s=e.target;if(e.isIntersecting){s.dataset.keep='1';ensurePageFonts(+s.dataset.p);showSlide(s)}else{s.dataset.keep='0';if(s.dataset.fontsReady){s.textContent='';delete s.dataset.fontsReady}}}),{root:pager,rootMargin:st.m=='h'?'0px 200% 0px 200%':'200% 0px 200% 0px'});
+ fio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)ensurePageFonts(+e.target.dataset.p)}),{root:pager,rootMargin:st.m=='h'?'0px 500% 0px 500%':'500% 0px 500% 0px'});
  cio=new IntersectionObserver(es=>{es.forEach(e=>{ratios[e.target.dataset.p]=e.intersectionRatio});if(lock)return;let b=0,bp=st.p;for(const p in ratios)if(ratios[p]>b){b=ratios[p];bp=+p}if(b>0)setPage(bp)},{root:pager,threshold:[0,.2,.4,.6,.8,1]});
- $$('.slide').forEach(s=>{rio.observe(s);cio.observe(s)});size()}
+ $$('.slide').forEach(s=>{rio.observe(s);cio.observe(s);fio.observe(s)});size()}
 let baseH=0,lastW=0;
 function size(){
  const W=innerWidth;if(W!=lastW||innerHeight>baseH){baseH=innerHeight;lastW=W}
@@ -772,9 +837,9 @@ function size(){
  if(st.fit=='w')pw=cw-16;else if(st.fit=='h')pw=Math.min(pH,cw-16);else if(st.fit=='2'){if(st.m=='h'){pw=Math.min((cw-32)/2,pH);document.documentElement.style.setProperty('--pw',Math.max(200,pw)+'px');go(st.p,false);return}else{pw=Math.min((cw-24)/2-16,pH);}}
  else{pw=Math.min(cw-16,780);if(W<=baseH)pw=Math.min(pw,(baseH-48-20)/PAGE_HEIGHT_RATIO)} /* الارتفاع لا يتغير مع لوحة المفاتيح */
  document.documentElement.style.setProperty('--pw',Math.max(240,pw)+'px');go(st.p,false)}
-function go(n,smooth){n=Math.max(1,Math.min(MAXP,n|0||1));lock=true;const two=st.fit=='2',tg=two&&st.m=='h'?(n%2?n:n-1):n,s=pager.querySelector('.slide[data-p="'+tg+'"]');
+function go(n,smooth){n=Math.max(1,Math.min(MAXP,n|0||1));lock=true;ensurePageFonts(n);prefetchNear(n,2);const two=st.fit=='2',tg=two&&st.m=='h'?(n%2?n:n-1):n,s=pager.querySelector('.slide[data-p="'+tg+'"]');
  if(s)s.scrollIntoView({behavior:smooth?'smooth':'instant',block:'start',inline:two&&st.m=='h'?'start':'center'});setPage(n,true);setTimeout(()=>{lock=false},smooth?700:150)}
-function setPage(n,f){if(n==st.p&&!f)return;st.p=n;save();QuranAnalytics.page(n,PAGE_SURAHS[n],juzOf(n))}
+function setPage(n,f){if(n==st.p&&!f)return;st.p=n;save();prefetchNear(n,2);QuranAnalytics.page(n,PAGE_SURAHS[n],juzOf(n))}
 function flash(t){toast(t)}
 
 /* الفهرس */
@@ -1565,7 +1630,7 @@ albumInit();renderReady();
 decorate();fitUi();enh();applyBg();ui();build();modesUi();refresh();limits();applyLang();
 $('#analyticsManage').onclick=()=>QuranAnalytics.manage();
 QuranAnalytics.init(()=>({page:st.p,surah:DATA[st.p].s,surahs:PAGE_SURAHS[st.p],juz:juzOf(st.p),mode:st.m,reader_active:!$('.sheet.on')&&!$('#studio').classList.contains('on'),theme:'theme_'+st.th,theme_index:st.th,theme_mode:st.night?'dark':'light',reciter:st.rec,reciter_name:recName(),recitation_active:!!(pl&&!au.paused),recitation_surah:pl?+pl.k.split(':')[0]:undefined,recitation_page:pl?PAGEOF[pl.k]:undefined,recitation_juz:pl?juzOf(PAGEOF[pl.k]):undefined,studio_open:$('#studio').classList.contains('on'),design_surah:D.s,design_background:D.bg,design_pattern:D.bg=='pat'?D.pat:'none',design_ratio:D.ratio}));
-document.fonts.ready.then(()=>go(st.p,false));
+(async()=>{await ensurePageFonts(st.p);go(st.p,false);warmFontCache()})().catch(()=>go(st.p,false));
 addEventListener('resize',size);addEventListener('orientationchange',()=>setTimeout(size,250));
 addEventListener('pagehide',save);document.addEventListener('visibilitychange',save);applyKeep();
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(error=>console.warn('Service worker registration failed.',error));

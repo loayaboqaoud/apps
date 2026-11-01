@@ -1,4 +1,4 @@
-# The Holy Quran App — Feature & Functionality Map
+# Quran Studio — Feature & Functionality Map
 
 Offline-first Progressive Web App (PWA) for reading the Uthmani Mushaf (QCF4 Hafs v1 fonts),
 listening to recitations, reading word-by-word meanings/tafsir, and turning verses into
