@@ -1,4 +1,4 @@
-const V='mushaf-20261102-1.1.12',FONT_CACHE='mushaf-fonts-v1';
+const V='mushaf-20261106-1.2.0',FONT_CACHE='mushaf-fonts-v1';
 const CORE=['./','index.html','backgrounds/list.js','icon-b64.js','data.js','meanings.js','config.js?v='+V,'analytics.js','mp4-muxer.js','fix-webm-duration.js','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable-512.png','apple-touch-icon.png'];
 const FONTS=['QCF4_QBSML.woff2',...Array.from({length:47},(_,i)=>'QCF4_Hafs_'+String(i+1).padStart(2,'0')+'_W.woff2'),'tajawal-arabic-400-normal.woff2','tajawal-arabic-500-normal.woff2','tajawal-arabic-700-normal.woff2','xf-amiri-arabic-400.woff2','xf-amiri-arabic-700.woff2','xf-amiri-latin-400.woff2','xf-amiri-latin-700.woff2','xf-aref-ruqaa-arabic-400.woff2','xf-aref-ruqaa-arabic-700.woff2','xf-aref-ruqaa-latin-400.woff2','xf-aref-ruqaa-latin-700.woff2','xf-cairo-arabic-400.woff2','xf-cairo-arabic-700.woff2','xf-cairo-latin-400.woff2','xf-cairo-latin-700.woff2','xf-lalezar-arabic-400.woff2','xf-lalezar-latin-400.woff2','xf-reem-kufi-arabic-400.woff2','xf-reem-kufi-arabic-700.woff2','xf-reem-kufi-latin-400.woff2','xf-reem-kufi-latin-700.woff2'];
 const fontUrl=f=>new URL('fonts/'+f,self.registration.scope);
@@ -21,5 +21,13 @@ self.addEventListener('fetch',e=>{
   const response=await fetch(e.request);
   if(response.ok)caches.open(name).then(c=>c.put(e.request,response.clone())).catch(()=>{});
   return response
+ })())
+});
+self.addEventListener('notificationclick',e=>{
+ e.notification.close();
+ e.waitUntil((async()=>{
+  const all=await clients.matchAll({type:'window',includeUncontrolled:true});
+  for(const c of all){if('focus'in c){await c.focus();return}}
+  if(clients.openWindow)await clients.openWindow((e.notification.data&&e.notification.data.url)||self.registration.scope)
  })())
 });

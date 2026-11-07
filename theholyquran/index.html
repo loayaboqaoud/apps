@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f4f45">
-<meta name="app-version" content="1.1.12">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="app-version" content="1.2.0">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -89,8 +91,8 @@
 html,body{height:100%;margin:0}
 body{background:var(--bg);font-family:var(--ui);color:var(--txt);overflow:hidden;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
 button,input,select{font:inherit;color:inherit}button{cursor:pointer}
-#bar{flex:none;height:56px;display:flex;align-items:center;gap:1px;padding:0 3px;background:var(--green);color:#f4ecd6;overflow-x:auto;-webkit-overflow-scrolling:touch}
-#bar button{background:none;border:0;color:inherit;padding:2px;border-radius:8px;font-size:12px;min-width:40px}
+#bar{flex:none;height:62px;display:flex;align-items:center;gap:2px;padding:3px;background:var(--green);color:#f4ecd6;overflow-x:auto;-webkit-overflow-scrolling:touch}
+#bar button{background:none;border:0;color:inherit;padding:4px 3px;border-radius:9px;font-size:12px;min-width:48px;min-height:48px}
 #bar button:active,#bar button:focus-visible{background:#ffffff26;outline:none}
 #pager{flex:1;min-height:0;display:flex;direction:rtl;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #pager.h{flex-direction:row;scroll-snap-type:x mandatory}
@@ -113,8 +115,11 @@ display:flex;flex-direction:column;border:1px solid #0002}
 .lines{flex:1;display:flex;flex-direction:column;justify-content:space-between;opacity:var(--a)}
 .lines.few{justify-content:space-evenly}
 .ln{flex:none;height:calc(var(--pw)*.098);display:flex;justify-content:center;align-items:center;direction:rtl;white-space:nowrap;line-height:1}
-.w{display:inline-block;cursor:pointer;border-radius:.12em;transform:translateY(.13em)}
-.w.sel{background:color-mix(in srgb,var(--acc) 30%,transparent)}.w.play{background:color-mix(in srgb,var(--gold) 42%,transparent)}
+.w{display:inline-block;cursor:pointer;border-radius:0;transform:translateY(.13em)}
+.w.sel,.w.play,.w.range{background-clip:padding-box;border-radius:0;padding:.17em .05em;margin:-.17em -.05em;line-height:1;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.w.sel{background:color-mix(in srgb,var(--acc) 30%,transparent)}
+.w.play{background:color-mix(in srgb,var(--gold) 42%,transparent)}
+.w.range{background:color-mix(in srgb,var(--acc) 17%,transparent);box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--acc) 72%,transparent)}
 .ln.hd{height:calc(var(--pw)*.095);border:1.5px solid var(--gold);outline:1px solid var(--gold);outline-offset:calc(var(--pw)*-.008);background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:calc(var(--pw)*.012);margin:calc(var(--pw)*.006) 0}
 .ln.hd .w{transform:none;cursor:default}
 .sheet{position:fixed;inset:0;z-index:5;display:none;background:#0006}.sheet.on{display:block}
@@ -172,10 +177,13 @@ input[type=color]{width:42px;height:34px;padding:0;border:1px solid var(--line);
 .ib{display:inline-flex;align-items:center;justify-content:center;gap:6px}
 svg.i,.ib svg{width:1.25em;height:1.25em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .ib span{font-size:.86em}
-#bar .ib,.tabs .ib,.seg .ib{flex-direction:column;gap:1px}
+#bar .ib,.tabs .ib,.seg .ib{flex-direction:column;gap:2px}
 #bar .ib span,.tabs .ib span,.seg .ib span{font-size:10px;line-height:1.1}
-#bar button{padding:2px;min-width:40px}
-@media(max-width:540px){#bar{height:auto;min-height:56px;flex-wrap:wrap;align-content:center;overflow-x:hidden}#bar .ib{flex:1 1 18%;min-width:56px;padding:2px 0}#bar .ib span{display:block;white-space:nowrap}#bar #bSet{margin-inline-start:0}}
+#bar .ib svg{width:1.45em;height:1.45em;stroke-width:2.25}
+#bar .ib span{font-size:11.5px;font-weight:700;letter-spacing:0}
+#bar button{padding:4px 3px;min-width:48px}
+@media(orientation:portrait) and (max-width:900px){#bar{display:grid;grid-template-columns:repeat(5,1fr);height:auto;min-height:0;gap:2px;padding:4px;overflow:visible;align-content:stretch}#bar .ib{min-width:0;min-height:54px;padding:4px 2px;font-size:12px}#bar .ib span{display:block;white-space:nowrap;font-size:11px;font-weight:700}#bar #bSet{margin-inline-start:0}}
+@media(orientation:landscape){#bar{display:flex;justify-content:center;overflow:visible;position:relative}#bar #bSet{position:absolute;left:4px;top:50%;transform:translateY(-50%);margin:0}#bar .ib{min-width:52px;padding-inline:6px}}
 .rg{display:flex;align-items:center;gap:6px;direction:ltr;flex:1 1 100%}
 .rg input{flex:1;min-width:0}
 .rg .st{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--soft);font-size:20px;line-height:1;padding:0;color:var(--txt)}
@@ -261,6 +269,7 @@ button,input,select,textarea{font-family:var(--ui)}
 #fxG{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;margin:8px 0}
 #fxG button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--txt);cursor:pointer;font-size:12px}
 #fxG button b{font-size:22px}
+#fxG button svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .abt p{margin:10px 0;line-height:1.8}.abt b{color:var(--acc)}.abt a{color:var(--acc);font-weight:600}
 .abt .cr{font-size:11px;color:var(--mut);direction:ltr;text-align:center}
 html.glass body{background:var(--gbg) fixed}
@@ -276,13 +285,50 @@ html.glass .seg button,html.glass .btn.alt,html.glass .rg .st,html.glass input[t
 .card.np{padding-top:0}
 html.glass .stk{-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
 #bar{justify-content:flex-start}#bar #bSet{margin-inline-start:auto}
+@media(orientation:landscape){#bar{justify-content:center}#bar #bSet{margin-inline-start:0}}
 #settingsCloseButton,#indexCloseButton,#searchCloseButton,#wordMeaningCloseButton,#verseMeaningsCloseButton,#aboutCloseButton{background:var(--soft)!important;color:var(--txt)!important}
 #print{display:none}
 @media print{#dim,#as{display:none!important}#print .page{--paper:#fff;--pink:#000}#print .lines{filter:none}@page{size:A4 portrait;margin:8mm}
 html,body{height:auto;overflow:visible;background:var(--card)}
 body>*:not(#print){display:none!important}#print{display:block}
 #print .page{--pw:160mm;box-shadow:none;border:0;margin:0 auto;padding:calc(var(--pw)*.045) calc(var(--pw)*.05) calc(var(--pw)*.085);break-after:page;page-break-after:always}
-#print .page:last-child{break-after:auto;page-break-after:auto}#print .w.sel,#print .w.play{background:none}}
+#print .page:last-child{break-after:auto;page-break-after:auto}#print .w.sel,#print .w.play,#print .w.range{background:none}}
+.rangeState{padding:9px 11px;border:1px dashed var(--line);border-radius:10px;background:var(--soft);font-size:13px;line-height:1.7;min-height:38px}
+.rangeState.on{border-style:solid;border-color:var(--acc);background:color-mix(in srgb,var(--acc) 12%,var(--card))}
+.modesTitle{margin:12px 0 5px;font-size:14px;font-weight:700}
+#setS.on,#setE.on{background:color-mix(in srgb,var(--green) 18%,var(--card))!important;border:1px solid var(--green);color:var(--txt)!important}
+.recBtn{display:flex;align-items:center;gap:8px;width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--txt);text-align:start;font-size:15px}
+.recBtn b{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.recQ{font-size:11.5px;color:var(--mut);white-space:nowrap;font-weight:500}
+.recArrow{font-size:19px;line-height:1;color:var(--mut)}
+.recGroup{margin:10px 0 4px;font-size:12px;font-weight:700;color:var(--acc)}
+.recItem{display:flex;align-items:center;gap:8px;width:100%;padding:10px 8px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--txt);text-align:start;font-size:15px}
+.recItem span{flex:1;line-height:1.5}.recItem.on{background:var(--soft);color:var(--acc);font-weight:700}
+.recItem:active{background:var(--soft)}
+#recList{max-height:min(58vh,520px);overflow:auto;margin-top:8px}
+.help{line-height:1.8}
+.help details{border:1px solid var(--line);border-radius:11px;background:var(--soft);margin:8px 0;overflow:hidden}
+.help details details{background:var(--card);margin:8px 10px}
+.help summary{cursor:pointer;padding:11px 12px;font-weight:700;font-size:15px;list-style-position:inside}
+.help summary:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.help details[open]>summary{color:var(--acc);border-bottom:1px solid var(--line)}
+.help p{margin:0;padding:10px 13px 13px;font-size:14px;color:var(--txt)}
+.help .sub{padding:0 10px 8px}
+.cpWrap{display:inline-flex;align-items:center;vertical-align:middle}
+.cpBtn{width:46px;height:36px;padding:0;border:1px solid var(--line);border-radius:9px;box-shadow:inset 0 0 0 2px #fff8;background:#fff;position:relative}
+.cpBtn::after{content:"";position:absolute;inset:5px;border-radius:5px;border:1px solid #0002}
+.cpGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.cpSw{aspect-ratio:1;border:1px solid var(--line);border-radius:9px;padding:0;min-height:44px}
+.cpSw.on{outline:3px solid var(--acc);outline-offset:2px}
+.cpPreview{height:58px;border-radius:12px;border:1px solid var(--line);margin:8px 0;background:#fff}
+.cpNative{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--soft);font-size:14px;margin-top:8px}
+.cpNative input[type=color]{width:56px;height:42px}
+#studio [data-k$=".col"],#studio [data-k="col"],#studio [data-k="c1"],#studio [data-k="c2"]{vertical-align:middle}
+#skList .on{background:var(--green);color:#fff;border-color:var(--acc)}
+#fxG button span{font-size:12px;font-weight:600}
+#fxG button{padding:12px 6px}
+#studio .saveNote{position:sticky;bottom:-1px;background:var(--card);padding:6px 0 2px;z-index:2}
+@media(max-width:540px){.cpGrid{grid-template-columns:repeat(5,1fr)}#recList{max-height:52vh}}
 </style>
 </head>
 <body>
@@ -310,13 +356,13 @@ body>*:not(#print){display:none!important}#print{display:block}
 <p class="note" id="seaN"></p><div id="seaR" style="overflow-y:auto;flex:1"></div></div></div>
 
 <div class="sheet" id="sAbout" data-analytics-name="About app"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="aboutCloseButton" aria-label="إغلاق حول التطبيق" data-aria-source="إغلاق حول التطبيق" data-analytics-name="Close about app">✕</button></div>
-<p><b>تطوير:</b> Loay Abu Qaoud</p>
-<p><b>التاريخ:</b> <span dir="ltr">2026-10-05</span></p>
-<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.1.7</span></p>
+<p><b>تطوير:</b> لؤي أبوقاعود | Loay Abu Qaoud</p>
+<p><b>التاريخ:</b> <span dir="ltr">2026-11-06</span></p>
+<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.0</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
-<p class="cr">King Fahd Complex (QCF4) · Quranpedia · everyayah.com · Wikimedia Commons · GIPHY · Lucide · Tajawal · mp4-muxer</p></div></div>
+<p class="cr">King Fahd Complex (QCF4) · Quranpedia · everyayah.com · Wikimedia Commons · Lucide · Tajawal · mp4-muxer</p></div></div>
 
 <div class="sheet" id="sSet" data-analytics-name="Settings"><div class="card np"><div class="stk"><div class="pl"><b>الإعدادات</b><button class="s" id="settingsCloseButton" aria-label="إغلاق الإعدادات" data-aria-source="إغلاق الإعدادات" data-analytics-name="Close settings">✕</button></div></div>
 <h4>المظهر</h4>
@@ -345,12 +391,20 @@ body>*:not(#print){display:none!important}#print{display:block}
 <p class="note">تُحفظ الصفحة الحالية كصورة بنفس الخط ولون النص وشفافية الكلمات (دون تمييز كلمات المعاني).</p>
 <h4>اللغة</h4><select id="lang" style="width:100%"></select>
 <h4>الأوفلاين</h4><div class="act" style="margin-top:0"><button id="bOff" class="alt">حالة الأوفلاين</button></div><p class="note" id="offMsg"></p>
+<h4>التذكير اليومي</h4>
+<label class="f"><input type="checkbox" id="remOn"> تذكير يومي بقراءة القرآن (٩ مساءً)</label>
+<p class="note">يعمل التذكير أثناء فتح التطبيق أو في الخلفية أثناء تشغيله. لا يمكن ضمان وصوله إذا أُغلق التطبيق تماماً. يحتاج إلى إذن الإشعارات.</p>
 <h4>الخصوصية والتحليلات</h4><div class="act" style="margin-top:0"><button id="analyticsManage" class="alt">إدارة موافقة التحليلات</button></div><p class="note" id="analyticsStatus"></p>
-<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.1.7</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
+<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.0</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
 <p class="note" id="updateStatus" aria-live="polite"></p>
 <div class="act"><a id="reportProblem" class="btn alt" href="mailto:loqasoftware@gmail.com">الإبلاغ عن مشكلة</a></div>
-<div class="act" style="margin-top:14px"><button id="bAbout" class="alt">حول التطبيق</button></div>
+<div class="act" style="margin-top:14px"><button id="bHelp" class="alt" data-analytics-name="Help">مساعدة</button></div>
+<div class="act"><button id="bAbout" class="alt">حول التطبيق</button></div>
 </div></div>
+
+<div class="sheet" id="sHelp" data-analytics-name="Help"><div class="card" style="height:min(90vh,760px);display:flex;flex-direction:column">
+<div class="pl"><b>مساعدة</b><button class="s" id="helpCloseButton" aria-label="إغلاق المساعدة" data-aria-source="إغلاق المساعدة" data-analytics-name="Close help">✕</button></div>
+<div class="help" id="helpBody" style="overflow:auto;flex:1"></div></div></div>
 
 <div class="sheet" id="sCtx" data-analytics-name="Verse context"><div class="card"><div class="pl"><b id="cTtl"></b><button class="s" id="verseContextCloseButton" aria-label="إغلاق سياق الآية" data-aria-source="إغلاق سياق الآية" data-analytics-name="Close verse context">✕</button></div>
 <div class="act"><button id="cPlay">استماع</button><button id="cMn">المعاني</button></div>
@@ -363,21 +417,40 @@ body>*:not(#print){display:none!important}#print{display:block}
 
 <div class="sheet" id="vbar" data-analytics-name="Verse actions"><div class="card">
 <div class="pl"><b id="vTtl"></b><button class="s" id="verseActionsCloseButton" aria-label="إغلاق إجراءات الآية" data-aria-source="إغلاق إجراءات الآية" data-analytics-name="Close verse actions">✕</button></div>
-<div class="seg" id="modes" style="margin-top:10px"><button data-v="once">مرة</button><button data-v="cont">متواصل</button><button data-v="v">تكرار الآية</button><button data-v="s">تكرار السورة</button><button data-v="r">تكرار مقطع</button></div>
+<label class="f" style="margin-top:8px">القارئ والرواية</label>
+<button id="recBtn" class="recBtn" type="button" aria-haspopup="dialog" aria-label="اختيار القارئ" data-aria-source="اختيار القارئ"><b id="recBtnName"></b><small id="recBtnQ" class="recQ"></small><span class="recArrow">⌄</span></button>
+<select id="rec" hidden></select>
+<label class="f modesTitle">طريقة التشغيل والتكرار</label>
+<div class="seg" id="modes" style="margin-top:4px"><button data-v="once" title="تشغيل الآية مرة واحدة" data-title-source="تشغيل الآية مرة واحدة">مرة</button><button data-v="end" title="تشغيل من الآية حتى نهاية السورة" data-title-source="تشغيل من الآية حتى نهاية السورة">لنهاية السورة</button><button data-v="all" title="تشغيل من الآية حتى نهاية القرآن بلا توقف" data-title-source="تشغيل من الآية حتى نهاية القرآن بلا توقف">بلا توقف</button><button data-v="v" title="تكرار الآية الحالية" data-title-source="تكرار الآية الحالية">تكرار الآية</button><button data-v="s" title="تكرار السورة كاملة" data-title-source="تكرار السورة كاملة">تكرار السورة</button><button data-v="r" title="تكرار مقطع محدد من الآيات" data-title-source="تكرار مقطع محدد من الآيات">تكرار مقطع</button></div>
 <div class="two"><label>عدد التكرار <input type="number" id="rN" min="0" max="99"> <small>(٠ = بلا نهاية)</small></label></div>
-<div class="two" style="margin-top:6px"><button class="btn alt" id="setS">تعيين البداية</button><button class="btn alt" id="setE">تعيين النهاية</button></div>
-<div class="two" style="margin-top:6px;grid-template-columns:1fr auto;align-items:center"><span id="rgTx" class="note" style="margin:0"></span><button class="btn alt" id="clrR">مسح المقطع</button></div>
-<p class="note">اضغط مطولاً على آية ثم اختر «بداية المقطع» و«نهاية المقطع».</p>
-<label class="f">القارئ والرواية <select id="rec" style="width:100%"></select></label>
+<label class="f" style="margin-top:10px">نطاق التكرار</label>
+<div class="two" style="margin-top:4px"><button class="btn alt" id="setS" title="تعيين الآية الحالية بدايةً للمقطع" data-title-source="تعيين الآية الحالية بدايةً للمقطع">تعيين البداية</button><button class="btn alt" id="setE" title="تعيين الآية الحالية نهايةً للمقطع" data-title-source="تعيين الآية الحالية نهايةً للمقطع">تعيين النهاية</button></div>
+<div class="two" style="margin-top:6px;grid-template-columns:1fr auto;align-items:center"><span id="rgTx" class="rangeState" aria-live="polite"></span><button class="btn alt" id="clrR">مسح المقطع</button></div>
+<p class="note">اختر آية من المصحف ثم اضغط «تعيين البداية» أو «تعيين النهاية». سيُظلَّل المقطع المحدد، ويمكنك مسحه في أي وقت.</p>
 <div class="act"><button id="vTxt">نسخ النص</button><button id="vImg">نسخ كصورة</button><button id="vDl" class="alt">حفظ PNG</button><button id="vDs">تصميم صورة</button></div>
 <div class="two" style="margin-top:8px"><label>لون الخط <input type="color" id="vCol" value="#17150f"></label><label><input type="checkbox" id="vTr" checked> خلفية شفافة (وإلا: لون الصفحة)</label></div>
+</div></div>
+
+<div class="sheet" id="recSheet" data-analytics-name="Reciter selection"><div class="card">
+<div class="pl"><b>اختيار القارئ</b><button class="s" id="recCloseButton" aria-label="إغلاق اختيار القارئ" data-aria-source="إغلاق اختيار القارئ" data-analytics-name="Close reciter selection">✕</button></div>
+<input type="text" id="recSearch" placeholder="بحث عن قارئ" data-ph-source="بحث عن قارئ" autocomplete="off" style="width:100%">
+<div id="recList"></div></div></div>
+
+<div class="sheet" id="colorPop" data-analytics-name="Color picker"><div class="card">
+<div class="pl"><b>اختيار اللون</b><button class="s" id="cpClose" aria-label="إغلاق اختيار اللون" data-aria-source="إغلاق اختيار اللون" data-analytics-name="Close color picker">✕</button></div>
+<div class="cpPreview" id="cpPrev" aria-hidden="true"></div>
+<label class="f">الألوان الأخيرة</label><div class="cpGrid" id="cpRecent"></div>
+<label class="f">ألوان جاهزة</label><div class="cpGrid" id="cpPreset"></div>
+<div class="cpNative"><label>لون مخصص <input type="color" id="cpInput" value="#ffffff"></label><span id="cpVal" dir="ltr">#ffffff</span></div>
+<div class="act"><button id="cpApply">تطبيق</button><button id="cpCancel" class="alt">إلغاء</button></div>
+<p class="note">تظهر آخر ١٠ ألوان استخدمتها هنا لاختيارها بسرعة.</p>
 </div></div>
 
 <div id="studio" data-analytics-name="Design studio">
 <div id="stb"><button id="designStudioCloseButton" data-analytics-name="Close design studio">إغلاق</button><b>تصميم صورة بالآيات</b></div>
 <div id="pvw"><button id="rndD">تصميم جاهز</button><canvas id="pv"></canvas><div id="arBar"><button id="arShot" title="التقاط صورة"></button><button id="arRec" title="تسجيل فيديو"></button><button id="arAud" title="تلاوة الآيات"></button><button id="arMic" title="المايك (صوتك)"></button><button id="arSwap" title="تبديل الكاميرا"></button><button id="arFs" title="ملء الشاشة"></button><button id="arOff" title="إيقاف الكاميرا"></button></div><div class="arCd" id="arCd"></div><div class="arPill" id="arPill" style="display:none"><span class="rdot"></span><span id="arPillT">0:00</span></div></div>
 <div id="pnl">
-<div class="tabs" id="stTabs"><button data-t="tx" class="on">النص</button><button data-t="bg">الخلفية</button><button data-t="sz">الأبعاد</button><button data-t="lb">العناوين</button><button data-t="sk">الملصقات</button><button data-t="ex">التصدير</button><button data-t="hi">السجل</button></div>
+<div class="tabs" id="stTabs"><button data-t="tx" class="on">النص</button><button data-t="bg">الخلفية</button><button data-t="sz">الأبعاد</button><button data-t="lb">العناوين</button><button data-t="sk">المؤثرات</button><button data-t="ex">التصدير</button><button data-t="hi">السجل</button></div>
 <div class="tp on" id="tp-tx">
 <div class="two"><select data-k="s" id="dS"></select><label>من آية <input type="number" data-k="a1" min="1"></label><label>إلى <input type="number" data-k="a2" min="1"></label></div>
 <label class="f">حذف كلمات من البداية: <b id="c0v"></b></label><input type="range" data-k="cut0" min="0" max="0">
@@ -473,21 +546,21 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="two"><label class="f">أفقي</label><input type="range" data-k="rf.x" min="0" max="100"><label class="f">رأسي</label><input type="range" data-k="rf.y" min="0" max="100"></div></div>
 <div class="tp" id="tp-sk">
 <label class="f">مؤثرات متحركة</label><div id="fxG"></div>
-<label class="f">نص أو إيموجي (مثلاً توقيعك)</label>
-<div class="two" style="grid-template-columns:1fr auto"><input type="text" id="skEmT" maxlength="60" style="font-size:20px"><button class="btn" id="skEmAdd">إضافة</button></div>
-<div id="emG" class="grid" style="margin-top:8px"></div>
-<div class="act"><button id="skIm" class="alt">صورة / GIF</button><input type="file" id="skFile" accept="image/*" hidden></div>
-<div class="two" style="margin-top:8px;grid-template-columns:1fr auto"><input type="text" id="gifQ" value="islam"><button class="btn" id="gifGo">بحث GIF</button></div>
-<div id="gifG" class="gal"></div><p class="note">Powered by GIPHY</p>
-<div id="skList" class="seg" style="margin-top:8px"></div>
-<div id="skCtl" style="display:none"><div id="skCw" style="display:none"><label>اللون <input type="color" id="skC"></label></div>
-<div id="skTx" style="display:none"><label class="f">الخط</label><select id="skF"></select><label class="f" style="flex-direction:row;margin-top:8px"><input type="checkbox" id="skB"> عريض</label></div><label class="f">الحجم</label><input type="range" id="skS" min="2" max="90" step=".5"><label class="f">الدوران</label><input type="range" id="skR" min="-180" max="180"><label class="f">موضع أفقي</label><input type="range" id="skX" min="0" max="100"><label class="f">رأسي</label><input type="range" id="skY" min="0" max="100"><div class="act"><button id="skDel" class="alt">حذف</button></div></div>
-<p class="note">يمكنك سحب الملصق على المعاينة.</p>
+<div id="skList" class="seg" style="margin-top:12px"></div>
+<div id="skCtl" style="display:none">
+<div class="two"><label>اللون <input type="color" id="skC"></label></div>
+<label class="f">الحجم أو الكثافة</label><input type="range" id="skS" min="2" max="90" step=".5">
+<label class="f">الدوران</label><input type="range" id="skR" min="-180" max="180">
+<label class="f">موضع أفقي</label><input type="range" id="skX" min="0" max="100">
+<label class="f">رأسي</label><input type="range" id="skY" min="0" max="100">
+<div class="act"><button id="skDel" class="alt">حذف المؤثر</button></div>
+</div>
+<p class="note">أضف مؤثراً متحركاً واحداً أو أكثر فوق التصميم، ثم عدّل حجمه ولونه وموضعه. يمكنك سحب المؤثر على المعاينة.</p>
 <h4 style="margin-top:16px">التوقيع الثابت (يُضاف لكل التصاميم)</h4>
 <label class="f" style="flex-direction:row"><input type="checkbox" data-k="wm.on"> إظهار التوقيع على التصاميم</label>
 <div id="wmCtl">
 <label class="f">نص التوقيع</label>
-<input type="text" data-k="wm.text" maxlength="80" placeholder="اسمك أو حسابك">
+<input type="text" data-k="wm.text" maxlength="80" placeholder="اسمك أو حسابك" data-ph-source="اسمك أو حسابك">
 <div class="two"><label class="f">الخط</label><select data-k="wm.ff" id="wmF"></select></div>
 <div class="two"><label class="f" style="flex-direction:row"><input type="checkbox" data-k="wm.b"> عريض</label></div>
 <div class="two"><label>اللون <input type="color" data-k="wm.col"></label><label class="f">شفافية اللون</label><input type="range" data-k="wm.ca" min="0" max="100"></div>
@@ -498,7 +571,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <label class="f" style="flex-direction:row"><input type="checkbox" data-k="wm.bgOn"> خلفية التوقيع</label>
 <div class="two"><label>لون الخلفية <input type="color" data-k="wm.bgCol"></label><label class="f">شفافية الخلفية</label><input type="range" data-k="wm.bga" min="0" max="100"></div>
 <div class="two"><label class="f">أفقي</label><input type="range" data-k="wm.x" min="0" max="100"><label class="f">رأسي</label><input type="range" data-k="wm.y" min="0" max="100"></div>
-<p class="note">اسحب التوقيع على المعاينة لتحريكه — يبقى داخل التصميم دائماً.</p>
+<p class="note">اسحب التوقيع على المعاينة لتحريكه — يبقى داخل التصميم دائماً. يُحفظ نص التوقيع وتنسيقه تلقائياً ويُضاف إلى التصاميم القادمة ما دام الخيار مفعّلاً.</p>
 </div></div>
 <div class="tp" id="tp-ex">
 <label class="f">الدقة</label><div class="seg"><button data-k="res" data-v="1">HD ١٠٨٠</button><button data-k="res" data-v="2">2K/4K ×٢</button><button data-k="res" data-v="3">أعلى ×٣</button></div><p class="note" id="resTx"></p>
@@ -518,7 +591,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <h4>التصاميم المحفوظة</h4>
 <div class="act" style="margin-top:0"><button id="hiAlbum">مجلد الألبوم</button><button id="hiOpen" class="alt">السماح بالكتابة</button></div>
 <div class="act"><button id="hiClr" class="alt">مسح السجل</button><button id="hiDlAll" class="alt">تنزيل الكل</button></div>
-<p class="note" id="hiMsg">تُحفظ كل صورة أو فيديو تصدّره تلقائياً هنا. اربط مجلداً على جهازك ليُحفظ فيه أيضاً.</p>
+<p class="note" id="hiMsg">يجمع السجل كل تصاميمك السابقة ويسمح بإدارتها: عاينها، شاركها، احذفها، أو اجعل إحداها خلفية. تُحفظ كل صورة أو فيديو تصدّره تلقائياً هنا. اربط مجلداً على جهازك ليُحفظ فيه أيضاً.</p>
 <div id="hiG" class="gal hiG"></div>
 </div>
 </div></div>
@@ -638,8 +711,11 @@ const REC=[
 ['البوسنية — بسم كركت','translations/besim_korkut_ajet_po_ajet']
 ]]
 ];
-const st=Object.assign({p:1,a:100,m:'h',bg:null,rec:'Husary_128kbps',mode:'cont',mv:0,fit:'a',n:1,rs:null,re:null,tap:1,night:0,br:100,fb:100,sp:20,th:null,lt:0,dk:10,fc:null,lang:'ar',mo:1,mc:null,mb:null,keepOn:0},(()=>{try{return JSON.parse(localStorage.getItem('mushaf2')||'{}')}catch(e){return{}}})());
-if(st.th==null){st.th=st.night?10:0;st.bg=null}if(!st.mv){st.mode='cont';st.mv=1}lang=st.lang||'ar';
+const st=Object.assign({p:1,a:100,m:'h',bg:null,rec:'Husary_128kbps',mode:'all',mv:0,fit:'a',n:1,rs:null,re:null,tap:1,night:0,br:100,fb:100,sp:20,th:null,lt:0,dk:10,fc:null,lang:'ar',mo:1,mc:null,mb:null,keepOn:0,rem:0},(()=>{try{return JSON.parse(localStorage.getItem('mushaf2')||'{}')}catch(e){return{}}})());
+if(st.th==null){st.th=st.night?10:0;st.bg=null}
+if(!st.mv||st.mv<2){if(st.mode=='cont'||!st.mode)st.mode='end';st.mv=2}
+if(!['once','end','all','v','s','r'].includes(st.mode))st.mode='all';
+lang=st.lang||'ar';
 const save=()=>{try{localStorage.setItem('mushaf2',JSON.stringify(st))}catch(e){}};
 const juzOf=p=>JUZ.filter(s=>p>=s).length;
 const CNT={},ORDER=[],IDX={},PAGEOF={},WU={},PAGE_SURAHS={};
@@ -700,7 +776,7 @@ function applyBg(){const t=TH[st.th],r=document.documentElement.style;
  const pb=pg();r.setProperty('--paper',pb[0]);r.setProperty('--pink',st.fc||pb[1]);r.setProperty('--fb',st.fb/100);
  $('#dim').style.opacity=(1-st.br/100)*.88;$('#night').checked=!!t[0];$('#brR').value=st.br;$('#fbR').value=st.fb;$('#spR').value=st.sp;$('#asV').textContent=ar(st.sp);$('#fcol').value=st.fc||pb[1];
  const mc=st.mc||(t[0]?'#6fb3ff':'#1565c0');r.setProperty('--mn',mc);$('#mcol').value=mc;$('#mnOn').checked=!!st.mo;
- document.querySelector('meta[name=theme-color]').content=t[1].startsWith('#')?t[1]:(t[0]?'#14234f':'#4a74e0');syncRg()}
+ const tc=/^#/.test(t[1])?t[1]:(t[0]?'#14234f':'#4a74e0');document.querySelector('meta[name=theme-color]').content=tc;document.documentElement.style.colorScheme=t[0]?'dark':'light';const sm=document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');if(sm)sm.content=t[0]?'black-translucent':'default';syncRg();syncColorBtns()}
 let wakeLock=null;
 async function acquireWakeLock(){if(!('wakeLock' in navigator))return false;try{if(wakeLock){try{await wakeLock.release()}catch(e){}}wakeLock=await navigator.wakeLock.request('screen');wakeLock.addEventListener('release',()=>{wakeLock=null;if(document.hidden&&pl&&!au.paused){acquireWakeLock().catch(()=>{})}});$('#bKeep').classList.add('on');return true}catch(e){return false}}
 async function releaseWakeLock(){if(wakeLock){try{await wakeLock.release()}catch(e){}wakeLock=null}$('#bKeep').classList.toggle('on',!!st.keepOn&&!!wakeLock)}
@@ -715,7 +791,25 @@ function selTheme(i){const t=TH[i];if(!t)return;st.th=i;st.night=t[0]?1:0;st.bg=
 function lum(h){const n=parseInt(h.slice(1),16);return(.299*(n>>16)+.587*((n>>8)&255)+.114*(n&255))/255}
 function buildSw(){const s=$('#sw');s.innerHTML='';const d=document.createElement('button');d.style.background=TH[st.th][6];d.className=st.bg?'':'on';d.onclick=()=>{st.bg=null;applyBg();save();buildSw()};s.appendChild(d);
  PAL.forEach(p=>{const b=document.createElement('button');b.style.background=p[0];b.className=st.bg&&st.bg[0]==p[0]?'on':'';b.onclick=()=>{st.bg=p;applyBg();save();buildSw()};s.appendChild(b)});
- const c=document.createElement('input');c.id='customBackgroundColor';c.type='color';c.value=pg()[0];c.oninput=()=>{st.bg=[c.value,lum(c.value)<.45?'#f1ead6':'#17150f'];applyBg();save();$$('#sw button').forEach(x=>x.className='')};s.appendChild(c)}
+ const c=document.createElement('input');c.id='customBackgroundColor';c.type='color';c.value=pg()[0];c.oninput=()=>{st.bg=[c.value,lum(c.value)<.45?'#f1ead6':'#17150f'];applyBg();save();$$('#sw button').forEach(x=>x.className='')};s.appendChild(c);wrapColor(c)}
+/* منتقي الألوان: آخر ١٠ ألوان + ألوان جاهزة */
+const COLOR_KEY='mushafColors',PRESET_COLORS=['#000000','#ffffff','#fbf6e8','#f1e4c3','#0f4f45','#a8823f','#17150f','#e53935','#1e88e5','#43a047','#8e24aa','#fb8c00','#00897b','#6d4c41','#c0ca33','#d81b60','#3949ab','#00acc1','#fdd835','#757575'];
+let cpTarget=null;
+function getRecentColors(){try{const a=JSON.parse(localStorage.getItem(COLOR_KEY)||'[]');return Array.isArray(a)?a.filter(x=>/^#[0-9a-f]{6}$/i.test(x)).slice(0,10):[]}catch(e){return[]}}
+function addRecentColor(c){c=String(c||'').toLowerCase();if(!/^#[0-9a-f]{6}$/.test(c))return;const a=getRecentColors().filter(x=>x!=c);a.unshift(c);try{localStorage.setItem(COLOR_KEY,JSON.stringify(a.slice(0,10)))}catch(e){}}
+function cpPreview(){const v=$('#cpInput').value;$('#cpPrev').style.background=v;$('#cpVal').textContent=v;$('#cpPrev').style.color=lum(v)<.45?'#fff':'#111'}
+function renderColorChoices(){const r=$('#cpRecent'),p=$('#cpPreset');if(!r||!p)return;const rec=getRecentColors();
+ r.innerHTML='';if(!rec.length)r.innerHTML='<span class="note">'+T('لا توجد ألوان حديثة بعد')+'</span>';else rec.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='cpSw';b.style.background=c;b.title=c;b.onclick=()=>{$('#cpInput').value=c;cpPreview()};r.appendChild(b)});
+ p.innerHTML='';PRESET_COLORS.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='cpSw';b.style.background=c;b.title=c;b.onclick=()=>{$('#cpInput').value=c;cpPreview()};p.appendChild(b)})}
+function openColor(inp){cpTarget=inp;$('#cpInput').value=inp.value||'#ffffff';cpPreview();renderColorChoices();openOverlay('#colorPop')}
+function closeColor(){cpTarget=null;closeOverlay('#colorPop')}
+function applyColor(){const v=$('#cpInput').value;if(!cpTarget)return;cpTarget.value=v;cpTarget.dispatchEvent(new Event('input',{bubbles:true}));cpTarget.dispatchEvent(new Event('change',{bubbles:true}));addRecentColor(v);closeColor()}
+function wrapColor(inp){if(!inp||inp.dataset.cpw||inp.closest('#colorPop')||inp.id=='cpInput')return;inp.dataset.cpw='1';const b=document.createElement('button');b.type='button';b.className='cpBtn';b.style.background=inp.value||'#fff';b.setAttribute('aria-label','اختيار اللون');b.setAttribute('data-aria-source','اختيار اللون');b.onclick=e=>{e.preventDefault();e.stopPropagation();openColor(inp)};inp.style.display='none';inp.after(b);
+ inp.addEventListener('input',()=>{b.style.background=inp.value});inp.addEventListener('change',()=>{b.style.background=inp.value;addRecentColor(inp.value)})}
+function syncColorBtns(){$$('input[type=color]').forEach(i=>{const b=i.nextElementSibling;if(b&&b.classList.contains('cpBtn'))b.style.background=i.value||'#fff'})}
+$('#cpInput').addEventListener('input',cpPreview);
+$('#cpApply').onclick=applyColor;$('#cpCancel').onclick=closeColor;$('#cpClose').onclick=closeColor;
+$$('input[type=color]').forEach(wrapColor);
 $('#fcol').oninput=e=>{st.fc=e.target.value;applyBg();save()};$('#fcR').onclick=()=>{st.fc=null;applyBg();save()};
 /* أزرار ± للمنزلقات */
 const PCT=['aRng','brR','fbR','bw','g0','g1','dim','bx','by','nm.x','nm.y','rf.x','rf.y','sh.a'];
@@ -728,11 +822,11 @@ function enh(){$$('input[type=range]').forEach(r=>{if(r._v||r.dataset.no!=null)r
 const ico=(s,n)=>{const e=$(s),u=e.querySelector('use');if(u)u.setAttribute('href','#i-'+n);else e.innerHTML='<svg><use href="#i-'+n+'"/></svg>'};
 const IC=[['#reportProblem','info'],['#bIdx','menu'],['#bDes','film'],['#settingsCloseButton','x'],['#indexCloseButton','x'],['#clrR','trash-2'],['#cRs','chevron-right'],['#cRe','chevron-left'],['#bSea','search'],['#seaGo','search'],['#searchCloseButton','x'],['#bSet','settings'],['#bAs','arrow-down-to-line'],['#bFs','maximize'],['#bPrint','printer'],['#bOff','wifi'],['#mH','layers'],['#mV','list'],['#fcR','rotate-cw'],
 ['#aPlay','play'],['#aPrev','skip-forward'],['#aNext','skip-back'],['#verseActionsCloseButton','x'],['#verseContextCloseButton','x'],['#setS','chevron-right'],['#setE','chevron-left'],['#vTxt','copy'],['#vImg','image'],['#vDl','download'],['#vDs','film'],
-['#cPlay','volume-2'],['#aStop','square'],['#wPrev','play'],['[data-k=rv][data-v="0"]','x'],['[data-k=rv][data-v="1"]','eye'],['[data-k=rv][data-v="2"]','layers'],['[data-k=rv][data-v="3"]','chevron-right'],['#rndD','shuffle'],['#bAbout','info'],['#aboutCloseButton','x'],['#aMore','ellipsis'],['#vdF','film'],['#vdGo','film'],['#imGo','search'],['#vPrev','play'],['#aPrv','play'],['#skIm','image'],['#skEmAdd','plus'],['#gifGo','search'],['#skDel','trash-2'],['[data-k=bg][data-v=vid]','video'],['#stTabs [data-t=sk]','smile'],['#cMn','book-open'],['#wordMeaningCloseButton','x'],['#verseMeaningsCloseButton','x'],['#mcR','rotate-cw'],['#cCopy','copy'],['#cShare','share-2'],['#cImg','download'],['#cDs','film'],['#asT','pause'],['#asM','minus'],['#asP','plus'],['#autoScrollCloseButton','x'],
+['#cPlay','volume-2'],['#aStop','square'],['#wPrev','play'],['[data-k=rv][data-v="0"]','x'],['[data-k=rv][data-v="1"]','eye'],['[data-k=rv][data-v="2"]','layers'],['[data-k=rv][data-v="3"]','chevron-right'],['#rndD','shuffle'],['#bAbout','info'],['#aboutCloseButton','x'],['#aMore','ellipsis'],['#vdF','film'],['#vdGo','film'],['#imGo','search'],['#vPrev','play'],['#aPrv','play'],['#skDel','trash-2'],['[data-k=bg][data-v=vid]','video'],['#stTabs [data-t=sk]','sparkles'],['#cMn','book-open'],['#wordMeaningCloseButton','x'],['#verseMeaningsCloseButton','x'],['#mcR','rotate-cw'],['#cCopy','copy'],['#cShare','share-2'],['#cImg','download'],['#cDs','film'],['#asT','pause'],['#asM','minus'],['#asP','plus'],['#autoScrollCloseButton','x'],
 ['#designStudioCloseButton','x'],['#imF','upload'],['#imGo','search'],['#vdF','upload'],['#vdGo','search'],['#xPng','download'],['#xShP','share-2'],['#xVid','video'],['#xShV','share-2'],['#flip','rotate-cw'],
 ['#sIdx [data-t=s]','book-open'],['#sIdx [data-t=j]','layers'],['#sIdx [data-t=p]','list'],
 ['#stTabs [data-t=tx]','type'],['#stTabs [data-t=bg]','palette'],['#stTabs [data-t=sz]','ruler'],['#stTabs [data-t=lb]','hash'],['#stTabs [data-t=ex]','download'],['#stTabs [data-t=hi]','rotate-cw'],
-['#modes [data-v=once]','play'],['#modes [data-v=cont]','skip-forward'],['#modes [data-v=v]','repeat-1'],['#modes [data-v=s]','repeat'],['#modes [data-v=r]','scissors'],
+['#modes [data-v=once]','play'],['#modes [data-v=end]','skip-forward'],['#modes [data-v=all]','repeat'],['#modes [data-v=v]','repeat-1'],['#modes [data-v=s]','repeat'],['#modes [data-v=r]','scissors'],
 ['[data-k=al][data-v=r]','align-right'],['[data-k=al][data-v=c]','align-center'],['[data-k=al][data-v=l]','align-left'],
 ['[data-k=bg][data-v=none]','x'],['[data-k=bg][data-v=solid]','palette'],['[data-k=bg][data-v=grad]','layers'],['[data-k=bg][data-v=pat]','sparkles'],['[data-k=bg][data-v=img]','image'],
 ['[data-k=asrc][data-v=none]','x'],['[data-k=asrc][data-v=ayat]','volume-2'],['[data-k=asrc][data-v=file]','music'],
@@ -815,7 +909,7 @@ function pageEl(n){
   if(L.t=='h')h+='<div class="ln hd"><span class="w" style="font-family:F0;font-size:calc(var(--pw)*.0694)">'+L.c+'</span></div>';
   else if(L.t=='b')h+='<div class="ln"><span class="w" style="font-family:F'+L.f+';font-size:calc(var(--pw)*.0559)">'+L.c+'</span></div>';
   else{const R=L.e>=14.5?(.9/L.e):.0559;
-   h+='<div class="ln" style="font-size:calc(var(--pw)*'+R.toFixed(5)+');font-family:F'+L.f+'">'+L.w.map(w=>'<span class="w'+(w[2]==0&&cover(w[1],w[4])?' mn':'')+'"'+(w[2]==2?'':' data-k="'+w[1]+'"')+(w[2]==0?' data-i="'+w[4]+'"':'')+'>'+w[0]+'</span>').join('')+'</div>'}}
+   h+='<div class="ln" style="font-size:calc(var(--pw)*'+R.toFixed(5)+');font-family:F'+L.f+'">'+L.w.map(w=>'<span class="w'+(w[2]==0&&cover(w[1],w[4])?' mn':'')+(w[2]==0&&inRange(w[1])?' range':'')+'"'+(w[2]==2?'':' data-k="'+w[1]+'"')+(w[2]==0?' data-i="'+w[4]+'"':'')+'>'+w[0]+'</span>').join('')+'</div>'}}
  const nextWords=[];let nextSurahGlyph='',nextSurahName='';if(n<MAXP){const nd=DATA[n+1];let fk='';for(const line of nd.l){if(line.t!='t')continue;if(!fk){const nw=line.w.find(w=>w[2]!==2&&typeof w[1]==='string'&&w[1].indexOf(':')>0);if(nw)fk=nw[1]}for(const word of line.w)if(word[2]===0&&nextWords.length<3)nextWords.push('<span class="nextPageCueWord" style="font-family:F'+line.f+'">'+word[0]+'</span>');if(nextWords.length===3)break}
   const fa=String(fk||'').split(':');if(fa.length===2&&+fa[1]===1){const hl=nd.l.find(L=>L.t=='h');if(hl)nextSurahGlyph=hl.c;else nextSurahName=sName(+fa[0]);nextWords.length=0}}
  const cueTxt=nextSurahGlyph?'<span style="font-family:F0">'+nextSurahGlyph+'</span>':nextSurahName;
@@ -871,27 +965,31 @@ async function refreshAppShell(registration){
  if(!active||active.state!='activated')throw new Error('No active service worker is available.');
  await new Promise((resolve,reject)=>{const channel=new MessageChannel(),timer=setTimeout(()=>{channel.port1.close();reject(new Error('Timed out while refreshing the app cache.'))},90000);channel.port1.onmessage=event=>{clearTimeout(timer);channel.port1.close();if(event.data&&event.data.ok)resolve();else reject(new Error(event.data&&event.data.error||'The service worker could not refresh the app cache.'))};try{active.postMessage({type:'REFRESH_APP_CACHE'},[channel.port2])}catch(error){clearTimeout(timer);channel.port1.close();reject(error)}});
 }
-$('#checkUpdatesButton').onclick=async()=>{
- const button=$('#checkUpdatesButton'),status=$('#updateStatus');let stage='check';button.disabled=true;status.textContent=T('جارٍ التحقق من وجود تحديث...');
+async function checkAppUpdate(auto){
+ const button=$('#checkUpdatesButton'),status=$('#updateStatus');let stage='check';
+ const setStatus=msg=>{if(!auto)status.textContent=msg};
+ if(!auto)button.disabled=true;setStatus(T('جارٍ التحقق من وجود تحديث...'));
  try{
   const versionUrl=new URL('index.html',location.href);versionUrl.searchParams.set('_version_check',Date.now());
   const response=await fetch(versionUrl,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
   if(!response.ok)throw new Error('Version check failed with HTTP '+response.status+'.');
   const html=await response.text(),serverVersion=new DOMParser().parseFromString(html,'text/html').querySelector('meta[name="app-version"]')?.content;
-  if(!parseVersion(serverVersion)){status.textContent=T('تعذر قراءة إصدار التطبيق من الخادم.');QuranAnalytics.track('app_update_check',{result:'invalid_version'});return}
-  if(serverVersion===currentAppVersion){status.textContent=T('التطبيق محدث بالفعل.')+' '+currentAppVersion;QuranAnalytics.track('app_update_check',{result:'current',version:currentAppVersion});return}
-  if(!isNewerVersion(serverVersion,currentAppVersion)){status.textContent=T('إصدار الخادم أقدم من الإصدار المثبت.')+' '+serverVersion;QuranAnalytics.track('app_update_check',{result:'server_older',version:serverVersion});return}
-  status.textContent=T('يتوفر تحديث جديد (الإصدار)')+' '+serverVersion;
+  if(!parseVersion(serverVersion)){setStatus(T('تعذر قراءة إصدار التطبيق من الخادم.'));if(!auto)QuranAnalytics.track('app_update_check',{result:'invalid_version'});return}
+  if(serverVersion===currentAppVersion){setStatus(T('التطبيق محدث بالفعل.')+' '+currentAppVersion);if(!auto)QuranAnalytics.track('app_update_check',{result:'current',version:currentAppVersion});return}
+  if(!isNewerVersion(serverVersion,currentAppVersion)){setStatus(T('إصدار الخادم أقدم من الإصدار المثبت.')+' '+serverVersion);if(!auto)QuranAnalytics.track('app_update_check',{result:'server_older',version:serverVersion});return}
+  setStatus(T('يتوفر تحديث جديد (الإصدار)')+' '+serverVersion);
   if(!('serviceWorker'in navigator))throw new Error('Service workers are unavailable in this browser context.');
   stage='apply';
   const registration=await navigator.serviceWorker.register('sw.js',{updateViaCache:'none'});
   await refreshAppShell(registration);
-  status.textContent=T('تم تحديث التطبيق إلى الإصدار التالي. جارٍ إعادة التحميل...')+' '+serverVersion;
-  QuranAnalytics.track('app_update_check',{result:'updated',from_version:currentAppVersion,to_version:serverVersion});
+  try{localStorage.setItem('mushafUpdateToast','1')}catch(e){}
+  if(!auto)setStatus(T('تم تحديث التطبيق إلى الإصدار التالي. جارٍ إعادة التحميل...')+' '+serverVersion);
+  QuranAnalytics.track('app_update_check',{result:'updated',from_version:currentAppVersion,to_version:serverVersion,automatic:!!auto});
   location.reload();
- }catch(error){console.error('App update failed during '+stage+'.',error);status.textContent=T(stage=='check'?'تعذر التحقق من التحديث. تحقق من اتصال الإنترنت ثم أعد المحاولة.':'تعذر تطبيق التحديث. أعد المحاولة أو أعد فتح التطبيق عند توفر اتصال.');QuranAnalytics.track('app_update_check',{result:stage=='check'?'check_error':'apply_error'})}
- finally{button.disabled=false}
-};
+ }catch(error){console.error('App update failed during '+stage+'.',error);if(!auto){setStatus(T(stage=='check'?'تعذر التحقق من التحديث. تحقق من اتصال الإنترنت ثم أعد المحاولة.':'تعذر تطبيق التحديث. أعد المحاولة أو أعد فتح التطبيق عند توفر اتصال.'));QuranAnalytics.track('app_update_check',{result:stage=='check'?'check_error':'apply_error'})}else QuranAnalytics.track('app_update_check',{result:'auto_'+stage+'_error'})}
+ finally{if(!auto)button.disabled=false}
+}
+$('#checkUpdatesButton').onclick=()=>checkAppUpdate(false);
 $('#aRng').oninput=e=>{st.a=+e.target.value;ui();save()};
 $('#mH').onclick=()=>{st.m='h';ui();build();QuranAnalytics.track('reading_mode_change',{mode:st.m})};$('#mV').onclick=()=>{st.m='v';ui();build();QuranAnalytics.track('reading_mode_change',{mode:st.m})};
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement,de=document.documentElement;
@@ -909,38 +1007,62 @@ $('#bOff').onclick=async()=>{const m=$('#offMsg');if(!('serviceWorker' in naviga
 
 /* الصوت */
 const au=new Audio();au.preload='auto';let pl=null;
-const recSel=$('#rec');REC.forEach(g=>{const o=document.createElement('optgroup');o.label=g[0];g[1].forEach(r=>{const x=document.createElement('option');x.value=r[1];x.textContent=r[0];o.appendChild(x)});recSel.appendChild(o)});
+const recSel=$('#rec');REC.forEach(g=>{const o=document.createElement('optgroup');o.label=g[0];g[1].forEach(r=>{const x=document.createElement('option');x.value=r[1];x.textContent=recLabel(r[0]);o.appendChild(x)});recSel.appendChild(o)});
 if(st.rec=='Husary_Mujawwad_128kbps')st.rec='Husary_128kbps_Mujawwad';
 if(!REC.some(g=>g[1].some(r=>r[1]==st.rec)))st.rec='Husary_128kbps';save();
-const recName=()=>{for(const g of REC)for(const r of g[1])if(r[1]==st.rec)return r[0];return st.rec};
-recSel.value=st.rec;recSel.onchange=()=>{st.rec=recSel.value;save();QuranAnalytics.track('reciter_selected',{reciter:st.rec,reciter_name:recName()});if(pl)playAt();else $('#aLb').textContent=recName()};
-$('#aLb').textContent=recName();
+function recLabel(n){return String(n).replace(/\s*[\(\uFF08][\u0660-\u0669\d]+[\)\uFF09]\s*$/,'').trim()}
+function recQuality(src){const m=String(src).match(/(\d{2,3})kbps/i);if(!m)return'';const n=+m[1];return n<=32?'عادية':n<=64?'متوسطة':'عالية'}
+const recFinder=src=>{for(const g of REC)for(const r of g[1])if(r[1]==src)return r;return null};
+const recName=()=>{const r=recFinder(st.rec);return r?recLabel(r[0]):st.rec};
+function recSync(){const r=recFinder(st.rec),q=r?recQuality(r[1]):'';$('#recBtnName').textContent=r?recLabel(r[0]):st.rec;$('#recBtnQ').textContent=q?'('+T(q)+')':'';$('#recBtnQ').style.display=q?'':'none';recSel.value=st.rec;$('#aLb').textContent=recName()}
+function renderRecList(){const box=$('#recList');if(!box)return;const q=$('#recSearch').value.trim().toLowerCase();box.innerHTML='';let n=0;
+ REC.forEach(g=>{const items=g[1].filter(r=>!q||r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q));if(!items.length)return;
+  const h=document.createElement('div');h.className='recGroup';h.textContent=g[0];box.appendChild(h);
+  items.forEach(r=>{const b=document.createElement('button');b.type='button';b.className='recItem'+(r[1]==st.rec?' on':'');const ql=recQuality(r[1]);
+   b.innerHTML='<span>'+esc(recLabel(r[0]))+'</span>'+(ql?'<small class="recQ">('+esc(T(ql))+')</small>':'')+(r[1]==st.rec?'<svg class="i" style="width:18px;height:18px"><use href="#i-check"/></svg>':'');
+   b.onclick=()=>{st.rec=r[1];save();recSync();renderRecList();closeOverlay('#recSheet');QuranAnalytics.track('reciter_selected',{reciter:st.rec,reciter_name:recName(),quality:recQuality(st.rec)});if(pl)playAt()};box.appendChild(b);n++})});
+ if(!n)box.innerHTML='<p class="note">'+T('لا نتائج')+'</p>'}
+$('#recBtn').onclick=()=>{renderRecList();openOverlay('#recSheet')};
+$('#recCloseButton').onclick=()=>closeOverlay('#recSheet');
+$('#recSearch').oninput=renderRecList;
+recSel.onchange=()=>{st.rec=recSel.value;save();QuranAnalytics.track('reciter_selected',{reciter:st.rec,reciter_name:recName(),quality:recQuality(st.rec)});if(pl)playAt();else recSync()};
 const aUrl=k=>{const[s,a]=k.split(':');return 'https://everyayah.com/data/'+st.rec+'/'+String(s).padStart(3,'0')+String(a).padStart(3,'0')+'.mp3'};
 let cur=null;
 function modesUi(){$$('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.v==st.mode));$('#rN').value=st.n;
- $('#rgTx').textContent=st.rs?(T('المقطع: ')+kn(st.rs)+' ← '+kn(st.re||st.rs)):T('المقطع غير محدد')}
+ const has=!!(st.rs&&st.re);
+ $('#rgTx').classList.toggle('on',has);
+ $('#rgTx').textContent=has?(T('المقطع: ')+kn(st.rs)+' ← '+kn(st.re)):T('لم يُحدَّد مقطع — اختر آية ثم عيّن البداية أو النهاية');
+ $('#setS').classList.toggle('on',!!(st.rs&&ck()==st.rs));$('#setE').classList.toggle('on',!!(st.re&&ck()==st.re));
+ markRangeDom()}
 const kn=k=>{const[s,a]=k.split(':');return sName(s)+' '+ar(a)};
+const inRange=k=>!!(st.rs&&st.re&&k&&IDX[k]!=null&&IDX[k]>=IDX[st.rs]&&IDX[k]<=IDX[st.re]);
+function markRangeDom(){$$('.w[data-k]').forEach(w=>w.classList.toggle('range',inRange(w.dataset.k)))}
 $('#modes').onclick=e=>{const b=e.target.closest('button');if(!b)return;st.mode=b.dataset.v;save();modesUi()};
 $('#rN').onchange=e=>{st.n=Math.max(0,Math.min(99,+e.target.value||0));e.target.value=st.n;save()};$('#rN').onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();e.target.blur()}};
 const ck=()=>pl?pl.k:cur;
-function setRange(w,k){if(!k)return;if(w=='s'){st.rs=k;if(!st.re||IDX[st.re]<IDX[k])st.re=k}else{st.re=k;if(!st.rs||IDX[st.rs]>IDX[k])st.rs=k}st.mode='r';save();modesUi();flash(T('المقطع: ')+kn(st.rs)+' ← '+kn(st.re))}
-$('#setS').onclick=()=>setRange('s',ck());$('#clrR').onclick=()=>{st.rs=st.re=null;save();modesUi()};
+function setRange(w,k){if(!k)return;if(w=='s'){st.rs=k;if(!st.re||IDX[st.re]<IDX[k])st.re=k}else{st.re=k;if(!st.rs||IDX[st.rs]>IDX[k])st.rs=k}st.mode='r';save();modesUi();flash(T('تم تحديد المقطع: ')+kn(st.rs)+' ← '+kn(st.re))}
+$('#setS').onclick=()=>setRange('s',ck());$('#clrR').onclick=()=>{st.rs=st.re=null;if(st.mode=='r')st.mode='all';save();modesUi()};
 $('#setE').onclick=()=>setRange('e',ck());
 let lastTouch=0;['pointerdown','wheel','touchmove'].forEach(e=>pager.addEventListener(e,()=>{lastTouch=Date.now()},{passive:true}));
-function follow(k){const ws=[...pager.querySelectorAll('.w[data-k="'+k+'"]')],pr=pager.getBoundingClientRect();
+function scrollWord(w){if(!w)return;const slide=w.closest('.slide'),pr=pager.getBoundingClientRect();
+ if(st.m=='h'&&slide){const r=w.getBoundingClientRect(),sr=slide.getBoundingClientRect();const dy=(r.top+r.bottom)/2-(sr.top+sr.bottom)/2;if(Math.abs(dy)>2)slide.scrollBy({top:dy,behavior:'smooth'});return}
+ const r=w.getBoundingClientRect();const dy=(r.top+r.bottom)/2-(pr.top+pr.bottom)/2;if(Math.abs(dy)>2)pager.scrollBy({top:dy,behavior:'smooth'})}
+function follow(k,force){if(!k)return;const ws=[...pager.querySelectorAll('.w[data-k="'+k+'"]')],pr=pager.getBoundingClientRect();
  const vis=ws.some(w=>{const r=w.getBoundingClientRect();return r.bottom>pr.top+30&&r.top<pr.bottom-110&&r.right>pr.left&&r.left<pr.right});
- if(vis)return;if(ws.length&&Date.now()-lastTouch<2500)return;
- if(ws.length){ws[0].scrollIntoView({block:'center',inline:'center',behavior:'smooth'});return}
- go(PAGEOF[k],true);setTimeout(()=>{const w=pager.querySelector('.w[data-k="'+k+'"]');w&&w.scrollIntoView({block:'center',inline:'center'})},750)}
+ if(vis&&!force)return;if(ws.length&&!force&&Date.now()-lastTouch<2500)return;
+ if(ws.length){scrollWord(ws[0]);return}
+ go(PAGEOF[k],true);setTimeout(()=>{const w=pager.querySelector('.w[data-k="'+k+'"]');scrollWord(w)},750)}
 function startPlay(k){const m=st.mode,s=+k.split(':')[0];let list,i=0,loops=1;
- if(m=='once')list=[k];else if(m=='cont'){list=ORDER.slice(IDX[k],IDX[s+':'+CNT[s]]+1)}
+ if(m=='once')list=[k];
+ else if(m=='end')list=ORDER.slice(IDX[k],IDX[s+':'+CNT[s]]+1);
+ else if(m=='all')list=ORDER.slice(IDX[k]);
  else if(m=='v'){list=[k];loops=st.n}
  else if(m=='s'){list=ORDER.slice(IDX[s+':1'],IDX[s+':'+CNT[s]]+1);i=IDX[k]-IDX[s+':1'];loops=st.n}
  else{if(!st.rs){st.rs=st.re=k}list=ORDER.slice(IDX[st.rs],IDX[st.re]+1);loops=st.n}
  pl={list,i,loops,loop:0,first:true};if('wakeLock' in navigator)acquireWakeLock().catch(()=>{});playAt();const verse=+k.split(':')[1],page=PAGEOF[k];QuranAnalytics.track('recitation_start',{reciter:st.rec,reciter_name:recName(),surah:s,verse,page,juz:juzOf(page),mode:m})}
 function updateMediaSession(k){if(!('mediaSession' in navigator))return;try{const[s,a]=k.split(':').map(Number);try{navigator.mediaSession.metadata=new MediaMetadata({title:T('الآية')+' '+ar(a),artist:sName(s),album:recName(),artwork:[{src:'icon-192.png',sizes:'192x192',type:'image/png'},{src:'icon-512.png',sizes:'512x512',type:'image/png'}]})}catch(e){}try{navigator.mediaSession.setActionHandler('play',()=>{if(pl){au.play().catch(()=>{});QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause');if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{});try{navigator.mediaSession.playbackState='playing'}catch(e){}}})}catch(e){}try{navigator.mediaSession.setActionHandler('pause',()=>{if(pl){au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play');if(!st.keepOn&&'wakeLock' in navigator)releaseWakeLock().catch(()=>{});try{navigator.mediaSession.playbackState='paused'}catch(e){}}})}catch(e){}try{navigator.mediaSession.setActionHandler('previoustrack',()=>{$('#aPrev').click()})}catch(e){}try{navigator.mediaSession.setActionHandler('nexttrack',()=>{$('#aNext').click()})}catch(e){}try{navigator.mediaSession.playbackState='playing'}catch(e){}}catch(e){}}
-function playAt(){if(!pl)return;const k=pl.list[pl.i];au.src=aUrl(k);au.play().catch(()=>{});pl.k=k;markPlay();document.body.classList.add('hasbar');$('#aLb').textContent=vt(k);updateMediaSession(k);
- if(!pl.first)follow(k);pl.first=false;ico('#aPlay','pause');if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{});
+function playAt(){if(!pl)return;const k=pl.list[pl.i];au.src=aUrl(k);au.play().catch(()=>{});pl.k=k;cur=k;markPlay();document.body.classList.add('hasbar');$('#aLb').textContent=vt(k);updateMediaSession(k);
+ follow(k);pl.first=false;ico('#aPlay','pause');if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{});
  const nx=pl.list[pl.i+1];if(nx){const pre=new Audio();pre.preload='auto';pre.src=aUrl(nx)}}
 au.onended=()=>{if(!pl)return;pl.i++;if(pl.i>=pl.list.length){pl.loop++;if(pl.loops&&pl.loop>=pl.loops){if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='none';navigator.mediaSession.metadata=null}catch(e){}}stopPlay();return}pl.i=0}playAt()};
 au.onerror=()=>{if(pl){QuranAnalytics.track('recitation_error',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],kind:au.error&&au.error.code||0});flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
@@ -964,7 +1086,7 @@ function pick(k){$$('.w.sel').forEach(x=>x.classList.remove('sel'));cur=k;
 const clrSel=()=>{if(!$('#vbar').classList.contains('on'))$$('.w.sel').forEach(x=>x.classList.remove('sel'))};
 function toggleChrome(){const h=!document.body.classList.contains('nc');document.body.classList.toggle('nc',h);
  if(h){hlK=null;$$('.sheet').forEach(s=>s.classList.remove('on'));$$('.w.sel').forEach(x=>x.classList.remove('sel'))}
- setTimeout(()=>go(st.p,false),80)}
+ setTimeout(()=>{go(st.p,false);if(pl)setTimeout(()=>follow(pl.k),120)},80)}
 let lpT=0,lpF=0,lpX=0,lpY=0;
 pager.addEventListener('pointerdown',e=>{lpF=0;const w=e.target.closest('.w[data-k]');if(!w)return;lpX=e.clientX;lpY=e.clientY;clearTimeout(lpT);lpT=setTimeout(()=>{lpT=0;lpF=1;ctxOpen(w.dataset.k)},480)});
 pager.addEventListener('pointermove',e=>{if(lpT&&Math.hypot(e.clientX-lpX,e.clientY-lpY)>10){clearTimeout(lpT);lpT=0}});
@@ -985,7 +1107,7 @@ $('#cShare').onclick=async()=>{closeOverlay('#sCtx');const x=verseText(cur),[sur
 $('#verseActionsCloseButton').onclick=()=>closeOverlay('#vbar');
 $('#settingsCloseButton').onclick=()=>closeOverlay('#sSet');$('#indexCloseButton').onclick=()=>closeOverlay('#sIdx');
 function firstOnPage(){const L=DATA[st.p].l;let f=null;for(const l of L)if(l.t=='t')for(const w of l.w){if(w[2]==0&&w[1]){if(w[4]===0)return w[1];f=f||w[1]}}return f||ORDER[0]}
-$('#bDes').onclick=()=>{const s=document.querySelector('.w.sel');cur=(s&&s.dataset.k)||firstOnPage();$('#vDs').onclick()};
+$('#bDes').onclick=()=>{const s=document.querySelector('.w.sel');cur=(pl&&pl.k)||(s&&s.dataset.k)||cur||firstOnPage();$('#vDs').onclick()};
 $('#bAbout').onclick=()=>{closeOverlay('#sSet');openOverlay('#sAbout')};$('#aboutCloseButton').onclick=()=>closeOverlay('#sAbout');
 $('#vTxt').onclick=()=>{const t=verseText(cur),[surah,verse]=cur.split(':').map(Number),page=PAGEOF[cur];let copied=false;const doFallback=()=>{try{const x=document.createElement('textarea');x.value=t;x.style.position='fixed';x.style.left='-9999px';x.style.top='0';x.setAttribute('readonly','');document.body.appendChild(x);if(navigator.userAgent.match(/iPhone|iPad|iPod/i)){const range=document.createRange();range.selectNodeContents(x);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);x.setSelectionRange(0,t.length)}else{x.select()}const ok=document.execCommand('copy');x.remove();return ok}catch(e){return false}};if(navigator.clipboard&&typeof navigator.clipboard.writeText==='function'){try{const p=navigator.clipboard.writeText(t);copied=true;if(p&&typeof p.then==='function'){p.then(()=>{}).catch(()=>{doFallback()})}}catch(e){copied=doFallback()}}else{copied=doFallback()}QuranAnalytics.track('verse_text_copied',{surah,verse,page,juz:juzOf(page)});flash(T('تم نسخ النص'))};
 async function fontsFor(us){await stkFonts();await Promise.all([...new Set([0,...us.map(u=>u.f)])].map(f=>document.fonts.load('40px F'+f,'\uF100')));if(D.wm.on)try{await document.fonts.load(stkFont({ff:D.wm.ff,b:D.wm.b},40),D.wm.text||'ا')}catch(e){}}
@@ -1015,11 +1137,29 @@ const D={s:2,a1:255,a2:255,cut0:0,cut1:0,brk:{},fs:6.4,bw:84,bx:50,by:50,al:'c',
   nm:{on:1,x:50,y:13,size:9,col:'#0f4f45'},rf:{on:1,x:50,y:89,size:4.2,col:'#0f4f45'},tgt:'txt',asrc:'none',vsec:8,afile:null,exact:0,rv:0,wf:.25,bs:100,bgx:0,bgy:0,vt0:0,vt1:0,at0:0,at1:0,stk:[],ss:-1,vid:null,vclipAudio:null,sh:{on:0,col:'#000000',a:55,ang:135,d:4,b:6},
   wm:{on:0,text:'القرآن الكريم',ff:'Tajawal',b:1,size:5,col:'#ffffff',ca:100,shOn:1,shCol:'#000000',sha:60,shb:8,shd:3,bgOn:0,bgCol:'#000000',bga:35,rad:6,x:50,y:93,pad:55,gap:45}};
 const gp=(o,p)=>p.split('.').reduce((x,k)=>x[k],o),sp=(o,p,v)=>{const a=p.split('.'),l=a.pop();a.reduce((x,k)=>x[k],o)[l]=v};
+const STUDIO_KEY='mushafStudio';let studioSaveT=0;
+function studioPersist(now){clearTimeout(studioSaveT);const write=()=>{try{localStorage.setItem(STUDIO_KEY,JSON.stringify(D,(k,v)=>['img','vid','afile','vclipAudio'].includes(k)?undefined:v))}catch(e){}};if(now)write();else studioSaveT=setTimeout(write,350)}
+function studioRestore(){let s=null;try{s=JSON.parse(localStorage.getItem(STUDIO_KEY)||'null')}catch(e){}
+ if(!s||typeof s!=='object')return;
+ const skip=new Set(['img','vid','afile','vclipAudio']);
+ const merge=(t,o)=>{for(const k of Object.keys(o)){if(skip.has(k)||!(k in t))continue;const tv=t[k],sv=o[k];
+  if(typeof tv==='number'&&typeof sv==='boolean'){t[k]=sv?1:0;continue}
+  if(typeof tv==='boolean'&&typeof sv==='number'){t[k]=!!sv;continue}
+  if(sv&&typeof sv==='object'&&!Array.isArray(sv)&&tv&&typeof tv==='object'&&!Array.isArray(tv))merge(tv,sv);else if(sv!==null&&typeof sv===typeof tv&&!Array.isArray(tv))t[k]=sv}};
+ merge(D,s);
+ D.stk=(Array.isArray(s.stk)?s.stk:[]).filter(x=>x&&x.t=='f'&&FX[x.k]).map(x=>({t:'f',k:x.k,x:Math.max(0,Math.min(100,+x.x||50)),y:Math.max(0,Math.min(100,+x.y||50)),r:Math.max(-180,Math.min(180,+x.r||0)),s:Math.max(2,Math.min(90,+x.s||FX[x.k].s)),c:/^#[0-9a-f]{3,8}$/i.test(x.c||'')?x.c:(FX[x.k].col||'#ffffff')}));
+ D.ss=D.stk.length?Math.max(0,Math.min(D.stk.length-1,+s.ss||0)):-1;
+ if(!['none','solid','grad','pat'].includes(D.bg))D.bg='solid';
+ if(!RAT[D.ratio]&&D.ratio!='c')D.ratio='1:1';
+ D.s=Math.max(1,Math.min(SURAHS.length,D.s|0||2));D.a1=Math.max(1,Math.min(CNT[D.s],D.a1|0||1));D.a2=Math.max(D.a1,Math.min(CNT[D.s],D.a2|0||D.a1));
+ D.cut0=Math.max(0,D.cut0|0);D.cut1=Math.max(0,D.cut1|0);D.res=Math.max(1,Math.min(3,D.res|0||2));D.rv=Math.max(0,Math.min(3,D.rv|0||0));
+ if(!['txt','nm','rf','wm','stk'].includes(D.tgt)||(D.tgt=='stk'&&!D.stk.length))D.tgt='txt';
+}
 const dims=()=>{if(D.exact&&D.ratio=='c')return[Math.min(8000,D.cw||1),Math.min(8000,D.ch||1)];const[a,b]=D.ratio=='c'?[D.cw||1,D.ch||1]:RAT[D.ratio],S=1080;return a>=b?[Math.round(S*a/b),S]:[S,Math.round(S*b/a)]};
 const allU=()=>{const o=[];for(let a=D.a1;a<=D.a2;a++)(WU[D.s+':'+a]||[]).forEach(u=>o.push({...u,k:D.s+':'+a}));o.forEach((u,i)=>u.i=i);return o};
 const kept=()=>{const a=allU();return a.slice(D.cut0,a.length-D.cut1)};
 SURAHS.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=ar(s.id)+'. '+s.n;$('#dS').appendChild(o)});
-function refresh(){$$('#studio [data-k]').forEach(el=>{const v=gp(D,el.dataset.k);if(el.tagName=='BUTTON')el.classList.toggle('on',String(v)==el.dataset.v);else if(el.type=='checkbox')el.checked=!!v;else el.value=v});$('#atrim').style.display=D.asrc=='file'&&D.afile?'block':'none';$('#vtrim').style.display=D.vid?'block':'none';syncRg();bgPanels();camUi()}
+function refresh(){$$('#studio [data-k]').forEach(el=>{const v=gp(D,el.dataset.k);if(el.tagName=='BUTTON')el.classList.toggle('on',String(v)==el.dataset.v);else if(el.type=='checkbox')el.checked=!!v;else el.value=v});$('#atrim').style.display=D.asrc=='file'&&D.afile?'block':'none';$('#vtrim').style.display=D.vid?'block':'none';syncRg();bgPanels();camUi();syncColorBtns()}
 function bgPanels(){const b=D.bg;const set=(id,on)=>{const e=$(id);if(e)e.style.display=on?'block':'none'};set('#bgpC',b=='none'||b=='solid'||b=='grad');set('#bgpP',b=='pat');set('#bgpI',b=='img');set('#bgpV',b=='vid');$$('.gradOnly').forEach(e=>e.style.display=b=='grad'?'block':'none')}
 const PRE=[['iPhone',1179,2556],['iPhone Pro',1206,2622],['iPhone Pro Max',1320,2868]];
 PRE.forEach(p=>{const b=document.createElement('button');b.classList.add('ib');b.innerHTML='<svg><use href="#i-smartphone"/></svg><span><b>'+p[0]+'</b><br><small>'+p[1]+'×'+p[2]+'</small></span>';b.onclick=()=>{D.ratio='c';D.cw=p[1];D.ch=p[2];D.exact=1;D.res=1;after('ratio')};$('#presets').appendChild(b)});
@@ -1034,14 +1174,14 @@ async function autoFit(){const us=kept();if(!us.length)return;await fontsFor(us)
 function after(k){preAfter(k);if(k.indexOf('wm')==0)try{document.fonts.load(stkFont({ff:D.wm.ff,b:D.wm.b},40),D.wm.text||'ا').then(()=>upd())}catch(e){}
  if(k=='s'){D.a1=D.a2=1;D.cut0=D.cut1=0;D.brk={}}
  if(k=='s'||k=='a1'||k=='a2'){const m=CNT[D.s];D.a1=Math.max(1,Math.min(m,D.a1|0||1));D.a2=Math.max(D.a1,Math.min(m,D.a2|0||D.a1));if(k!='s'){D.cut0=D.cut1=0;D.brk={}}}
- limits();refresh();if(['s','s0','a1','a2','cut0','cut1','ratio','bw','ls'].includes(k))autoFit().then(()=>{refresh();upd()});else upd()}
+ limits();refresh();studioPersist();if(['s','s0','a1','a2','cut0','cut1','ratio','bw','ls'].includes(k))autoFit().then(()=>{refresh();upd()});else upd()}
 $$('#studio [data-k]').forEach(el=>{const k=el.dataset.k;
  if(el.tagName=='BUTTON')el.onclick=()=>{const v=el.dataset.v;sp(D,k,isNaN(v)?v:+v);if(k=='ratio')D.exact=0;after(k)};
  else if(el.type=='number'){el.onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();el.blur()}};el.onchange=()=>{const n=+el.value;if(el.value!==''&&!isNaN(n)){const mn=el.min===''?-1/0:+el.min,mx=el.max===''?1/0:+el.max;sp(D,k,Math.max(mn,Math.min(mx,Math.round(n))))}after(k)}}
  else el.oninput=()=>{sp(D,k,el.type=='checkbox'?el.checked:el.type=='range'?+el.value:(k=='s'?+el.value:el.value));after(k)}});
 $$('#stTabs button').forEach(b=>b.onclick=()=>{$$('#stTabs button').forEach(x=>x.classList.toggle('on',x==b));$$('.tp').forEach(t=>t.classList.toggle('on',t.id=='tp-'+b.dataset.t));if(b.dataset.t=='hi')histRender()});
-$('#vDs').onclick=()=>{const[s,a]=cur.split(':').map(Number);QuranAnalytics.track('design_open',{source:'verse',surah:s,verse:a});closeOverlay('#vbar');D.s=s;D.a1=D.a2=a;D.cut0=D.cut1=0;D.brk={};D.rf.on=1;$('#studio').classList.add('on');after('s0');setTimeout(()=>{D.a1=D.a2=a;after('a1')},0)};
-$('#designStudioCloseButton').onclick=()=>{$('#studio').classList.remove('on');QuranAnalytics.track('design_close');if(wpOn||wpBusy)wpStop();if(D.bg=='cam')camOff()};
+$('#vDs').onclick=()=>{const[s,a]=cur.split(':').map(Number);QuranAnalytics.track('design_open',{source:'verse',surah:s,verse:a});closeOverlay('#vbar');D.s=s;D.a1=D.a2=a;D.cut0=D.cut1=0;D.brk={};D.rf.on=1;$('#studio').classList.add('on');skUi();after('s0');setTimeout(()=>{D.a1=D.a2=a;after('a1')},0)};
+$('#designStudioCloseButton').onclick=()=>{$('#studio').classList.remove('on');studioPersist(true);QuranAnalytics.track('design_close');if(wpOn||wpBusy)wpStop();if(D.bg=='cam')camOff()};
 const PATS=[['star','نجمة ثمانية'],['diamond','معيّنات'],['hex','خلايا سداسية'],['square','مربعات متداخلة'],['triangle','مثلثات'],['rosette','وريدات هندسية'],['octagon','مثمنات'],['lattice','شبكة مائلة'],['rings','دوائر متحدة المركز'],['cross','نجوم متقاطعة']];
 function pat(x,W,H,c1,c2,type='star',preview=false){x.fillStyle=c1;x.fillRect(0,0,W,H);const s=Math.min(W,H)/(preview?2.5:5.5);x.strokeStyle=c2;x.lineWidth=Math.max(1,s/30);x.globalAlpha=.65;
  const polygon=(cx,cy,r,n,rot=0,inner)=>{x.beginPath();for(let i=0;i<n*(inner?2:1);i++){const a=rot+i*Math.PI/(n*(inner?1:0.5)),rr=inner&&i%2?r*inner:r;x.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr)}x.closePath();x.stroke()};
@@ -1083,9 +1223,9 @@ function drawFg(x,W,H,pv){const S=Math.min(W,H);
 let STK_T=()=>performance.now()/1000;
 const SKF=['Tajawal','Cairo','Amiri','Aref Ruqaa','Reem Kufi','Lalezar','Tahoma','Arial','Georgia','Courier New'];
 const stkFont=(s,z)=>(s.b?'700 ':'400 ')+z+'px "'+(s.ff||'Tajawal')+'","Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
-async function stkFonts(){await Promise.all(D.stk.filter(s=>s.t=='e').map(s=>document.fonts.load(stkFont(s,40),s.ch).catch(()=>0)))}
+async function stkFonts(){await document.fonts.ready}
 const mctx=document.createElement('canvas').getContext('2d');
-const stkHalf=(s,S)=>{const z=S*s.s/100;if(s.t!='e')return[z/2,z/2];mctx.font=stkFont(s,z);return[Math.max(z/2,mctx.measureText(s.ch).width/2),z*.6]};
+const stkHalf=(s,S)=>{const z=S*s.s/100;return[z/2,z/2]};
 /* ظهور الكلمات كلمة كلمة */
 let REV=null,REV0=null,wpOn=false,wpT0=0,wpDur=0,wpTimes=null;const AYD={};
 function revTimes(us,total,segs){const out=[],gr=[];us.forEach((u,i)=>{const g=gr[gr.length-1];if(g&&g.k==u.k)g.ix.push(i);else gr.push({k:u.k,ix:[i]})});
@@ -1106,11 +1246,7 @@ async function wpPlan(){const us=kept();let total,segs=null,aud=[];
  else{let q=0,fail=0;segs={};for(let a=D.a1;a<=D.a2;a++){const k=D.s+':'+a,n=(WU[k]||[]).length,el=new Audio();el.preload='auto';el.src=aUrl(k);let len=await loadMeta(el);if(!len){fail=1;len=AYD[k]||Math.max(1.5,n*.6)}else AYD[k]=len;segs[k]={t0:q,len};if(!fail)aud.push({el,t0:q,off:0,len});q+=len+.25}total=q-.25;if(fail){aud=[];flash(T('تعذّر تحميل الصوت'))}}
  return{times:revTimes(us,total,segs),total,aud}}
 function wpStop(){wpOn=false;wpBusy=false;REV=null;wpAud.forEach(a=>{try{a.el.pause()}catch(e){}});wpAud=[];ico('#wPrev','play');upd()}
-function stkImg(s,tm){if(s.t=='i')return s.im;const tot=s.fr.reduce((a,f)=>a+f.d,0);let q=tm%tot;for(const f of s.fr){if(q<f.d)return f.bm;q-=f.d}return s.fr[0].bm}
-function drawStk(x,W,H,pv){const S=Math.min(W,H),tm=STK_T();D.stk.forEach((s,i)=>{const z=S*s.s/100;if(s.t=='f')return drawFx(x,s,i,W,H,z,tm,pv);x.save();x.translate(W*s.x/100,H*s.y/100);x.rotate(s.r*Math.PI/180);
- if(s.t=='e'){x.font=stkFont(s,z);x.fillStyle=s.c||'#ffffff';x.textAlign='center';x.textBaseline='middle';x.fillText(s.ch,0,z*.06)}
- else{const im=stkImg(s,tm);if(im){const w=im.width||im.naturalWidth,h=im.height||im.naturalHeight,k=z/Math.max(w,h);x.drawImage(im,-w*k/2,-h*k/2,w*k,h*k)}}
- if(pv&&i==D.ss&&D.tgt=='stk'){const[hw,hh]=stkHalf(s,S);x.strokeStyle='#0f4f4599';x.setLineDash([10,8]);x.lineWidth=2;x.strokeRect(-hw-4,-hh,2*hw+8,2*hh)}x.restore()})}
+function drawStk(x,W,H,pv){const S=Math.min(W,H),tm=STK_T();D.stk.forEach((s,i)=>{if(s.t!='f'||!FX[s.k])return;const z=S*s.s/100;drawFx(x,s,i,W,H,z,tm,pv)})}
 const WM_ICON=new Image();let WM_OK=0;WM_ICON.onload=()=>{WM_OK=1;try{upd()}catch(e){}};WM_ICON.src=(window.__ICON_B64||'icon-192.png');
 function rr(x,x0,y0,w,h,r){r=Math.max(0,Math.min(r,Math.min(w,h)/2));x.beginPath();x.moveTo(x0+r,y0);x.arcTo(x0+w,y0,x0+w,y0+h,r);x.arcTo(x0+w,y0+h,x0,y0+h,r);x.arcTo(x0,y0+h,x0,y0,r);x.arcTo(x0,y0,x0+w,y0,r);x.closePath()}
 function wmGeom(W,H){const wm=D.wm,S=Math.min(W,H),fs=S*wm.size/100;mctx.font=stkFont({ff:wm.ff,b:wm.b},fs);const txt=wm.text||'',tw=txt?mctx.measureText(txt).width:0,icS=fs*1.25,gap=(tw)?fs*(wm.gap/100):0,pad=fs*(wm.pad/100);
@@ -1132,7 +1268,7 @@ $('#pv').onpointerdown=e=>{e.target.setPointerCapture(e.pointerId);drag.on=1;dra
  if(D.wm.on){const wg=wmGeom(W,H),bx=wg.cx-wg.w/2,by=wg.cy-wg.h/2,m=Math.max(8,S*.05);if(px>=bx-m&&px<=bx+wg.w+m&&py>=by-m&&py<=by+wg.h+m){D.tgt='wm';refresh();return}}
  for(let i=D.stk.length-1;i>=0;i--){const s=D.stk[i];const hf=stkHalf(s,S);if(Math.abs(px-W*s.x/100)<=Math.max(hf[0],S*.04)&&Math.abs(py-H*s.y/100)<=Math.max(hf[1],S*.04)){D.ss=i;D.tgt='stk';skUi();refresh();break}}};
 $('#pv').onpointermove=e=>{if(!drag.on)return;const r=e.target.getBoundingClientRect(),dx=(e.clientX-drag.x)/r.width*100,dy=(e.clientY-drag.y)/r.height*100;drag.x=e.clientX;drag.y=e.clientY;
- const o=D.tgt=='txt'?{get x(){return D.bx},set x(v){D.bx=v},get y(){return D.by},set y(v){D.by=v}}:D.tgt=='stk'?D.stk[D.ss]:D[D.tgt];if(!o)return;o.x=Math.max(0,Math.min(100,o.x+dx));o.y=Math.max(0,Math.min(100,o.y+dy));refresh();skSync();upd()};
+ const o=D.tgt=='txt'?{get x(){return D.bx},set x(v){D.bx=v},get y(){return D.by},set y(v){D.by=v}}:D.tgt=='stk'?D.stk[D.ss]:D[D.tgt];if(!o)return;o.x=Math.max(0,Math.min(100,o.x+dx));o.y=Math.max(0,Math.min(100,o.y+dy));refresh();skSync();upd();studioPersist()};
 $('#pv').onpointerup=$('#pv').onpointercancel=()=>{drag.on=0};
 async function exportBlob(){await fontsFor(kept());const[W,H]=dims(),[ow]=outDims(D.res),sc=ow/W,c=document.createElement('canvas');c.width=ow;c.height=outDims(D.res)[1];const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,false);return new Promise(r=>c.toBlob(r,'image/png'))}
 async function share(b,n,t){const f=new File([b],n,{type:t});if(navigator.canShare&&navigator.canShare({files:[f]}))try{await navigator.share({files:[f]});QuranAnalytics.track('media_shared',{media_type:t.indexOf('video')===0?'video':'image'});return}catch(e){if(e.name=='AbortError')return}dl(b,n)}
@@ -1233,11 +1369,11 @@ let lastV=null;
 $('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(lastV.b,n)}catch(e){QuranAnalytics.track('media_export_failed',{media_type:'video',source:'studio',kind:e&&e.name||'error'});$('#exMsg').textContent=T('خطأ: ')+e.message}};
 $('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});await share(lastV.b,n,lastV.b.type)}catch(e){QuranAnalytics.track('media_export_failed',{media_type:'video',source:'studio',kind:e&&e.name||'error',action:'share'});$('#exMsg').textContent=T('خطأ: ')+e.message}};
 
-/* خلفية فيديو + قص + ملصقات */
+/* خلفية فيديو + قص */
 let prevOn=false,liveOn=false,pa=null;
 const trimClamp=(k,p)=>{const a=p+'0',b=p+'1';if(k==a&&D[a]>D[b]-.2)D[a]=Math.max(0,D[b]-.2);if(k==b&&D[b]<D[a]+.2)D[b]=D[a]+.2};
 function preAfter(k){if(k=='vt0'||k=='vt1'){trimClamp(k,'vt');if(D.vid&&!prevOn)D.vid.currentTime=k=='vt0'?D.vt0:Math.max(D.vt0,D.vt1-.05)}if(k=='at0'||k=='at1')trimClamp(k,'at');if(k=='bg'&&D.bg!='vid')D.vclipAudio=null;if(k=='bg'&&D.bg!='vid'&&D.vid){D.vid.pause();prevOn=false;ico('#vPrev','play')}if(k=='bg'&&D.bg!='cam'&&camStream)camRelease()}
-const needLive=()=>$('#studio').classList.contains('on')&&((D.bg=='cam'&&camVid)||(D.bg=='vid'&&D.vid)||D.stk.some(s=>s.t=='g'||s.t=='f')||prevOn||wpOn);
+const needLive=()=>$('#studio').classList.contains('on')&&((D.bg=='cam'&&camVid)||(D.bg=='vid'&&D.vid)||D.stk.some(s=>s.t=='f')||prevOn||wpOn);
 function drawPv(){if(wpOn){const tt=(performance.now()-wpT0)/1000;if(tt>wpDur){wpStop()}else{REV={times:wpTimes,t:tt};wpAud.forEach(a=>{if(!a.st&&tt>=a.t0){a.st=1;a.el.currentTime=a.off||0;a.el.play().catch(()=>{})}if(a.st&&tt>=a.t0+a.len)try{a.el.pause()}catch(e){}})}}const c=$('#pv'),[W,H]=dims();if(c.width!=Math.round(W*.6))return;const x=c.getContext('2d');x.setTransform(c.width/W,0,0,c.width/W,0,0);draw(x,W,H,true)}
 function liveLoop(){if(!needLive()){liveOn=false;if(wpOn||wpBusy)wpStop();return}const v=D.vid;if(prevOn&&v&&v.currentTime>=D.vt1){v.pause();v.currentTime=D.vt0;prevOn=false;ico('#vPrev','play')}drawPv();requestAnimationFrame(liveLoop)}
 function kick(){if(!liveOn&&needLive()){liveOn=true;requestAnimationFrame(liveLoop)}}
@@ -1349,42 +1485,32 @@ $('#arAud').title='تشغيل تلاوة الآيات أثناء التسجيل'
 $('#arMic').onclick=()=>arSetMic(!camMicOn);
 $('#camMic').onchange=()=>arSetMic($('#camMic').checked);
 $$('[data-k=bg][data-v=cam]').forEach(b=>b.onclick=camStart);
-/* الملصقات */
-const EMO='🕌 🕋 ☪️ 🌙 ⭐ ✨ 📖 🤲 🙏 ❤️ 💚 🤍 🌹 🌸 🌿 🌴 🌳 ☀️ 🌤️ 🌈 🕊️ 💫 🔆 👑 💎 🏔️ 🌊 🕯️ 📿 🎁 🎉 😊 😍 🥰 🤗 😇 🌟 💛 💙 🧡 🔥 ☁️ 🌺 🌻 🍃 🦋'.split(' ');
-EMO.forEach(e=>{const b=document.createElement('button');b.textContent=e;b.onclick=()=>addStk({t:'e',ch:e,s:14,c:'#ffffff'});$('#emG').appendChild(b)});
-SKF.forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;$('#skF').appendChild(o);$('#wmF').appendChild(o.cloneNode(true))});
-$('#skEmAdd').onclick=async()=>{const v=$('#skEmT').value.trim();if(!v)return;const tx=/[A-Za-z\u0600-\u06FF0-9]/.test(v);const o={t:'e',ch:v,s:tx?7:14,c:tx?D.col:'#ffffff',ff:'Tajawal',b:0,sig:tx?1:0};D.stk.push({x:50,y:90,r:0,...o});D.ss=D.stk.length-1;D.tgt='stk';await stkFonts();skUi();refresh();upd();kick();$('#skEmT').value=''};
-$('#skF').addEventListener('change',async e=>{const s=D.stk[D.ss];if(s){s.ff=e.target.value;await stkFonts();upd()}});$('#skB').addEventListener('change',async e=>{const s=D.stk[D.ss];if(s){s.b=e.target.checked?1:0;await stkFonts();upd()}});
-function addStk(o){D.stk.push({x:50,y:50,r:0,s:14,...o});D.ss=D.stk.length-1;D.tgt='stk';skUi();refresh();upd();kick()}
-function skUi(){const L=$('#skList');L.innerHTML='';D.stk.forEach((s,i)=>{const b=document.createElement('button');b.className=i==D.ss?'on':'';b.textContent=s.t=='e'?s.ch:s.t=='f'?FX[s.k].e:(s.t=='g'?'GIF':'🖼');b.onclick=()=>{D.ss=i;D.tgt='stk';skUi();upd()};L.appendChild(b)});
+/* المؤثرات */
+SKF.forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;$('#wmF').appendChild(o)});
+function addStk(o){D.stk.push({x:50,y:50,r:0,s:14,...o});D.ss=D.stk.length-1;D.tgt='stk';skUi();refresh();upd();kick();studioPersist()}
+function skUi(){const L=$('#skList');L.innerHTML='';D.stk.forEach((s,i)=>{if(s.t!='f'||!FX[s.k])return;const b=document.createElement('button');b.className=i==D.ss?'on':'';b.textContent=FX[s.k].n;b.onclick=()=>{D.ss=i;D.tgt='stk';skUi();upd()};L.appendChild(b)});
  $('#skCtl').style.display=D.ss>=0&&D.stk[D.ss]?'block':'none';skSync()}
-function skSync(){const s=D.stk[D.ss];if(!s)return;const fc=s.t=='f'&&FX[s.k].col,te=s.t=='e';$('#skCw').style.display=fc||te?'block':'none';$('#skTx').style.display=te?'block':'none';if(fc)$('#skC').value=s.c||FX[s.k].col;if(te){$('#skC').value=s.c||'#ffffff';$('#skF').value=s.ff||'Tajawal';$('#skB').checked=!!s.b}$('#skS').value=s.s;$('#skR').value=s.r;$('#skX').value=s.x;$('#skY').value=s.y;syncRg()}
-[['skS','s'],['skR','r'],['skX','x'],['skY','y']].forEach(([id,k])=>$('#'+id).addEventListener('input',e=>{const s=D.stk[D.ss];if(s){s[k]=+e.target.value;upd()}}));
-$('#skDel').onclick=()=>{if(D.ss<0)return;D.stk.splice(D.ss,1);D.ss=D.stk.length-1;skUi();upd()};
-async function gifFrames(buf){if(!window.ImageDecoder)return null;try{const d=new ImageDecoder({data:buf,type:'image/gif'});await d.tracks.ready;const n=Math.min(d.tracks.selectedTrack.frameCount,150),fr=[];for(let i=0;i<n;i++){const r=await d.decode({frameIndex:i});fr.push({bm:await createImageBitmap(r.image),d:Math.max(.02,(r.image.duration||1e5)/1e6)});r.image.close()}return fr}catch(e){return null}}
-async function addGif(buf,type){const fr=type=='image/gif'?await gifFrames(buf.slice(0)):null;if(fr&&fr.length>1)return addStk({t:'g',fr,s:30});const i2=new Image();i2.onload=()=>addStk({t:'i',im:i2,s:30});i2.src=URL.createObjectURL(new Blob([buf],{type}))}
-$('#skIm').onclick=()=>$('#skFile').click();$('#skFile').onchange=async e=>{const f=e.target.files[0];if(f)addGif(await f.arrayBuffer(),f.type||'image/png');e.target.value=''};
-$('#gifGo').onclick=async()=>{const g=$('#gifG'),key=(typeof CONFIG!='undefined'&&CONFIG.GIPHY_KEY)||'';if(!key){g.textContent=T('ضع مفتاح Giphy في ملف config.js');return}g.textContent='...';
- try{const j=await(await fetch('https://api.giphy.com/v1/gifs/search?api_key='+encodeURIComponent(key)+'&q='+encodeURIComponent($('#gifQ').value)+'&limit=24&rating=g&lang='+(lang=='ar'?'ar':'en'))).json();g.innerHTML='';const D2=j.data||[];if(!D2.length){g.textContent=T('لا نتائج');return}
-  D2.forEach(d=>{const im=document.createElement('img'),I=d.images;im.src=(I.fixed_width_small||I.fixed_width).url;im.loading='lazy';im.onclick=async()=>{try{const buf=await(await fetch((I.downsized||I.original).url)).arrayBuffer();addGif(buf,'image/gif')}catch(e){flash(T('تعذّر تحميل الملصق'))}};g.appendChild(im)})}catch(e){g.textContent='تعذّر البحث — يلزم اتصال بالإنترنت.'}};
+function skSync(){const s=D.stk[D.ss];if(!s)return;$('#skC').value=s.c||FX[s.k].col||'#ffffff';$('#skS').value=s.s;$('#skR').value=s.r;$('#skX').value=s.x;$('#skY').value=s.y;syncRg()}
+[['skS','s'],['skR','r'],['skX','x'],['skY','y']].forEach(([id,k])=>$('#'+id).addEventListener('input',e=>{const s=D.stk[D.ss];if(s){s[k]=+e.target.value;upd();studioPersist()}}));
+$('#skDel').onclick=()=>{if(D.ss<0)return;D.stk.splice(D.ss,1);D.ss=D.stk.length-1;skUi();upd();studioPersist()};
 
 /* مؤثرات متحركة */
 const fr=(i,j)=>{const s=Math.sin(i*127.1+j*311.7)*43758.5453;return s-Math.floor(s)};
 const h2r=h=>{const n=parseInt(h.slice(1),16);return[n>>16,(n>>8)&255,n&255]};
 const FX={
-snow:{e:'❄️',n:'ثلج',full:1,s:14,d(x,x0,y0,W,H,t,k){x.fillStyle='#fff';for(let i=0;i<90;i++){const r=(2+fr(i,4)*4)*k,px=fr(i,0)*W+Math.sin(t*.8+fr(i,1)*6)*20*k,py=(fr(i,2)*H+t*(40+fr(i,3)*70)*k)%H;x.globalAlpha=.55+fr(i,5)*.45;x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
-rain:{e:'🌧️',n:'مطر',full:1,s:14,d(x,x0,y0,W,H,t,k){x.strokeStyle='rgba(205,225,255,.7)';x.lineWidth=1.6*k;x.lineCap='round';x.beginPath();for(let i=0;i<140;i++){const px=fr(i,0)*W,py=(fr(i,2)*H+t*(900+fr(i,3)*500)*k)%H,l=(20+fr(i,4)*26)*k;x.moveTo(px,py);x.lineTo(px-l*.18,py+l)}x.stroke()}},
-stars:{e:'✨',n:'نجوم',full:1,s:14,d(x,x0,y0,W,H,t,k){x.fillStyle='#fff6cf';for(let i=0;i<46;i++){const r=(3+fr(i,2)*6)*k,px=fr(i,0)*W,py=fr(i,1)*H;x.globalAlpha=.2+.8*(.5+.5*Math.sin(t*2+fr(i,3)*6.3));x.beginPath();x.moveTo(px,py-r);x.quadraticCurveTo(px,py,px+r,py);x.quadraticCurveTo(px,py,px,py+r);x.quadraticCurveTo(px,py,px-r,py);x.quadraticCurveTo(px,py,px,py-r);x.fill()}}},
-bokeh:{e:'💡',n:'أضواء',full:1,s:14,d(x,x0,y0,W,H,t,k){for(let i=0;i<16;i++){const r=(35+fr(i,2)*80)*k,px=((fr(i,0)*W+t*12*k*(fr(i,1)-.3))%W+W)%W,py=fr(i,3)*H+Math.sin(t*.5+i)*20*k,a=.2+.14*Math.sin(t+i),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'rgba(255,226,150,'+a+')');g.addColorStop(1,'rgba(255,226,150,0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}},
-sparks:{e:'✴️',n:'شرر',full:1,s:14,d(x,x0,y0,W,H,t,k){x.globalCompositeOperation='lighter';for(let i=0;i<60;i++){const life=(t*.22*(.6+fr(i,4))+fr(i,3))%1,px=fr(i,0)*W+Math.sin(t*2+i)*16*k,py=H*(1-life),r=(1.5+fr(i,2)*3.5)*k;x.fillStyle='rgba(255,'+Math.round(140+fr(i,5)*90)+',60,'+Math.sin(life*3.14)+')';x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
-roses:{e:'🌹',n:'ورد',full:1,s:14,d(x,x0,y0,W,H,t,k){const g=['🌹','🌹','🌸','🥀'];x.textAlign='center';x.textBaseline='middle';for(let i=0;i<16;i++){const z=(22+fr(i,1)*26)*k,px=fr(i,0)*W+Math.sin(t*.9+i)*30*k,py=((fr(i,2)*(H+120)+t*(50+fr(i,3)*50)*k)%(H+120))-60;x.save();x.translate(px,py);x.rotate(t*.7+i);x.font=z+'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';x.fillText(g[Math.floor(fr(i,6)*4)],0,0);x.restore()}}},
-birds:{e:'🕊️',n:'طيور',s:40,ar:.6,col:'#1b1b1b',d(x,x0,y0,w,h,t,k,c){x.strokeStyle=c||'#1b1b1b';x.lineCap='round';for(let i=0;i<6;i++){const u=(t*.08+fr(i,0))%1,px=x0+u*w*1.2-w*.1,py=y0+h*(.15+fr(i,1)*.6)+Math.sin(t*2+i)*h*.04,s=(.05+fr(i,2)*.04)*w,f=Math.sin(t*9+i*2);x.lineWidth=Math.max(1.5,s*.16);x.beginPath();x.moveTo(px-s,py+f*s*.5);x.quadraticCurveTo(px-s*.5,py-s*.45*(1-f*.3),px,py);x.quadraticCurveTo(px+s*.5,py-s*.45*(1-f*.3),px+s,py+f*s*.5);x.stroke()}}},
-viz:{e:'🎚️',n:'مرئي الصوت',s:40,ar:.5,col:'#ffffff',d(x,x0,y0,w,h,t,k,c){x.fillStyle=c||'#fff';const n=26,bw=w/n*.62;for(let i=0;i<n;i++){const hh=h*(.12+.88*Math.abs(Math.sin(t*3+i*.7)*.55+Math.sin(t*5.3+i*1.9)*.45)),px=x0+(i+.5)*w/n-bw/2;x.beginPath();x.roundRect?x.roundRect(px,y0+h/2-hh/2,bw,hh,bw/2):x.rect(px,y0+h/2-hh/2,bw,hh);x.fill()}}},
-smoke:{e:'💨',n:'دخان',full:1,s:14,col:'#cfcfcf',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#cfcfcf');for(let i=0;i<22;i++){const life=(t*.06*(.6+fr(i,5)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(life*6+i)*50*k,py=H*(1.1-life*1.3),r=(110+fr(i,2)*170)*k*(.6+life*.7),g=x.createRadialGradient(px,py,0,px,py,r),a=.26*Math.sin(life*Math.PI);g.addColorStop(0,'rgba('+r0+','+g0+','+b0+','+a+')');g.addColorStop(1,'rgba('+r0+','+g0+','+b0+',0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}},
-fire:{e:'🔥',n:'نار',full:1,s:14,d(x,x0,y0,W,H,t,k){x.globalCompositeOperation='lighter';for(let i=0;i<80;i++){const life=(t*.45*(.6+fr(i,6)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(t*5+i)*8*k,py=fr(i,3)*H-life*H*.3,r=(16+fr(i,2)*30)*k*(1-life*.55),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'hsla('+(54-life*46)+',100%,'+(64-life*20)+'%,'+(.8*Math.sin(life*Math.PI))+')');g.addColorStop(1,'hsla('+(28-life*24)+',100%,50%,0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}}};
+snow:{n:'ثلج',full:1,s:14,d(x,x0,y0,W,H,t,k){x.fillStyle='#fff';for(let i=0;i<90;i++){const r=(2+fr(i,4)*4)*k,px=fr(i,0)*W+Math.sin(t*.8+fr(i,1)*6)*20*k,py=(fr(i,2)*H+t*(40+fr(i,3)*70)*k)%H;x.globalAlpha=.55+fr(i,5)*.45;x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
+rain:{n:'مطر',full:1,s:14,d(x,x0,y0,W,H,t,k){x.strokeStyle='rgba(205,225,255,.7)';x.lineWidth=1.6*k;x.lineCap='round';x.beginPath();for(let i=0;i<140;i++){const px=fr(i,0)*W,py=(fr(i,2)*H+t*(900+fr(i,3)*500)*k)%H,l=(20+fr(i,4)*26)*k;x.moveTo(px,py);x.lineTo(px-l*.18,py+l)}x.stroke()}},
+stars:{n:'نجوم',full:1,s:14,d(x,x0,y0,W,H,t,k){x.fillStyle='#fff6cf';for(let i=0;i<46;i++){const r=(3+fr(i,2)*6)*k,px=fr(i,0)*W,py=fr(i,1)*H;x.globalAlpha=.2+.8*(.5+.5*Math.sin(t*2+fr(i,3)*6.3));x.beginPath();x.moveTo(px,py-r);x.quadraticCurveTo(px,py,px+r,py);x.quadraticCurveTo(px,py,px,py+r);x.quadraticCurveTo(px,py,px-r,py);x.quadraticCurveTo(px,py,px,py-r);x.fill()}}},
+bokeh:{n:'أضواء',full:1,s:14,d(x,x0,y0,W,H,t,k){for(let i=0;i<16;i++){const r=(35+fr(i,2)*80)*k,px=((fr(i,0)*W+t*12*k*(fr(i,1)-.3))%W+W)%W,py=fr(i,3)*H+Math.sin(t*.5+i)*20*k,a=.2+.14*Math.sin(t+i),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'rgba(255,226,150,'+a+')');g.addColorStop(1,'rgba(255,226,150,0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}},
+sparks:{n:'شرر',full:1,s:14,d(x,x0,y0,W,H,t,k){x.globalCompositeOperation='lighter';for(let i=0;i<60;i++){const life=(t*.22*(.6+fr(i,4))+fr(i,3))%1,px=fr(i,0)*W+Math.sin(t*2+i)*16*k,py=H*(1-life),r=(1.5+fr(i,2)*3.5)*k;x.fillStyle='rgba(255,'+Math.round(140+fr(i,5)*90)+',60,'+Math.sin(life*3.14)+')';x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
+birds:{n:'طيور',s:40,ar:.6,col:'#1b1b1b',d(x,x0,y0,w,h,t,k,c){x.strokeStyle=c||'#1b1b1b';x.lineCap='round';for(let i=0;i<6;i++){const u=(t*.08+fr(i,0))%1,px=x0+u*w*1.2-w*.1,py=y0+h*(.15+fr(i,1)*.6)+Math.sin(t*2+i)*h*.04,s=(.05+fr(i,2)*.04)*w,f=Math.sin(t*9+i*2);x.lineWidth=Math.max(1.5,s*.16);x.beginPath();x.moveTo(px-s,py+f*s*.5);x.quadraticCurveTo(px-s*.5,py-s*.45*(1-f*.3),px,py);x.quadraticCurveTo(px+s*.5,py-s*.45*(1-f*.3),px+s,py+f*s*.5);x.stroke()}}},
+viz:{n:'مرئي الصوت',s:40,ar:.5,col:'#ffffff',d(x,x0,y0,w,h,t,k,c){x.fillStyle=c||'#fff';const n=26,bw=w/n*.62;for(let i=0;i<n;i++){const hh=h*(.12+.88*Math.abs(Math.sin(t*3+i*.7)*.55+Math.sin(t*5.3+i*1.9)*.45)),px=x0+(i+.5)*w/n-bw/2;x.beginPath();x.roundRect?x.roundRect(px,y0+h/2-hh/2,bw,hh,bw/2):x.rect(px,y0+h/2-hh/2,bw,hh);x.fill()}}},
+smoke:{n:'دخان',full:1,s:14,col:'#cfcfcf',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#cfcfcf');for(let i=0;i<22;i++){const life=(t*.06*(.6+fr(i,5)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(life*6+i)*50*k,py=H*(1.1-life*1.3),r=(110+fr(i,2)*170)*k*(.6+life*.7),g=x.createRadialGradient(px,py,0,px,py,r),a=.26*Math.sin(life*Math.PI);g.addColorStop(0,'rgba('+r0+','+g0+','+b0+','+a+')');g.addColorStop(1,'rgba('+r0+','+g0+','+b0+',0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}},
+fire:{n:'نار',full:1,s:14,d(x,x0,y0,W,H,t,k){x.globalCompositeOperation='lighter';for(let i=0;i<80;i++){const life=(t*.45*(.6+fr(i,6)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(t*5+i)*8*k,py=fr(i,3)*H-life*H*.3,r=(16+fr(i,2)*30)*k*(1-life*.55),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'hsla('+(54-life*46)+',100%,'+(64-life*20)+'%,'+(.8*Math.sin(life*Math.PI))+')');g.addColorStop(1,'hsla('+(28-life*24)+',100%,50%,0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}}};
 function drawFx(x,s,i,W,H,z,tm,pv){const f=FX[s.k];if(!f)return;x.save();if(f.full)f.d(x,0,0,W,H,tm,s.s/14,s.c);else{const h=z*(f.ar||1);x.translate(W*s.x/100,H*s.y/100);x.rotate(s.r*Math.PI/180);f.d(x,-z/2,-h/2,z,h,tm,1,s.c);if(pv&&i==D.ss&&D.tgt=='stk'){x.strokeStyle='#0f4f4599';x.setLineDash([10,8]);x.lineWidth=2;x.strokeRect(-z/2,-h/2,z,h)}}x.restore()}
-Object.keys(FX).forEach(k=>{const f=FX[k],b=document.createElement('button');b.innerHTML='<b>'+f.e+'</b><span>'+f.n+'</span>';b.onclick=()=>addStk({t:'f',k,s:f.s,c:f.col});$('#fxG').appendChild(b)});
-$('#skC').addEventListener('input',e=>{const s=D.stk[D.ss];if(s){s.c=e.target.value;upd()}});
+Object.keys(FX).forEach(k=>{const f=FX[k],b=document.createElement('button');b.innerHTML='<svg><use href="#i-sparkles"/></svg><span>'+f.n+'</span>';b.onclick=()=>addStk({t:'f',k,s:f.s,c:f.col});$('#fxG').appendChild(b)});
+$('#skC').addEventListener('input',e=>{const s=D.stk[D.ss];if(s){s.c=e.target.value;upd();studioPersist()}});
+studioRestore();skUi();
 /* تصميم عشوائي */
 const PALS=[['#0f4f45','#1b8a72','#fff6d8'],['#1a237e','#5c6bc0','#ffffff'],['#3e2723','#a1887f','#fff3e0'],['#004d40','#26a69a','#e0f2f1'],['#4a148c','#ab47bc','#fce4ec'],['#b71c1c','#ef5350','#fff8e1'],['#0d1b2a','#415a77','#e0e1dd'],['#f5ebe0','#d5bdaf','#3b2f2f'],['#fdf6e3','#eee8d5','#073642'],['#ffe9d6','#ffb88c','#4a2c2a'],['#e8f5e9','#a5d6a7','#1b3a1d'],['#212121','#616161','#ffd54f'],['#023e8a','#48cae4','#ffffff'],['#2d1b4e','#e07a5f','#f4f1de']];
 const rnd=(a,b)=>a+Math.random()*(b-a),rpick=a=>a[Math.floor(Math.random()*a.length)];
@@ -1397,9 +1523,9 @@ $('#rndD').onclick=async()=>{const b=$('#rndD');b.disabled=true;try{const p=rpic
  preAfter('bg');D.bg=bg;D.c1=p[0];D.c2=p[1];D.col=p[2];D.ang=Math.round(rnd(0,360));D.g0=Math.round(rnd(0,25));D.g1=Math.round(rnd(70,100));D.dim=bg=='img'?Math.round(rnd(25,55)):0;D.bs=100;D.bgx=0;D.bgy=0;
  D.fs=+rnd(5,8).toFixed(1);D.bw=Math.round(rnd(70,90));D.ls=+rnd(1.7,2.4).toFixed(2);D.al=rpick(['c','c','r']);
  D.sh={on:Math.random()<.75?1:0,col:rpick(['#000000','#000000',p[0]]),a:Math.round(rnd(35,75)),ang:Math.round(rnd(30,150)),d:+rnd(2,10).toFixed(1),b:+rnd(4,14).toFixed(1)};
- D.nm.col=p[2];D.rf.col=p[2];D.stk=D.stk.filter(s=>s.sig);
+ D.nm.col=p[2];D.rf.col=p[2];D.stk=[];
  const ks=Object.keys(FX);for(let i=0;i<Math.ceil(rnd(.3,2));i++){const k=rpick(ks);if(!D.stk.some(s=>s.k==k))D.stk.push({t:'f',k,x:50,y:50,r:0,s:FX[k].s,c:FX[k].col})}
- D.ss=D.stk.length-1;D.tgt='txt';skUi();refresh();await autoFit();refresh();upd();kick()}catch(e){console.warn(e)}b.disabled=false};
+ D.ss=D.stk.length-1;D.tgt='txt';skUi();refresh();await autoFit();refresh();upd();kick();studioPersist()}catch(e){console.warn(e)}b.disabled=false};
 
 /* السطوع */
 const setS=(k,v)=>{st[k]=v;applyBg();save()};
@@ -1477,11 +1603,164 @@ Object.assign(DICT,{
  "إغلاق إجراءات الآية":["Close verse actions","Cerrar acciones de la aleya","آیت کے اختیارات بند کریں","आयत क्रियाएँ बंद करें","Fermer les actions du verset","Tutup tindakan ayat","Ayet işlemlerini kapat","আয়াতের কাজ বন্ধ করুন","Закрыть действия с аятом"],
  "إيقاف التمرير التلقائي":["Stop auto-scroll","Detener desplazamiento automático","خودکار اسکرول روکیں","ऑटो-स्क्रॉल रोकें","Arrêter le défilement automatique","Hentikan gulir otomatis","Otomatik kaydırmayı durdur","স্বয়ংক্রিয় স্ক্রল বন্ধ করুন","Остановить автопрокрутку"]
 });
+Object.assign(DICT,{
+ "مساعدة":["Help","Ayuda","مدد","सहायता","Aide","Bantuan","Yardım","সহায়তা","Помощь"],
+ "إغلاق المساعدة":["Close help","Cerrar ayuda","مدد بند کریں","सहायता बंद करें","Fermer l’aide","Tutup bantuan","Yardımı kapat","সহায়তা বন্ধ করুন","Закрыть помощь"],
+ "تذكير يومي بقراءة القرآن (٩ مساءً)":["Daily Quran reading reminder (9 PM)","Recordatorio diario de lectura del Corán (9 PM)","قرآن پڑھنے کی روزانہ یاد دہانی (٩ بجے شب)","क़ुरआन पढ़ने का दैनिक अनुस्मारक (रात 9 बजे)","Rappel quotidien de lecture du Coran (21 h)","Pengingat membaca Al-Qur'an harian (21.00)","Günlük Kur'an okuma hatırlatıcısı (21.00)","দৈনিক কুরআন পড়ার অনুস্মারক (রাত ৯টা)","Ежедневное напоминание о чтении Корана (21:00)"],
+ "يعمل التذكير أثناء فتح التطبيق أو في الخلفية أثناء تشغيله. لا يمكن ضمان وصوله إذا أُغلق التطبيق تماماً. يحتاج إلى إذن الإشعارات.":["The reminder works while the app is open or running in the background. Delivery cannot be guaranteed if the app is fully closed. It requires notification permission.","El recordatorio funciona mientras la aplicación está abierta o en segundo plano. No se garantiza la entrega si la aplicación está totalmente cerrada. Requiere permiso de notificaciones.","یاد دہانی ایپ کھلی یا پس منظر میں چلنے کے دوران کام کرتی ہے۔ اگر ایپ مکمل بند ہو تو اطلاع کی ضمانت نہیں۔ اس کے لیے اطلاعات کی اجازت ضروری ہے۔","अनुस्मारक ऐप खुले या पृष्ठभूमि में चलने के दौरान काम करता है। ऐप पूरी तरह बंद हो तो सूचना की गारंटी नहीं। इसके लिए सूचना अनुमति आवश्यक है।","Le rappel fonctionne lorsque l’application est ouverte ou en arrière-plan. La réception n’est pas garantie si l’application est complètement fermée. Il nécessite l’autorisation de notifications.","Pengingat berfungsi saat aplikasi terbuka atau berjalan di latar belakang. Pengiriman tidak dapat dijamin jika aplikasi sepenuhnya ditutup. Ini memerlukan izin notifikasi.","Hatırlatıcı, uygulama açıkken veya arka planda çalışırken çalışır. Uygulama tamamen kapatılırsa iletim garanti edilemez. Bildirim izni gerektirir.","অনুস্মারক অ্যাপ খোলা বা ব্যাকগ্রাউন্ডে চলার সময় কাজ করে। অ্যাপ সম্পূর্ণ বন্ধ থাকলে পৌঁছানোর নিশ্চয়তা নেই। এর জন্য নোটিফিকেশনের অনুমতি প্রয়োজন।","Напоминание работает, пока приложение открыто или работает в фоне. Доставка не гарантируется, если приложение полностью закрыто. Требуется разрешение на уведомления."],
+ "تم تحديث التطبيق إلى أحدث إصدار":["The app has been updated to the latest version","La aplicación se ha actualizado a la última versión","ایپ تازہ ترین ورژن پر اپ ڈیٹ ہو گئی","ऐप नवीनतम संस्करण में अपडेट हो गया","L’application a été mise à jour vers la dernière version","Aplikasi telah diperbarui ke versi terbaru","Uygulama en son sürüme güncellendi","অ্যাপটি সর্বশেষ সংস্করণে আপডেট হয়েছে","Приложение обновлено до последней версии"],
+ "تذكير بقراءة القرآن":["Quran reading reminder","Recordatorio de lectura del Corán","قرآن پڑھنے کی یاد دہانی","क़ुरआन पढ़ने का अनुस्मारक","Rappel de lecture du Coran","Pengingat membaca Al-Qur'an","Kur'an okuma hatırlatıcısı","কুরআন পড়ার অনুস্মারক","Напоминание о чтении Корана"],
+ "حان وقت وردك اليومي من القرآن الكريم.":["It is time for your daily portion of the Holy Quran.","Es hora de tu lectura diaria del Sagrado Corán.","یہ آپ کے روزانہ قرآن کریم کے ورد کا وقت ہے۔","पवित्र क़ुरआन के अपने दैनिक हिस्से का समय है।","Il est temps de votre lecture quotidienne du Saint Coran.","Saatnya bagian harian Anda dari Al-Qur'an.","Kur'an-ı Kerim'den günlük payınızın zamanı geldi.","পবিত্র কুরআনের আপনার দৈনিক অংশের সময় হয়েছে।","Время вашей ежедневной части Священного Корана."],
+ "الإشعارات غير مدعومة في هذا المتصفح":["Notifications are not supported in this browser","Este navegador no admite notificaciones","اس براؤزر میں اطلاعات کی معاونت نہیں","इस ब्राउज़र में सूचनाएँ समर्थित नहीं हैं","Les notifications ne sont pas prises en charge dans ce navigateur","Notifikasi tidak didukung di browser ini","Bu tarayıcıda bildirimler desteklenmiyor","এই ব্রাউজারে নোটিফিকেশন সমর্থিত নয়","Уведомления не поддерживаются в этом браузере"],
+ "تم إيقاف التذكير اليومي":["Daily reminder turned off","Recordatorio diario desactivado","روزانہ یاد دہانی بند کر دی گئی","दैनिक अनुस्मारक बंद कर दिया गया","Rappel quotidien désactivé","Pengingat harian dinonaktifkan","Günlük hatırlatıcı kapatıldı","দৈনিক অনুস্মারক বন্ধ করা হয়েছে","Ежедневное напоминание отключено"],
+ "يرجى السماح بالإشعارات من إعدادات المتصفح لتفعيل التذكير":["Please allow notifications in your browser settings to enable the reminder","Permite las notificaciones en los ajustes del navegador para activar el recordatorio","یاد دہانی فعال کرنے کے لیے براؤزر کی ترتیبات میں اطلاعات کی اجازت دیں","अनुस्मारक चालू करने के लिए ब्राउज़र सेटिंग्स में सूचनाओं की अनुमति दें","Autorisez les notifications dans les réglages du navigateur pour activer le rappel","Izinkan notifikasi di pengaturan browser untuk mengaktifkan pengingat","Hatırlatıcıyı açmak için tarayıcı ayarlarında bildirimlere izin verin","অনুস্মারক চালু করতে ব্রাউজার সেটিংসে নোটিফিকেশনের অনুমতি দিন","Разрешите уведомления в настройках браузера, чтобы включить напоминание"],
+ "تم تفعيل التذكير اليومي عند ٩ مساءً":["Daily reminder enabled at 9 PM","Recordatorio diario activado a las 9 PM","روزانہ یاد دہانی رات ٩ بجے فعال ہو گئی","दैनिक अनुस्मारक रात 9 बजे चालू किया गया","Rappel quotidien activé à 21 h","Pengingat harian diaktifkan pukul 21.00","Günlük hatırlatıcı 21.00'de açıldı","দৈনিক অনুস্মারক রাত ৯টায় চালু করা হয়েছে","Ежедневное напоминание включено на 21:00"],
+ "طريقة التشغيل والتكرار":["Playback and repeat mode","Modo de reproducción y repetición","چلانے اور تکرار کا طریقہ","प्लेबैक और पुनरावृत्ति","Mode de lecture et de répétition","Mode pemutaran dan pengulangan","Oynatma ve tekrar modu","প্লেব্যাক ও পুনরাবৃত্তি","Режим воспроизведения и повтора"],
+ "مرة":["Once","Una vez","ایک بار","एक बार","Une fois","Sekali","Bir kez","একবার","Один раз"],
+ "لنهاية السورة":["To end of surah","Hasta el final de la sura","سورت کے آخر تک","सूरह के अंत तक","Jusqu’à la fin de la sourate","Sampai akhir surah","Sure sonuna kadar","সূরার শেষ পর্যন্ত","До конца суры"],
+ "بلا توقف":["Non-stop","Sin parar","بلا توقف","बिना रुके","Sans arrêt","Tanpa henti","Durmadan","না থেমে","Без остановки"],
+ "تكرار الآية":["Repeat verse","Repetir aleya","آیت دہرائیں","आयत दोहराएँ","Répéter le verset","Ulangi ayat","Ayeti tekrarla","আয়াত পুনরাবৃত্তি","Повтор аята"],
+ "تكرار السورة":["Repeat surah","Repetir sura","سورت دہرائیں","सूरह दोहराएँ","Répéter la sourate","Ulangi surah","Sureyi tekrarla","সূরা পুনরাবৃত্তি","Повтор суры"],
+ "تكرار مقطع":["Repeat range","Repetir tramo","مقطع دہرائیں","भाग दोहराएँ","Répéter un passage","Ulangi rentang","Aralığı tekrarla","পরিসর পুনরাবৃত্তি","Повтор диапазона"],
+ "تشغيل الآية مرة واحدة":["Play the verse once","Reproducir la aleya una vez","آیت ایک بار چلائیں","आयत एक बार चलाएँ","Lire le verset une fois","Putar ayat sekali","Ayeti bir kez oynat","আয়াত একবার চালান","Воспроизвести аят один раз"],
+ "تشغيل من الآية حتى نهاية السورة":["Play from the verse to the end of the surah","Reproducir desde la aleya hasta el final de la sura","آیت سے سورت کے آخر تک چلائیں","आयत से सूरह के अंत तक चलाएँ","Lire du verset jusqu’à la fin de la sourate","Putar dari ayat hingga akhir surah","Ayetten sure sonuna kadar oynat","আয়াত থেকে সূরার শেষ পর্যন্ত চালান","Воспроизвести от аята до конца суры"],
+ "تشغيل من الآية حتى نهاية القرآن بلا توقف":["Play from the verse to the end of the Quran without stopping","Reproducir desde la aleya hasta el final del Corán sin parar","آیت سے قرآن کے آخر تک بلا توقف چلائیں","आयत से क़ुरआन के अंत तक बिना रुके चलाएँ","Lire du verset jusqu’à la fin du Coran sans arrêt","Putar dari ayat hingga akhir Al-Qur'an tanpa henti","Ayetten Kur'an'ın sonuna kadar durmadan oynat","আয়াত থেকে কুরআনের শেষ পর্যন্ত না থেমে চালান","Воспроизвести от аята до конца Корана без остановки"],
+ "تكرار الآية الحالية":["Repeat the current verse","Repetir la aleya actual","موجودہ آیت دہرائیں","वर्तमान आयत दोहराएँ","Répéter le verset actuel","Ulangi ayat saat ini","Geçerli ayeti tekrarla","বর্তমান আয়াত পুনরাবৃত্তি","Повтор текущего аята"],
+ "تكرار السورة كاملة":["Repeat the entire surah","Repetir la sura completa","پوری سورت دہرائیں","पूरी सूरह दोहराएँ","Répéter toute la sourate","Ulangi seluruh surah","Surenin tamamını tekrarla","সম্পূর্ণ সূরা পুনরাবৃত্তি","Повтор всей суры"],
+ "تكرار مقطع محدد من الآيات":["Repeat a selected range of verses","Repetir un tramo seleccionado de aleyas","آیات کا منتخب مقطع دہرائیں","आयतों का चुना हुआ भाग दोहराएँ","Répéter une plage de versets sélectionnée","Ulangi rentang ayat yang dipilih","Seçili ayet aralığını tekrarla","নির্বাচিত আয়াত পরিসর পুনরাবৃত্তি","Повтор выбранного диапазона аятов"],
+ "تعيين الآية الحالية بدايةً للمقطع":["Set the current verse as the range start","Fijar la aleya actual como inicio del tramo","موجودہ آیت کو مقطع کا آغاز بنائیں","वर्तमान आयत को भाग का आरंभ बनाएँ","Définir le verset actuel comme début du passage","Tetapkan ayat saat ini sebagai awal rentang","Geçerli ayeti aralık başlangıcı yap","বর্তমান আয়াতকে পরিসরের শুরু করুন","Задать текущий аят началом диапазона"],
+ "تعيين الآية الحالية نهايةً للمقطع":["Set the current verse as the range end","Fijar la aleya actual como fin del tramo","موجودہ آیت کو مقطع کا اختتام بنائیں","वर्तमान आयत को भाग का अंत बनाएँ","Définir le verset actuel comme fin du passage","Tetapkan ayat saat ini sebagai akhir rentang","Geçerli ayeti aralık bitişi yap","বর্তমান আয়াতকে পরিসরের শেষ করুন","Задать текущий аят концом диапазона"],
+ "نطاق التكرار":["Repeat range","Rango de repetición","تکرار کی حد","पुनरावृत्ति सीमा","Plage de répétition","Rentang pengulangan","Tekrar aralığı","পুনরাবৃত্তির পরিসর","Диапазон повтора"],
+ "تعيين البداية":["Set start","Fijar inicio","آغاز مقرر کریں","आरंभ सेट करें","Définir le début","Tetapkan awal","Başlangıcı ayarla","শুরু নির্ধারণ","Задать начало"],
+ "تعيين النهاية":["Set end","Fijar fin","اختتام مقرر کریں","अंत सेट करें","Définir la fin","Tetapkan akhir","Bitişi ayarla","শেষ নির্ধারণ","Задать конец"],
+ "مسح المقطع":["Clear range","Borrar tramo","مقطع مٹائیں","भाग हटाएँ","Effacer le passage","Hapus rentang","Aralığı temizle","পরিসর মুছুন","Очистить диапазон"],
+ "اختر آية من المصحف ثم اضغط «تعيين البداية» أو «تعيين النهاية». سيُظلَّل المقطع المحدد، ويمكنك مسحه في أي وقت.":["Select a verse in the mushaf, then tap “Set start” or “Set end”. The selected range will be highlighted and you can clear it at any time.","Selecciona una aleya en el mus'haf y pulsa «Fijar inicio» o «Fijar fin». El tramo seleccionado se resaltará y podrás borrarlo en cualquier momento.","مصحف میں آیت منتخب کریں، پھر «آغاز مقرر کریں» یا «اختتام مقرر کریں» دبائیں۔ منتخب مقطع نمایاں ہوگا اور آپ اسے کسی بھی وقت مٹا سکتے ہیں۔","मुसहफ़ में आयत चुनें, फिर «आरंभ सेट करें» या «अंत सेट करें» दबाएँ। चुना हुआ भाग हाइलाइट होगा और आप उसे कभी भी हटा सकते हैं।","Sélectionnez un verset dans le mushaf, puis appuyez sur « Définir le début » ou « Définir la fin ». La plage choisie sera surlignée et vous pourrez l’effacer à tout moment.","Pilih ayat di mushaf, lalu ketuk «Tetapkan awal» atau «Tetapkan akhir». Rentang yang dipilih akan disorot dan dapat dihapus kapan saja.","Mushafta bir ayet seçin, ardından «Başlangıcı ayarla» veya «Bitişi ayarla»ya dokunun. Seçilen aralık vurgulanır ve istediğiniz zaman temizlenebilir.","মুসহাফে একটি আয়াত নির্বাচন করুন, তারপর «শুরু নির্ধারণ» বা «শেষ নির্ধারণ» চাপুন। নির্বাচিত পরিসর হাইলাইট হবে এবং যেকোনো সময় মুছে ফেলা যাবে।","Выберите аят в мусхафе, затем нажмите «Задать начало» или «Задать конец». Выбранный диапазон будет подсвечен, и его можно очистить в любое время."],
+ "لم يُحدَّد مقطع — اختر آية ثم عيّن البداية أو النهاية":["No range selected — choose a verse, then set the start or end","No hay tramo seleccionado: elige una aleya y fija el inicio o el fin","کوئی مقطع منتخب نہیں — آیت چنیں پھر آغاز یا اختتام مقرر کریں","कोई भाग चयनित नहीं — आयत चुनें फिर आरंभ या अंत सेट करें","Aucune plage sélectionnée — choisissez un verset puis définissez le début ou la fin","Tidak ada rentang dipilih — pilih ayat lalu tetapkan awal atau akhir","Aralık seçilmedi — bir ayet seçip başlangıç veya bitişi ayarlayın","কোনো পরিসর নির্বাচিত নয় — আয়াত বেছে শুরু বা শেষ নির্ধারণ করুন","Диапазон не выбран — выберите аят и задайте начало или конец"],
+ "تم تحديد المقطع: ":["Range selected: ","Tramo seleccionado: ","مقطع منتخب: ","भाग चयनित: ","Plage sélectionnée : ","Rentang dipilih: ","Aralık seçildi: ","পরিসর নির্বাচিত: ","Диапазон выбран: "],
+ "المقطع: ":["Range: ","Tramo: ","مقطع: ","भाग: ","Plage : ","Rentang: ","Aralık: ","পরিসর: ","Диапазон: "],
+ "اختيار القارئ":["Choose reciter","Elegir recitador","قاری منتخب کریں","क़ारी चुनें","Choisir un récitateur","Pilih qari","Kâri seç","ক্বারী নির্বাচন করুন","Выбор чтеца"],
+ "إغلاق اختيار القارئ":["Close reciter selection","Cerrar selección de recitador","قاری انتخاب بند کریں","क़ारी चयन बंद करें","Fermer la sélection du récitateur","Tutup pemilihan qari","Kâri seçimini kapat","ক্বারী নির্বাচন বন্ধ করুন","Закрыть выбор чтеца"],
+ "بحث عن قارئ":["Search for a reciter","Buscar un recitador","قاری تلاش کریں","क़ारी खोजें","Rechercher un récitateur","Cari qari","Kâri ara","ক্বারী খুঁজুন","Поиск чтеца"],
+ "عادية":["Normal","Normal","عادی","सामान्य","Normale","Normal","Normal","সাধারণ","Обычное"],
+ "متوسطة":["Medium","Media","متوسط","मध्यम","Moyenne","Sedang","Orta","মধ্যম","Среднее"],
+ "عالية":["High","Alta","اعلیٰ","उच्च","Élevée","Tinggi","Yüksek","উচ্চ","Высокое"],
+ "اختيار اللون":["Choose color","Elegir color","رنگ منتخب کریں","रंग चुनें","Choisir une couleur","Pilih warna","Renk seç","রং নির্বাচন করুন","Выбор цвета"],
+ "إغلاق اختيار اللون":["Close color picker","Cerrar selector de color","رنگ انتخاب بند کریں","रंग चयन बंद करें","Fermer le sélecteur de couleur","Tutup pemilih warna","Renk seçiciyi kapat","রং নির্বাচক বন্ধ করুন","Закрыть выбор цвета"],
+ "الألوان الأخيرة":["Recent colors","Colores recientes","حالیہ رنگ","हाल के रंग","Couleurs récentes","Warna terbaru","Son renkler","সাম্প্রতিক রং","Последние цвета"],
+ "ألوان جاهزة":["Preset colors","Colores predefinidos","تیار رنگ","तैयार रंग","Couleurs prédéfinies","Warna bawaan","Hazır renkler","প্রিসেট রং","Готовые цвета"],
+ "لون مخصص":["Custom color","Color personalizado","حسب ضرورت رنگ","कस्टम रंग","Couleur personnalisée","Warna khusus","Özel renk","কাস্টম রং","Свой цвет"],
+ "تطبيق":["Apply","Aplicar","لاگو کریں","लागू करें","Appliquer","Terapkan","Uygula","প্রয়োগ করুন","Применить"],
+ "إلغاء":["Cancel","Cancelar","منسوخ کریں","रद्द करें","Annuler","Batal","İptal","বাতিল","Отмена"],
+ "لا توجد ألوان حديثة بعد":["No recent colors yet","Aún no hay colores recientes","ابھی کوئی حالیہ رنگ نہیں","अभी कोई हाल का रंग नहीं","Aucune couleur récente","Belum ada warna terbaru","Henüz son renk yok","এখনো সাম্প্রতিক রং নেই","Последних цветов пока нет"],
+ "تظهر آخر ١٠ ألوان استخدمتها هنا لاختيارها بسرعة.":["Your last 10 used colors appear here for quick selection.","Aquí aparecen tus últimos 10 colores usados para elegirlos rápidamente.","آپ کے آخری ١٠ استعمال شدہ رنگ یہاں تیزی سے انتخاب کے لیے دکھائی دیتے ہیں۔","तेज़ चयन के लिए आपके अंतिम 10 प्रयुक्त रंग यहाँ दिखते हैं।","Vos 10 dernières couleurs utilisées apparaissent ici pour les choisir rapidement.","Sepuluh warna terakhir yang Anda gunakan tampil di sini untuk dipilih cepat.","Son kullandığınız 10 renk hızlı seçim için burada görünür.","দ্রুত বাছাইয়ের জন্য আপনার সর্বশেষ ব্যবহৃত ১০টি রং এখানে দেখা যায়।","Здесь отображаются последние 10 использованных цветов для быстрого выбора."],
+ "المؤثرات":["Effects","Efectos","اثرات","प्रभाव","Effets","Efek","Efektler","ইফেক্ট","Эффекты"],
+ "أضف مؤثراً متحركاً واحداً أو أكثر فوق التصميم، ثم عدّل حجمه ولونه وموضعه. يمكنك سحب المؤثر على المعاينة.":["Add one or more animated effects over the design, then adjust their size, color, and position. You can drag an effect on the preview.","Añade uno o más efectos animados sobre el diseño y ajusta su tamaño, color y posición. Puedes arrastrar un efecto en la vista previa.","ڈیزائن پر ایک یا زیادہ متحرک اثرات شامل کریں، پھر ان کا حجم، رنگ اور مقام ایڈجسٹ کریں۔ آپ معاہدہ پر مؤثر کو گھسیٹ سکتے ہیں۔","डिज़ाइन पर एक या अधिक एनिमेटेड प्रभाव जोड़ें, फिर उनका आकार, रंग और स्थान समायोजित करें। आप पूर्वावलोकन पर प्रभाव खींच सकते हैं।","Ajoutez un ou plusieurs effets animés sur le design, puis ajustez leur taille, leur couleur et leur position. Vous pouvez faire glisser un effet sur l’aperçu.","Tambahkan satu atau beberapa efek animasi di atas desain, lalu sesuaikan ukuran, warna, dan posisinya. Anda dapat menyeret efek pada pratinjau.","Tasarımın üzerine bir veya daha fazla hareketli efekt ekleyin; boyut, renk ve konumlarını ayarlayın. Efekti önizlemede sürükleyebilirsiniz.","ডিজাইনের উপরে এক বা একাধিক অ্যানিমেটেড ইফেক্ট যোগ করুন, তারপর আকার, রং ও অবস্থান সমন্বয় করুন। প্রিভিউতে ইফেক্ট টেনে সরাতে পারেন।","Добавьте один или несколько анимированных эффектов поверх дизайна, затем настройте их размер, цвет и положение. Эффект можно перетаскивать на предпросмотре."],
+ "اسمك أو حسابك":["Your name or handle","Tu nombre o usuario","آپ کا نام یا اکاؤنٹ","आपका नाम या हैंडल","Votre nom ou compte","Nama atau akun Anda","Adınız veya hesabınız","আপনার নাম বা অ্যাকাউন্ট","Ваше имя или аккаунт"]
+});
+Object.assign(DICT,{
+ "البدء والتنقل":["Getting started and navigation","Primeros pasos y navegación","شروعات اور نیویگیشن","शुरुआत और नेविगेशन","Démarrage et navigation","Mulai dan navigasi","Başlangıç ve gezinme","শুরু ও নেভিগেশন","Начало работы и навигация"],
+ "التنقل بين الصفحات":["Moving between pages","Navegar entre páginas","صفحات کے درمیان نیویگیشن","पृष्ठों के बीच नेविगेशन","Navigation entre les pages","Berpindah antar halaman","Sayfalar arasında gezinme","পৃষ্ঠার মধ্যে চলাচল","Перемещение между страницами"],
+ "افتح «الفهرس» للتنقل بين السور والأجزاء والصفحات. اسحب الصفحة أو استخدم الأسهم للتنقل، واضغط على الصفحة لإخفاء الواجهة وإظهارها.":["Open “Index” to move between surahs, juz, and pages. Swipe the page or use the arrows to navigate, and tap the page to hide or show the interface.","Abre «Índice» para moverte entre suras, yuz y páginas. Desliza la página o usa las flechas para navegar, y toca la página para ocultar o mostrar la interfaz.","سورتوں، پاروں اور صفحات کے درمیان جانے کے لیے «فہرست» کھولیں۔ صفحے کو سوائپ کریں یا تیروں سے چلیں، اور انٹرفیس چھپانے یا دکھانے کے لیے صفحے پر ٹیپ کریں۔","सूरह, पारे और पृष्ठों के बीच जाने के लिए «सूची» खोलें। पृष्ठ स्वाइप करें या तीरों से चलें, और इंटरफ़ेस छिपाने या दिखाने के लिए पृष्ठ पर टैप करें।","Ouvrez « Index » pour passer entre les sourates, les juz et les pages. Faites glisser la page ou utilisez les flèches, et touchez la page pour masquer ou afficher l’interface.","Buka «Indeks» untuk berpindah antar surah, juz, dan halaman. Geser halaman atau gunakan panah, dan ketuk halaman untuk menyembunyikan atau menampilkan antarmuka.","Sureler, cüzler ve sayfalar arasında geçmek için «Dizin»i açın. Sayfayı kaydırın veya okları kullanın; arayüzü gizlemek ya da göstermek için sayfaya dokunun.","সূরা, পারা ও পৃষ্ঠার মধ্যে যেতে «সূচি» খুলুন। পৃষ্ঠা সোয়াইপ করুন বা তীর চিহ্ন ব্যবহার করুন, এবং ইন্টারফেস লুকাতে বা দেখাতে পৃষ্ঠায় ট্যাপ করুন।","Откройте «Оглавление», чтобы переходить между сурами, джузами и страницами. Пролистывайте страницу или используйте стрелки; коснитесь страницы, чтобы скрыть или показать интерфейс."],
+ "البحث":["Search","Buscar","تلاش","खोज","Recherche","Pencarian","Arama","অনুসন্ধান","Поиск"],
+ "اضغط «بحث» واكتب حرفين على الأقل. افتح النتيجة للانتقال إلى الآية، أو اضغط مطولاً على آية لفتح خياراتها.":["Tap “Search” and type at least two letters. Open a result to jump to the verse, or long-press a verse to open its options.","Pulsa «Buscar» y escribe al menos dos letras. Abre un resultado para ir a la aleya, o mantén pulsada una aleya para abrir sus opciones.","«تلاش» دبائیں اور کم از کم دو حرف لکھیں۔ نتیجہ کھول کر آیت پر جائیں، یا آیت کو دبا کر رکھیں تاکہ اس کے اختیارات کھلیں۔","«खोज» दबाएँ और कम से कम दो अक्षर लिखें। परिणाम खोलकर आयत पर जाएँ, या आयत को दबाकर रखें ताकि उसके विकल्प खुलें।","Appuyez sur « Recherche » et saisissez au moins deux lettres. Ouvrez un résultat pour aller au verset, ou maintenez un verset pour ouvrir ses options.","Ketuk «Cari» dan ketik minimal dua huruf. Buka hasil untuk menuju ayat, atau tekan lama sebuah ayat untuk membuka opsinya.","«Ara»ya dokunun ve en az iki harf yazın. Sonucu açarak ayete gidin veya bir ayete uzun basarak seçeneklerini açın.","«অনুসন্ধান» চাপুন এবং অন্তত দুটি অক্ষর লিখুন। ফলাফল খুলে আয়াতে যান, অথবা আয়াতে চেপে ধরে তার বিকল্প খুলুন।","Нажмите «Поиск» и введите хотя бы две буквы. Откройте результат, чтобы перейти к аяту, или удерживайте аят, чтобы открыть его параметры."],
+ "التلاوة والتكرار":["Recitation and repetition","Recitación y repetición","تلاوت اور تکرار","पाठ और पुनरावृत्ति","Récitation et répétition","Tilawah dan pengulangan","Tilavet ve tekrar","তিলাওয়াত ও পুনরাবৃত্তি","Чтение и повтор"],
+ "اختيار القارئ":["Choosing a reciter","Elegir un recitador","قاری کا انتخاب","क़ारी चुनना","Choisir un récitateur","Memilih qari","Kâri seçimi","ক্বারী নির্বাচন","Выбор чтеца"],
+ "اختر القارئ من أعلى نافذة خيارات الآية. تظهر جودة التلاوة بين قوسين: عادية أو متوسطة أو عالية، دون تغيير مصدر الصوت.":["Choose the reciter at the top of the verse options window. Recitation quality appears in brackets: normal, medium, or high, without changing the audio source.","Elige el recitador en la parte superior de la ventana de opciones de la aleya. La calidad de la recitación aparece entre paréntesis: normal, media o alta, sin cambiar la fuente de audio.","آیت کے اختیارات کی ونڈو کے اوپر قاری منتخب کریں۔ تلاوت کا معیار بریکٹ میں دکھتا ہے: عادی، متوسط یا اعلیٰ، اور آڈیو ماخذ تبدیل نہیں ہوتا۔","आयत विकल्प विंडो के ऊपर क़ारी चुनें। तिलावत की गुणवत्ता कोष्ठक में दिखती है: सामान्य, मध्यम या उच्च, बिना ऑडियो स्रोत बदले।","Choisissez le récitateur en haut de la fenêtre des options du verset. La qualité de la récitation apparaît entre parenthèses : normale, moyenne ou élevée, sans changer la source audio.","Pilih qari di bagian atas jendela opsi ayat. Kualitas tilawah tampil dalam tanda kurung: normal, sedang, atau tinggi, tanpa mengubah sumber audio.","Ayet seçenekleri penceresinin üstünden kâriyi seçin. Tilavet kalitesi parantez içinde görünür: normal, orta veya yüksek; ses kaynağı değişmez.","আয়াতের বিকল্প উইন্ডোর উপরে ক্বারী নির্বাচন করুন। তিলাওয়াতের মান বন্ধনীতে দেখা যায়: সাধারণ, মধ্যম বা উচ্চ, অডিও উৎস না বদলে।","Выберите чтеца в верхней части окна параметров аята. Качество чтения показано в скобках: обычное, среднее или высокое, без изменения источника звука."],
+ "طرق التشغيل":["Playback modes","Modos de reproducción","چلانے کے طریقے","प्लेबैक मोड","Modes de lecture","Mode pemutaran","Oynatma modları","প্লেব্যাক মোড","Режимы воспроизведения"],
+ "«مرة» تشغّل الآية مرة واحدة، و«لنهاية السورة» تكمل حتى نهاية السورة، و«بلا توقف» تكمل حتى نهاية القرآن وهو الافتراضي. تعيد «تكرار الآية» و«تكرار السورة» حسب عدد التكرار، ويعيد «تكرار مقطع» النطاق المحدد.":["“Once” plays the verse once, “To end of surah” continues to the end of the surah, and “Non-stop” continues to the end of the Quran (the default). “Repeat verse” and “Repeat surah” repeat according to the repeat count, and “Repeat range” repeats the selected range.","«Una vez» reproduce la aleya una vez, «Hasta el final de la sura» continúa hasta el final de la sura y «Sin parar» continúa hasta el final del Corán (opción predeterminada). «Repetir aleya» y «Repetir sura» repiten según el número de repeticiones, y «Repetir tramo» repite el rango seleccionado.","«ایک بار» آیت کو ایک بار چلاتا ہے، «سورت کے آخر تک» سورت کے آخر تک جاری رکھتا ہے، اور «بلا توقف» قرآن کے آخر تک جاری رکھتا ہے (پہلے سے طے شدہ)۔ «آیت دہرائیں» اور «سورت دہرائیں» تکرار کی تعداد کے مطابق دہراتے ہیں، اور «مقطع دہرائیں» منتخب حد دہراتا ہے۔","«एक बार» आयत को एक बार चलाता है, «सूरह के अंत तक» सूरह के अंत तक चलता है, और «बिना रुके» क़ुरआन के अंत तक चलता है (डिफ़ॉल्ट)। «आयत दोहराएँ» और «सूरह दोहराएँ» पुनरावृत्ति संख्या के अनुसार दोहराते हैं, और «भाग दोहराएँ» चुनी हुई सीमा दोहराता है।","« Une fois » lit le verset une fois, « Jusqu’à la fin de la sourate » continue jusqu’à la fin de la sourate, et « Sans arrêt » continue jusqu’à la fin du Coran (par défaut). « Répéter le verset » et « Répéter la sourate » répètent selon le nombre choisi, et « Répéter un passage » répète la plage sélectionnée.","«Sekali» memutar ayat satu kali, «Sampai akhir surah» melanjutkan hingga akhir surah, dan «Tanpa henti» melanjutkan hingga akhir Al-Qur'an (bawaan). «Ulangi ayat» dan «Ulangi surah» mengulang sesuai jumlah pengulangan, dan «Ulangi rentang» mengulang rentang yang dipilih.","«Bir kez» ayeti bir kez oynatır, «Sure sonuna kadar» sure sonuna kadar devam eder, «Durmadan» Kur'an'ın sonuna kadar devam eder (varsayılan). «Ayeti tekrarla» ve «Sureyi tekrarla» tekrar sayısına göre yineler, «Aralığı tekrarla» seçilen aralığı yineler.","«একবার» আয়াতটি একবার চালায়, «সূরার শেষ পর্যন্ত» সূরার শেষ পর্যন্ত চালায়, এবং «না থেমে» কুরআনের শেষ পর্যন্ত চালায় (ডিফল্ট)। «আয়াত পুনরাবৃত্তি» ও «সূরা পুনরাবৃত্তি» পুনরাবৃত্তি সংখ্যা অনুযায়ী চালায়, এবং «পরিসর পুনরাবৃত্তি» নির্বাচিত পরিসর পুনরাবৃত্তি করে।","«Один раз» воспроизводит аят один раз, «До конца суры» продолжает до конца суры, «Без остановки» продолжает до конца Корана (по умолчанию). «Повтор аята» и «Повтор суры» повторяют согласно числу повторов, «Повтор диапазона» повторяет выбранный диапазон."],
+ "نطاق التكرار":["Repeat range","Rango de repetición","تکرار کی حد","पुनरावृत्ति सीमा","Plage de répétition","Rentang pengulangan","Tekrar aralığı","পুনরাবৃত্তির পরিসর","Диапазон повтора"],
+ "اختر آية ثم اضغط «تعيين البداية» أو «تعيين النهاية». يظهر النطاق مظللاً، ويمكنك مسحه في أي وقت.":["Select a verse, then tap “Set start” or “Set end”. The range is highlighted, and you can clear it at any time.","Selecciona una aleya y pulsa «Fijar inicio» o «Fijar fin». El rango se resalta y puedes borrarlo en cualquier momento.","آیت منتخب کریں، پھر «آغاز مقرر کریں» یا «اختتام مقرر کریں» دبائیں۔ حد نمایاں ہو جاتی ہے اور آپ اسے کسی بھی وقت مٹا سکتے ہیں۔","आयत चुनें, फिर «आरंभ सेट करें» या «अंत सेट करें» दबाएँ। सीमा हाइलाइट हो जाती है और आप उसे कभी भी हटा सकते हैं।","Sélectionnez un verset, puis appuyez sur « Définir le début » ou « Définir la fin ». La plage est surlignée et vous pouvez l’effacer à tout moment.","Pilih ayat, lalu ketuk «Tetapkan awal» atau «Tetapkan akhir». Rentang akan disorot dan dapat dihapus kapan saja.","Bir ayet seçin, ardından «Başlangıcı ayarla» veya «Bitişi ayarla»ya dokunun. Aralık vurgulanır ve istediğiniz zaman temizlenebilir.","একটি আয়াত নির্বাচন করুন, তারপর «শুরু নির্ধারণ» বা «শেষ নির্ধারণ» চাপুন। পরিসর হাইলাইট হয় এবং যেকোনো সময় মুছে ফেলা যায়।","Выберите аят, затем нажмите «Задать начало» или «Задать конец». Диапазон подсвечивается, и его можно очистить в любое время."],
+ "المظهر والقراءة":["Appearance and reading","Apariencia y lectura","ظاہری شکل اور مطالعہ","रूप और पढ़ना","Apparence et lecture","Tampilan dan membaca","Görünüm ve okuma","চেহারা ও পড়া","Оформление и чтение"],
+ "غيّر الثيم ولون الخلفية والخط والشفافية وسطوع الشاشة من «الإعدادات ← المظهر». يدعم التطبيق الوضع الليلي والقراءة الأفقية والعمودية.":["Change the theme, background color, font, opacity, and screen brightness from “Settings → Appearance”. The app supports night mode and horizontal or vertical reading.","Cambia el tema, el color de fondo, la fuente, la opacidad y el brillo de la pantalla desde «Ajustes → Apariencia». La aplicación admite modo nocturno y lectura horizontal o vertical.","«ترتیبات ← ظاہری شکل» سے تھیم، پس منظر کا رنگ، فونٹ، شفافیت اور اسکرین کی روشنی بدلیں۔ ایپ نائٹ موڈ اور افقی یا عمودی مطالعہ کی حمایت کرتی ہے۔","«सेटिंग्स → दिखावट» से थीम, पृष्ठभूमि रंग, फ़ॉन्ट, पारदर्शिता और स्क्रीन चमक बदलें। ऐप नाइट मोड और क्षैतिज या लंबवत पढ़ने का समर्थन करता है।","Modifiez le thème, la couleur de fond, la police, l’opacité et la luminosité de l’écran depuis « Réglages → Apparence ». L’application prend en charge le mode nuit et la lecture horizontale ou verticale.","Ubah tema, warna latar, huruf, opasitas, dan kecerahan layar dari «Pengaturan → Tampilan». Aplikasi mendukung mode malam serta membaca horizontal atau vertikal.","Tema, arka plan rengi, yazı tipi, saydamlık ve ekran parlaklığını «Ayarlar → Görünüm»den değiştirin. Uygulama gece modunu ve yatay veya dikey okumayı destekler.","«সেটিংস → চেহারা» থেকে থিম, পটভূমির রং, ফন্ট, স্বচ্ছতা ও স্ক্রিনের উজ্জ্বলতা বদলান। অ্যাপটি নাইট মোড এবং অনুভূমিক বা উল্লম্ব পাঠ সমর্থন করে।","Изменяйте тему, цвет фона, шрифт, прозрачность и яркость экрана в разделе «Настройки → Оформление». Приложение поддерживает ночной режим и горизонтальное или вертикальное чтение."],
+ "تصميم الصور والفيديو":["Image and video design","Diseño de imagen y vídeo","تصویر اور ویڈیو ڈیزائن","छवि और वीडियो डिज़ाइन","Création d’images et de vidéos","Desain gambar dan video","Görsel ve video tasarımı","ছবি ও ভিডিও ডিজাইন","Дизайн изображений и видео"],
+ "الأدوات":["Tools","Herramientas","اوزار","उपकरण","Outils","Alat","Araçlar","সরঞ্জাম","Инструменты"],
+ "افتح «تصميم صورة» من خيارات الآية أو من الشريط السفلي. اختر النص والخلفية والأبعاد والعناوين والمؤثرات، ثم صدّر صورة أو فيديو.":["Open “Design image” from the verse options or the bottom bar. Choose the text, background, dimensions, titles, and effects, then export an image or video.","Abre «Diseñar imagen» desde las opciones de la aleya o la barra inferior. Elige el texto, el fondo, las dimensiones, los títulos y los efectos, y exporta una imagen o un vídeo.","آیت کے اختیارات یا نیچے کی پٹی سے «تصویر ڈیزائن کریں» کھولیں۔ متن، پس منظر، ابعاد، عنوانات اور اثرات منتخب کریں، پھر تصویر یا ویڈیو ایکسپورٹ کریں۔","आयत विकल्पों या निचली पट्टी से «छवि डिज़ाइन करें» खोलें। पाठ, पृष्ठभूमि, आयाम, शीर्षक और प्रभाव चुनें, फिर छवि या वीडियो निर्यात करें।","Ouvrez « Créer une image » depuis les options du verset ou la barre inférieure. Choisissez le texte, le fond, les dimensions, les titres et les effets, puis exportez une image ou une vidéo.","Buka «Desain gambar» dari opsi ayat atau bilah bawah. Pilih teks, latar, dimensi, judul, dan efek, lalu ekspor gambar atau video.","Ayet seçeneklerinden veya alt çubuktan «Görsel tasarla»yı açın. Metni, arka planı, boyutları, başlıkları ve efektleri seçin; ardından görsel veya video dışa aktarın.","আয়াতের বিকল্প বা নিচের বার থেকে «ছবি ডিজাইন» খুলুন। লেখা, পটভূমি, মাপ, শিরোনাম ও ইফেক্ট বেছে নিয়ে ছবি বা ভিডিও এক্সপোর্ট করুন।","Откройте «Дизайн изображения» в параметрах аята или на нижней панели. Выберите текст, фон, размеры, заголовки и эффекты, затем экспортируйте изображение или видео."],
+ "المؤثرات والتوقيع":["Effects and signature","Efectos y firma","اثرات اور دستخط","प्रभाव और हस्ताक्षर","Effets et signature","Efek dan tanda tangan","Efektler ve imza","ইফেক্ট ও স্বাক্ষর","Эффекты и подпись"],
+ "أضف مؤثرات متحركة من تبويب «المؤثرات». يُحفظ التوقيع الثابت نصاً وتنسيقاً ويُضاف تلقائياً إلى التصاميم القادمة ما دام الخيار مفعّلاً.":["Add animated effects from the “Effects” tab. The fixed signature’s text and style are saved and automatically added to future designs while the option is enabled.","Añade efectos animados desde la pestaña «Efectos». El texto y el estilo de la firma fija se guardan y se añaden automáticamente a los diseños futuros mientras la opción esté activada.","«اثرات» ٹیب سے متحرک اثرات شامل کریں۔ مستقل دستخط کا متن اور انداز محفوظ رہتا ہے اور جب تک اختیار فعال ہو، آئندہ ڈیزائنوں میں خودکار شامل ہوتا ہے۔","«प्रभाव» टैब से एनिमेटेड प्रभाव जोड़ें। स्थायी हस्ताक्षर का पाठ और शैली सहेजी जाती है और विकल्प चालू रहने तक आगे के डिज़ाइनों में स्वतः जुड़ती है।","Ajoutez des effets animés depuis l’onglet « Effets ». Le texte et le style de la signature fixe sont enregistrés et ajoutés automatiquement aux futurs designs tant que l’option est activée.","Tambahkan efek animasi dari tab «Efek». Teks dan gaya tanda tangan tetap disimpan dan otomatis ditambahkan ke desain berikutnya selama opsi aktif.","«Efektler» sekmesinden hareketli efektler ekleyin. Sabit imzanın metni ve stili kaydedilir ve seçenek açık olduğu sürece sonraki tasarımlara otomatik eklenir.","«ইফেক্ট» ট্যাব থেকে অ্যানিমেটেড ইফেক্ট যোগ করুন। স্থায়ী স্বাক্ষরের লেখা ও স্টাইল সংরক্ষিত থাকে এবং বিকল্প চালু থাকলে পরের ডিজাইনে স্বয়ংক্রিয়ভাবে যোগ হয়।","Добавляйте анимированные эффекты на вкладке «Эффекты». Текст и стиль постоянной подписи сохраняются и автоматически добавляются в будущие дизайны, пока опция включена."],
+ "السجل":["History","Historial","سجل","इतिहास","Historique","Riwayat","Geçmiş","ইতিহাস","История"],
+ "يجمع تبويب «السجل» كل تصميم صدّرته، ويتيح معاينته ومشاركته وحذفه أو تعيينه خلفية. يمكن ربط مجلد على الجهاز لحفظ الصادرات تلقائياً.":["The “History” tab collects every design you export and lets you preview, share, delete, or set it as a background. You can link a folder on your device to save exports automatically.","La pestaña «Historial» reúne todos los diseños que exportes y permite previsualizarlos, compartirlos, eliminarlos o usarlos como fondo. Puedes vincular una carpeta del dispositivo para guardar las exportaciones automáticamente.","«سجل» ٹیب آپ کے ہر ایکسپورٹ شدہ ڈیزائن کو جمع کرتا ہے اور اسے دیکھنے، شیئر کرنے، حذف کرنے یا پس منظر بنانے کی سہولت دیتا ہے۔ ایکسپورٹ خودکار محفوظ کرنے کے لیے آپ آلے کا فولڈر منسلک کر سکتے ہیں۔","«इतिहास» टैब आपके हर निर्यात किए गए डिज़ाइन को इकट्ठा करता है और उसे देखने, साझा करने, हटाने या पृष्ठभूमि बनाने देता है। निर्यात स्वतः सहेजने के लिए आप डिवाइस का फ़ोल्डर जोड़ सकते हैं।","L’onglet « Historique » rassemble chaque design exporté et permet de le prévisualiser, le partager, le supprimer ou l’utiliser comme fond. Vous pouvez lier un dossier de votre appareil pour enregistrer les exports automatiquement.","Tab «Riwayat» mengumpulkan setiap desain yang diekspor dan memungkinkan pratinjau, berbagi, menghapus, atau menjadikannya latar. Anda dapat menautkan folder di perangkat agar ekspor tersimpan otomatis.","«Geçmiş» sekmesi dışa aktardığınız her tasarımı toplar; önizleme, paylaşma, silme veya arka plan yapma imkânı verir. Dışa aktarımların otomatik kaydı için cihazınızda bir klasör bağlayabilirsiniz.","«ইতিহাস» ট্যাব আপনার এক্সপোর্ট করা প্রতিটি ডিজাইন সংগ্রহ করে এবং প্রিভিউ, শেয়ার, মুছে ফেলা বা পটভূমি হিসেবে সেট করার সুযোগ দেয়। স্বয়ংক্রিয় সংরক্ষণের জন্য ডিভাইসের একটি ফোল্ডার লিংক করতে পারেন।","Вкладка «История» собирает все экспортированные дизайны и позволяет просматривать, делиться, удалять их или назначать фоном. Можно подключить папку на устройстве для автоматического сохранения экспорта."],
+ "منتقي الألوان":["Color picker","Selector de color","رنگ منتخب کرنے والا","रंग चयनकर्ता","Sélecteur de couleur","Pemilih warna","Renk seçici","রং নির্বাচক","Выбор цвета"],
+ "عند اختيار أي لون تظهر آخر ١٠ ألوان استخدمتها وألوان جاهزة، مع معاينة قبل التطبيق.":["When choosing any color, your last 10 used colors and preset colors appear, with a preview before applying.","Al elegir cualquier color aparecen tus últimos 10 colores usados y colores predefinidos, con una vista previa antes de aplicar.","کوئی بھی رنگ منتخب کرتے وقت آپ کے آخری ١٠ استعمال شدہ رنگ اور تیار رنگ دکھائی دیتے ہیں، لاگو کرنے سے پہلے معاہدہ کے ساتھ۔","कोई भी रंग चुनते समय आपके अंतिम 10 प्रयुक्त रंग और तैयार रंग दिखते हैं, लागू करने से पहले पूर्वावलोकन के साथ।","Lorsque vous choisissez une couleur, vos 10 dernières couleurs utilisées et des couleurs prédéfinies apparaissent, avec un aperçu avant application.","Saat memilih warna, 10 warna terakhir yang digunakan dan warna bawaan muncul, lengkap dengan pratinjau sebelum diterapkan.","Bir renk seçerken son kullandığınız 10 renk ve hazır renkler, uygulamadan önce önizlemeyle birlikte görünür.","যেকোনো রং বাছাই করলে আপনার সর্বশেষ ব্যবহৃত ১০টি রং ও প্রিসেট রং দেখা যায়, প্রয়োগের আগে প্রিভিউসহ।","При выборе цвета отображаются последние 10 использованных и готовые цвета с предпросмотром перед применением."],
+ "التذكير اليومي":["Daily reminder","Recordatorio diario","روزانہ یاد دہانی","दैनिक अनुस्मारक","Rappel quotidien","Pengingat harian","Günlük hatırlatıcı","দৈনিক অনুস্মারক","Ежедневное напоминание"],
+ "فعّل «تذكير يومي بقراءة القرآن» في الإعدادات واسمح بالإشعارات. يرسل التطبيق تذكيراً عند الساعة ٩ مساءً بالتوقيت المحلي ما دام مفتوحاً أو يعمل في الخلفية. لا يمكن ضمان الإشعار إذا أُغلق التطبيق تماماً أو أوقفه النظام.":["Enable “Daily Quran reading reminder” in Settings and allow notifications. The app sends a reminder at 9 PM local time while it is open or running in the background. Delivery cannot be guaranteed if the app is fully closed or stopped by the system.","Activa «Recordatorio diario de lectura del Corán» en Ajustes y permite las notificaciones. La aplicación envía un recordatorio a las 9 PM hora local mientras esté abierta o en segundo plano. No se garantiza la entrega si la aplicación está totalmente cerrada o el sistema la detiene.","ترتیبات میں «قرآن پڑھنے کی روزانہ یاد دہانی» فعال کریں اور اطلاعات کی اجازت دیں۔ ایپ مقامی وقت کے مطابق رات ٩ بجے یاد دہانی بھیجتی ہے جب تک وہ کھلی یا پس منظر میں چل رہی ہو۔ اگر ایپ مکمل بند ہو یا سسٹم اسے روک دے تو اطلاع کی ضمانت نہیں دی جا سکتی۔","सेटिंग्स में «क़ुरआन पढ़ने का दैनिक अनुस्मारक» चालू करें और सूचनाओं की अनुमति दें। ऐप स्थानीय समय पर रात 9 बजे अनुस्मारक भेजता है जब तक वह खुला या पृष्ठभूमि में चल रहा हो। यदि ऐप पूरी तरह बंद हो या सिस्टम उसे रोक दे तो सूचना की गारंटी नहीं है।","Activez « Rappel quotidien de lecture du Coran » dans les réglages et autorisez les notifications. L’application envoie un rappel à 21 h heure locale tant qu’elle est ouverte ou en arrière-plan. La réception n’est pas garantie si l’application est complètement fermée ou arrêtée par le système.","Aktifkan «Pengingat membaca Al-Qur'an harian» di Pengaturan dan izinkan notifikasi. Aplikasi mengirim pengingat pukul 21.00 waktu setempat selama terbuka atau berjalan di latar belakang. Pengiriman tidak dapat dijamin jika aplikasi sepenuhnya ditutup atau dihentikan sistem.","Ayarlar’da «Günlük Kur'an okuma hatırlatıcısı»nı açın ve bildirimlere izin verin. Uygulama açıkken veya arka planda çalışırken yerel saatle 21.00’de hatırlatma gönderir. Uygulama tamamen kapatılırsa veya sistem tarafından durdurulursa iletim garanti edilemez.","সেটিংসে «দৈনিক কুরআন পড়ার অনুস্মারক» চালু করুন এবং নোটিফিকেশনের অনুমতি দিন। অ্যাপ খোলা বা ব্যাকগ্রাউন্ডে চলার সময় স্থানীয় সময় রাত ৯টায় অনুস্মারক পাঠায়। অ্যাপ সম্পূর্ণ বন্ধ হলে বা সিস্টেম থামিয়ে দিলে পৌঁছানোর নিশ্চয়তা নেই।","Включите «Ежедневное напоминание о чтении Корана» в настройках и разрешите уведомления. Приложение отправляет напоминание в 21:00 по местному времени, пока оно открыто или работает в фоне. Доставка не гарантируется, если приложение полностью закрыто или остановлено системой."],
+ "الأوفلاين والتحديث":["Offline and updates","Sin conexión y actualizaciones","آف لائن اور اپ ڈیٹ","ऑफ़लाइन और अपडेट","Hors ligne et mises à jour","Offline dan pembaruan","Çevrimdışı ve güncellemeler","অফলাইন ও আপডেট","Офлайн и обновления"],
+ "الأوفلاين":["Offline","Sin conexión","آف لائن","ऑफ़लाइन","Hors ligne","Offline","Çevrimdışı","অফলাইন","Офлайн"],
+ "يعمل التطبيق دون إنترنت بعد أول فتح واكتمال التخزين المؤقت. تحتاج تلاوة الآيات والصور والفيديوهات الخارجية إلى إنترنت.":["The app works offline after the first open and the cache finishes downloading. Verse recitation and external images and videos require internet.","La aplicación funciona sin conexión tras la primera apertura y cuando termina de descargarse la caché. La recitación de aleyas y las imágenes y vídeos externos requieren internet.","پہلی بار کھولنے اور کیشے مکمل ہونے کے بعد ایپ آف لائن کام کرتی ہے۔ آیات کی تلاوت اور بیرونی تصاویر و ویڈیوز کے لیے انٹرنیٹ ضروری ہے۔","पहली बार खोलने और कैश पूरा डाउनलोड होने के बाद ऐप ऑफ़लाइन काम करता है। आयतों की तिलावत तथा बाहरी चित्र और वीडियो के लिए इंटरनेट आवश्यक है।","L’application fonctionne hors ligne après la première ouverture et une fois le cache téléchargé. La récitation des versets ainsi que les images et vidéos externes nécessitent Internet.","Aplikasi berfungsi offline setelah pembukaan pertama dan cache selesai diunduh. Tilawah ayat serta gambar dan video eksternal memerlukan internet.","Uygulama ilk açılıştan ve önbellek indirildikten sonra çevrimdışı çalışır. Ayet tilaveti ile harici görseller ve videolar internet gerektirir.","প্রথমবার খোলার পর ও ক্যাশ সম্পূর্ণ ডাউনলোড হলে অ্যাপ অফলাইনে কাজ করে। আয়াতের তিলাওয়াত এবং বাইরের ছবি ও ভিডিওর জন্য ইন্টারনেট প্রয়োজন।","Приложение работает офлайн после первого открытия и завершения загрузки кэша. Для чтения аятов, а также внешних изображений и видео требуется интернет."],
+ "التحديث":["Updates","Actualizaciones","اپ ڈیٹ","अपडेट","Mises à jour","Pembaruan","Güncellemeler","আপডেট","Обновления"],
+ "يتحقق التطبيق من التحديثات عند فتحه، ويمكنك التحقق يدوياً من الإعدادات. عند نجاح التحديث تظهر رسالة «تم تحديث التطبيق إلى أحدث إصدار».":["The app checks for updates when it opens, and you can check manually from Settings. When an update succeeds, the message “The app has been updated to the latest version” appears.","La aplicación busca actualizaciones al abrirse y puedes comprobarlas manualmente desde Ajustes. Cuando una actualización se aplica correctamente, aparece el mensaje «La aplicación se ha actualizado a la última versión».","ایپ کھلتے وقت اپ ڈیٹ چیک کرتی ہے، اور آپ ترتیبات سے دستی طور پر بھی چیک کر سکتے ہیں۔ کامیاب اپ ڈیٹ پر «ایپ تازہ ترین ورژن پر اپ ڈیٹ ہو گئی» کا پیغام آتا ہے۔","ऐप खुलने पर अपडेट जाँचता है और आप सेटिंग्स से मैन्युअली भी जाँच सकते हैं। सफल अपडेट पर «ऐप नवीनतम संस्करण में अपडेट हो गया» संदेश दिखता है।","L’application recherche les mises à jour à l’ouverture, et vous pouvez les vérifier manuellement dans les réglages. En cas de succès, le message « L’application a été mise à jour vers la dernière version » apparaît.","Aplikasi memeriksa pembaruan saat dibuka, dan Anda dapat memeriksanya secara manual dari Pengaturan. Jika berhasil, pesan «Aplikasi telah diperbarui ke versi terbaru» muncul.","Uygulama açılışta güncellemeleri denetler; Ayarlar’dan elle de denetleyebilirsiniz. Güncelleme başarılı olduğunda «Uygulama en son sürüme güncellendi» mesajı görünür.","অ্যাপ খোলার সময় আপডেট পরীক্ষা করে এবং সেটিংস থেকে হাতেও পরীক্ষা করা যায়। সফল হলে «অ্যাপটি সর্বশেষ সংস্করণে আপডেট হয়েছে» বার্তা দেখায়।","Приложение проверяет обновления при открытии, а также вручную в настройках. При успешном обновлении появляется сообщение «Приложение обновлено до последней версии»."],
+ "الخصوصية والبيانات":["Privacy and data","Privacidad y datos","رازداری اور ڈیٹا","गोपनीयता और डेटा","Confidentialité et données","Privasi dan data","Gizlilik ve veriler","গোপনীয়তা ও তথ্য","Конфиденциальность и данные"],
+ "تُحفظ إعداداتك وتصاميمك على جهازك. التحليلات اختيارية ويمكن إدارتها من الإعدادات، ولا تُرسل بياناتك الشخصية.":["Your settings and designs are saved on your device. Analytics are optional and can be managed in Settings; your personal data is not sent.","Tus ajustes y diseños se guardan en tu dispositivo. Las analíticas son opcionales y se gestionan en Ajustes; no se envían tus datos personales.","آپ کی ترتیبات اور ڈیزائن آپ کے آلے پر محفوظ رہتے ہیں۔ تجزیات اختیاری ہیں اور ترتیبات سے منظم کیے جا سکتے ہیں؛ آپ کا ذاتی ڈیٹا نہیں بھیجا جاتا۔","आपकी सेटिंग्स और डिज़ाइन आपके डिवाइस पर सहेजे जाते हैं। एनालिटिक्स वैकल्पिक हैं और सेटिंग्स से प्रबंधित किए जा सकते हैं; आपका व्यक्तिगत डेटा नहीं भेजा जाता।","Vos réglages et designs sont enregistrés sur votre appareil. Les analyses sont facultatives et gérables dans les réglages ; vos données personnelles ne sont pas envoyées.","Pengaturan dan desain Anda disimpan di perangkat. Analitik bersifat opsional dan dapat dikelola di Pengaturan; data pribadi Anda tidak dikirim.","Ayarlarınız ve tasarımlarınız cihazınızda saklanır. Analitik isteğe bağlıdır ve Ayarlar’dan yönetilebilir; kişisel verileriniz gönderilmez.","আপনার সেটিংস ও ডিজাইন ডিভাইসে সংরক্ষিত হয়। অ্যানালিটিক্স ঐচ্ছিক এবং সেটিংস থেকে নিয়ন্ত্রণ করা যায়; আপনার ব্যক্তিগত তথ্য পাঠানো হয় না।","Ваши настройки и дизайны сохраняются на устройстве. Аналитика необязательна и управляется в настройках; личные данные не отправляются."],
+ "لا توجد خلفيات جاهزة. ضَع الصور في مجلد backgrounds/ ثم اضغط «تحديث».":["No ready backgrounds found. Put images in the backgrounds/ folder, then tap “Refresh”.","No hay fondos listos. Coloca imágenes en la carpeta backgrounds/ y pulsa «Actualizar».","کوئی تیار پس منظر نہیں ملا۔ تصاویر backgrounds/ فولڈر میں رکھیں، پھر «تازہ کریں» دبائیں۔","कोई तैयार पृष्ठभूमि नहीं मिली। चित्र backgrounds/ फ़ोल्डर में रखें, फिर «ताज़ा करें» दबाएँ।","Aucun fond prêt. Placez des images dans le dossier backgrounds/, puis appuyez sur « Actualiser ».","Tidak ada latar siap pakai. Letakkan gambar di folder backgrounds/, lalu ketuk «Segarkan».","Hazır arka plan bulunamadı. Görselleri backgrounds/ klasörüne koyun, ardından «Yenile»ye dokunun.","কোনো প্রস্তুত পটভূমি পাওয়া যায়নি। ছবিগুলো backgrounds/ ফোল্ডারে রাখুন, তারপর «রিফ্রেশ» চাপুন।","Готовые фоны не найдены. Поместите изображения в папку backgrounds/ и нажмите «Обновить»."],
+ "خلفيات جاهزة ({n}) — اضغط صورةً لاختيارها، وزر التثبيت لتثبيتها.":["Ready backgrounds ({n}) — tap an image to choose it, or the pin button to pin it.","Fondos listos ({n}): toca una imagen para elegirla o el botón de fijar para fijarla.","تیار پس منظر ({n}) — انتخاب کے لیے تصویر پر ٹیپ کریں، یا پن کرنے کے لیے پن بٹن دبائیں۔","तैयार पृष्ठभूमि ({n}) — चुनने के लिए चित्र पर टैप करें, या पिन करने के लिए पिन बटन दबाएँ।","Fonds prêts ({n}) — touchez une image pour la choisir, ou le bouton d’épingle pour l’épingler.","Latar siap pakai ({n}) — ketuk gambar untuk memilihnya, atau tombol pin untuk menyematkannya.","Hazır arka planlar ({n}) — seçmek için bir görsele, sabitlemek için pin düğmesine dokunun.","প্রস্তুত পটভূমি ({n}) — বেছে নিতে ছবিতে ট্যাপ করুন, বা পিন করতে পিন বোতাম চাপুন।","Готовые фоны ({n}) — коснитесь изображения, чтобы выбрать его, или кнопки-булавки, чтобы закрепить."],
+ "تثبيت في المقدمة":["Pin to front","Fijar al frente","سامنے پن کریں","सामने पिन करें","Épingler en avant","Sematkan ke depan","Öne sabitle","সামনে পিন করুন","Закрепить впереди"],
+ "تم تعيين الخلفية":["Background set","Fondo establecido","پس منظر مقرر ہو گیا","पृष्ठभूमि सेट हो गई","Fond défini","Latar ditetapkan","Arka plan ayarlandı","পটভূমি নির্ধারণ হয়েছে","Фон установлен"],
+ "خلفية جاهزة":["Ready background","Fondo listo","تیار پس منظر","तैयार पृष्ठभूमि","Fond prêt","Latar siap pakai","Hazır arka plan","প্রস্তুত পটভূমি","Готовый фон"],
+ "حذف المؤثر":["Delete effect","Eliminar efecto","اثر حذف کریں","प्रभाव हटाएँ","Supprimer l’effet","Hapus efek","Efekti sil","ইফেক্ট মুছুন","Удалить эффект"],
+ "الحجم أو الكثافة":["Size or density","Tamaño o densidad","حجم یا کثافت","आकार या घनत्व","Taille ou densité","Ukuran atau kepadatan","Boyut veya yoğunluk","আকার বা ঘনত্ব","Размер или плотность"],
+ "اسحب التوقيع على المعاينة لتحريكه — يبقى داخل التصميم دائماً. يُحفظ نص التوقيع وتنسيقه تلقائياً ويُضاف إلى التصاميم القادمة ما دام الخيار مفعّلاً.":["Drag the signature on the preview to move it — it always stays inside the design. The signature text and style are saved automatically and added to future designs while the option is enabled.","Arrastra la firma en la vista previa para moverla; siempre permanece dentro del diseño. El texto y el estilo de la firma se guardan automáticamente y se añaden a los diseños futuros mientras la opción esté activada.","معاہدہ پر دستخط کو گھسیٹ کر منتقل کریں — یہ ہمیشہ ڈیزائن کے اندر رہتے ہیں۔ دستخط کا متن اور انداز خودکار محفوظ ہوتا ہے اور اختیار فعال رہنے تک آئندہ ڈیزائنوں میں شامل ہوتا ہے۔","पूर्वावलोकन पर हस्ताक्षर खींचकर हिलाएँ — यह हमेशा डिज़ाइन के अंदर रहता है। हस्ताक्षर का पाठ और शैली स्वतः सहेजे जाते हैं और विकल्प चालू रहने तक आगे के डिज़ाइनों में जुड़ते हैं।","Faites glisser la signature sur l’aperçu pour la déplacer — elle reste toujours dans le design. Le texte et le style de la signature sont enregistrés automatiquement et ajoutés aux futurs designs tant que l’option est activée.","Seret tanda tangan pada pratinjau untuk memindahkannya — selalu tetap di dalam desain. Teks dan gaya tanda tangan disimpan otomatis dan ditambahkan ke desain berikutnya selama opsi aktif.","İmzayı taşımak için önizlemede sürükleyin — her zaman tasarımın içinde kalır. İmza metni ve stili otomatik kaydedilir ve seçenek açık olduğu sürece sonraki tasarımlara eklenir.","প্রিভিউতে স্বাক্ষর টেনে সরান — এটি সর্বদা ডিজাইনের ভিতরে থাকে। স্বাক্ষরের লেখা ও স্টাইল স্বয়ংক্রিয়ভাবে সংরক্ষিত হয় এবং বিকল্প চালু থাকলে পরের ডিজাইনে যোগ হয়।","Перетаскивайте подпись на предпросмотре, чтобы переместить её — она всегда остаётся внутри дизайна. Текст и стиль подписи сохраняются автоматически и добавляются в будущие дизайны, пока опция включена."]
+});
 [['ar','العربية'],['en','English'],['es','Español'],['ur','اردو'],['hi','हिन्दी'],['fr','Français'],['id','Bahasa Indonesia'],['tr','Türkçe'],['bn','বাংলা'],['ru','Русский']].forEach(l=>{const o=document.createElement('option');o.value=l[0];o.textContent=l[1];$('#lang').appendChild(o)});
-function applyLang(){$('#seaQ').placeholder=T('ابحث في المصحف...');const de=document.documentElement;de.lang=lang;de.dir=(lang=='ar'||lang=='ur')?'rtl':'ltr';$$('#bar [title]').forEach(e=>{if(!e.dataset.titleSource)e.dataset.titleSource=e.title;e.title=T(e.dataset.titleSource);e.setAttribute('aria-label',e.title)});$$('[data-aria-source]').forEach(e=>e.setAttribute('aria-label',T(e.dataset.ariaSource)));
+/* المساعدة */
+const HELP=[
+ {t:'البدء والتنقل',c:[
+  {t:'التنقل بين الصفحات',b:'افتح «الفهرس» للتنقل بين السور والأجزاء والصفحات. اسحب الصفحة أو استخدم الأسهم للتنقل، واضغط على الصفحة لإخفاء الواجهة وإظهارها.'},
+  {t:'البحث',b:'اضغط «بحث» واكتب حرفين على الأقل. افتح النتيجة للانتقال إلى الآية، أو اضغط مطولاً على آية لفتح خياراتها.'}
+ ]},
+ {t:'التلاوة والتكرار',c:[
+  {t:'اختيار القارئ',b:'اختر القارئ من أعلى نافذة خيارات الآية. تظهر جودة التلاوة بين قوسين: عادية أو متوسطة أو عالية، دون تغيير مصدر الصوت.'},
+  {t:'طرق التشغيل',b:'«مرة» تشغّل الآية مرة واحدة، و«لنهاية السورة» تكمل حتى نهاية السورة، و«بلا توقف» تكمل حتى نهاية القرآن وهو الافتراضي. تعيد «تكرار الآية» و«تكرار السورة» حسب عدد التكرار، ويعيد «تكرار مقطع» النطاق المحدد.'},
+  {t:'نطاق التكرار',b:'اختر آية ثم اضغط «تعيين البداية» أو «تعيين النهاية». يظهر النطاق مظللاً، ويمكنك مسحه في أي وقت.'}
+ ]},
+ {t:'المظهر والقراءة',b:'غيّر الثيم ولون الخلفية والخط والشفافية وسطوع الشاشة من «الإعدادات ← المظهر». يدعم التطبيق الوضع الليلي والقراءة الأفقية والعمودية.'},
+ {t:'تصميم الصور والفيديو',c:[
+  {t:'الأدوات',b:'افتح «تصميم صورة» من خيارات الآية أو من الشريط السفلي. اختر النص والخلفية والأبعاد والعناوين والمؤثرات، ثم صدّر صورة أو فيديو.'},
+  {t:'المؤثرات والتوقيع',b:'أضف مؤثرات متحركة من تبويب «المؤثرات». يُحفظ التوقيع الثابت نصاً وتنسيقاً ويُضاف تلقائياً إلى التصاميم القادمة ما دام الخيار مفعّلاً.'},
+  {t:'السجل',b:'يجمع تبويب «السجل» كل تصميم صدّرته، ويتيح معاينته ومشاركته وحذفه أو تعيينه خلفية. يمكن ربط مجلد على الجهاز لحفظ الصادرات تلقائياً.'},
+  {t:'منتقي الألوان',b:'عند اختيار أي لون تظهر آخر ١٠ ألوان استخدمتها وألوان جاهزة، مع معاينة قبل التطبيق.'}
+ ]},
+ {t:'التذكير اليومي',b:'فعّل «تذكير يومي بقراءة القرآن» في الإعدادات واسمح بالإشعارات. يرسل التطبيق تذكيراً عند الساعة ٩ مساءً بالتوقيت المحلي ما دام مفتوحاً أو يعمل في الخلفية. لا يمكن ضمان الإشعار إذا أُغلق التطبيق تماماً أو أوقفه النظام.'},
+ {t:'الأوفلاين والتحديث',c:[
+  {t:'الأوفلاين',b:'يعمل التطبيق دون إنترنت بعد أول فتح واكتمال التخزين المؤقت. تحتاج تلاوة الآيات والصور والفيديوهات الخارجية إلى إنترنت.'},
+  {t:'التحديث',b:'يتحقق التطبيق من التحديثات عند فتحه، ويمكنك التحقق يدوياً من الإعدادات. عند نجاح التحديث تظهر رسالة «تم تحديث التطبيق إلى أحدث إصدار».'}
+ ]},
+ {t:'الخصوصية والبيانات',b:'تُحفظ إعداداتك وتصاميمك على جهازك. التحليلات اختيارية ويمكن إدارتها من الإعدادات، ولا تُرسل بياناتك الشخصية.'}
+];
+function renderHelp(){const box=$('#helpBody');if(!box)return;box.innerHTML='';
+ const mk=(item,level)=>{const d=document.createElement('details');if(!level)d.open=true;const s=document.createElement('summary');s.textContent=T(item.t);d.appendChild(s);
+  if(item.b){const w=document.createElement('div');w.className='sub';(Array.isArray(item.b)?item.b:[item.b]).forEach(t=>{const p=document.createElement('p');p.textContent=T(t);w.appendChild(p)});d.appendChild(w)}
+  if(item.c){const w=document.createElement('div');w.className='sub';item.c.forEach(x=>w.appendChild(mk(x,level+1)));d.appendChild(w)}
+  return d};
+ HELP.forEach(x=>box.appendChild(mk(x,0)))}
+$('#bHelp').onclick=()=>{renderHelp();closeOverlay('#sSet');openOverlay('#sHelp')};
+$('#helpCloseButton').onclick=()=>closeOverlay('#sHelp');
+function applyLang(){$('#seaQ').placeholder=T('ابحث في المصحف...');const de=document.documentElement;de.lang=lang;de.dir=(lang=='ar'||lang=='ur')?'rtl':'ltr';$$('[title]').forEach(e=>{if(!e.dataset.titleSource)e.dataset.titleSource=e.title;e.title=T(e.dataset.titleSource)});$$('#bar [title]').forEach(e=>e.setAttribute('aria-label',e.title));$$('[data-aria-source]').forEach(e=>e.setAttribute('aria-label',T(e.dataset.ariaSource)));$$('[data-ph-source]').forEach(e=>e.placeholder=T(e.dataset.phSource));
  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(/^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName))continue;if(n._o==null){if(!/[\u0600-\u06FF]/.test(n.nodeValue))continue;n._o=n.nodeValue}n.nodeValue=T(n._o)}
- modesUi();if($('#sIdx').classList.contains('on'))idx();syncRg();if(window.D)limits()}
+ modesUi();if($('#sIdx').classList.contains('on'))idx();if($('#helpBody').children.length)renderHelp();if($('#recSheet').classList.contains('on'))renderRecList();if($('#colorPop').classList.contains('on'))renderColorChoices();recSync();syncRg();if(window.D)limits()}
 $('#lang').onchange=e=>{lang=st.lang=e.target.value;save();applyLang();build();applyBg()};
+/* التذكير اليومي (أفضل جهد ممكن) */
+const REM_KEY='mushafReminderLast';
+const remDay=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const remDone=()=>{try{return localStorage.getItem(REM_KEY)==remDay()}catch(e){return false}};
+const remMark=()=>{try{localStorage.setItem(REM_KEY,remDay())}catch(e){}};
+let remTimer=0;
+function remNotify(){if(!('Notification'in window)||Notification.permission!='granted')return;
+ const title=T('تذكير بقراءة القرآن'),opts={body:T('حان وقت وردك اليومي من القرآن الكريم.'),icon:'icon-192.png',badge:'icon-192.png',tag:'quran-daily-reminder',renotify:false,data:{url:location.href}};
+ try{if(navigator.serviceWorker&&navigator.serviceWorker.ready)navigator.serviceWorker.ready.then(r=>r.showNotification(title,opts)).catch(()=>{try{new Notification(title,opts)}catch(e){}});else new Notification(title,opts)}catch(e){}
+ remMark()}
+function remSchedule(){clearTimeout(remTimer);remTimer=0;if(!st.rem||!('Notification'in window)||Notification.permission!='granted')return;
+ const now=new Date(),target=new Date(now);target.setHours(21,0,0,0);
+ if(target<=now){if(!remDone())remNotify();target.setDate(target.getDate()+1)}
+ const ms=Math.min(target-now,2147483647);remTimer=setTimeout(()=>{remNotify();remSchedule()},Math.max(1000,ms))}
+function remCheck(){if(!st.rem||!('Notification'in window)||Notification.permission!='granted'||remDone())return;if(new Date().getHours()>=21)remNotify()}
+async function remToggle(on){if(!('Notification'in window)){toast(T('الإشعارات غير مدعومة في هذا المتصفح'));$('#remOn').checked=false;st.rem=0;save();return}
+ if(!on){st.rem=0;save();clearTimeout(remTimer);remTimer=0;toast(T('تم إيقاف التذكير اليومي'));return}
+ try{if(Notification.permission=='default')await Notification.requestPermission()}catch(e){}
+ if(Notification.permission!='granted'){st.rem=0;save();$('#remOn').checked=false;toast(T('يرجى السماح بالإشعارات من إعدادات المتصفح لتفعيل التذكير'));return}
+ st.rem=1;save();remSchedule();toast(T('تم تفعيل التذكير اليومي عند ٩ مساءً'))}
+$('#remOn').checked=!!st.rem;
+$('#remOn').onchange=e=>remToggle(e.target.checked);
+if(st.rem&&('Notification'in window)&&Notification.permission=='granted'){remCheck();remSchedule()}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){remCheck();remSchedule()}});
 /* زر الرجوع يغلق النوافذ */
 const OV=[];let ignorePop=0;
 const ovEls=[...$$('.sheet'),$('#studio')];
@@ -1569,12 +1848,12 @@ async function readyList(force){let cache=null;try{cache=JSON.parse(localStorage
  try{localStorage.setItem('mushafReady',JSON.stringify({t:Date.now(),u:list}))}catch(e){}
  return list}
 async function renderReady(force){const g=$('#bgReady');if(!g)return;g.innerHTML='<div class="hiEmpty">جارٍ التحميل…</div>';let list=[];try{list=await readyList(force)}catch(e){}g.innerHTML='';const m=$('#rdMsg');
- if(!list.length){if(m)m.textContent='لا توجد خلفيات جاهزة. ضَع الصور في مجلد backgrounds/ ثم اضغط «تحديث».';return}
- const pins=rdPins();if(m)m.textContent='خلفيات جاهزة ('+ar(list.length)+') — اضغط صورةً لاختيارها، و📌 للتثبيت.';
+ if(!list.length){if(m)m.textContent=T('لا توجد خلفيات جاهزة. ضَع الصور في مجلد backgrounds/ ثم اضغط «تحديث».');return}
+ const pins=rdPins();if(m)m.textContent=T('خلفيات جاهزة ({n}) — اضغط صورةً لاختيارها، وزر التثبيت لتثبيتها.').replace('{n}',ar(list.length));
  rdSorted(list).forEach(x=>{const c=document.createElement('div');c.className='rdC'+(pins.indexOf(x.name)>=0?' pin':'');
-  const im=document.createElement('img');im.src=x.url;im.loading='lazy';im.alt=x.name;im.onclick=()=>{setImg(x.url,'خلفية جاهزة');toast('تم تعيين الخلفية')};
+  const im=document.createElement('img');im.src=x.url;im.loading='lazy';im.alt=x.name;im.onclick=()=>{setImg(x.url,T('خلفية جاهزة'));toast(T('تم تعيين الخلفية'))};
   im.onerror=()=>{im.style.display='none';if(!c.querySelector('.rdD')){const l=document.createElement('div');l.className='rdD';l.textContent=x.name;c.appendChild(l)}};c.appendChild(im);
-  const p=document.createElement('button');p.className='rdP';p.type='button';p.title='تثبيت في المقدمة';p.textContent='📌';p.onclick=ev=>{ev.stopPropagation();rdPin(x.name);renderReady(false)};c.appendChild(p);
+  const p=document.createElement('button');p.className='rdP';p.type='button';p.title=T('تثبيت في المقدمة');p.innerHTML='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z"/></svg>';p.onclick=ev=>{ev.stopPropagation();rdPin(x.name);renderReady(false)};c.appendChild(p);
   if(x.added){const d=new Date(x.added),l=document.createElement('div');l.className='rdD';l.textContent=ar(d.getDate())+'/'+ar(d.getMonth()+1)+'/'+ar(d.getFullYear());c.appendChild(l)}
   g.appendChild(c)})}
 
@@ -1627,13 +1906,14 @@ $('#bKeep').onclick=keepToggle;
 albumInit();renderReady();
 
 /* بدء */
-decorate();fitUi();enh();applyBg();ui();build();modesUi();refresh();limits();applyLang();
+decorate();fitUi();enh();applyBg();ui();build();modesUi();recSync();refresh();limits();applyLang();
+try{if(localStorage.getItem('mushafUpdateToast')=='1'){localStorage.removeItem('mushafUpdateToast');setTimeout(()=>toast(T('تم تحديث التطبيق إلى أحدث إصدار')),1000)}}catch(e){}
 $('#analyticsManage').onclick=()=>QuranAnalytics.manage();
 QuranAnalytics.init(()=>({page:st.p,surah:DATA[st.p].s,surahs:PAGE_SURAHS[st.p],juz:juzOf(st.p),mode:st.m,reader_active:!$('.sheet.on')&&!$('#studio').classList.contains('on'),theme:'theme_'+st.th,theme_index:st.th,theme_mode:st.night?'dark':'light',reciter:st.rec,reciter_name:recName(),recitation_active:!!(pl&&!au.paused),recitation_surah:pl?+pl.k.split(':')[0]:undefined,recitation_page:pl?PAGEOF[pl.k]:undefined,recitation_juz:pl?juzOf(PAGEOF[pl.k]):undefined,studio_open:$('#studio').classList.contains('on'),design_surah:D.s,design_background:D.bg,design_pattern:D.bg=='pat'?D.pat:'none',design_ratio:D.ratio}));
 (async()=>{await ensurePageFonts(st.p);go(st.p,false);warmFontCache()})().catch(()=>go(st.p,false));
 addEventListener('resize',size);addEventListener('orientationchange',()=>setTimeout(size,250));
-addEventListener('pagehide',save);document.addEventListener('visibilitychange',save);applyKeep();
-if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(error=>console.warn('Service worker registration failed.',error));
+addEventListener('pagehide',()=>{save();studioPersist(true)});document.addEventListener('visibilitychange',()=>{save();if(document.hidden)studioPersist(true)});applyKeep();
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(()=>setTimeout(()=>checkAppUpdate(true),2500)).catch(error=>console.warn('Service worker registration failed.',error));
 </script>
 </body>
 </html>

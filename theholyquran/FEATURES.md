@@ -10,7 +10,9 @@ designed images and videos. Single-page app, no framework, no build step.
 - Config: `config.js` (`window.CONFIG.GIPHY_KEY`)
 - Offline: `sw.js` (service worker), `manifest.webmanifest`
 - Ready backgrounds: `backgrounds/` (images + optional `manifest.json`) — see 11b
-- Local storage: `localStorage` key `mushaf2` (settings); IndexedDB DB `mushaf3` (design history + album handle)
+- Local storage: `localStorage` key `mushaf2` (settings), `mushafStudio` (studio design settings),
+  `mushafColors` (last 10 colors), `mushafReminderLast` (daily reminder date), `mushafPins`/`mushafReady`
+  (ready backgrounds); IndexedDB DB `mushaf3` (design history + album handle)
 - Export libs: `mp4-muxer.js`, `fix-webm-duration.js`
 - Fonts: `fonts/QCF4_Hafs_01..47_W.woff2`, `QCF4_QBSML.woff2`, plus UI fonts
 - No JS bundler/test runner; validation is manual/visual in a browser over http(s).
@@ -122,17 +124,24 @@ designed images and videos. Single-page app, no framework, no build step.
 - 6.4 Auto-follow current verse (`follow`) — scrolls page to the playing ayah unless user is scrolling
 - 6.5 Playing-word highlight (`.w.play`) via `markPlay()`
 - 6.6 Next-ayah preloading
-- 6.7 Reciter switching (`#rec`) mid-playback
+- 6.7 Reciter switching: custom searchable RTL/touch dropdown (`#recBtn` → `#recSheet`, search `#recSearch`)
+  layered over the verse actions sheet; `#rec` stays hidden as the source of truth. Display names strip the
+  raw bitrate, and a small bracketed quality label (`(عادية)`/`(متوسطة)`/`(عالية)`) is mapped from the real source bitrate
+  without changing the playback URL.
 
 ---
 
 ## 6b. Playback Modes & Repeat / Range (`#vbar`, `#modes`)
 
-- Once (`once`), Continuous (`cont`, to end of surah), Repeat verse (`v`, N times),
-  Repeat surah (`s`, N times), Repeat range (`r`, N times)
-- Repeat count `#rN` (0 = infinite)
-- Set range start/end (`#setS`/`#setE`, `setRange`), clear range (`#clrR`); status text `#rgTx`
-- Range settable from context sheet too (`cRs`/`cRe`)
+- Modes: Once (`once`), To end of surah (`end`), **Non-stop to end of Quran (`all`, default)**,
+  Repeat verse (`v`, N times), Repeat surah (`s`, N times), Repeat range (`r`, N times).
+  The old `cont` value migrates to `end`; state version `mv:2`.
+- Repeat count `#rN` (0 = infinite); mode titles/tooltips above the repeat controls; helper text below.
+- Set range start/end (`#setS`/`#setE`, `setRange`), clear range (`#clrR`); visible confirmed range state
+  `#rgTx` (`.rangeState.on` + highlighted `.w.range` words) and a confirmation toast.
+- Range settable from the context sheet too (`cRs`/`cRe`).
+- Currently playing ayah becomes the selection (`playAt` sets `cur`), so opening verse actions from the
+  player targets the playing verse; auto-follow handles both chrome-visible and chrome-hidden states.
 
 ---
 
@@ -150,10 +159,15 @@ designed images and videos. Single-page app, no framework, no build step.
 - 6/7.c1 22 built-in themes (`TH`): 10 light, 10 dark, 2 glass (backdrop-blur); separate light/dark pickers (`#thL`,`#thD`,`#thG`)
 - Night-reading toggle (`#night` → `selTheme`)
 - Quick palettes (`PAL`) + custom page background color picker (`#sw`)
+- Every color input uses a custom picker sheet (`#colorPop`): preview, last 10 used colors
+  (`mushafColors`), preset swatches, native custom color, Apply/Cancel. Native inputs stay in the DOM as
+  the source of truth and receive synthetic `input`/`change` events.
 - Accent/font color picker + reset (`#fcol`/`#fcR`)
 - Font opacity `#aRng`, screen brightness `#brR` (`#dim` overlay), font brightness `#fbR`
 - CSS custom properties: `--green --gold --bg --card --txt --acc --paper --pink --fb --mn --a --pw`, `glass` class
-- `theme-color` meta updated to match theme
+- `theme-color` meta is updated on every theme change to the theme's main/nav color (glass themes use their
+  accent fallback); `color-scheme` and the Apple status-bar meta are kept in sync (dark → `black-translucent`,
+  light → `default`). `manifest.webmanifest` keeps `theme_color #0f4f45` / `background_color #fbf6e8`.
 
 ---
 
@@ -190,7 +204,11 @@ designed images and videos. Single-page app, no framework, no build step.
 
 - 10.1 Toolbar: Close (`#stX`), title, Randomize design (`#rndD` — random theme/effects/font/shadow)
 - 10.2 Live preview canvas (`#pv`) with drag-to-position; selection for text/name/ref/sticker
-- 10.3 Tabs (`#stTabs`): Text, Background, Size, Labels, Stickers, Export
+- 10.3 Tabs (`#stTabs`): Text, Background, Size, Labels, Effects (`المؤثرات`), Export, History (`السجل`)
+- 10.3b Studio settings autosave/restore (`mushafStudio`, debounced + `pagehide` flush): text/background/
+  dimensions/labels/effects/signature are restored on next open; image/video/audio blobs are never stored.
+- 10.3c No emojis, stickers or GIF search in the studio. The former stickers tab was removed; animated
+  effects and the fixed signature remain.
 - 10.4 Text tab (`tp-tx`)
   - Surah select `#dS`, ayah range `a1`/`a2`
   - Trim words from start/end (`cut0`/`cut1`), line-break chips (`#chips`, `brk`)
@@ -264,13 +282,14 @@ designed images and videos. Single-page app, no framework, no build step.
   - Target: text / surah name / reference
   - Surah name overlay (`nm.on`, size, color, x, y) drawn from QBSML glyph font
   - Reference overlay (`rf.on`, size, color, x, y) e.g. "الآية ١" / "الآيات ١ - ٣"
-- 10.8 Stickers & Effects tab (`tp-sk`)
-  - Animated full-frame effects (`FX`): Snow, Rain, Stars, Lights/Bokeh, Sparks, Roses, Birds,
+- 10.8 Effects tab (`tp-sk`)
+  - Animated full-frame effects (`FX`): Snow, Rain, Stars, Lights/Bokeh, Sparks, Birds,
     Audio Visualizer, Smoke, Flames
-  - Text/emoji stickers (`#skEmT`, emoji grid `#emG`), font selector (`#skF`), bold (`#skB`)
-  - Image/GIF sticker from device (`#skFile`) or Giphy search (`#gifGo`, key in `config.js`)
-  - Animated GIF frame decoding via `ImageDecoder` (up to 150 frames)
-  - Sticker list, size/rotation/x/y, color, delete
+  - "المؤثرات" list (`#skList`), color (`#skC`), size/density (`#skS`), rotation (`#skR`), position
+    (`#skX`/`#skY`), delete (`#skDel`)
+  - Effects are draggable on the preview and saved/restored with the studio design
+  - No emoji/text stickers and no GIF/image stickers (removed); the fixed signature lives below the
+    effects list
 - 10.9 Auto-fit (`autoFit`) — finds max font size that fits the frame; `ref`/`nm` reserve space
 - 10.10 Render pipeline: `drawBg` → `drawFg` → `drawStk` (`draw`); live loop for animated content (`liveLoop`)
 - 10.11 Real-time word reveal modes (`rv`): none, fade in/out, show & keep, single-line ticker
@@ -305,6 +324,8 @@ designed images and videos. Single-page app, no framework, no build step.
   - Icon uses the embedded data-URL `window.__ICON_B64` (`icon-b64.js`, 128×128) to avoid canvas tainting on
     `file://` (local image → `toDataURL`/`captureStream` `SecurityError`).
   - Font is loaded before drawing/export via `fontsFor()` + the `after('wm*')` hook.
+  - Signature text/style and the `wm.on` checkbox persist in `localStorage` (`mushafStudio`); while the
+    checkbox is enabled the signature is auto-added to future designs, and unchecking it stops that.
 
 ---
 
@@ -372,6 +393,12 @@ designed images and videos. Single-page app, no framework, no build step.
 - Design history tab lives in the studio (`tp-hi`), see 11b
 - Language selector `#lang`
 - Offline: cache status check (`#bOff`, counts cached files vs ~50)
+- Daily reminder (`#remOn`): best-effort local notification at 21:00 local time; requires Notification
+  permission, works while open/in background, cannot be guaranteed if the app is fully closed. Compatible
+  with a future Push backend.
+- Updates: version display (`#appVersion`), manual check (`#checkUpdatesButton`), automatic check on open
+  (silent on connectivity failure), success toast `تم تحديث التطبيق إلى أحدث إصدار` after reload
+- Help (`#bHelp` → `#sHelp`): large popup with an expandable/collapsible nested topic tree, fully localized
 - About (`#bAbout`)
 
 ---
@@ -383,8 +410,9 @@ designed images and videos. Single-page app, no framework, no build step.
   - Precache core assets + all fonts (best-effort `allSettled`); includes `backgrounds/list.js` and
     `icon-b64.js` (embedded watermark icon)
   - `backgrounds/manifest.json` is bypassed (network) so new ready-made backgrounds appear; background images are cached normally
-  - Versioned cache `mushaf-1792270100`; old caches purged on activate; `skipWaiting`/`clients.claim`
-- Service worker registered only over http(s)
+  - Versioned app cache (currently `mushaf-20261106-1.2.0`); old caches purged on activate; `skipWaiting`/`clients.claim`
+  - `notificationclick` focuses an existing window or opens the app for daily reminders
+- Service worker registered only over http(s); an automatic update check runs shortly after registration
 - App designed to work fully offline once cached
 - `backgrounds/` folder holds ready-made background images (+ optional `manifest.json`; regenerate with `backgrounds/update-manifest.mjs`) for GitHub Pages hosting
 
@@ -392,8 +420,8 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 15. About Sheet (`#sAbout`)
 
-- Developer: Loay Abu Qaoud; date; version 1.0.6
-- Credits: King Fahd Complex (QCF4), Quranpedia, everyayah.com, Wikimedia Commons, GIPHY, Lucide, Tajawal, mp4-muxer
+- Developer: Loay Abu Qaoud; date 2026-11-06; version 1.2.0
+- Credits: King Fahd Complex (QCF4), Quranpedia, everyayah.com, Wikimedia Commons, Lucide, Tajawal, mp4-muxer
 
 ---
 
@@ -409,10 +437,10 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 17. Known Gaps / Notes (candidates for fixes & new work)
 
-- 17.1 `DICT` covers UI chrome only; many dynamic strings rely on Arabic templates + `T()`
+- 17.1 `DICT` covers UI chrome and the new help/reminder/reciter/range/color strings; some dynamic canvas/status templates still rely on Arabic `T()` fragments
 - 17.2 Meaning overlay is word-range based; only 4 books bundled in `MEAN_BOOKS`
-- 17.3 Recitation/background search/media require internet (everyayah.com, Wikimedia, Giphy)
-- 17.4 GIPHY key is a hardcoded public key in `config.js`
+- 17.3 Recitation/background search/media require internet (everyayah.com, Wikimedia)
+- 17.4 GIF/sticker integration was removed; `config.js` `GIPHY_KEY` is no longer used and kept only for backward compatibility
 - 17.5 Word-reveal timing is estimated by duration/number-of-words when metadata is unavailable
 - 17.6 No automated tests, lint, or type checking configured
 - 17.7 Single monolithic `index.html` inline script; no modules/bundler
