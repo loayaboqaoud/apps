@@ -128,6 +128,12 @@ designed images and videos. Single-page app, no framework, no build step.
   layered over the verse actions sheet; `#rec` stays hidden as the source of truth. Display names strip the
   raw bitrate, and a small bracketed quality label (`(عادية)`/`(متوسطة)`/`(عالية)`) is mapped from the real source bitrate
   without changing the playback URL.
+- 6.8 Background/suspension reliability (best effort): Media Session position state (`setPositionState`) and
+  `seekto`/`seekbackward`/`seekforward` handlers, conservative resume/advance recovery on
+  `visibilitychange`/`pageshow`/`focus` (`recitationRecover`), single retry on `waiting`/`stalled`, and an
+  ongoing recitation notification when Notification permission is already granted (`quran-recitation-now`).
+  Web/PWA cannot guarantee background audio like a native foreground service; the OS/browser may still
+  suspend playback.
 
 ---
 
@@ -410,7 +416,7 @@ designed images and videos. Single-page app, no framework, no build step.
   - Precache core assets + all fonts (best-effort `allSettled`); includes `backgrounds/list.js` and
     `icon-b64.js` (embedded watermark icon)
   - `backgrounds/manifest.json` is bypassed (network) so new ready-made backgrounds appear; background images are cached normally
-  - Versioned app cache (currently `mushaf-20261106-1.2.0`); old caches purged on activate; `skipWaiting`/`clients.claim`
+  - Versioned app cache (currently `mushaf-20261108-1.2.1`); old caches purged on activate; `skipWaiting`/`clients.claim`
   - `notificationclick` focuses an existing window or opens the app for daily reminders
 - Service worker registered only over http(s); an automatic update check runs shortly after registration
 - App designed to work fully offline once cached
@@ -420,7 +426,7 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 15. About Sheet (`#sAbout`)
 
-- Developer: Loay Abu Qaoud; date 2026-11-06; version 1.2.0
+- Developer: Loay Abu Qaoud; date 2026-11-06; version 1.2.1
 - Credits: King Fahd Complex (QCF4), Quranpedia, everyayah.com, Wikimedia Commons, Lucide, Tajawal, mp4-muxer
 
 ---

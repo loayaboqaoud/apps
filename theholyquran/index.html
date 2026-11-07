@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0f4f45">
 <meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="app-version" content="1.2.0">
+<meta name="app-version" content="1.2.1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -358,7 +358,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout" data-analytics-name="About app"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="aboutCloseButton" aria-label="إغلاق حول التطبيق" data-aria-source="إغلاق حول التطبيق" data-analytics-name="Close about app">✕</button></div>
 <p><b>تطوير:</b> لؤي أبوقاعود | Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-11-06</span></p>
-<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.0</span></p>
+<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.1</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -395,7 +395,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <label class="f"><input type="checkbox" id="remOn"> تذكير يومي بقراءة القرآن (٩ مساءً)</label>
 <p class="note">يعمل التذكير أثناء فتح التطبيق أو في الخلفية أثناء تشغيله. لا يمكن ضمان وصوله إذا أُغلق التطبيق تماماً. يحتاج إلى إذن الإشعارات.</p>
 <h4>الخصوصية والتحليلات</h4><div class="act" style="margin-top:0"><button id="analyticsManage" class="alt">إدارة موافقة التحليلات</button></div><p class="note" id="analyticsStatus"></p>
-<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.0</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
+<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.1</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
 <p class="note" id="updateStatus" aria-live="polite"></p>
 <div class="act"><a id="reportProblem" class="btn alt" href="mailto:loqasoftware@gmail.com">الإبلاغ عن مشكلة</a></div>
 <div class="act" style="margin-top:14px"><button id="bHelp" class="alt" data-analytics-name="Help">مساعدة</button></div>
@@ -1014,6 +1014,14 @@ function recLabel(n){return String(n).replace(/\s*[\(\uFF08][\u0660-\u0669\d]+[\
 function recQuality(src){const m=String(src).match(/(\d{2,3})kbps/i);if(!m)return'';const n=+m[1];return n<=32?'عادية':n<=64?'متوسطة':'عالية'}
 const recFinder=src=>{for(const g of REC)for(const r of g[1])if(r[1]==src)return r;return null};
 const recName=()=>{const r=recFinder(st.rec);return r?recLabel(r[0]):st.rec};
+/* Best-effort ongoing recitation notification. On the web/PWA this is not an
+   Android foreground service; the OS/browser may still suspend audio. */
+const REC_NOTIF_TAG='quran-recitation-now';
+let recNotifRef=null,recNotifVisible=false;
+const recNotifAllowed=()=>('Notification'in window)&&Notification.permission==='granted';
+function recNotifShow(){if(!recNotifAllowed()||!pl)return;const[s,a]=pl.k.split(':').map(Number);const title=T('الآية')+' '+ar(a)+' — '+sName(s);const opts={body:recName(),icon:'icon-192.png',badge:'icon-192.png',tag:REC_NOTIF_TAG,renotify:false,silent:true,requireInteraction:false,data:{url:location.href}};recNotifVisible=true;
+ try{if(navigator.serviceWorker&&navigator.serviceWorker.ready)navigator.serviceWorker.ready.then(r=>r.showNotification(title,opts)).catch(()=>{try{recNotifRef=new Notification(title,opts)}catch(e){}});else recNotifRef=new Notification(title,opts)}catch(e){}}
+function recNotifClose(){if(!recNotifVisible)return;recNotifVisible=false;try{if(recNotifRef){recNotifRef.close();recNotifRef=null}}catch(e){}try{if(navigator.serviceWorker&&navigator.serviceWorker.ready)navigator.serviceWorker.ready.then(async r=>{try{const ns=await r.getNotifications({tag:REC_NOTIF_TAG});ns.forEach(n=>n.close())}catch(e){}}).catch(()=>{})}catch(e){}}
 function recSync(){const r=recFinder(st.rec),q=r?recQuality(r[1]):'';$('#recBtnName').textContent=r?recLabel(r[0]):st.rec;$('#recBtnQ').textContent=q?'('+T(q)+')':'';$('#recBtnQ').style.display=q?'':'none';recSel.value=st.rec;$('#aLb').textContent=recName()}
 function renderRecList(){const box=$('#recList');if(!box)return;const q=$('#recSearch').value.trim().toLowerCase();box.innerHTML='';let n=0;
  REC.forEach(g=>{const items=g[1].filter(r=>!q||r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q));if(!items.length)return;
@@ -1059,24 +1067,53 @@ function startPlay(k){const m=st.mode,s=+k.split(':')[0];let list,i=0,loops=1;
  else if(m=='v'){list=[k];loops=st.n}
  else if(m=='s'){list=ORDER.slice(IDX[s+':1'],IDX[s+':'+CNT[s]]+1);i=IDX[k]-IDX[s+':1'];loops=st.n}
  else{if(!st.rs){st.rs=st.re=k}list=ORDER.slice(IDX[st.rs],IDX[st.re]+1);loops=st.n}
- pl={list,i,loops,loop:0,first:true};if('wakeLock' in navigator)acquireWakeLock().catch(()=>{});playAt();const verse=+k.split(':')[1],page=PAGEOF[k];QuranAnalytics.track('recitation_start',{reciter:st.rec,reciter_name:recName(),surah:s,verse,page,juz:juzOf(page),mode:m})}
-function updateMediaSession(k){if(!('mediaSession' in navigator))return;try{const[s,a]=k.split(':').map(Number);try{navigator.mediaSession.metadata=new MediaMetadata({title:T('الآية')+' '+ar(a),artist:sName(s),album:recName(),artwork:[{src:'icon-192.png',sizes:'192x192',type:'image/png'},{src:'icon-512.png',sizes:'512x512',type:'image/png'}]})}catch(e){}try{navigator.mediaSession.setActionHandler('play',()=>{if(pl){au.play().catch(()=>{});QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause');if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{});try{navigator.mediaSession.playbackState='playing'}catch(e){}}})}catch(e){}try{navigator.mediaSession.setActionHandler('pause',()=>{if(pl){au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play');if(!st.keepOn&&'wakeLock' in navigator)releaseWakeLock().catch(()=>{});try{navigator.mediaSession.playbackState='paused'}catch(e){}}})}catch(e){}try{navigator.mediaSession.setActionHandler('previoustrack',()=>{$('#aPrev').click()})}catch(e){}try{navigator.mediaSession.setActionHandler('nexttrack',()=>{$('#aNext').click()})}catch(e){}try{navigator.mediaSession.playbackState='playing'}catch(e){}}catch(e){}}
-function playAt(){if(!pl)return;const k=pl.list[pl.i];au.src=aUrl(k);au.play().catch(()=>{});pl.k=k;cur=k;markPlay();document.body.classList.add('hasbar');$('#aLb').textContent=vt(k);updateMediaSession(k);
+ pl={list,i,loops,loop:0,first:true,wantPlay:true};if('wakeLock' in navigator)acquireWakeLock().catch(()=>{});playAt();const verse=+k.split(':')[1],page=PAGEOF[k];QuranAnalytics.track('recitation_start',{reciter:st.rec,reciter_name:recName(),surah:s,verse,page,juz:juzOf(page),mode:m})}
+/* Media Session position/seek helpers (best effort). */
+function mediaArtwork(){const b=new URL('./',location.href).href;return[{src:new URL('icon-192.png',b).href,sizes:'192x192',type:'image/png'},{src:new URL('icon-512.png',b).href,sizes:'512x512',type:'image/png'}]}
+function setMediaPlaybackState(state){if(!('mediaSession'in navigator))return;try{navigator.mediaSession.playbackState=state}catch(e){}}
+let msPosAt=0;
+function updateMediaPosition(){if(!('mediaSession'in navigator)||typeof navigator.mediaSession.setPositionState!=='function'||!pl)return;const d=au.duration;if(!isFinite(d)||d<=0)return;const t=isFinite(au.currentTime)?au.currentTime:0,pos=Math.max(0,Math.min(d,t)),rate=isFinite(au.playbackRate)&&au.playbackRate>0?au.playbackRate:1;try{navigator.mediaSession.setPositionState({duration:d,playbackRate:rate,position:pos})}catch(e){}}
+function seekMediaTo(time,fast){if(!pl||!isFinite(au.duration)||au.duration<=0)return;const pos=Math.max(0,Math.min(au.duration,isFinite(time)?time:0));try{if(fast&&typeof au.fastSeek==='function')au.fastSeek(pos);else au.currentTime=pos}catch(e){try{au.currentTime=pos}catch(err){}}const s=$('#seek'),t0=$('#aT0');if(s&&au.duration)s.value=au.currentTime/au.duration*1000;if(t0)t0.textContent=fmt(au.currentTime);updateMediaPosition();setMediaPlaybackState(au.paused?'paused':'playing')}
+function updateMediaSession(k){if(!('mediaSession' in navigator))return;try{const[s,a]=k.split(':').map(Number);try{navigator.mediaSession.metadata=new MediaMetadata({title:T('الآية')+' '+ar(a),artist:sName(s),album:recName(),artwork:mediaArtwork()})}catch(e){}try{navigator.mediaSession.setActionHandler('play',()=>{if(pl){pl.wantPlay=true;au.play().catch(()=>{});QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause');if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{});setMediaPlaybackState('playing');recNotifShow()}})}catch(e){}try{navigator.mediaSession.setActionHandler('pause',()=>{if(pl){pl.wantPlay=false;au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play');if(!st.keepOn&&'wakeLock' in navigator)releaseWakeLock().catch(()=>{});setMediaPlaybackState('paused');recNotifClose()}})}catch(e){}try{navigator.mediaSession.setActionHandler('previoustrack',()=>{$('#aPrev').click()})}catch(e){}try{navigator.mediaSession.setActionHandler('nexttrack',()=>{$('#aNext').click()})}catch(e){}
+ try{navigator.mediaSession.setActionHandler('seekto',e=>{if(!pl||!isFinite(au.duration)||au.duration<=0||!isFinite(e.seekTime))return;seekMediaTo(e.seekTime,e.fastSeek)})}catch(e){}
+ try{navigator.mediaSession.setActionHandler('seekbackward',e=>{if(!pl||!isFinite(au.duration)||au.duration<=0)return;const d=isFinite(e.seekOffset)&&e.seekOffset>0?e.seekOffset:10;seekMediaTo(au.currentTime-d,false)})}catch(e){}
+ try{navigator.mediaSession.setActionHandler('seekforward',e=>{if(!pl||!isFinite(au.duration)||au.duration<=0)return;const d=isFinite(e.seekOffset)&&e.seekOffset>0?e.seekOffset:10;seekMediaTo(au.currentTime+d,false)})}catch(e){}
+ setMediaPlaybackState(au.paused?'paused':'playing');updateMediaPosition()
+ }catch(e){}}
+function playAt(){if(!pl)return;const k=pl.list[pl.i];pl.wantPlay=true;au.src=aUrl(k);au.play().catch(()=>{});pl.k=k;cur=k;markPlay();document.body.classList.add('hasbar');$('#aLb').textContent=vt(k);updateMediaSession(k);recNotifShow();
  follow(k);pl.first=false;ico('#aPlay','pause');if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{});
  const nx=pl.list[pl.i+1];if(nx){const pre=new Audio();pre.preload='auto';pre.src=aUrl(nx)}}
-au.onended=()=>{if(!pl)return;pl.i++;if(pl.i>=pl.list.length){pl.loop++;if(pl.loops&&pl.loop>=pl.loops){if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='none';navigator.mediaSession.metadata=null}catch(e){}}stopPlay();return}pl.i=0}playAt()};
-au.onerror=()=>{if(pl){QuranAnalytics.track('recitation_error',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],kind:au.error&&au.error.code||0});flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
-function stopPlay(){const data=pl?{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],verse:+pl.k.split(':')[1]}:{};au.pause();pl=null;document.body.classList.remove('hasbar');ico('#aPlay','play');markPlay();$('#aLb').textContent=recName();if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='none';navigator.mediaSession.metadata=null}catch(e){}}if('wakeLock' in navigator&&!st.keepOn)releaseWakeLock().catch(()=>{});if(data.surah)QuranAnalytics.track('recitation_stop',data)}
+let advancing=false,lastAdvanceAt=0;
+function advanceTrack(){if(!pl||advancing)return;if(Date.now()-lastAdvanceAt<300)return;advancing=true;lastAdvanceAt=Date.now();try{pl.i++;if(pl.i>=pl.list.length){pl.loop++;if(pl.loops&&pl.loop>=pl.loops){setMediaPlaybackState('none');if('mediaSession' in navigator){try{navigator.mediaSession.metadata=null}catch(e){}}stopPlay();return}pl.i=0}playAt()}finally{advancing=false}}
+au.onended=()=>{clearWaitRetry();advanceTrack()};
+au.onerror=()=>{if(pl){pl.wantPlay=false;recNotifClose();setMediaPlaybackState('none');QuranAnalytics.track('recitation_error',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],kind:au.error&&au.error.code||0});flash(T('تعذّر تحميل الصوت — تحقق من الاتصال أو غيّر القارئ'))}};
+function stopPlay(){const data=pl?{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0],verse:+pl.k.split(':')[1]}:{};au.pause();pl=null;clearWaitRetry();recNotifClose();document.body.classList.remove('hasbar');ico('#aPlay','play');markPlay();$('#aLb').textContent=recName();setMediaPlaybackState('none');if('mediaSession' in navigator){try{navigator.mediaSession.metadata=null}catch(e){}}if('wakeLock' in navigator&&!st.keepOn)releaseWakeLock().catch(()=>{});if(data.surah)QuranAnalytics.track('recitation_stop',data)}
 function markPlay(root){const k=pl&&pl.k;(root?[root]:[document]).forEach(r=>r.querySelectorAll('.w.play').forEach(x=>x.classList.remove('play')));if(k)(root?root:document).querySelectorAll('.w[data-k="'+k+'"]').forEach(x=>x.classList.add('play'))}
 const pageKey=()=>{const s=pager.querySelector('.slide[data-p="'+st.p+'"]')||pager.querySelector('.slide'),w=s&&s.querySelector('.w[data-k]');return w?w.dataset.k:null};
 const barKey=()=>ck()||pageKey();
-$('#aPlay').onclick=()=>{if(pl&&!au.paused){au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play');if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='paused'}catch(e){}}if(!st.keepOn&&'wakeLock' in navigator)releaseWakeLock().catch(()=>{})}else if(pl){au.play().catch(()=>{});QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause');if('mediaSession' in navigator){try{navigator.mediaSession.playbackState='playing'}catch(e){}}if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{})}else{const k=barKey();if(k)startPlay(k)}};
+$('#aPlay').onclick=()=>{if(pl&&!au.paused){pl.wantPlay=false;au.pause();QuranAnalytics.track('recitation_pause',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','play');setMediaPlaybackState('paused');recNotifClose();if(!st.keepOn&&'wakeLock' in navigator)releaseWakeLock().catch(()=>{})}else if(pl){pl.wantPlay=true;au.play().catch(()=>{});QuranAnalytics.track('recitation_resume',{reciter:st.rec,reciter_name:recName(),surah:+pl.k.split(':')[0]});ico('#aPlay','pause');setMediaPlaybackState('playing');recNotifShow();if('wakeLock' in navigator&&!wakeLock)acquireWakeLock().catch(()=>{})}else{const k=barKey();if(k)startPlay(k)}};
 const step=d=>{const k=barKey();if(!k)return;const j=IDX[k]+d;if(j<0||j>=ORDER.length)return;cur=ORDER[j];startPlay(cur);follow(cur)};
 $('#aPrev').onclick=()=>step(-1);$('#aNext').onclick=()=>step(1);$('#aStop').onclick=()=>stopPlay();
 const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};let seeking=false;
 au.addEventListener('timeupdate',()=>{if(seeking)return;$('#seek').value=au.duration?au.currentTime/au.duration*1000:0;$('#aT0').textContent=fmt(au.currentTime);$('#aT1').textContent=fmt(au.duration)});
 $('#seek').addEventListener('input',()=>{seeking=true;if(au.duration){au.currentTime=$('#seek').value/1000*au.duration;$('#aT0').textContent=fmt(au.currentTime)}});$('#seek').addEventListener('change',()=>seeking=false);
 $('#aMore').onclick=()=>{if(pl)cur=pl.k;modesUi();$('#vTtl').textContent=cur?vt(cur):'';openOverlay('#vbar')};
+/* Recitation recovery after suspension (conservative, best effort). */
+let lastRecoverAt=0;
+function recitationRecover(){if(!pl||document.hidden)return;const now=Date.now();if(now-lastRecoverAt<1200)return;lastRecoverAt=now;const d=au.duration,atEnd=au.ended||(isFinite(d)&&d>0&&au.currentTime>=d-0.25);if(atEnd){advanceTrack();return}if(pl.wantPlay&&au.paused&&!au.ended)au.play().catch(()=>{});updateMediaPosition();setMediaPlaybackState(au.paused?'paused':'playing')}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)recitationRecover()});
+window.addEventListener('pageshow',()=>recitationRecover());
+window.addEventListener('focus',()=>{if(!document.hidden)recitationRecover()});
+/* Stall/waiting retries: one short retry per episode, no reload loops. */
+let waitRetryT=0;
+function clearWaitRetry(){clearTimeout(waitRetryT);waitRetryT=0}
+au.addEventListener('waiting',()=>{if(!pl)return;clearWaitRetry();waitRetryT=setTimeout(()=>{waitRetryT=0;if(pl&&pl.wantPlay&&au.paused&&!au.ended)au.play().catch(()=>{})},4000)});
+au.addEventListener('stalled',()=>{if(!pl||!navigator.onLine)return;clearWaitRetry();waitRetryT=setTimeout(()=>{waitRetryT=0;if(pl&&pl.wantPlay&&!au.ended&&au.paused)au.play().catch(()=>{})},6000)});
+au.addEventListener('playing',()=>{clearWaitRetry();setMediaPlaybackState('playing');updateMediaPosition()});
+au.addEventListener('play',()=>{if(pl)pl.wantPlay=true;setMediaPlaybackState('playing');updateMediaPosition()});
+au.addEventListener('pause',()=>{clearWaitRetry();if(pl&&!au.ended&&au.currentTime>0){setMediaPlaybackState('paused');recNotifClose()}});
+['loadedmetadata','durationchange'].forEach(e=>au.addEventListener(e,()=>updateMediaPosition()));
+au.addEventListener('timeupdate',()=>{const now=Date.now();if(now-msPosAt>=1000){msPosAt=now;updateMediaPosition()}});
 
 /* تحديد الآية */
 function pick(k){$$('.w.sel').forEach(x=>x.classList.remove('sel'));cur=k;
