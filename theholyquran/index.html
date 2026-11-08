@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0f4f45">
 <meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="app-version" content="1.2.1">
+<meta name="app-version" content="1.2.2">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -116,13 +116,14 @@ display:flex;flex-direction:column;border:1px solid #0002}
 .lines.few{justify-content:space-evenly}
 .ln{flex:none;height:calc(var(--pw)*.098);display:flex;justify-content:center;align-items:center;direction:rtl;white-space:nowrap;line-height:1}
 .w{display:inline-block;cursor:pointer;border-radius:0;transform:translateY(.13em)}
-.w.sel,.w.play,.w.range{background-clip:padding-box;border-radius:0;padding:.17em .05em;margin:-.17em -.05em;line-height:1;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.w.sel,.w.play,.w.range{background-clip:padding-box;border-radius:0;padding:.17em 0;margin:-.17em 0;line-height:1;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .w.sel{background:color-mix(in srgb,var(--acc) 30%,transparent)}
 .w.play{background:color-mix(in srgb,var(--gold) 42%,transparent)}
 .w.range{background:color-mix(in srgb,var(--acc) 17%,transparent);box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--acc) 72%,transparent)}
 .ln.hd{height:calc(var(--pw)*.095);border:1.5px solid var(--gold);outline:1px solid var(--gold);outline-offset:calc(var(--pw)*-.008);background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:calc(var(--pw)*.012);margin:calc(var(--pw)*.006) 0}
 .ln.hd .w{transform:none;cursor:default}
 .sheet{position:fixed;inset:0;z-index:5;display:none;background:#0006}.sheet.on{display:block}
+#colorPop{z-index:20}
 .card{position:absolute;bottom:0;left:0;right:0;max-height:84%;overflow:auto;background:var(--card);border-radius:18px 18px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom));max-width:660px;margin:0 auto}
 .card h3{margin:0 0 10px;font-size:17px;color:var(--acc)}
 .tabs,.seg{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
@@ -134,7 +135,7 @@ display:flex;flex-direction:column;border:1px solid #0002}
 .grid button{padding:10px 0;border:1px solid var(--line);background:var(--soft);border-radius:10px;font-size:15px}.grid .cur{background:var(--green);color:#fff}
 label.f{display:block;margin:12px 0 5px;font-size:14px}
 input[type=range]{width:100%;accent-color:var(--acc)}
-input[type=number],select,input[type=text]{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:14px}
+input[type=number],input[type=time],select,input[type=text]{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:14px}
 input[type=number]{width:70px;text-align:center}
 input[type=color]{width:42px;height:34px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--card);vertical-align:middle}
 .act{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -182,8 +183,8 @@ svg.i,.ib svg{width:1.25em;height:1.25em;stroke:currentColor;fill:none;stroke-wi
 #bar .ib svg{width:1.45em;height:1.45em;stroke-width:2.25}
 #bar .ib span{font-size:11.5px;font-weight:700;letter-spacing:0}
 #bar button{padding:4px 3px;min-width:48px}
-@media(orientation:portrait) and (max-width:900px){#bar{display:grid;grid-template-columns:repeat(5,1fr);height:auto;min-height:0;gap:2px;padding:4px;overflow:visible;align-content:stretch}#bar .ib{min-width:0;min-height:54px;padding:4px 2px;font-size:12px}#bar .ib span{display:block;white-space:nowrap;font-size:11px;font-weight:700}#bar #bSet{margin-inline-start:0}}
-@media(orientation:landscape){#bar{display:flex;justify-content:center;overflow:visible;position:relative}#bar #bSet{position:absolute;left:4px;top:50%;transform:translateY(-50%);margin:0}#bar .ib{min-width:52px;padding-inline:6px}}
+@media(max-width:900px){#bar{display:grid;grid-template-columns:repeat(5,1fr);height:auto;min-height:0;gap:2px;padding:4px;overflow:visible;align-content:stretch;position:static}#bar .ib{min-width:0;min-height:54px;padding:4px 2px;font-size:12px}#bar .ib span{display:block;white-space:nowrap;font-size:11px;font-weight:700}#bar #bSet{position:static;transform:none;margin:0;grid-column:5}}
+@media(min-width:901px){#bar{display:flex;justify-content:center;overflow:visible;position:relative}#bar #bSet{position:absolute;left:4px;top:50%;transform:translateY(-50%);margin:0}#bar .ib{min-width:52px;padding-inline:6px}}
 .rg{display:flex;align-items:center;gap:6px;direction:ltr;flex:1 1 100%}
 .rg input{flex:1;min-width:0}
 .rg .st{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--soft);font-size:20px;line-height:1;padding:0;color:var(--txt)}
@@ -279,13 +280,12 @@ html.glass #bar,html.glass #abar,html.glass #as,html.glass #stb{-webkit-backdrop
 html.glass .card,html.glass #pnl{background:var(--card);-webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%);border:1px solid rgba(255,255,255,.4);border-top-color:rgba(255,255,255,.75);box-shadow:0 -10px 34px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.5)}
 html.glass #stTabs{background:transparent;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
 html.glass .sheet.on{background:rgba(0,0,0,.16);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
-html.glass .seg button,html.glass .btn.alt,html.glass .rg .st,html.glass input[type=text],html.glass input[type=number],html.glass select{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.4)}
+html.glass .seg button,html.glass .btn.alt,html.glass .rg .st,html.glass input[type=text],html.glass input[type=number],html.glass input[type=time],html.glass select{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.4)}
 .stk{position:sticky;top:0;z-index:6;background:var(--card);margin:0 -16px 8px;padding:14px 16px 0}
 .stk .pl{margin-bottom:8px}.stk .tabs{margin-bottom:0}
 .card.np{padding-top:0}
 html.glass .stk{-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
-#bar{justify-content:flex-start}#bar #bSet{margin-inline-start:auto}
-@media(orientation:landscape){#bar{justify-content:center}#bar #bSet{margin-inline-start:0}}
+#bar{justify-content:center;position:relative}#bar #bSet{position:absolute;left:4px;top:50%;transform:translateY(-50%);margin:0}
 #settingsCloseButton,#indexCloseButton,#searchCloseButton,#wordMeaningCloseButton,#verseMeaningsCloseButton,#aboutCloseButton{background:var(--soft)!important;color:var(--txt)!important}
 #print{display:none}
 @media print{#dim,#as{display:none!important}#print .page{--paper:#fff;--pink:#000}#print .lines{filter:none}@page{size:A4 portrait;margin:8mm}
@@ -358,7 +358,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout" data-analytics-name="About app"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="aboutCloseButton" aria-label="إغلاق حول التطبيق" data-aria-source="إغلاق حول التطبيق" data-analytics-name="Close about app">✕</button></div>
 <p><b>تطوير:</b> لؤي أبوقاعود | Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-11-06</span></p>
-<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.1</span></p>
+<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.2</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -392,10 +392,11 @@ body>*:not(#print){display:none!important}#print{display:block}
 <h4>اللغة</h4><select id="lang" style="width:100%"></select>
 <h4>الأوفلاين</h4><div class="act" style="margin-top:0"><button id="bOff" class="alt">حالة الأوفلاين</button></div><p class="note" id="offMsg"></p>
 <h4>التذكير اليومي</h4>
-<label class="f"><input type="checkbox" id="remOn"> تذكير يومي بقراءة القرآن (٩ مساءً)</label>
+<label class="f"><input type="checkbox" id="remOn"> تذكير يومي بقراءة القرآن</label>
+<div class="two" style="margin-top:6px"><label>وقت التذكير <input type="time" id="remTime" value="21:00"></label></div>
 <p class="note">يعمل التذكير أثناء فتح التطبيق أو في الخلفية أثناء تشغيله. لا يمكن ضمان وصوله إذا أُغلق التطبيق تماماً. يحتاج إلى إذن الإشعارات.</p>
 <h4>الخصوصية والتحليلات</h4><div class="act" style="margin-top:0"><button id="analyticsManage" class="alt">إدارة موافقة التحليلات</button></div><p class="note" id="analyticsStatus"></p>
-<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.1</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
+<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.2</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
 <p class="note" id="updateStatus" aria-live="polite"></p>
 <div class="act"><a id="reportProblem" class="btn alt" href="mailto:loqasoftware@gmail.com">الإبلاغ عن مشكلة</a></div>
 <div class="act" style="margin-top:14px"><button id="bHelp" class="alt" data-analytics-name="Help">مساعدة</button></div>
@@ -711,7 +712,8 @@ const REC=[
 ['البوسنية — بسم كركت','translations/besim_korkut_ajet_po_ajet']
 ]]
 ];
-const st=Object.assign({p:1,a:100,m:'h',bg:null,rec:'Husary_128kbps',mode:'all',mv:0,fit:'a',n:1,rs:null,re:null,tap:1,night:0,br:100,fb:100,sp:20,th:null,lt:0,dk:10,fc:null,lang:'ar',mo:1,mc:null,mb:null,keepOn:0,rem:0},(()=>{try{return JSON.parse(localStorage.getItem('mushaf2')||'{}')}catch(e){return{}}})());
+const st=Object.assign({p:1,a:100,m:'h',bg:null,rec:'Husary_128kbps',mode:'all',mv:0,fit:'a',n:1,rs:null,re:null,tap:1,night:0,br:100,fb:100,sp:20,th:null,lt:0,dk:10,fc:null,lang:'ar',mo:1,mc:null,mb:null,keepOn:0,rem:0,remH:21,remM:0},(()=>{try{return JSON.parse(localStorage.getItem('mushaf2')||'{}')}catch(e){return{}}})());
+if(st.remH==null)st.remH=21;if(st.remM==null)st.remM=0;
 if(st.th==null){st.th=st.night?10:0;st.bg=null}
 if(!st.mv||st.mv<2){if(st.mode=='cont'||!st.mode)st.mode='end';st.mv=2}
 if(!['once','end','all','v','s','r'].includes(st.mode))st.mode='all';
@@ -805,6 +807,7 @@ function openColor(inp){cpTarget=inp;$('#cpInput').value=inp.value||'#ffffff';cp
 function closeColor(){cpTarget=null;closeOverlay('#colorPop')}
 function applyColor(){const v=$('#cpInput').value;if(!cpTarget)return;cpTarget.value=v;cpTarget.dispatchEvent(new Event('input',{bubbles:true}));cpTarget.dispatchEvent(new Event('change',{bubbles:true}));addRecentColor(v);closeColor()}
 function wrapColor(inp){if(!inp||inp.dataset.cpw||inp.closest('#colorPop')||inp.id=='cpInput')return;inp.dataset.cpw='1';const b=document.createElement('button');b.type='button';b.className='cpBtn';b.style.background=inp.value||'#fff';b.setAttribute('aria-label','اختيار اللون');b.setAttribute('data-aria-source','اختيار اللون');b.onclick=e=>{e.preventDefault();e.stopPropagation();openColor(inp)};inp.style.display='none';inp.after(b);
+ const lab=inp.closest('label');if(lab)lab.addEventListener('click',e=>{if(e.target.closest('.cpBtn'))return;e.preventDefault();openColor(inp)});
  inp.addEventListener('input',()=>{b.style.background=inp.value});inp.addEventListener('change',()=>{b.style.background=inp.value;addRecentColor(inp.value)})}
 function syncColorBtns(){$$('input[type=color]').forEach(i=>{const b=i.nextElementSibling;if(b&&b.classList.contains('cpBtn'))b.style.background=i.value||'#fff'})}
 $('#cpInput').addEventListener('input',cpPreview);
@@ -1298,7 +1301,7 @@ function drawWM(x,W,H,pv){const wm=D.wm;if(!wm.on)return;const g=wmGeom(W,H),bx=
  x.fillStyle=rgba(wm.col,wm.ca);x.fillText(g.txt,ix,g.cy+g.fs*.03);
  x.restore();
  if(pv&&D.tgt=='wm'){x.save();x.setLineDash([10,8]);x.strokeStyle='#0f4f4599';x.lineWidth=2;x.strokeRect(bx-4,by-4,g.w+8,g.h+8);x.restore()}}
-function draw(x,W,H,pv){drawBg(x,W,H);drawFg(x,W,H,pv);drawStk(x,W,H,pv);drawWM(x,W,H,pv)}
+function draw(x,W,H,pv){drawBg(x,W,H);drawStk(x,W,H,pv);drawFg(x,W,H,pv);drawWM(x,W,H,pv)}
 let raf=0,rv=0;const upd=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(async()=>{const v=++rv;await fontsFor(kept());if(v!=rv)return;const[W,H]=dims(),c=$('#pv'),sc=.6;c.width=Math.round(W*sc);c.height=Math.round(H*sc);const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,true);kick()})};
 const drag={};
 $('#pv').onpointerdown=e=>{e.target.setPointerCapture(e.pointerId);drag.on=1;drag.x=e.clientX;drag.y=e.clientY;const r=e.target.getBoundingClientRect(),[W,H]=dims(),px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*H,S=Math.min(W,H);
@@ -1326,7 +1329,7 @@ async function exportRec(){const msg=$('#exMsg'),clip=D.vclipAudio,rcSrc=D.asrc!
  const[W0,H0]=dims(),sc=Math.min(1,1920/Math.max(W0,H0)),W=Math.round(W0*sc/2)*2,H=Math.round(H0*sc/2)*2;
  const fg=document.createElement('canvas');fg.width=W;fg.height=H;const fx=fg.getContext('2d');fx.scale(W/W0,H/H0);drawFg(fx,W0,H0,false);
  const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');
- const frame=()=>{const v2=D.bg=='vid'&&D.vid;if(v2&&(v2.ended||v2.currentTime>=D.vt1-.03)){v2.currentTime=D.vt0;v2.play().catch(()=>{})};if(REV0){REV={times:REV0,t:STK_T()};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawStk(rx,W0,H0,false);drawWM(rx,W0,H0,false)};frame();
+ const frame=()=>{const v2=D.bg=='vid'&&D.vid;if(v2&&(v2.ended||v2.currentTime>=D.vt1-.03)){v2.currentTime=D.vt0;v2.play().catch(()=>{})};if(REV0){REV={times:REV0,t:STK_T()};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);drawStk(rx,W0,H0,false);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawWM(rx,W0,H0,false)};frame();
  const stream=rc.captureStream(30);let dur=D.vsec,bufs=[],lens=[];
  if(clip||rcSrc){
   const resumeError=await audioReady;if(resumeError)throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));
@@ -1391,7 +1394,7 @@ async function exportMp4(){
  try{
   for(let i=0;i<n;i++){if(err)throw err;const tm=i/fps;STK_T=()=>tm;if(vd)await seek(vd,D.vt0+(tm%span));
    if(times){REV={times,t:tm};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}
-   rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawStk(rx,W0,H0,false);drawWM(rx,W0,H0,false);
+   rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);drawStk(rx,W0,H0,false);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawWM(rx,W0,H0,false);
    const vf=new VideoFrame(rc,{timestamp:Math.round(i*1e6/fps),duration:Math.round(1e6/fps)});venc.encode(vf,{keyFrame:i%(fps*2)==0});vf.close();
    while(venc.encodeQueueSize>8){if(err)throw err;await new Promise(r=>setTimeout(r,4))}
    if(i%6==0){msg.textContent=T('جارٍ تصدير الفيديو')+' '+ar(Math.round(i/n*100))+(lang=='ar'?'٪':'%');await new Promise(r=>setTimeout(r))}}
@@ -1535,15 +1538,15 @@ $('#skDel').onclick=()=>{if(D.ss<0)return;D.stk.splice(D.ss,1);D.ss=D.stk.length
 const fr=(i,j)=>{const s=Math.sin(i*127.1+j*311.7)*43758.5453;return s-Math.floor(s)};
 const h2r=h=>{const n=parseInt(h.slice(1),16);return[n>>16,(n>>8)&255,n&255]};
 const FX={
-snow:{n:'ثلج',full:1,s:14,d(x,x0,y0,W,H,t,k){x.fillStyle='#fff';for(let i=0;i<90;i++){const r=(2+fr(i,4)*4)*k,px=fr(i,0)*W+Math.sin(t*.8+fr(i,1)*6)*20*k,py=(fr(i,2)*H+t*(40+fr(i,3)*70)*k)%H;x.globalAlpha=.55+fr(i,5)*.45;x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
-rain:{n:'مطر',full:1,s:14,d(x,x0,y0,W,H,t,k){x.strokeStyle='rgba(205,225,255,.7)';x.lineWidth=1.6*k;x.lineCap='round';x.beginPath();for(let i=0;i<140;i++){const px=fr(i,0)*W,py=(fr(i,2)*H+t*(900+fr(i,3)*500)*k)%H,l=(20+fr(i,4)*26)*k;x.moveTo(px,py);x.lineTo(px-l*.18,py+l)}x.stroke()}},
-stars:{n:'نجوم',full:1,s:14,d(x,x0,y0,W,H,t,k){x.fillStyle='#fff6cf';for(let i=0;i<46;i++){const r=(3+fr(i,2)*6)*k,px=fr(i,0)*W,py=fr(i,1)*H;x.globalAlpha=.2+.8*(.5+.5*Math.sin(t*2+fr(i,3)*6.3));x.beginPath();x.moveTo(px,py-r);x.quadraticCurveTo(px,py,px+r,py);x.quadraticCurveTo(px,py,px,py+r);x.quadraticCurveTo(px,py,px-r,py);x.quadraticCurveTo(px,py,px,py-r);x.fill()}}},
-bokeh:{n:'أضواء',full:1,s:14,d(x,x0,y0,W,H,t,k){for(let i=0;i<16;i++){const r=(35+fr(i,2)*80)*k,px=((fr(i,0)*W+t*12*k*(fr(i,1)-.3))%W+W)%W,py=fr(i,3)*H+Math.sin(t*.5+i)*20*k,a=.2+.14*Math.sin(t+i),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'rgba(255,226,150,'+a+')');g.addColorStop(1,'rgba(255,226,150,0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}},
-sparks:{n:'شرر',full:1,s:14,d(x,x0,y0,W,H,t,k){x.globalCompositeOperation='lighter';for(let i=0;i<60;i++){const life=(t*.22*(.6+fr(i,4))+fr(i,3))%1,px=fr(i,0)*W+Math.sin(t*2+i)*16*k,py=H*(1-life),r=(1.5+fr(i,2)*3.5)*k;x.fillStyle='rgba(255,'+Math.round(140+fr(i,5)*90)+',60,'+Math.sin(life*3.14)+')';x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
+snow:{n:'ثلج',full:1,s:14,col:'#ffffff',d(x,x0,y0,W,H,t,k,c){x.fillStyle=c||'#ffffff';for(let i=0;i<90;i++){const r=(2+fr(i,4)*4)*k,px=fr(i,0)*W+Math.sin(t*.8+fr(i,1)*6)*20*k,py=(fr(i,2)*H+t*(40+fr(i,3)*70)*k)%H;x.globalAlpha=.55+fr(i,5)*.45;x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
+rain:{n:'مطر',full:1,s:14,col:'#cddfff',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#cddfff');x.strokeStyle='rgba('+r0+','+g0+','+b0+',.7)';x.lineWidth=1.6*k;x.lineCap='round';x.beginPath();for(let i=0;i<140;i++){const px=fr(i,0)*W,py=(fr(i,2)*H+t*(900+fr(i,3)*500)*k)%H,l=(20+fr(i,4)*26)*k;x.moveTo(px,py);x.lineTo(px-l*.18,py+l)}x.stroke()}},
+stars:{n:'نجوم',full:1,s:14,col:'#fff6cf',d(x,x0,y0,W,H,t,k,c){x.fillStyle=c||'#fff6cf';for(let i=0;i<46;i++){const r=(3+fr(i,2)*6)*k,px=fr(i,0)*W,py=fr(i,1)*H;x.globalAlpha=.2+.8*(.5+.5*Math.sin(t*2+fr(i,3)*6.3));x.beginPath();x.moveTo(px,py-r);x.quadraticCurveTo(px,py,px+r,py);x.quadraticCurveTo(px,py,px,py+r);x.quadraticCurveTo(px,py,px-r,py);x.quadraticCurveTo(px,py,px,py-r);x.fill()}}},
+bokeh:{n:'أضواء',full:1,s:14,col:'#ffe296',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#ffe296');for(let i=0;i<16;i++){const r=(35+fr(i,2)*80)*k,px=((fr(i,0)*W+t*12*k*(fr(i,1)-.3))%W+W)%W,py=fr(i,3)*H+Math.sin(t*.5+i)*20*k,a=.2+.14*Math.sin(t+i),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'rgba('+r0+','+g0+','+b0+','+a+')');g.addColorStop(1,'rgba('+r0+','+g0+','+b0+',0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}},
+sparks:{n:'شرر',full:1,s:14,col:'#ff9a3c',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#ff9a3c');x.globalCompositeOperation='lighter';for(let i=0;i<60;i++){const life=(t*.22*(.6+fr(i,4))+fr(i,3))%1,px=fr(i,0)*W+Math.sin(t*2+i)*16*k,py=H*(1-life),r=(1.5+fr(i,2)*3.5)*k;x.fillStyle='rgba('+r0+','+g0+','+b0+','+Math.sin(life*3.14)+')';x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
 birds:{n:'طيور',s:40,ar:.6,col:'#1b1b1b',d(x,x0,y0,w,h,t,k,c){x.strokeStyle=c||'#1b1b1b';x.lineCap='round';for(let i=0;i<6;i++){const u=(t*.08+fr(i,0))%1,px=x0+u*w*1.2-w*.1,py=y0+h*(.15+fr(i,1)*.6)+Math.sin(t*2+i)*h*.04,s=(.05+fr(i,2)*.04)*w,f=Math.sin(t*9+i*2);x.lineWidth=Math.max(1.5,s*.16);x.beginPath();x.moveTo(px-s,py+f*s*.5);x.quadraticCurveTo(px-s*.5,py-s*.45*(1-f*.3),px,py);x.quadraticCurveTo(px+s*.5,py-s*.45*(1-f*.3),px+s,py+f*s*.5);x.stroke()}}},
 viz:{n:'مرئي الصوت',s:40,ar:.5,col:'#ffffff',d(x,x0,y0,w,h,t,k,c){x.fillStyle=c||'#fff';const n=26,bw=w/n*.62;for(let i=0;i<n;i++){const hh=h*(.12+.88*Math.abs(Math.sin(t*3+i*.7)*.55+Math.sin(t*5.3+i*1.9)*.45)),px=x0+(i+.5)*w/n-bw/2;x.beginPath();x.roundRect?x.roundRect(px,y0+h/2-hh/2,bw,hh,bw/2):x.rect(px,y0+h/2-hh/2,bw,hh);x.fill()}}},
 smoke:{n:'دخان',full:1,s:14,col:'#cfcfcf',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#cfcfcf');for(let i=0;i<22;i++){const life=(t*.06*(.6+fr(i,5)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(life*6+i)*50*k,py=H*(1.1-life*1.3),r=(110+fr(i,2)*170)*k*(.6+life*.7),g=x.createRadialGradient(px,py,0,px,py,r),a=.26*Math.sin(life*Math.PI);g.addColorStop(0,'rgba('+r0+','+g0+','+b0+','+a+')');g.addColorStop(1,'rgba('+r0+','+g0+','+b0+',0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}},
-fire:{n:'نار',full:1,s:14,d(x,x0,y0,W,H,t,k){x.globalCompositeOperation='lighter';for(let i=0;i<80;i++){const life=(t*.45*(.6+fr(i,6)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(t*5+i)*8*k,py=fr(i,3)*H-life*H*.3,r=(16+fr(i,2)*30)*k*(1-life*.55),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'hsla('+(54-life*46)+',100%,'+(64-life*20)+'%,'+(.8*Math.sin(life*Math.PI))+')');g.addColorStop(1,'hsla('+(28-life*24)+',100%,50%,0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}}};
+fire:{n:'نار',full:1,s:14,col:'#ff8a2b',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#ff8a2b');x.globalCompositeOperation='lighter';for(let i=0;i<80;i++){const life=(t*.45*(.6+fr(i,6)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(t*5+i)*8*k,py=fr(i,3)*H-life*H*.3,r=(16+fr(i,2)*30)*k*(1-life*.55),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'rgba('+r0+','+g0+','+b0+','+(.8*Math.sin(life*Math.PI))+')');g.addColorStop(1,'rgba('+r0+','+g0+','+b0+',0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}}};
 function drawFx(x,s,i,W,H,z,tm,pv){const f=FX[s.k];if(!f)return;x.save();if(f.full)f.d(x,0,0,W,H,tm,s.s/14,s.c);else{const h=z*(f.ar||1);x.translate(W*s.x/100,H*s.y/100);x.rotate(s.r*Math.PI/180);f.d(x,-z/2,-h/2,z,h,tm,1,s.c);if(pv&&i==D.ss&&D.tgt=='stk'){x.strokeStyle='#0f4f4599';x.setLineDash([10,8]);x.lineWidth=2;x.strokeRect(-z/2,-h/2,z,h)}}x.restore()}
 Object.keys(FX).forEach(k=>{const f=FX[k],b=document.createElement('button');b.innerHTML='<svg><use href="#i-sparkles"/></svg><span>'+f.n+'</span>';b.onclick=()=>addStk({t:'f',k,s:f.s,c:f.col});$('#fxG').appendChild(b)});
 $('#skC').addEventListener('input',e=>{const s=D.stk[D.ss];if(s){s.c=e.target.value;upd();studioPersist()}});
@@ -1643,7 +1646,8 @@ Object.assign(DICT,{
 Object.assign(DICT,{
  "مساعدة":["Help","Ayuda","مدد","सहायता","Aide","Bantuan","Yardım","সহায়তা","Помощь"],
  "إغلاق المساعدة":["Close help","Cerrar ayuda","مدد بند کریں","सहायता बंद करें","Fermer l’aide","Tutup bantuan","Yardımı kapat","সহায়তা বন্ধ করুন","Закрыть помощь"],
- "تذكير يومي بقراءة القرآن (٩ مساءً)":["Daily Quran reading reminder (9 PM)","Recordatorio diario de lectura del Corán (9 PM)","قرآن پڑھنے کی روزانہ یاد دہانی (٩ بجے شب)","क़ुरआन पढ़ने का दैनिक अनुस्मारक (रात 9 बजे)","Rappel quotidien de lecture du Coran (21 h)","Pengingat membaca Al-Qur'an harian (21.00)","Günlük Kur'an okuma hatırlatıcısı (21.00)","দৈনিক কুরআন পড়ার অনুস্মারক (রাত ৯টা)","Ежедневное напоминание о чтении Корана (21:00)"],
+ "تذكير يومي بقراءة القرآن":["Daily Quran reading reminder","Recordatorio diario de lectura del Corán","قرآن پڑھنے کی روزانہ یاد دہانی","क़ुरआन पढ़ने का दैनिक अनुस्मारक","Rappel quotidien de lecture du Coran","Pengingat membaca Al-Qur'an harian","Günlük Kur'an okuma hatırlatıcısı","দৈনিক কুরআন পড়ার অনুস্মারক","Ежедневное напоминание о чтении Корана"],
+ "وقت التذكير":["Reminder time","Hora del recordatorio","یاد دہانی کا وقت","अनुस्मारक का समय","Heure du rappel","Waktu pengingat","Hatırlatma saati","অনুস্মারকের সময়","Время напоминания"],
  "يعمل التذكير أثناء فتح التطبيق أو في الخلفية أثناء تشغيله. لا يمكن ضمان وصوله إذا أُغلق التطبيق تماماً. يحتاج إلى إذن الإشعارات.":["The reminder works while the app is open or running in the background. Delivery cannot be guaranteed if the app is fully closed. It requires notification permission.","El recordatorio funciona mientras la aplicación está abierta o en segundo plano. No se garantiza la entrega si la aplicación está totalmente cerrada. Requiere permiso de notificaciones.","یاد دہانی ایپ کھلی یا پس منظر میں چلنے کے دوران کام کرتی ہے۔ اگر ایپ مکمل بند ہو تو اطلاع کی ضمانت نہیں۔ اس کے لیے اطلاعات کی اجازت ضروری ہے۔","अनुस्मारक ऐप खुले या पृष्ठभूमि में चलने के दौरान काम करता है। ऐप पूरी तरह बंद हो तो सूचना की गारंटी नहीं। इसके लिए सूचना अनुमति आवश्यक है।","Le rappel fonctionne lorsque l’application est ouverte ou en arrière-plan. La réception n’est pas garantie si l’application est complètement fermée. Il nécessite l’autorisation de notifications.","Pengingat berfungsi saat aplikasi terbuka atau berjalan di latar belakang. Pengiriman tidak dapat dijamin jika aplikasi sepenuhnya ditutup. Ini memerlukan izin notifikasi.","Hatırlatıcı, uygulama açıkken veya arka planda çalışırken çalışır. Uygulama tamamen kapatılırsa iletim garanti edilemez. Bildirim izni gerektirir.","অনুস্মারক অ্যাপ খোলা বা ব্যাকগ্রাউন্ডে চলার সময় কাজ করে। অ্যাপ সম্পূর্ণ বন্ধ থাকলে পৌঁছানোর নিশ্চয়তা নেই। এর জন্য নোটিফিকেশনের অনুমতি প্রয়োজন।","Напоминание работает, пока приложение открыто или работает в фоне. Доставка не гарантируется, если приложение полностью закрыто. Требуется разрешение на уведомления."],
  "تم تحديث التطبيق إلى أحدث إصدار":["The app has been updated to the latest version","La aplicación se ha actualizado a la última versión","ایپ تازہ ترین ورژن پر اپ ڈیٹ ہو گئی","ऐप नवीनतम संस्करण में अपडेट हो गया","L’application a été mise à jour vers la dernière version","Aplikasi telah diperbarui ke versi terbaru","Uygulama en son sürüme güncellendi","অ্যাপটি সর্বশেষ সংস্করণে আপডেট হয়েছে","Приложение обновлено до последней версии"],
  "تذكير بقراءة القرآن":["Quran reading reminder","Recordatorio de lectura del Corán","قرآن پڑھنے کی یاد دہانی","क़ुरआन पढ़ने का अनुस्मारक","Rappel de lecture du Coran","Pengingat membaca Al-Qur'an","Kur'an okuma hatırlatıcısı","কুরআন পড়ার অনুস্মারক","Напоминание о чтении Корана"],
@@ -1651,7 +1655,7 @@ Object.assign(DICT,{
  "الإشعارات غير مدعومة في هذا المتصفح":["Notifications are not supported in this browser","Este navegador no admite notificaciones","اس براؤزر میں اطلاعات کی معاونت نہیں","इस ब्राउज़र में सूचनाएँ समर्थित नहीं हैं","Les notifications ne sont pas prises en charge dans ce navigateur","Notifikasi tidak didukung di browser ini","Bu tarayıcıda bildirimler desteklenmiyor","এই ব্রাউজারে নোটিফিকেশন সমর্থিত নয়","Уведомления не поддерживаются в этом браузере"],
  "تم إيقاف التذكير اليومي":["Daily reminder turned off","Recordatorio diario desactivado","روزانہ یاد دہانی بند کر دی گئی","दैनिक अनुस्मारक बंद कर दिया गया","Rappel quotidien désactivé","Pengingat harian dinonaktifkan","Günlük hatırlatıcı kapatıldı","দৈনিক অনুস্মারক বন্ধ করা হয়েছে","Ежедневное напоминание отключено"],
  "يرجى السماح بالإشعارات من إعدادات المتصفح لتفعيل التذكير":["Please allow notifications in your browser settings to enable the reminder","Permite las notificaciones en los ajustes del navegador para activar el recordatorio","یاد دہانی فعال کرنے کے لیے براؤزر کی ترتیبات میں اطلاعات کی اجازت دیں","अनुस्मारक चालू करने के लिए ब्राउज़र सेटिंग्स में सूचनाओं की अनुमति दें","Autorisez les notifications dans les réglages du navigateur pour activer le rappel","Izinkan notifikasi di pengaturan browser untuk mengaktifkan pengingat","Hatırlatıcıyı açmak için tarayıcı ayarlarında bildirimlere izin verin","অনুস্মারক চালু করতে ব্রাউজার সেটিংসে নোটিফিকেশনের অনুমতি দিন","Разрешите уведомления в настройках браузера, чтобы включить напоминание"],
- "تم تفعيل التذكير اليومي عند ٩ مساءً":["Daily reminder enabled at 9 PM","Recordatorio diario activado a las 9 PM","روزانہ یاد دہانی رات ٩ بجے فعال ہو گئی","दैनिक अनुस्मारक रात 9 बजे चालू किया गया","Rappel quotidien activé à 21 h","Pengingat harian diaktifkan pukul 21.00","Günlük hatırlatıcı 21.00'de açıldı","দৈনিক অনুস্মারক রাত ৯টায় চালু করা হয়েছে","Ежедневное напоминание включено на 21:00"],
+ "تم تفعيل التذكير اليومي":["Daily reminder enabled","Recordatorio diario activado","روزانہ یاد دہانی فعال ہو گئی","दैनिक अनुस्मारक चालू किया गया","Rappel quotidien activé","Pengingat harian diaktifkan","Günlük hatırlatıcı açıldı","দৈনিক অনুস্মারক চালু করা হয়েছে","Ежедневное напоминание включено"],
  "طريقة التشغيل والتكرار":["Playback and repeat mode","Modo de reproducción y repetición","چلانے اور تکرار کا طریقہ","प्लेबैक और पुनरावृत्ति","Mode de lecture et de répétition","Mode pemutaran dan pengulangan","Oynatma ve tekrar modu","প্লেব্যাক ও পুনরাবৃত্তি","Режим воспроизведения и повтора"],
  "مرة":["Once","Una vez","ایک بار","एक बार","Une fois","Sekali","Bir kez","একবার","Один раз"],
  "لنهاية السورة":["To end of surah","Hasta el final de la sura","سورت کے آخر تک","सूरह के अंत तक","Jusqu’à la fin de la sourate","Sampai akhir surah","Sure sonuna kadar","সূরার শেষ পর্যন্ত","До конца суры"],
@@ -1719,7 +1723,7 @@ Object.assign(DICT,{
  "منتقي الألوان":["Color picker","Selector de color","رنگ منتخب کرنے والا","रंग चयनकर्ता","Sélecteur de couleur","Pemilih warna","Renk seçici","রং নির্বাচক","Выбор цвета"],
  "عند اختيار أي لون تظهر آخر ١٠ ألوان استخدمتها وألوان جاهزة، مع معاينة قبل التطبيق.":["When choosing any color, your last 10 used colors and preset colors appear, with a preview before applying.","Al elegir cualquier color aparecen tus últimos 10 colores usados y colores predefinidos, con una vista previa antes de aplicar.","کوئی بھی رنگ منتخب کرتے وقت آپ کے آخری ١٠ استعمال شدہ رنگ اور تیار رنگ دکھائی دیتے ہیں، لاگو کرنے سے پہلے معاہدہ کے ساتھ۔","कोई भी रंग चुनते समय आपके अंतिम 10 प्रयुक्त रंग और तैयार रंग दिखते हैं, लागू करने से पहले पूर्वावलोकन के साथ।","Lorsque vous choisissez une couleur, vos 10 dernières couleurs utilisées et des couleurs prédéfinies apparaissent, avec un aperçu avant application.","Saat memilih warna, 10 warna terakhir yang digunakan dan warna bawaan muncul, lengkap dengan pratinjau sebelum diterapkan.","Bir renk seçerken son kullandığınız 10 renk ve hazır renkler, uygulamadan önce önizlemeyle birlikte görünür.","যেকোনো রং বাছাই করলে আপনার সর্বশেষ ব্যবহৃত ১০টি রং ও প্রিসেট রং দেখা যায়, প্রয়োগের আগে প্রিভিউসহ।","При выборе цвета отображаются последние 10 использованных и готовые цвета с предпросмотром перед применением."],
  "التذكير اليومي":["Daily reminder","Recordatorio diario","روزانہ یاد دہانی","दैनिक अनुस्मारक","Rappel quotidien","Pengingat harian","Günlük hatırlatıcı","দৈনিক অনুস্মারক","Ежедневное напоминание"],
- "فعّل «تذكير يومي بقراءة القرآن» في الإعدادات واسمح بالإشعارات. يرسل التطبيق تذكيراً عند الساعة ٩ مساءً بالتوقيت المحلي ما دام مفتوحاً أو يعمل في الخلفية. لا يمكن ضمان الإشعار إذا أُغلق التطبيق تماماً أو أوقفه النظام.":["Enable “Daily Quran reading reminder” in Settings and allow notifications. The app sends a reminder at 9 PM local time while it is open or running in the background. Delivery cannot be guaranteed if the app is fully closed or stopped by the system.","Activa «Recordatorio diario de lectura del Corán» en Ajustes y permite las notificaciones. La aplicación envía un recordatorio a las 9 PM hora local mientras esté abierta o en segundo plano. No se garantiza la entrega si la aplicación está totalmente cerrada o el sistema la detiene.","ترتیبات میں «قرآن پڑھنے کی روزانہ یاد دہانی» فعال کریں اور اطلاعات کی اجازت دیں۔ ایپ مقامی وقت کے مطابق رات ٩ بجے یاد دہانی بھیجتی ہے جب تک وہ کھلی یا پس منظر میں چل رہی ہو۔ اگر ایپ مکمل بند ہو یا سسٹم اسے روک دے تو اطلاع کی ضمانت نہیں دی جا سکتی۔","सेटिंग्स में «क़ुरआन पढ़ने का दैनिक अनुस्मारक» चालू करें और सूचनाओं की अनुमति दें। ऐप स्थानीय समय पर रात 9 बजे अनुस्मारक भेजता है जब तक वह खुला या पृष्ठभूमि में चल रहा हो। यदि ऐप पूरी तरह बंद हो या सिस्टम उसे रोक दे तो सूचना की गारंटी नहीं है।","Activez « Rappel quotidien de lecture du Coran » dans les réglages et autorisez les notifications. L’application envoie un rappel à 21 h heure locale tant qu’elle est ouverte ou en arrière-plan. La réception n’est pas garantie si l’application est complètement fermée ou arrêtée par le système.","Aktifkan «Pengingat membaca Al-Qur'an harian» di Pengaturan dan izinkan notifikasi. Aplikasi mengirim pengingat pukul 21.00 waktu setempat selama terbuka atau berjalan di latar belakang. Pengiriman tidak dapat dijamin jika aplikasi sepenuhnya ditutup atau dihentikan sistem.","Ayarlar’da «Günlük Kur'an okuma hatırlatıcısı»nı açın ve bildirimlere izin verin. Uygulama açıkken veya arka planda çalışırken yerel saatle 21.00’de hatırlatma gönderir. Uygulama tamamen kapatılırsa veya sistem tarafından durdurulursa iletim garanti edilemez.","সেটিংসে «দৈনিক কুরআন পড়ার অনুস্মারক» চালু করুন এবং নোটিফিকেশনের অনুমতি দিন। অ্যাপ খোলা বা ব্যাকগ্রাউন্ডে চলার সময় স্থানীয় সময় রাত ৯টায় অনুস্মারক পাঠায়। অ্যাপ সম্পূর্ণ বন্ধ হলে বা সিস্টেম থামিয়ে দিলে পৌঁছানোর নিশ্চয়তা নেই।","Включите «Ежедневное напоминание о чтении Корана» в настройках и разрешите уведомления. Приложение отправляет напоминание в 21:00 по местному времени, пока оно открыто или работает в фоне. Доставка не гарантируется, если приложение полностью закрыто или остановлено системой."],
+ "فعّل «تذكير يومي بقراءة القرآن» في الإعدادات واسمح بالإشعارات. يرسل التطبيق تذكيراً في الوقت الذي تختاره بالتوقيت المحلي ما دام مفتوحاً أو يعمل في الخلفية. لا يمكن ضمان الإشعار إذا أُغلق التطبيق تماماً أو أوقفه النظام.":["Enable “Daily Quran reading reminder” in Settings and allow notifications. The app sends a reminder at the time you choose local time while it is open or running in the background. Delivery cannot be guaranteed if the app is fully closed or stopped by the system.","Activa «Recordatorio diario de lectura del Corán» en Ajustes y permite las notificaciones. La aplicación envía un recordatorio a la hora que elijas, hora local mientras esté abierta o en segundo plano. No se garantiza la entrega si la aplicación está totalmente cerrada o el sistema la detiene.","ترتیبات میں «قرآن پڑھنے کی روزانہ یاد دہانی» فعال کریں اور اطلاعات کی اجازت دیں۔ ایپ مقامی وقت کے مطابق آپ کے منتخب کردہ وقت پر یاد دہانی بھیجتی ہے جب تک وہ کھلی یا پس منظر میں چل رہی ہو۔ اگر ایپ مکمل بند ہو یا سسٹم اسے روک دے تو اطلاع کی ضمانت نہیں دی جا سکتی۔","सेटिंग्स में «क़ुरआन पढ़ने का दैनिक अनुस्मारक» चालू करें और सूचनाओं की अनुमति दें। ऐप स्थानीय समय पर आपके चुने समय पर अनुस्मारक भेजता है जब तक वह खुला या पृष्ठभूमि में चल रहा हो। यदि ऐप पूरी तरह बंद हो या सिस्टम उसे रोक दे तो सूचना की गारंटी नहीं है।","Activez « Rappel quotidien de lecture du Coran » dans les réglages et autorisez les notifications. L’application envoie un rappel à l’heure que vous choisissez, heure locale tant qu’elle est ouverte ou en arrière-plan. La réception n’est pas garantie si l’application est complètement fermée ou arrêtée par le système.","Aktifkan «Pengingat membaca Al-Qur'an harian» di Pengaturan dan izinkan notifikasi. Aplikasi mengirim pengingat pada waktu yang Anda pilih, waktu setempat selama terbuka atau berjalan di latar belakang. Pengiriman tidak dapat dijamin jika aplikasi sepenuhnya ditutup atau dihentikan sistem.","Ayarlar’da «Günlük Kur'an okuma hatırlatıcısı»nı açın ve bildirimlere izin verin. Uygulama açıkken veya arka planda çalışırken yerel saatle seçtiğiniz saatte hatırlatma gönderir. Uygulama tamamen kapatılırsa veya sistem tarafından durdurulursa iletim garanti edilemez.","সেটিংসে «দৈনিক কুরআন পড়ার অনুস্মারক» চালু করুন এবং নোটিফিকেশনের অনুমতি দিন। অ্যাপ খোলা বা ব্যাকগ্রাউন্ডে চলার সময় স্থানীয় সময় আপনার নির্বাচিত সময়ে অনুস্মারক পাঠায়। অ্যাপ সম্পূর্ণ বন্ধ হলে বা সিস্টেম থামিয়ে দিলে পৌঁছানোর নিশ্চয়তা নেই।","Включите «Ежедневное напоминание о чтении Корана» в настройках и разрешите уведомления. Приложение отправляет напоминание в выбранное вами время по местному времени, пока оно открыто или работает в фоне. Доставка не гарантируется, если приложение полностью закрыто или остановлено системой."],
  "الأوفلاين والتحديث":["Offline and updates","Sin conexión y actualizaciones","آف لائن اور اپ ڈیٹ","ऑफ़लाइन और अपडेट","Hors ligne et mises à jour","Offline dan pembaruan","Çevrimdışı ve güncellemeler","অফলাইন ও আপডেট","Офлайн и обновления"],
  "الأوفلاين":["Offline","Sin conexión","آف لائن","ऑफ़लाइन","Hors ligne","Offline","Çevrimdışı","অফলাইন","Офлайн"],
  "يعمل التطبيق دون إنترنت بعد أول فتح واكتمال التخزين المؤقت. تحتاج تلاوة الآيات والصور والفيديوهات الخارجية إلى إنترنت.":["The app works offline after the first open and the cache finishes downloading. Verse recitation and external images and videos require internet.","La aplicación funciona sin conexión tras la primera apertura y cuando termina de descargarse la caché. La recitación de aleyas y las imágenes y vídeos externos requieren internet.","پہلی بار کھولنے اور کیشے مکمل ہونے کے بعد ایپ آف لائن کام کرتی ہے۔ آیات کی تلاوت اور بیرونی تصاویر و ویڈیوز کے لیے انٹرنیٹ ضروری ہے۔","पहली बार खोलने और कैश पूरा डाउनलोड होने के बाद ऐप ऑफ़लाइन काम करता है। आयतों की तिलावत तथा बाहरी चित्र और वीडियो के लिए इंटरनेट आवश्यक है।","L’application fonctionne hors ligne après la première ouverture et une fois le cache téléchargé. La récitation des versets ainsi que les images et vidéos externes nécessitent Internet.","Aplikasi berfungsi offline setelah pembukaan pertama dan cache selesai diunduh. Tilawah ayat serta gambar dan video eksternal memerlukan internet.","Uygulama ilk açılıştan ve önbellek indirildikten sonra çevrimdışı çalışır. Ayet tilaveti ile harici görseller ve videolar internet gerektirir.","প্রথমবার খোলার পর ও ক্যাশ সম্পূর্ণ ডাউনলোড হলে অ্যাপ অফলাইনে কাজ করে। আয়াতের তিলাওয়াত এবং বাইরের ছবি ও ভিডিওর জন্য ইন্টারনেট প্রয়োজন।","Приложение работает офлайн после первого открытия и завершения загрузки кэша. Для чтения аятов, а также внешних изображений и видео требуется интернет."],
@@ -1755,7 +1759,7 @@ const HELP=[
   {t:'السجل',b:'يجمع تبويب «السجل» كل تصميم صدّرته، ويتيح معاينته ومشاركته وحذفه أو تعيينه خلفية. يمكن ربط مجلد على الجهاز لحفظ الصادرات تلقائياً.'},
   {t:'منتقي الألوان',b:'عند اختيار أي لون تظهر آخر ١٠ ألوان استخدمتها وألوان جاهزة، مع معاينة قبل التطبيق.'}
  ]},
- {t:'التذكير اليومي',b:'فعّل «تذكير يومي بقراءة القرآن» في الإعدادات واسمح بالإشعارات. يرسل التطبيق تذكيراً عند الساعة ٩ مساءً بالتوقيت المحلي ما دام مفتوحاً أو يعمل في الخلفية. لا يمكن ضمان الإشعار إذا أُغلق التطبيق تماماً أو أوقفه النظام.'},
+ {t:'التذكير اليومي',b:'فعّل «تذكير يومي بقراءة القرآن» في الإعدادات واسمح بالإشعارات. يرسل التطبيق تذكيراً في الوقت الذي تختاره بالتوقيت المحلي ما دام مفتوحاً أو يعمل في الخلفية. لا يمكن ضمان الإشعار إذا أُغلق التطبيق تماماً أو أوقفه النظام.'},
  {t:'الأوفلاين والتحديث',c:[
   {t:'الأوفلاين',b:'يعمل التطبيق دون إنترنت بعد أول فتح واكتمال التخزين المؤقت. تحتاج تلاوة الآيات والصور والفيديوهات الخارجية إلى إنترنت.'},
   {t:'التحديث',b:'يتحقق التطبيق من التحديثات عند فتحه، ويمكنك التحقق يدوياً من الإعدادات. عند نجاح التحديث تظهر رسالة «تم تحديث التطبيق إلى أحدث إصدار».'}
@@ -1784,18 +1788,22 @@ function remNotify(){if(!('Notification'in window)||Notification.permission!='gr
  const title=T('تذكير بقراءة القرآن'),opts={body:T('حان وقت وردك اليومي من القرآن الكريم.'),icon:'icon-192.png',badge:'icon-192.png',tag:'quran-daily-reminder',renotify:false,data:{url:location.href}};
  try{if(navigator.serviceWorker&&navigator.serviceWorker.ready)navigator.serviceWorker.ready.then(r=>r.showNotification(title,opts)).catch(()=>{try{new Notification(title,opts)}catch(e){}});else new Notification(title,opts)}catch(e){}
  remMark()}
+const remTimeVal=()=>String(st.remH??21).padStart(2,'0')+':'+String(st.remM??0).padStart(2,'0');
+const remTarget=()=>{const d=new Date();d.setHours(st.remH??21,st.remM??0,0,0);return d};
 function remSchedule(){clearTimeout(remTimer);remTimer=0;if(!st.rem||!('Notification'in window)||Notification.permission!='granted')return;
- const now=new Date(),target=new Date(now);target.setHours(21,0,0,0);
+ const now=new Date(),target=remTarget();
  if(target<=now){if(!remDone())remNotify();target.setDate(target.getDate()+1)}
  const ms=Math.min(target-now,2147483647);remTimer=setTimeout(()=>{remNotify();remSchedule()},Math.max(1000,ms))}
-function remCheck(){if(!st.rem||!('Notification'in window)||Notification.permission!='granted'||remDone())return;if(new Date().getHours()>=21)remNotify()}
+function remCheck(){if(!st.rem||!('Notification'in window)||Notification.permission!='granted'||remDone())return;if(new Date()>=remTarget())remNotify()}
 async function remToggle(on){if(!('Notification'in window)){toast(T('الإشعارات غير مدعومة في هذا المتصفح'));$('#remOn').checked=false;st.rem=0;save();return}
  if(!on){st.rem=0;save();clearTimeout(remTimer);remTimer=0;toast(T('تم إيقاف التذكير اليومي'));return}
  try{if(Notification.permission=='default')await Notification.requestPermission()}catch(e){}
  if(Notification.permission!='granted'){st.rem=0;save();$('#remOn').checked=false;toast(T('يرجى السماح بالإشعارات من إعدادات المتصفح لتفعيل التذكير'));return}
- st.rem=1;save();remSchedule();toast(T('تم تفعيل التذكير اليومي عند ٩ مساءً'))}
+ st.rem=1;save();remSchedule();toast(T('تم تفعيل التذكير اليومي')+' '+remTimeVal())}
 $('#remOn').checked=!!st.rem;
+$('#remTime').value=remTimeVal();
 $('#remOn').onchange=e=>remToggle(e.target.checked);
+$('#remTime').onchange=e=>{const[h,m]=(e.target.value||'21:00').split(':').map(Number);if(Number.isFinite(h)&&Number.isFinite(m)){st.remH=h;st.remM=m;save();remSchedule();if(st.rem)toast(T('تم تفعيل التذكير اليومي')+' '+remTimeVal())}};
 if(st.rem&&('Notification'in window)&&Notification.permission=='granted'){remCheck();remSchedule()}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){remCheck();remSchedule()}});
 /* زر الرجوع يغلق النوافذ */
