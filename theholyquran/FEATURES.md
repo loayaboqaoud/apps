@@ -416,7 +416,7 @@ designed images and videos. Single-page app, no framework, no build step.
   - Precache core assets + all fonts (best-effort `allSettled`); includes `backgrounds/list.js` and
     `icon-b64.js` (embedded watermark icon)
   - `backgrounds/manifest.json` is bypassed (network) so new ready-made backgrounds appear; background images are cached normally
-  - Versioned app cache (currently `mushaf-20261109-1.2.3`); old caches purged on activate; `skipWaiting`/`clients.claim`
+  - Versioned app cache (currently `mushaf-20261109-1.2.4`); old caches purged on activate; `skipWaiting`/`clients.claim`
   - `notificationclick` focuses an existing window or opens the app for daily reminders
 - Service worker registered only over http(s); an automatic update check runs shortly after registration
 - App designed to work fully offline once cached
@@ -426,7 +426,7 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 15. About Sheet (`#sAbout`)
 
-- Developer: Loay Abu Qaoud; date 2026-11-06; version 1.2.3
+- Developer: Loay Abu Qaoud; date 2026-11-06; version 1.2.4
 - Credits: King Fahd Complex (QCF4), Quranpedia, everyayah.com, Wikimedia Commons, Lucide, Tajawal, mp4-muxer
 
 ---
