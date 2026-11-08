@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0f4f45">
 <meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="app-version" content="1.2.2">
+<meta name="app-version" content="1.2.3">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -183,7 +183,7 @@ svg.i,.ib svg{width:1.25em;height:1.25em;stroke:currentColor;fill:none;stroke-wi
 #bar .ib svg{width:1.45em;height:1.45em;stroke-width:2.25}
 #bar .ib span{font-size:11.5px;font-weight:700;letter-spacing:0}
 #bar button{padding:4px 3px;min-width:48px}
-@media(max-width:900px){#bar{display:grid;grid-template-columns:repeat(5,1fr);height:auto;min-height:0;gap:2px;padding:4px;overflow:visible;align-content:stretch;position:static}#bar .ib{min-width:0;min-height:54px;padding:4px 2px;font-size:12px}#bar .ib span{display:block;white-space:nowrap;font-size:11px;font-weight:700}#bar #bSet{position:static;transform:none;margin:0;grid-column:5}}
+@media(max-width:900px){#bar{display:grid;grid-template-columns:repeat(5,1fr);height:auto;min-height:0;gap:2px;padding:4px;overflow:visible;align-content:stretch;position:static}#bar .ib{min-width:0;min-height:54px;padding:4px 2px;font-size:12px}#bar .ib span{display:block;white-space:nowrap;font-size:11px;font-weight:700}#bar #bSet{position:static;transform:none;margin:0;grid-column:5;grid-row:2}}
 @media(min-width:901px){#bar{display:flex;justify-content:center;overflow:visible;position:relative}#bar #bSet{position:absolute;left:4px;top:50%;transform:translateY(-50%);margin:0}#bar .ib{min-width:52px;padding-inline:6px}}
 .rg{display:flex;align-items:center;gap:6px;direction:ltr;flex:1 1 100%}
 .rg input{flex:1;min-width:0}
@@ -285,7 +285,6 @@ html.glass .seg button,html.glass .btn.alt,html.glass .rg .st,html.glass input[t
 .stk .pl{margin-bottom:8px}.stk .tabs{margin-bottom:0}
 .card.np{padding-top:0}
 html.glass .stk{-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
-#bar{justify-content:center;position:relative}#bar #bSet{position:absolute;left:4px;top:50%;transform:translateY(-50%);margin:0}
 #settingsCloseButton,#indexCloseButton,#searchCloseButton,#wordMeaningCloseButton,#verseMeaningsCloseButton,#aboutCloseButton{background:var(--soft)!important;color:var(--txt)!important}
 #print{display:none}
 @media print{#dim,#as{display:none!important}#print .page{--paper:#fff;--pink:#000}#print .lines{filter:none}@page{size:A4 portrait;margin:8mm}
@@ -358,7 +357,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout" data-analytics-name="About app"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="aboutCloseButton" aria-label="إغلاق حول التطبيق" data-aria-source="إغلاق حول التطبيق" data-analytics-name="Close about app">✕</button></div>
 <p><b>تطوير:</b> لؤي أبوقاعود | Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-11-06</span></p>
-<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.2</span></p>
+<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.3</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -396,7 +395,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="two" style="margin-top:6px"><label>وقت التذكير <input type="time" id="remTime" value="21:00"></label></div>
 <p class="note">يعمل التذكير أثناء فتح التطبيق أو في الخلفية أثناء تشغيله. لا يمكن ضمان وصوله إذا أُغلق التطبيق تماماً. يحتاج إلى إذن الإشعارات.</p>
 <h4>الخصوصية والتحليلات</h4><div class="act" style="margin-top:0"><button id="analyticsManage" class="alt">إدارة موافقة التحليلات</button></div><p class="note" id="analyticsStatus"></p>
-<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.2</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
+<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.3</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
 <p class="note" id="updateStatus" aria-live="polite"></p>
 <div class="act"><a id="reportProblem" class="btn alt" href="mailto:loqasoftware@gmail.com">الإبلاغ عن مشكلة</a></div>
 <div class="act" style="margin-top:14px"><button id="bHelp" class="alt" data-analytics-name="Help">مساعدة</button></div>
