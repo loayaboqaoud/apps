@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0f4f45">
 <meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="app-version" content="1.2.4">
+<meta name="app-version" content="1.2.5">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -357,7 +357,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout" data-analytics-name="About app"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="aboutCloseButton" aria-label="إغلاق حول التطبيق" data-aria-source="إغلاق حول التطبيق" data-analytics-name="Close about app">✕</button></div>
 <p><b>تطوير:</b> لؤي أبوقاعود | Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-11-06</span></p>
-<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.4</span></p>
+<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.5</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -395,7 +395,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="two" style="margin-top:6px"><label>وقت التذكير <input type="time" id="remTime" value="21:00"></label></div>
 <p class="note">يعمل التذكير أثناء فتح التطبيق أو في الخلفية أثناء تشغيله. لا يمكن ضمان وصوله إذا أُغلق التطبيق تماماً. يحتاج إلى إذن الإشعارات.</p>
 <h4>الخصوصية والتحليلات</h4><div class="act" style="margin-top:0"><button id="analyticsManage" class="alt">إدارة موافقة التحليلات</button></div><p class="note" id="analyticsStatus"></p>
-<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.4</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
+<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.5</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
 <p class="note" id="updateStatus" aria-live="polite"></p>
 <div class="act"><a id="reportProblem" class="btn alt" href="mailto:loqasoftware@gmail.com">الإبلاغ عن مشكلة</a></div>
 <div class="act" style="margin-top:14px"><button id="bHelp" class="alt" data-analytics-name="Help">مساعدة</button></div>
@@ -1536,6 +1536,236 @@ $('#skDel').onclick=()=>{if(D.ss<0)return;D.stk.splice(D.ss,1);D.ss=D.stk.length
 /* مؤثرات متحركة */
 const fr=(i,j)=>{const s=Math.sin(i*127.1+j*311.7)*43758.5453;return s-Math.floor(s)};
 const h2r=h=>{const n=parseInt(h.slice(1),16);return[n>>16,(n>>8)&255,n&255]};
+const fxh=(x,y,s)=>{let n=Math.imul(x,374761393)+Math.imul(y,668265263)+Math.imul(s,1442695041)|0;n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967296};
+const fxs=t=>t*t*(3-2*t);
+const fxn=(x,y,s)=>{const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=fxs(xf),v=fxs(yf),a=fxh(xi,yi,s),b=fxh(xi+1,yi,s),c=fxh(xi,yi+1,s),d=fxh(xi+1,yi+1,s);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v};
+const fxf=(x,y,s,o=3)=>{let v=0,a=.5,f=1,n=0;for(let i=0;i<o;i++){v+=a*fxn(x*f,y*f,s+i*17);n+=a;f*=2;a*=.5}return v/n};
+const fxe=[[],[[2,3]],[[1,2]],[[1,3]],[[0,1]],[[0,3],[1,2]],[[0,2]],[[0,3]],[[0,3]],[[0,2]],[[0,1],[2,3]],[[0,1]],[[1,3]],[[1,2]],[[2,3]],[]];
+/* معدن منصهر — WebGL2 shader (ReactBits Molten Metal) */
+const MOLTEN_VERT=`#version 300 es
+in vec2 aPosition;
+void main(){
+  gl_Position=vec4(aPosition,0.0,1.0);
+}`;
+const MOLTEN_FRAG=`#version 300 es
+precision highp float;
+uniform vec2 uResolution;
+uniform float uTime;
+uniform float uClock;
+uniform float uScale;
+uniform float uDetail;
+uniform float uGlow;
+uniform float uThickness;
+uniform float uSwirl;
+uniform float uFold;
+uniform float uBlackPoint;
+uniform float uBrightness;
+uniform float uBalance;
+uniform float uGrain;
+uniform float uOpacity;
+uniform vec2 uOffset;
+uniform vec2 uRotation;
+uniform vec2 uDrift;
+uniform vec3 uColors[6];
+uniform int uColorCount;
+uniform vec3 uBackground;
+uniform float uOpaque;
+uniform float uLight;
+uniform vec3 uReveal;
+uniform vec4 uTrail[16];
+uniform float uTrailWeight[16];
+uniform int uTrailCount;
+uniform vec4 uFlares[8];
+uniform int uFlareCount;
+uniform vec4 uHeat;
+out vec4 outColor;
+
+float hash(vec2 p) {
+  p = fract(p * vec2(123.34, 456.21));
+  p += dot(p, p + 45.32);
+  return fract(p.x * p.y);
+}
+
+vec3 palette(float g) {
+  if (uColorCount <= 1) return uColors[0];
+  float t = g < uBalance ? 0.5 * g / uBalance : 0.5 + 0.5 * (g - uBalance) / (1.0 - uBalance);
+  float scaled = t * float(uColorCount - 1);
+  int index = int(min(floor(scaled), float(uColorCount - 2)));
+  return mix(uColors[index], uColors[index + 1], smoothstep(0.0, 1.0, scaled - float(index)));
+}
+
+float warmth(float age, float weight, vec2 offset) {
+  float life = clamp(age / 0.90, 0.0, 1.0);
+  vec2 spread = offset / (uHeat.z * (1.0 + 0.8 * life));
+  return weight * (1.0 - life) * (1.0 - life) * exp(-dot(spread, spread));
+}
+
+float trailHeat(vec2 q) {
+  float heat = 0.0;
+  for (int k = 0; k < 16; k++) {
+    if (k >= uTrailCount) break;
+    vec4 a = uTrail[k];
+    float weight = uTrailWeight[k];
+    heat = max(heat, warmth(a.z, weight, q - a.xy));
+    int next = min(k + 1, 15);
+    if (next == k || next >= uTrailCount) continue;
+    vec4 b = uTrail[next];
+    float older = uTrailWeight[next];
+    vec2 ab = b.xy - a.xy;
+    float span = dot(ab, ab);
+    float t = span > 1e-10 ? clamp(dot(q - a.xy, ab) / span, 0.0, 1.0) : 0.0;
+    float even = smoothstep(0.0, uHeat.z, sqrt(span));
+    float age = mix(min(a.w, b.z), mix(a.w, b.z, t), even);
+    float strength = mix(max(weight, older), mix(weight, older, t), even);
+    heat = max(heat, warmth(age, strength, q - a.xy - ab * t));
+  }
+  return heat;
+}
+
+float flareHeat(vec2 q) {
+  float heat = 0.0;
+  for (int k = 0; k < 8; k++) {
+    if (k >= uFlareCount) break;
+    vec4 f = uFlares[k];
+    float life = clamp(f.z / 1.80, 0.0, 1.0);
+    float rise = 1.0 - exp(-f.z / 0.07);
+    float fall = exp(-3.0 * life) * (1.0 - life) * (1.0 - life);
+    vec2 offset = (q - f.xy) / (uHeat.z * (0.9 + 1.6 * sqrt(life)));
+    heat += rise * fall * exp(-dot(offset, offset));
+  }
+  return heat;
+}
+
+void main() {
+  float time = uTime;
+  vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution) / uResolution.y;
+  vec2 q = uv - uOffset;
+  vec2 view = vec2(q.x * uRotation.x - q.y * uRotation.y, q.x * uRotation.y + q.y * uRotation.x);
+  vec2 p = uScale * view - 0.5;
+  p += uDrift;
+
+  float heat = 0.0;
+  float flare = 0.0;
+  if (uHeat.w > 0.5) {
+    heat = trailHeat(uv) * uHeat.x;
+    flare = flareHeat(uv) * uHeat.y;
+  }
+  float power = uThickness * (1.0 + (heat + flare) * 0.45);
+
+  vec2 i = p;
+  float c = 0.0;
+  float blurred = 0.0;
+  float r = length(p + vec2(sin(time), sin(time * 0.3 + 5.0)) * 0.5);
+  float d = length(p);
+  float rot = d + time + p.x * uSwirl;
+  float cosRot = cos(rot);
+  mat2 warp = mat2(cos(rot - sin(time / 5.0)), sin(rot), -sin(cosRot - time), cosRot) * uFold;
+  float layers = ceil(uDetail);
+
+  for (float n = 0.0; n < 8.0; n++) {
+    if (n >= layers) break;
+    p *= warp;
+    float t = r - time / (n + 3.0);
+    i -= p + vec2(cos(t - i.x - r) + sin(t + i.y), sin(t - i.y) + cos(t + i.x) + r);
+    float l = length(vec2(sin(i.x + t), cos(i.y + t)));
+    float footprint = 0.5 * length(vec2(dFdx(l), dFdy(l)));
+    l = sqrt(l * l + footprint * footprint);
+    float weight = clamp(uDetail - n, 0.0, 1.0);
+    c += weight * uGlow / (power == 1.0 ? l : pow(max(l, 1e-6), power));
+    if (uReveal.y > 0.5) blurred += weight * uGlow / sqrt(l * l + 0.0025);
+  }
+
+  c /= 6.0;
+  c *= 1.0 + heat * 0.25 + flare * 0.6;
+
+  float reveal = 1.0;
+  float front = 0.0;
+  if (uReveal.y > 0.5) {
+    float level = log(max(blurred / 6.0, 1e-5)) - uReveal.x;
+    reveal = smoothstep(-1.0, 1.0, level) * smoothstep(0.0, 0.08, uReveal.z);
+    front = 0.2 * exp(-level * level * 1.5) * smoothstep(-2.6, -0.6, uReveal.x);
+  }
+
+  float g = clamp(max(c - uBlackPoint, 0.0) * uBrightness + front, 0.0, 1.0);
+  vec3 col = palette(g);
+  float noise = hash(gl_FragCoord.xy + fract(uClock) * 97.0) - 0.5;
+  float a;
+  if (uLight < 0.5) {
+    a = g + noise * uGrain;
+  } else {
+    float lift = max(g - 0.03, 0.0) / 0.97;
+    a = (1.0 - exp(-6.0 * lift)) / (1.0 - exp(-6.0)) + noise * uGrain * g;
+  }
+  a = clamp(a + noise / 255.0, 0.0, 1.0) * reveal * uOpacity;
+
+  if (uOpaque > 0.5) {
+    outColor = vec4(mix(uBackground, col, a), 1.0);
+  } else {
+    outColor = vec4(col * a, a);
+  }
+}`;
+let moltenGL=null,moltenCv=null,moltenProg=null,moltenU={},moltenVAO=null,moltenBuf=null,moltenOK=false,moltenBad=false;
+const moltenColors=new Float32Array(18),moltenTrail=new Float32Array(64),moltenWeights=new Float32Array(16),moltenFlares=new Float32Array(32);
+function moltenCompile(gl,type,src){const s=gl.createShader(type);if(!s)return null;gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){gl.deleteShader(s);return null}return s}
+function moltenInit(){
+  if(moltenOK)return true;if(moltenBad)return false;
+  try{
+    moltenCv=document.createElement('canvas');
+    moltenGL=moltenCv.getContext('webgl2',{alpha:true,antialias:false,depth:false,stencil:false,premultipliedAlpha:true,powerPreference:'high-performance'});
+    if(!moltenGL)throw 0;
+    const gl=moltenGL,v=moltenCompile(gl,gl.VERTEX_SHADER,MOLTEN_VERT),f=moltenCompile(gl,gl.FRAGMENT_SHADER,MOLTEN_FRAG),p=gl.createProgram();
+    if(!v||!f||!p)throw 0;
+    gl.attachShader(p,v);gl.attachShader(p,f);gl.bindAttribLocation(p,0,'aPosition');gl.linkProgram(p);gl.deleteShader(v);gl.deleteShader(f);
+    if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw 0;
+    moltenProg=p;
+    ['uResolution','uTime','uClock','uScale','uDetail','uGlow','uThickness','uSwirl','uFold','uBlackPoint','uBrightness','uBalance','uGrain','uOpacity','uOffset','uRotation','uDrift','uColors','uColorCount','uBackground','uOpaque','uLight','uReveal','uTrail','uTrailWeight','uTrailCount','uFlares','uFlareCount','uHeat'].forEach(n=>moltenU[n]=gl.getUniformLocation(p,n));
+    moltenVAO=gl.createVertexArray();gl.bindVertexArray(moltenVAO);
+    moltenBuf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,moltenBuf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
+    gl.useProgram(p);
+    gl.uniform4fv(moltenU.uTrail,moltenTrail);gl.uniform1fv(moltenU.uTrailWeight,moltenWeights);gl.uniform1i(moltenU.uTrailCount,0);gl.uniform4fv(moltenU.uFlares,moltenFlares);gl.uniform1i(moltenU.uFlareCount,0);
+    moltenOK=true;return true;
+  }catch(e){moltenBad=true;return false}
+}
+function moltenRender(x,W,H,t,k,c){
+  if(!moltenInit())return null;
+  const gl=moltenGL,cv=moltenCv,tf=x.getTransform();
+  const pw=Math.max(1,Math.round(W*Math.abs(tf.a||1))),ph=Math.max(1,Math.round(H*Math.abs(tf.d||1)));
+  if(cv.width!==pw||cv.height!==ph){cv.width=pw;cv.height=ph}
+  gl.viewport(0,0,pw,ph);gl.useProgram(moltenProg);
+  gl.uniform2f(moltenU.uResolution,pw,ph);
+  gl.uniform1f(moltenU.uTime,.4+t*.35);
+  gl.uniform1f(moltenU.uClock,t);
+  const kk=Math.max(.35,k);
+  gl.uniform1f(moltenU.uScale,Math.max(1.5,Math.min(8,4/kk)));
+  gl.uniform1f(moltenU.uDetail,3);
+  gl.uniform1f(moltenU.uGlow,.16);
+  gl.uniform1f(moltenU.uThickness,Math.max(.2,Math.min(3,k)));
+  gl.uniform1f(moltenU.uSwirl,1);
+  gl.uniform1f(moltenU.uFold,-.2);
+  gl.uniform1f(moltenU.uBlackPoint,.05);
+  gl.uniform1f(moltenU.uBrightness,1.3);
+  gl.uniform1f(moltenU.uBalance,.5);
+  gl.uniform1f(moltenU.uGrain,.05);
+  gl.uniform1f(moltenU.uOpacity,1);
+  gl.uniform2f(moltenU.uOffset,0,0);
+  gl.uniform2f(moltenU.uRotation,1,0);
+  gl.uniform2f(moltenU.uDrift,0,0);
+  const A=h2r(c||'#5227FF'),B=[Math.round(A[0]+(255-A[0])*.45),Math.round(A[1]+(255-A[1])*.45),Math.round(A[2]+(255-A[2])*.45)];
+  moltenColors[0]=A[0]/255;moltenColors[1]=A[1]/255;moltenColors[2]=A[2]/255;
+  moltenColors[3]=B[0]/255;moltenColors[4]=B[1]/255;moltenColors[5]=B[2]/255;
+  moltenColors[6]=1;moltenColors[7]=1;moltenColors[8]=1;
+  gl.uniform3fv(moltenU.uColors,moltenColors);
+  gl.uniform1i(moltenU.uColorCount,3);
+  gl.uniform3f(moltenU.uBackground,0,0,0);
+  gl.uniform1f(moltenU.uOpaque,0);
+  gl.uniform1f(moltenU.uLight,0);
+  gl.uniform3f(moltenU.uReveal,0,0,1);
+  gl.uniform4f(moltenU.uHeat,0,0,.2,0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+  gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.drawArrays(gl.TRIANGLES,0,3);
+  return cv;
+}
 const FX={
 snow:{n:'ثلج',full:1,s:14,col:'#ffffff',d(x,x0,y0,W,H,t,k,c){x.fillStyle=c||'#ffffff';for(let i=0;i<90;i++){const r=(2+fr(i,4)*4)*k,px=fr(i,0)*W+Math.sin(t*.8+fr(i,1)*6)*20*k,py=(fr(i,2)*H+t*(40+fr(i,3)*70)*k)%H;x.globalAlpha=.55+fr(i,5)*.45;x.beginPath();x.arc(px,py,r,0,7);x.fill()}}},
 rain:{n:'مطر',full:1,s:14,col:'#cddfff',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#cddfff');x.strokeStyle='rgba('+r0+','+g0+','+b0+',.7)';x.lineWidth=1.6*k;x.lineCap='round';x.beginPath();for(let i=0;i<140;i++){const px=fr(i,0)*W,py=(fr(i,2)*H+t*(900+fr(i,3)*500)*k)%H,l=(20+fr(i,4)*26)*k;x.moveTo(px,py);x.lineTo(px-l*.18,py+l)}x.stroke()}},
@@ -1545,6 +1775,45 @@ sparks:{n:'شرر',full:1,s:14,col:'#ff9a3c',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0
 birds:{n:'طيور',s:40,ar:.6,col:'#1b1b1b',d(x,x0,y0,w,h,t,k,c){x.strokeStyle=c||'#1b1b1b';x.lineCap='round';for(let i=0;i<6;i++){const u=(t*.08+fr(i,0))%1,px=x0+u*w*1.2-w*.1,py=y0+h*(.15+fr(i,1)*.6)+Math.sin(t*2+i)*h*.04,s=(.05+fr(i,2)*.04)*w,f=Math.sin(t*9+i*2);x.lineWidth=Math.max(1.5,s*.16);x.beginPath();x.moveTo(px-s,py+f*s*.5);x.quadraticCurveTo(px-s*.5,py-s*.45*(1-f*.3),px,py);x.quadraticCurveTo(px+s*.5,py-s*.45*(1-f*.3),px+s,py+f*s*.5);x.stroke()}}},
 viz:{n:'مرئي الصوت',s:40,ar:.5,col:'#ffffff',d(x,x0,y0,w,h,t,k,c){x.fillStyle=c||'#fff';const n=26,bw=w/n*.62;for(let i=0;i<n;i++){const hh=h*(.12+.88*Math.abs(Math.sin(t*3+i*.7)*.55+Math.sin(t*5.3+i*1.9)*.45)),px=x0+(i+.5)*w/n-bw/2;x.beginPath();x.roundRect?x.roundRect(px,y0+h/2-hh/2,bw,hh,bw/2):x.rect(px,y0+h/2-hh/2,bw,hh);x.fill()}}},
 smoke:{n:'دخان',full:1,s:14,col:'#cfcfcf',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#cfcfcf');for(let i=0;i<22;i++){const life=(t*.06*(.6+fr(i,5)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(life*6+i)*50*k,py=H*(1.1-life*1.3),r=(110+fr(i,2)*170)*k*(.6+life*.7),g=x.createRadialGradient(px,py,0,px,py,r),a=.26*Math.sin(life*Math.PI);g.addColorStop(0,'rgba('+r0+','+g0+','+b0+','+a+')');g.addColorStop(1,'rgba('+r0+','+g0+','+b0+',0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}},
+flux:{n:'خطوط التدفق',full:1,s:14,col:'#59c8ff',d(x,x0,y0,W,H,t,k,c){
+  const[r0,g0,b0]=h2r(c||'#59c8ff');
+  const st=Math.max(7,11*k),sc=1/(95*k);
+  const cols=Math.ceil(W/st)+1,rows=Math.ceil(H/st)+1;
+  const v=new Float32Array(cols*rows);
+  const tx=t*.07,ty=t*.11;
+  for(let j=0;j<rows;j++){
+    const py=j*st*sc;
+    for(let i=0;i<cols;i++){
+      const px=i*st*sc;
+      v[j*cols+i]=fxf(px+tx+Math.sin(py*1.4+tx*.6)*.22,py-ty+Math.cos(px*1.2-ty*.5)*.18,7);
+    }
+  }
+  const lv=[.3,.48,.66];
+  x.lineCap='round';x.lineJoin='round';
+  for(let li=0;li<lv.length;li++){
+    const L=lv[li];x.beginPath();
+    for(let j=0;j<rows-1;j++){
+      for(let i=0;i<cols-1;i++){
+        const a=v[j*cols+i],b=v[j*cols+i+1],c2=v[(j+1)*cols+i+1],d=v[(j+1)*cols+i];
+        const idx=(a>L?8:0)|(b>L?4:0)|(c2>L?2:0)|(d>L?1:0);
+        const segs=fxe[idx];
+        if(!segs.length)continue;
+        const X=i*st,Y=j*st;
+        for(let q=0;q<segs.length;q++){
+          const e1=segs[q][0],e2=segs[q][1];let ax,ay,bx,by;
+          if(e1===0){ax=X+((L-a)/(b-a))*st;ay=Y}else if(e1===1){ax=X+st;ay=Y+((L-b)/(c2-b))*st}else if(e1===2){ax=X+((L-d)/(c2-d))*st;ay=Y+st}else{ax=X;ay=Y+((L-a)/(d-a))*st}
+          if(e2===0){bx=X+((L-a)/(b-a))*st;by=Y}else if(e2===1){bx=X+st;by=Y+((L-b)/(c2-b))*st}else if(e2===2){bx=X+((L-d)/(c2-d))*st;by=Y+st}else{bx=X;by=Y+((L-a)/(d-a))*st}
+          x.moveTo(ax,ay);x.lineTo(bx,by);
+        }
+      }
+    }
+    x.globalCompositeOperation='lighter';
+    x.strokeStyle='rgba('+r0+','+g0+','+b0+',.12)';x.lineWidth=6*k;x.stroke();
+    x.globalCompositeOperation='source-over';
+    x.strokeStyle='rgba('+r0+','+g0+','+b0+',.72)';x.lineWidth=1.1*k;x.stroke();
+  }
+}},
+molten:{n:'معدن منصهر',full:1,s:14,col:'#5227FF',d(x,x0,y0,W,H,t,k,c){const cv=moltenRender(x,W,H,t,k,c);if(cv){x.globalCompositeOperation='source-over';x.globalAlpha=1;x.drawImage(cv,0,0,W,H)}}},
 fire:{n:'نار',full:1,s:14,col:'#ff8a2b',d(x,x0,y0,W,H,t,k,c){const[r0,g0,b0]=h2r(c||'#ff8a2b');x.globalCompositeOperation='lighter';for(let i=0;i<80;i++){const life=(t*.45*(.6+fr(i,6)*.8)+fr(i,0))%1,px=fr(i,1)*W+Math.sin(t*5+i)*8*k,py=fr(i,3)*H-life*H*.3,r=(16+fr(i,2)*30)*k*(1-life*.55),g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'rgba('+r0+','+g0+','+b0+','+(.8*Math.sin(life*Math.PI))+')');g.addColorStop(1,'rgba('+r0+','+g0+','+b0+',0)');x.fillStyle=g;x.fillRect(px-r,py-r,2*r,2*r)}}}};
 function drawFx(x,s,i,W,H,z,tm,pv){const f=FX[s.k];if(!f)return;x.save();if(f.full)f.d(x,0,0,W,H,tm,s.s/14,s.c);else{const h=z*(f.ar||1);x.translate(W*s.x/100,H*s.y/100);x.rotate(s.r*Math.PI/180);f.d(x,-z/2,-h/2,z,h,tm,1,s.c);if(pv&&i==D.ss&&D.tgt=='stk'){x.strokeStyle='#0f4f4599';x.setLineDash([10,8]);x.lineWidth=2;x.strokeRect(-z/2,-h/2,z,h)}}x.restore()}
 Object.keys(FX).forEach(k=>{const f=FX[k],b=document.createElement('button');b.innerHTML='<svg><use href="#i-sparkles"/></svg><span>'+f.n+'</span>';b.onclick=()=>addStk({t:'f',k,s:f.s,c:f.col});$('#fxG').appendChild(b)});
