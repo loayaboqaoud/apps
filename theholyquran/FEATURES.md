@@ -186,10 +186,21 @@ designed images and videos. Single-page app, no framework, no build step.
 ## 7c. UI Localization (i18n)
 
 - 10 UI languages: Arabic (`ar`), English, Spanish, Urdu, Hindi, French, Indonesian, Turkish, Bengali, Russian
-- `DICT` dictionary (~223 Arabic UI keys → 9 translations); `T()` translates DOM text nodes live (`applyLang`)
+- `DICT` dictionary (~500 Arabic UI keys → 9 translations); `T()` translates DOM text nodes live (`applyLang`)
+- Full UI localization (v1.2.8): every user-facing string is routed through `T()` — buttons, sheets, studio
+  panels, pattern/FX names, camera & mic messages (permissions, errors, recording status), album/history UI,
+  export progress dialogs, page-image toasts, next-page cue aria-labels, analytics consent/status (analytics.js
+  routed via `window.T`), watermark default text (`القرآن الكريم` shown translated in the studio input and on
+  canvas via `wmTxt()`), recitation quality labels, and the reciter-picker search placeholder
+- Deliberately NOT translated (kept Arabic in all languages): 114 surah names, reciter names, riwayah group
+  labels (حفص عن عاصم / ورش عن نافع), other-language recitation source labels, single-letter SMAP items,
+  Arabic-Indic digits, and the language endonyms in `#lang`
+- Static `title`/`aria-label`/`placeholder` attributes are translated via `data-title-source` /
+  `data-aria-source` / `data-ph-source` + `applyLang`; dynamic aria-labels/templates call `T()` at render time
 - RTL for `ar`/`ur`, LTR otherwise (`documentElement.dir/lang`)
 - Arabic-Indic digit rendering via `ar()` when UI is Arabic
-- Language selector `#lang`
+- Language selector `#lang`; switching re-renders stale dynamic regions (`limits()`, ready-backgrounds note,
+  watermark input) so nothing stays in the previous language
 
 ---
 
@@ -439,7 +450,7 @@ designed images and videos. Single-page app, no framework, no build step.
   - Precache core assets + all fonts (best-effort `allSettled`); includes `backgrounds/list.js` and
     `icon-b64.js` (embedded watermark icon)
   - `backgrounds/manifest.json` is bypassed (network) so new ready-made backgrounds appear; background images are cached normally
-  - Versioned app cache (currently `mushaf-20261110-1.2.7`); old caches purged on activate; `skipWaiting`/`clients.claim`
+  - Versioned app cache (currently `mushaf-20261110-1.2.8`); old caches purged on activate; `skipWaiting`/`clients.claim`
   - `notificationclick` focuses an existing window or opens the app for daily reminders
 - Service worker registered only over http(s); an automatic update check runs shortly after registration
 - App designed to work fully offline once cached
@@ -449,7 +460,7 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 15. About Sheet (`#sAbout`)
 
-- Developer: Loay Abu Qaoud; date 2026-11-10; version 1.2.7
+- Developer: Loay Abu Qaoud; date 2026-11-10; version 1.2.8
 - Credits: King Fahd Complex (QCF4), Quranpedia, everyayah.com, Wikimedia Commons, Lucide, Tajawal, mp4-muxer
 
 ---
@@ -466,7 +477,7 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 17. Known Gaps / Notes (candidates for fixes & new work)
 
-- 17.1 `DICT` covers UI chrome and the new help/reminder/reciter/range/color strings; some dynamic canvas/status templates still rely on Arabic `T()` fragments
+- 17.1 (resolved in 1.2.8) `DICT` now covers all UI strings; dynamic canvas/status templates route through `T()` fragments; remaining Arabic (surah/reciter/riwayah names, SMAP letters, digits) is intentional
 - 17.2 Meaning overlay is word-range based; only 4 books bundled in `MEAN_BOOKS`
 - 17.3 Recitation/background search/media require internet (everyayah.com, Wikimedia)
 - 17.4 GIF/sticker integration was removed; `config.js` `GIPHY_KEY` is no longer used and kept only for backward compatibility

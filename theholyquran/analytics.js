@@ -45,7 +45,9 @@
 
   function setStatus(text) {
     const status = document.querySelector('#analyticsStatus');
-    if (status) status.textContent = text;
+    if (!status) return;
+    status.dataset.arStatus = text;
+    status.textContent = window.T ? window.T(text) : text;
   }
 
   function safeData(data) {
