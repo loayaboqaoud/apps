@@ -57,6 +57,8 @@ designed images and videos. Single-page app, no framework, no build step.
 
 - 2.1 Page rendering (`pageEl(n)`) — draws header, lines, word `<span class="w" data-k="s:a">`,
   ayah-end markers, page footer number; words with meanings get class `mn`
+  - Surah-header glyph sized `.062pw` inside the `.095pw` gold banner — worst-case QBSML
+    glyph ink ≈ 90% of the banner height (was `.0694pw` ≈ 101.5%, which overflowed on iPhone)
 - 2.2 Virtualized pager
   - `build()` creates 604 `.slide` sections and two IntersectionObservers
     - render observer mounts/unmounts page DOM (memory efficient)
@@ -294,7 +296,15 @@ designed images and videos. Single-page app, no framework, no build step.
   - Reference overlay (`rf.on`, size, color, x, y) e.g. "الآية ١" / "الآيات ١ - ٣"
 - 10.8 Effects tab (`tp-sk`)
   - Animated full-frame effects (`FX`): Snow, Rain, Stars, Lights/Bokeh, Sparks, Birds,
-    Audio Visualizer, Smoke, Flux Lines, Molten Metal, Flames
+    Audio Visualizer, Smoke, Flux Lines, Molten Metal, Strands, Splash Cursor, Flames
+  - Strands (خيوط): WebGL2 silk-strands shader ported from ReactBits; autonomous motion
+    (level/lean/sway driven by effect time), full-frame mode, 7-role palette derived from
+    the selected color, size slider maps to amplitude/thickness
+  - Splash Cursor (رذاذ المؤشر): WebGL2 fluid simulation (13 passes: splat/burst/crown/
+    advection/divergence/curl/vorticity/pressure/gradient/prefilter/blur/display) ported
+    from ReactBits; simulates random pointer movement — wanders between waypoints with
+    jitter plus periodic bursts — palette from the selected color, dye at full frame res
+    (sim 128); silently skipped if float render targets are unsupported
   - "المؤثرات" list (`#skList`), color (`#skC`), size/density (`#skS`), rotation (`#skR`), position
     (`#skX`/`#skY`), delete (`#skDel`)
   - Effects are draggable on the preview and saved/restored with the studio design
@@ -381,7 +391,7 @@ designed images and videos. Single-page app, no framework, no build step.
 - `pagePng(n)` renders the current mushaf page to a `canvas` (1080×1728 logical, ×2 device = 2160×3456 PNG).
 - Reproduces the DOM geometry: paper + 1px border, `.ph` juz/surah header (top `.02pw`) + `.pf` page number
   (bottom `.016pw`), per-line flex spacing (`space-between`, or `space-evenly` when <15 lines) with header lines
-  sized `.107pw` (banner) vs `.098pw` (verse), glyph font `F<f>` at the same ratios (header `.0694pw`, basmala
+  sized `.107pw` (banner) vs `.098pw` (verse), glyph font `F<f>` at the same ratios (header `.062pw`, basmala
   `.0559pw`, verse `R*L.e` rule) and the `.13em` baseline shift.
 - Colours: text uses `st.fc || pg()[1]`; `.lines` opacity `st.a/100`; the `.mn` meaning-word colour is intentionally
   ignored (plain ink); the `.ln.hd` gold banner is drawn (`--gold`).
@@ -429,7 +439,7 @@ designed images and videos. Single-page app, no framework, no build step.
   - Precache core assets + all fonts (best-effort `allSettled`); includes `backgrounds/list.js` and
     `icon-b64.js` (embedded watermark icon)
   - `backgrounds/manifest.json` is bypassed (network) so new ready-made backgrounds appear; background images are cached normally
-  - Versioned app cache (currently `mushaf-20261110-1.2.6`); old caches purged on activate; `skipWaiting`/`clients.claim`
+  - Versioned app cache (currently `mushaf-20261110-1.2.7`); old caches purged on activate; `skipWaiting`/`clients.claim`
   - `notificationclick` focuses an existing window or opens the app for daily reminders
 - Service worker registered only over http(s); an automatic update check runs shortly after registration
 - App designed to work fully offline once cached
@@ -439,7 +449,7 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 15. About Sheet (`#sAbout`)
 
-- Developer: Loay Abu Qaoud; date 2026-11-10; version 1.2.6
+- Developer: Loay Abu Qaoud; date 2026-11-10; version 1.2.7
 - Credits: King Fahd Complex (QCF4), Quranpedia, everyayah.com, Wikimedia Commons, Lucide, Tajawal, mp4-muxer
 
 ---
