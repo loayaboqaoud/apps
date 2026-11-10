@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0f4f45">
 <meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="app-version" content="1.2.5">
+<meta name="app-version" content="1.2.6">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -154,6 +154,18 @@ input[type=color]{width:42px;height:34px;padding:0;border:1px solid var(--line);
 #pv{max-width:100%;max-height:100%;box-shadow:0 2px 12px #0004;touch-action:none;cursor:grab}
 #pnl{flex:none;height:52%;overflow:auto;background:var(--card);border-radius:16px 16px 0 0;padding:10px 14px calc(14px + env(safe-area-inset-bottom))}
 .tp{display:none}.tp.on{display:block}
+.spin{display:none;width:15px;height:15px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-inline-start:7px;opacity:.75}
+.spin.on{display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.exProg{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;width:min(520px,calc(100% - 28px));background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:0 12px 34px rgba(0,0,0,.28);display:flex;flex-direction:column;gap:9px}
+.exProg[hidden]{display:none}
+.exProgHead{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px}
+.exProgHead span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.exProgHead b{font-size:14px;font-variant-numeric:tabular-nums}
+.exProgTrack{height:8px;border-radius:999px;background:rgba(0,0,0,.14);overflow:hidden}
+.exProgTrack i{display:block;height:100%;width:0;border-radius:999px;background:var(--green);transition:width .15s linear}
+#exProgCancel{width:100%;padding:9px;border-radius:10px;border:0;background:var(--soft);color:var(--txt);font-size:14px}
+#exProgCancel:disabled{opacity:.55}
 .two{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.two label{font-size:14px}
 #chips{display:flex;flex-wrap:wrap;gap:4px;max-height:140px;overflow:auto;padding:6px;background:var(--soft);border-radius:10px;direction:rtl}
 .chip{padding:3px 7px;background:var(--card);border:1px solid var(--line);border-radius:7px;font-size:16px;cursor:pointer}.chip.br{background:color-mix(in srgb,var(--acc) 22%,var(--card));margin-inline-end:100%}
@@ -183,7 +195,7 @@ svg.i,.ib svg{width:1.25em;height:1.25em;stroke:currentColor;fill:none;stroke-wi
 #bar .ib svg{width:1.45em;height:1.45em;stroke-width:2.25}
 #bar .ib span{font-size:11.5px;font-weight:700;letter-spacing:0}
 #bar button{padding:4px 3px;min-width:48px}
-@media(max-width:900px){#bar{display:grid;grid-template-columns:repeat(5,1fr);height:auto;min-height:0;gap:1px;padding:3px 4px;overflow:visible;align-content:stretch;position:static}#bar .ib{min-width:0;min-height:0;padding:2px 1px;font-size:11px;gap:1px}#bar .ib svg{width:1.15em;height:1.15em}#bar .ib span{display:block;white-space:nowrap;font-size:10px;line-height:1.05;font-weight:700}#bar #bSet{position:static;transform:none;margin:0;grid-column:5;grid-row:2}}
+@media(max-width:900px){#bar{display:grid;grid-template-columns:repeat(5,1fr);height:auto;min-height:0;gap:2px;padding:4px;overflow:visible;align-content:stretch;position:static}#bar .ib{min-width:0;min-height:36px;padding:4px 2px;font-size:11.5px;gap:2px}#bar .ib svg{width:1.2em;height:1.2em}#bar .ib span{display:block;white-space:nowrap;font-size:10.5px;line-height:1.12;font-weight:700}#bar #bSet{position:static;transform:none;margin:0;grid-column:5;grid-row:2}}
 @media(min-width:901px){#bar{display:flex;justify-content:center;overflow:visible;position:relative}#bar #bSet{position:absolute;left:4px;top:50%;transform:translateY(-50%);margin:0}#bar .ib{min-width:52px;padding-inline:6px}}
 .rg{display:flex;align-items:center;gap:6px;direction:ltr;flex:1 1 100%}
 .rg input{flex:1;min-width:0}
@@ -357,7 +369,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="sheet" id="sAbout" data-analytics-name="About app"><div class="card abt"><div class="pl"><b>حول التطبيق</b><button class="s" id="aboutCloseButton" aria-label="إغلاق حول التطبيق" data-aria-source="إغلاق حول التطبيق" data-analytics-name="Close about app">✕</button></div>
 <p><b>تطوير:</b> لؤي أبوقاعود | Loay Abu Qaoud</p>
 <p><b>التاريخ:</b> <span dir="ltr">2026-11-06</span></p>
-<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.5</span></p>
+<p><b>الإصدار:</b> <span id="aboutAppVersion" dir="ltr">1.2.6</span></p>
 <p>تعود حقوق جميع المصادر لأصحابها.</p>
 <p>للمقترحات والملاحظات يمكن التواصل على: <a href="mailto:loqasoftware@gmail.com">loqasoftware@gmail.com</a></p>
 <p style="text-align:center;font-size:18px">دعواتكم 🤲🏻</p>
@@ -395,7 +407,7 @@ body>*:not(#print){display:none!important}#print{display:block}
 <div class="two" style="margin-top:6px"><label>وقت التذكير <input type="time" id="remTime" value="21:00"></label></div>
 <p class="note">يعمل التذكير أثناء فتح التطبيق أو في الخلفية أثناء تشغيله. لا يمكن ضمان وصوله إذا أُغلق التطبيق تماماً. يحتاج إلى إذن الإشعارات.</p>
 <h4>الخصوصية والتحليلات</h4><div class="act" style="margin-top:0"><button id="analyticsManage" class="alt">إدارة موافقة التحليلات</button></div><p class="note" id="analyticsStatus"></p>
-<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.5</span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
+<div class="two" style="margin-top:14px;align-items:center"><span><b>الإصدار:</b> <span id="appVersion" dir="ltr">1.2.6</span><span id="updateSpin" class="spin" aria-hidden="true"></span></span><button id="checkUpdatesButton" class="alt" data-analytics-name="Check for updates">تحقق من التحديث</button></div>
 <p class="note" id="updateStatus" aria-live="polite"></p>
 <div class="act"><a id="reportProblem" class="btn alt" href="mailto:loqasoftware@gmail.com">الإبلاغ عن مشكلة</a></div>
 <div class="act" style="margin-top:14px"><button id="bHelp" class="alt" data-analytics-name="Help">مساعدة</button></div>
@@ -594,7 +606,13 @@ body>*:not(#print){display:none!important}#print{display:block}
 <p class="note" id="hiMsg">يجمع السجل كل تصاميمك السابقة ويسمح بإدارتها: عاينها، شاركها، احذفها، أو اجعل إحداها خلفية. تُحفظ كل صورة أو فيديو تصدّره تلقائياً هنا. اربط مجلداً على جهازك ليُحفظ فيه أيضاً.</p>
 <div id="hiG" class="gal hiG"></div>
 </div>
-</div></div>
+</div>
+<div id="exProg" class="exProg" hidden role="status" aria-live="polite">
+<div class="exProgHead"><span id="exProgLabel"></span><b id="exProgPct" dir="ltr">0%</b></div>
+<div class="exProgTrack"><i id="exProgBar"></i></div>
+<button id="exProgCancel">إلغاء التصدير</button>
+</div>
+</div>
 <div id="print"></div>
 <script src="config.js"></script>
 <script src="analytics.js"></script>
@@ -967,10 +985,13 @@ async function refreshAppShell(registration){
  if(!active||active.state!='activated')throw new Error('No active service worker is available.');
  await new Promise((resolve,reject)=>{const channel=new MessageChannel(),timer=setTimeout(()=>{channel.port1.close();reject(new Error('Timed out while refreshing the app cache.'))},90000);channel.port1.onmessage=event=>{clearTimeout(timer);channel.port1.close();if(event.data&&event.data.ok)resolve();else reject(new Error(event.data&&event.data.error||'The service worker could not refresh the app cache.'))};try{active.postMessage({type:'REFRESH_APP_CACHE'},[channel.port2])}catch(error){clearTimeout(timer);channel.port1.close();reject(error)}});
 }
+let updateBusy=false;
 async function checkAppUpdate(auto){
- const button=$('#checkUpdatesButton'),status=$('#updateStatus');let stage='check';
+ const button=$('#checkUpdatesButton'),status=$('#updateStatus'),spin=$('#updateSpin');let stage='check';
+ if(updateBusy)return;
+ if(!navigator.onLine){if(!auto)status.textContent=T('لا يوجد اتصال بالإنترنت. تحقق من الاتصال ثم أعد المحاولة.');return}
  const setStatus=msg=>{if(!auto)status.textContent=msg};
- if(!auto)button.disabled=true;setStatus(T('جارٍ التحقق من وجود تحديث...'));
+ updateBusy=true;spin.classList.add('on');if(!auto)button.disabled=true;setStatus(T('جارٍ التحقق من وجود تحديث...'));
  try{
   const versionUrl=new URL('index.html',location.href);versionUrl.searchParams.set('_version_check',Date.now());
   const response=await fetch(versionUrl,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
@@ -989,7 +1010,7 @@ async function checkAppUpdate(auto){
   QuranAnalytics.track('app_update_check',{result:'updated',from_version:currentAppVersion,to_version:serverVersion,automatic:!!auto});
   location.reload();
  }catch(error){console.error('App update failed during '+stage+'.',error);if(!auto){setStatus(T(stage=='check'?'تعذر التحقق من التحديث. تحقق من اتصال الإنترنت ثم أعد المحاولة.':'تعذر تطبيق التحديث. أعد المحاولة أو أعد فتح التطبيق عند توفر اتصال.'));QuranAnalytics.track('app_update_check',{result:stage=='check'?'check_error':'apply_error'})}else QuranAnalytics.track('app_update_check',{result:'auto_'+stage+'_error'})}
- finally{if(!auto)button.disabled=false}
+ finally{updateBusy=false;spin.classList.remove('on');if(!auto)button.disabled=false}
 }
 $('#checkUpdatesButton').onclick=()=>checkAppUpdate(false);
 $('#aRng').oninput=e=>{st.a=+e.target.value;ui();save()};
@@ -1309,10 +1330,45 @@ $('#pv').onpointerdown=e=>{e.target.setPointerCapture(e.pointerId);drag.on=1;dra
 $('#pv').onpointermove=e=>{if(!drag.on)return;const r=e.target.getBoundingClientRect(),dx=(e.clientX-drag.x)/r.width*100,dy=(e.clientY-drag.y)/r.height*100;drag.x=e.clientX;drag.y=e.clientY;
  const o=D.tgt=='txt'?{get x(){return D.bx},set x(v){D.bx=v},get y(){return D.by},set y(v){D.by=v}}:D.tgt=='stk'?D.stk[D.ss]:D[D.tgt];if(!o)return;o.x=Math.max(0,Math.min(100,o.x+dx));o.y=Math.max(0,Math.min(100,o.y+dy));refresh();skSync();upd();studioPersist()};
 $('#pv').onpointerup=$('#pv').onpointercancel=()=>{drag.on=0};
-async function exportBlob(){await fontsFor(kept());const[W,H]=dims(),[ow]=outDims(D.res),sc=ow/W,c=document.createElement('canvas');c.width=ow;c.height=outDims(D.res)[1];const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,false);return new Promise(r=>c.toBlob(r,'image/png'))}
+/* تقدم التصدير والإلغاء */
+const exProg=$('#exProg'),exProgBar=$('#exProgBar'),exProgPct=$('#exProgPct'),exProgLabel=$('#exProgLabel'),exProgCancel=$('#exProgCancel');
+let exActive=false,exCancelled=false;
+function exStart(label){exActive=true;exCancelled=false;exProg.hidden=false;exProgCancel.disabled=false;exProgLabel.textContent=label||T('جارٍ التصدير...');exProgPct.textContent='0%';exProgBar.style.width='0%';try{exProg.scrollIntoView({block:'nearest'})}catch(e){}}
+function exSet(p,label){if(!exActive)return;const v=Math.max(0,Math.min(100,Math.round(p)));exProgBar.style.width=v+'%';exProgPct.textContent=ar(v)+'%';if(label)exProgLabel.textContent=label}
+function exEnd(){exActive=false;exCancelled=false;exProg.hidden=true;exProgCancel.disabled=false}
+function exCheck(){if(exCancelled)throw Object.assign(new Error(T('تم إلغاء التصدير.')),{cancelled:1})}
+exProgCancel.onclick=()=>{if(!exActive)return;if(!confirm(T('هل تريد إلغاء التصدير؟')))return;exCancelled=true;exProgLabel.textContent=T('جارٍ الإلغاء...');exProgCancel.disabled=true};
+async function exportBlob(){
+ exSet(3,T('جارٍ تجهيز الصورة...'));
+ await fontsFor(kept());
+ exCheck();
+ exSet(15,T('جارٍ رسم التصميم...'));
+ const[W,H]=dims(),[ow,oh]=outDims(D.res),sc=ow/W,c=document.createElement('canvas');c.width=ow;c.height=oh;const x=c.getContext('2d');x.scale(sc,sc);draw(x,W,H,false);
+ exCheck();
+ exSet(70,T('جارٍ إنشاء الصورة...'));
+ const b=await new Promise((res,rej)=>c.toBlob(bl=>bl?res(bl):rej(new Error(T('تعذّر إنشاء الصورة.'))),'image/png'));
+ exCheck();
+ exSet(100,T('تم إنشاء الصورة.'));
+ return b;
+}
 async function share(b,n,t){const f=new File([b],n,{type:t});if(navigator.canShare&&navigator.canShare({files:[f]}))try{await navigator.share({files:[f]});QuranAnalytics.track('media_shared',{media_type:t.indexOf('video')===0?'video':'image'});return}catch(e){if(e.name=='AbortError')return}dl(b,n)}
-$('#xPng').onclick=async()=>{const b=await exportBlob(),n=fname('png'),[width,height]=outDims(D.res);histAdd(b,{name:n,type:'image',width,height,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(b,n)};
-$('#xShP').onclick=async()=>{const b=await exportBlob(),n=fname('png'),[width,height]=outDims(D.res);histAdd(b,{name:n,type:'image',width,height,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});share(b,n,'image/png')};
+$('#xPng').onclick=async()=>{
+ try{
+  exStart(T('جارٍ تصدير الصورة...'));
+  const b=await exportBlob(),n=fname('png'),[width,height]=outDims(D.res);
+  histAdd(b,{name:n,type:'image',width,height,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(b,n);
+ }catch(e){$('#exMsg').textContent=e&&e.cancelled?T('تم إلغاء التصدير.'):T('خطأ: ')+e.message}
+ finally{exEnd()}
+};
+$('#xShP').onclick=async()=>{
+ try{
+  exStart(T('جارٍ تصدير الصورة...'));
+  const b=await exportBlob(),n=fname('png'),[width,height]=outDims(D.res);
+  exEnd();
+  histAdd(b,{name:n,type:'image',width,height,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});await share(b,n,'image/png');
+ }catch(e){$('#exMsg').textContent=e&&e.cancelled?T('تم إلغاء التصدير.'):T('خطأ: ')+e.message}
+ finally{exEnd()}
+};
 $('#imF').onclick=()=>$('#imFile').click();
 function isXO(u){try{const x=new URL(u,location.href);return /^https?:$/.test(x.protocol)&&x.origin!==location.origin}catch(e){return false}}
 function setImg(u,cr){const im=new Image();if(isXO(u))im.crossOrigin='anonymous';im.onload=()=>{D.vclipAudio=null;D.img=im;D.bg='img';refresh();upd();if(cr)$('#imCr').textContent=cr};im.onerror=()=>{$('#imCr').textContent='تعذّر تحميل الصورة (إنترنت أو منع CORS).'};im.src=u}
@@ -1322,43 +1378,52 @@ $('#imGo').onclick=async()=>{const g=$('#galI');g.innerHTML='...';try{const u='h
  ps.forEach(p=>{const i=p.imageinfo&&p.imageinfo[0];if(!i)return;const m=i.extmetadata||{},im=document.createElement('img');im.src=i.thumburl;im.loading='lazy';
   im.onclick=()=>{const big=i.width>1920?i.thumburl.replace(/\/\d+px-/,'/1920px-'):i.url,strip=s=>(s||'').replace(/<[^>]*>/g,'');setImg(big,'المصدر: ويكيميديا كومنز — '+strip(m.Artist&&m.Artist.value)+' — '+strip(m.LicenseShortName&&m.LicenseShortName.value))};g.appendChild(im)})}catch(e){g.textContent='تعذّر البحث — يلزم اتصال بالإنترنت.'}};
 $('#auF').onchange=e=>{D.afile=e.target.files[0]||null;if(D.afile){D.asrc='file';const a=new Audio(URL.createObjectURL(D.afile));a.onloadedmetadata=()=>{D.at0=0;D.at1=+a.duration.toFixed(1);$('[data-k=at0]').max=$('[data-k=at1]').max=D.at1;refresh()};refresh()}};
-async function exportRec(){const msg=$('#exMsg'),clip=D.vclipAudio,rcSrc=D.asrc!='none';let ac=null,audioReady=Promise.resolve(null);
+async function exportRec(){
+ const clip=D.vclipAudio,rcSrc=D.asrc!='none';let ac=null,audioReady=Promise.resolve(null);
+ exCheck();
  if(clip||rcSrc){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));ac=new AC();audioReady=ac.resume().then(()=>null).catch(e=>e)}
- await fontsFor(kept());
- const[W0,H0]=dims(),sc=Math.min(1,1920/Math.max(W0,H0)),W=Math.round(W0*sc/2)*2,H=Math.round(H0*sc/2)*2;
- const fg=document.createElement('canvas');fg.width=W;fg.height=H;const fx=fg.getContext('2d');fx.scale(W/W0,H/H0);drawFg(fx,W0,H0,false);
- const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');
- const frame=()=>{const v2=D.bg=='vid'&&D.vid;if(v2&&(v2.ended||v2.currentTime>=D.vt1-.03)){v2.currentTime=D.vt0;v2.play().catch(()=>{})};if(REV0){REV={times:REV0,t:STK_T()};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);drawStk(rx,W0,H0,false);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawWM(rx,W0,H0,false)};frame();
- const stream=rc.captureStream(30);let dur=D.vsec,bufs=[],lens=[];
- if(clip||rcSrc){
-  const resumeError=await audioReady;if(resumeError)throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));
-  if(ac.state=='suspended')await ac.resume();
-  if(ac.state!='running')throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));
-  msg.textContent=T('جارٍ تجهيز الصوت...');
-  const dest=ac.createMediaStreamDestination();dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
-  const t0=ac.currentTime+.3,rvol=Math.max(0,Math.min(1,(+($('#camVol')&&$('#camVol').value)||100)/100));
-  if(clip){const s0=ac.createBufferSource();s0.buffer=clip;s0.connect(dest);s0.start(t0);dur=clip.duration}
-  if(rcSrc){
-   let gain=dest;if(rvol<1){gain=ac.createGain();gain.gain.value=rvol;gain.connect(dest)}
-   if(D.asrc=='file'){if(!D.afile)throw new Error(T('اختر ملفاً صوتياً أولاً'));bufs=[await ac.decodeAudioData(await D.afile.arrayBuffer())]}
-   else for(let a=D.a1;a<=D.a2;a++){const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw new Error(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}
-   lens=bufs.map(b=>D.asrc=='file'?Math.max(.2,Math.min(b.duration,D.at1||b.duration)-D.at0):b.duration);
-   const rd=lens.reduce((s,l)=>s+l,0)+.25*(bufs.length-1);dur=clip?Math.max(dur,rd):rd;
-   let t=t0;bufs.forEach((b,i)=>{const s=ac.createBufferSource();s.buffer=b;s.connect(gain);s.start(t,D.asrc=='file'?D.at0:0,lens[i]);t+=lens[i]+.25})
+ try{
+  exSet(4,T('جارٍ تجهيز الفيديو...'));
+  await fontsFor(kept());
+  exCheck();
+  const[W0,H0]=dims(),sc=Math.min(1,1920/Math.max(W0,H0)),W=Math.round(W0*sc/2)*2,H=Math.round(H0*sc/2)*2;
+  const fg=document.createElement('canvas');fg.width=W;fg.height=H;const fx=fg.getContext('2d');fx.scale(W/W0,H/H0);drawFg(fx,W0,H0,false);
+  const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');
+  const frame=()=>{const v2=D.bg=='vid'&&D.vid;if(v2&&(v2.ended||v2.currentTime>=D.vt1-.03)){v2.currentTime=D.vt0;v2.play().catch(()=>{})};if(REV0){REV={times:REV0,t:STK_T()};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);drawStk(rx,W0,H0,false);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawWM(rx,W0,H0,false)};frame();
+  const stream=rc.captureStream(30);let dur=D.vsec,bufs=[],lens=[];
+  if(clip||rcSrc){
+   const resumeError=await audioReady;if(resumeError)throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));
+   if(ac.state=='suspended')await ac.resume();
+   if(ac.state!='running')throw new Error(T('تعذّر تفعيل الصوت للتصدير. أعد المحاولة بعد الضغط على زر التصدير.'));
+   exCheck();
+   exSet(8,T('جارٍ تجهيز الصوت...'));
+   const dest=ac.createMediaStreamDestination();dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
+   const t0=ac.currentTime+.3,rvol=Math.max(0,Math.min(1,(+($('#camVol')&&$('#camVol').value)||100)/100));
+   if(clip){const s0=ac.createBufferSource();s0.buffer=clip;s0.connect(dest);s0.start(t0);dur=clip.duration}
+   if(rcSrc){
+    let gain=dest;if(rvol<1){gain=ac.createGain();gain.gain.value=rvol;gain.connect(dest)}
+    if(D.asrc=='file'){if(!D.afile)throw new Error(T('اختر ملفاً صوتياً أولاً'));bufs=[await ac.decodeAudioData(await D.afile.arrayBuffer())]}
+    else for(let a=D.a1;a<=D.a2;a++){exCheck();const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw new Error(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}
+    lens=bufs.map(b=>D.asrc=='file'?Math.max(.2,Math.min(b.duration,D.at1||b.duration)-D.at0):b.duration);
+    const rd=lens.reduce((s,l)=>s+l,0)+.25*(bufs.length-1);dur=clip?Math.max(dur,rd):rd;
+    let t=t0;bufs.forEach((b,i)=>{const s=ac.createBufferSource();s.buffer=b;s.connect(gain);s.start(t,D.asrc=='file'?D.at0:0,lens[i]);t+=lens[i]+.25})
+   }
   }
- }
- if(!clip&&D.asrc=='none'&&D.bg=='vid'&&D.vid)dur=Math.max(1,D.vt1-D.vt0);
- REV0=D.rv?revTimes(kept(),dur,D.asrc=='ayat'?ayatSegs(lens):null):null;
- const mt=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t));
- if(!mt)throw new Error(T('المتصفح لا يدعم تسجيل الفيديو'));
- const mr=new MediaRecorder(stream,{mimeType:mt,videoBitsPerSecond:8e6}),ch=[];mr.ondataavailable=e=>e.data.size&&ch.push(e.data);
- return new Promise(res=>{mr.onstop=()=>{REV0=null;REV=null;ac&&ac.close();if(D.vid){D.vid.pause();D.vid.currentTime=D.vt0}STK_T=()=>performance.now()/1000;const bl=new Blob(ch,{type:mt.split(';')[0]}),ext=mt.includes('mp4')?'mp4':'webm';if(ext=='webm'&&window.ysFixWebmDuration)ysFixWebmDuration(bl,Math.round(dur*1000),f=>res({b:f,ext,duration:dur,width:W,height:H}));else res({b:bl,ext,duration:dur,width:W,height:H})};mr.start(200);const t0=performance.now()+300;const vd=D.bg=='vid'&&D.vid?D.vid:null;if(vd){vd.currentTime=D.vt0;vd.play().catch(()=>{})}STK_T=()=>Math.max(0,(performance.now()-t0)/1000);
-  (function f(){const el=(performance.now()-t0)/1000;frame();msg.textContent=T('جارٍ التسجيل... ')+ar(Math.max(0,Math.round(dur-el)))+T(' ث');if(el<dur+.3)requestAnimationFrame(f);else mr.stop()})()})}
+  if(!clip&&D.asrc=='none'&&D.bg=='vid'&&D.vid)dur=Math.max(1,D.vt1-D.vt0);
+  REV0=D.rv?revTimes(kept(),dur,D.asrc=='ayat'?ayatSegs(lens):null):null;
+  const mt=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t));
+  if(!mt)throw new Error(T('المتصفح لا يدعم تسجيل الفيديو'));
+  exCheck();
+  const mr=new MediaRecorder(stream,{mimeType:mt,videoBitsPerSecond:8e6}),ch=[];mr.ondataavailable=e=>e.data.size&&ch.push(e.data);
+  return new Promise((res,rej)=>{mr.onstop=()=>{REV0=null;REV=null;ac&&ac.close();if(D.vid){D.vid.pause();D.vid.currentTime=D.vt0}STK_T=()=>performance.now()/1000;if(exCancelled){rej(Object.assign(new Error(T('تم إلغاء التصدير.')),{cancelled:1}));return}const bl=new Blob(ch,{type:mt.split(';')[0]}),ext=mt.includes('mp4')?'mp4':'webm';if(ext=='webm'&&window.ysFixWebmDuration)ysFixWebmDuration(bl,Math.round(dur*1000),f=>res({b:f,ext,duration:dur,width:W,height:H}));else res({b:bl,ext,duration:dur,width:W,height:H})};mr.start(200);const t0=performance.now()+300;const vd=D.bg=='vid'&&D.vid?D.vid:null;if(vd){vd.currentTime=D.vt0;vd.play().catch(()=>{})}STK_T=()=>Math.max(0,(performance.now()-t0)/1000);
+   (function f(){if(exCancelled){try{mr.stop()}catch(e){}return}const el=(performance.now()-t0)/1000;frame();exSet(Math.min(100,el/dur*100),T('جارٍ التسجيل... ')+ar(Math.max(0,Math.round(dur-el)))+T(' ث'));if(el<dur+.3)requestAnimationFrame(f);else mr.stop()})()})
+ }catch(e){try{ac&&ac.close()}catch(_){}REV0=null;REV=null;STK_T=()=>performance.now()/1000;throw e}
+}
 const uerr=m=>Object.assign(new Error(m),{user:1}),isIOSDevice=()=>/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform=='MacIntel'&&navigator.maxTouchPoints>1);
-async function exportVideo(){if(D.bg=='cam'||(isIOSDevice()&&(D.asrc!='none'||D.vclipAudio)))return exportRec();let r=null;try{r=await exportMp4()}catch(e){if(e&&e.user)throw e;console.warn('mp4 export failed, falling back',e)}return r||exportRec()}
+async function exportVideo(){if(D.bg=='cam'||(isIOSDevice()&&(D.asrc!='none'||D.vclipAudio)))return exportRec();let r=null;try{r=await exportMp4()}catch(e){if(e&&(e.user||e.cancelled))throw e;console.warn('mp4 export failed, falling back',e)}return r||exportRec()}
 async function exportMp4(){
  if(!window.VideoEncoder||!window.VideoFrame||!window.Mp4Muxer)return null;
- const msg=$('#exMsg');await fontsFor(kept());
+ exSet(3,T('جارٍ تجهيز الفيديو...'));await fontsFor(kept());exCheck();
  const[W0,H0]=dims();let sc=Math.min(1,1920/Math.max(W0,H0)),W=Math.round(W0*sc/2)*2,H=Math.round(H0*sc/2)*2;
  while(W*H>2088960){sc*=.95;W=Math.round(W0*sc/2)*2;H=Math.round(H0*sc/2)*2}
  const fps=30,br=Math.round(Math.min(10e6,Math.max(2e6,W*H*fps*.09)));let vcfg=null,vm='avc';
@@ -1369,10 +1434,10 @@ async function exportMp4(){
  if(D.asrc!='none'||D.vclipAudio){if(!window.AudioEncoder||!window.AudioData)return null;
   const cf=[{codec:'mp4a.40.2',sampleRate:48000,numberOfChannels:2,bitrate:128000}];if(window.__allowVp9)cf.push({codec:'opus',sampleRate:48000,numberOfChannels:2,bitrate:96000});
   for(const c of cf){try{if((await AudioEncoder.isConfigSupported(c)).supported){acfg=c;am=c.codec=='opus'?'opus':'aac';break}}catch(e){}}
-  if(!acfg)return null;msg.textContent=T('جارٍ تجهيز الصوت...');
+  if(!acfg)return null;exSet(5,T('جارٍ تجهيز الصوت...'));
   let bufs=[],lens=[];const ac=new(window.AudioContext||window.webkitAudioContext)({sampleRate:48000});
   try{if(D.asrc=='file'){if(!D.afile)throw uerr(T('اختر ملفاً صوتياً أولاً'));bufs=[await ac.decodeAudioData(await D.afile.arrayBuffer())]}
-  else if(D.asrc=='ayat')for(let a=D.a1;a<=D.a2;a++){const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw uerr(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}}
+  else if(D.asrc=='ayat')for(let a=D.a1;a<=D.a2;a++){exCheck();const r=await fetch(aUrl(D.s+':'+a));if(!r.ok)throw uerr(T('تعذّر تحميل الصوت'));bufs.push(await ac.decodeAudioData(await r.arrayBuffer()))}}
   finally{await ac.close()}
   lens=bufs.map(b=>D.asrc=='file'?Math.max(.2,Math.min(b.duration,D.at1||b.duration)-D.at0):b.duration);
   const rd=lens.reduce((s,l)=>s+l,0)+.25*Math.max(0,bufs.length-1);dur=Math.max(dur,rd);
@@ -1380,7 +1445,7 @@ async function exportMp4(){
   const oc=new OfflineAudioContext(2,Math.max(1,Math.ceil(dur*48000)),48000);let q=0;
   if(D.vclipAudio){const s=oc.createBufferSource();s.buffer=D.vclipAudio;s.connect(oc.destination);s.start(0)}
   bufs.forEach((b,i)=>{const s=oc.createBufferSource();s.buffer=b;s.connect(oc.destination);s.start(q,D.asrc=='file'?D.at0:0,lens[i]);q+=lens[i]+.25});
-  mix=await oc.startRendering()}
+  mix=await oc.startRendering();exCheck()}
  else if(D.bg=='vid'&&D.vid)dur=Math.max(1,D.vt1-D.vt0);
  const fg=document.createElement('canvas');fg.width=W;fg.height=H;const fx=fg.getContext('2d');fx.scale(W/W0,H/H0);drawFg(fx,W0,H0,false);
  const rc=document.createElement('canvas');rc.width=W;rc.height=H;const rx=rc.getContext('2d');
@@ -1391,22 +1456,41 @@ async function exportMp4(){
  let aenc=null;if(mix){aenc=new AudioEncoder({output:(c,m)=>muxer.addAudioChunk(c,m),error:e=>err=e});aenc.configure(acfg)}
  const n=Math.max(1,Math.ceil(dur*fps)),times=D.rv?revTimes(kept(),dur,segs):null;
  try{
-  for(let i=0;i<n;i++){if(err)throw err;const tm=i/fps;STK_T=()=>tm;if(vd)await seek(vd,D.vt0+(tm%span));
+  for(let i=0;i<n;i++){exCheck();if(err)throw err;const tm=i/fps;STK_T=()=>tm;if(vd)await seek(vd,D.vt0+(tm%span));
    if(times){REV={times,t:tm};fx.setTransform(W/W0,0,0,H/H0,0,0);fx.clearRect(0,0,W0,H0);drawFg(fx,W0,H0,false)}
    rx.setTransform(W/W0,0,0,H/H0,0,0);drawBg(rx,W0,H0);drawStk(rx,W0,H0,false);rx.setTransform(1,0,0,1,0,0);rx.drawImage(fg,0,0);rx.setTransform(W/W0,0,0,H/H0,0,0);drawWM(rx,W0,H0,false);
    const vf=new VideoFrame(rc,{timestamp:Math.round(i*1e6/fps),duration:Math.round(1e6/fps)});venc.encode(vf,{keyFrame:i%(fps*2)==0});vf.close();
-   while(venc.encodeQueueSize>8){if(err)throw err;await new Promise(r=>setTimeout(r,4))}
-   if(i%6==0){msg.textContent=T('جارٍ تصدير الفيديو')+' '+ar(Math.round(i/n*100))+(lang=='ar'?'٪':'%');await new Promise(r=>setTimeout(r))}}
-  if(mix){const sr=48000,c0=mix.getChannelData(0),c1=mix.numberOfChannels>1?mix.getChannelData(1):c0,CH=4800;
-   for(let p=0;p<mix.length;p+=CH){const k=Math.min(CH,mix.length-p),d=new Float32Array(k*2);d.set(c0.subarray(p,p+k),0);d.set(c1.subarray(p,p+k),k);
+   while(venc.encodeQueueSize>8){exCheck();if(err)throw err;await new Promise(r=>setTimeout(r,4))}
+   if(i%6==0){exSet(5+i/n*90,T('جارٍ تصدير الفيديو...'));await new Promise(r=>setTimeout(r))}}
+  if(mix){exSet(95,T('جارٍ معالجة الصوت...'));const sr=48000,c0=mix.getChannelData(0),c1=mix.numberOfChannels>1?mix.getChannelData(1):c0,CH=4800;
+   for(let p=0;p<mix.length;p+=CH){exCheck();const k=Math.min(CH,mix.length-p),d=new Float32Array(k*2);d.set(c0.subarray(p,p+k),0);d.set(c1.subarray(p,p+k),k);
     const ad=new AudioData({format:'f32-planar',sampleRate:sr,numberOfFrames:k,numberOfChannels:2,timestamp:Math.round(p/sr*1e6),data:d});aenc.encode(ad);ad.close();
-    while(aenc.encodeQueueSize>16){if(err)throw err;await new Promise(r=>setTimeout(r,4))}}}
-  await venc.flush();if(aenc)await aenc.flush();if(err)throw err;muxer.finalize();
+    while(aenc.encodeQueueSize>16){exCheck();if(err)throw err;await new Promise(r=>setTimeout(r,4))}}}
+  exCheck();exSet(99,T('جارٍ إنهاء الفيديو...'));await venc.flush();if(aenc)await aenc.flush();if(err)throw err;muxer.finalize();
  }finally{REV=null;STK_T=()=>performance.now()/1000;try{venc.close()}catch(e){}try{aenc&&aenc.close()}catch(e){}}
  return{b:new Blob([muxer.target.buffer],{type:'video/mp4'}),ext:'mp4',duration:dur,width:W,height:H}}
 let lastV=null;
-$('#xVid').onclick=async()=>{try{lastV=await exportVideo();$('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(lastV.b,n)}catch(e){QuranAnalytics.track('media_export_failed',{media_type:'video',source:'studio',kind:e&&e.name||'error'});$('#exMsg').textContent=T('خطأ: ')+e.message}};
-$('#xShV').onclick=async()=>{try{if(!lastV)lastV=await exportVideo();const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});await share(lastV.b,n,lastV.b.type)}catch(e){QuranAnalytics.track('media_export_failed',{media_type:'video',source:'studio',kind:e&&e.name||'error',action:'share'});$('#exMsg').textContent=T('خطأ: ')+e.message}};
+$('#xVid').onclick=async()=>{
+ try{
+  exStart(T('جارٍ تصدير الفيديو...'));
+  lastV=await exportVideo();
+  exSet(100,T('تم إنشاء الفيديو.'));
+  $('#exMsg').textContent=T('تم إنشاء الفيديو (')+lastV.ext+')';
+  const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});dl(lastV.b,n);
+ }catch(e){
+  QuranAnalytics.track('media_export_failed',{media_type:'video',source:'studio',kind:e&&e.cancelled?'cancelled':(e&&e.name||'error')});
+  $('#exMsg').textContent=e&&e.cancelled?T('تم إلغاء التصدير.'):T('خطأ: ')+e.message
+ }finally{exEnd()}
+};
+$('#xShV').onclick=async()=>{
+ try{
+  if(!lastV){exStart(T('جارٍ تصدير الفيديو...'));lastV=await exportVideo();exSet(100,T('تم إنشاء الفيديو.'));exEnd()}
+  const n=fname(lastV.ext);histAdd(lastV.b,{name:n,type:'video',width:lastV.width,height:lastV.height,duration:lastV.duration,surah:D.s,verseCount:D.a2-D.a1+1,source:'studio'});await share(lastV.b,n,lastV.b.type)
+ }catch(e){
+  QuranAnalytics.track('media_export_failed',{media_type:'video',source:'studio',kind:e&&e.cancelled?'cancelled':(e&&e.name||'error'),action:'share'});
+  $('#exMsg').textContent=e&&e.cancelled?T('تم إلغاء التصدير.'):T('خطأ: ')+e.message
+ }finally{exEnd()}
+};
 
 /* خلفية فيديو + قص */
 let prevOn=false,liveOn=false,pa=null;
@@ -2226,7 +2310,8 @@ QuranAnalytics.init(()=>({page:st.p,surah:DATA[st.p].s,surahs:PAGE_SURAHS[st.p],
 (async()=>{await ensurePageFonts(st.p);go(st.p,false);warmFontCache()})().catch(()=>go(st.p,false));
 addEventListener('resize',size);addEventListener('orientationchange',()=>setTimeout(size,250));
 addEventListener('pagehide',()=>{save();studioPersist(true)});document.addEventListener('visibilitychange',()=>{save();if(document.hidden)studioPersist(true)});applyKeep();
-if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(()=>setTimeout(()=>checkAppUpdate(true),2500)).catch(error=>console.warn('Service worker registration failed.',error));
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(error=>console.warn('Service worker registration failed.',error));
+if(/^https?:/.test(location.protocol)){setTimeout(()=>{if(navigator.onLine)checkAppUpdate(true)},2500);addEventListener('online',()=>{if(navigator.onLine)checkAppUpdate(true)})}
 </script>
 </body>
 </html>

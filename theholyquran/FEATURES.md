@@ -73,7 +73,11 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 3. Navigation & Index (`#sIdx`, `#bIdx`)
 
-- 3.1 Bottom bar buttons: Index (`#bIdx`), Search (`#bSea`), Design (`#bDes`), Settings (`#bSet`), title `#ttl`
+- 3.1 Top bar buttons: Index (`#bIdx`), Search (`#bSea`), Auto-scroll (`#bAsTop`), Night mode (`#bNight`),
+  Meanings (`#bMn`), Page image (`#bPg`), Fit (`#bFit`), Keep screen on (`#bKeep`), Design (`#bDes`),
+  Settings (`#bSet`), title `#ttl`
+  - Mobile (≤900px): 5-column grid over two rows, compact 36px-per-button height (raised back from the
+    over-compacted 1.2.4 sizing); desktop keeps the single 62px row with settings pinned left
 - 3.2 Index sheet with three tabs
   - Surahs (`s`): id, name, ayah count, start page
   - Juz (`j`): 28 Juz with start page
@@ -314,10 +318,15 @@ designed images and videos. Single-page app, no framework, no build step.
 - 11.5 Video export (`#xVid`) — `exportVideo()`:
   - Preferred path: WebCodecs `VideoEncoder`/`AudioEncoder` + `mp4-muxer` (AVC/AAC MP4, VP9/Opus opt-in)
   - Fallback path: `MediaRecorder` + canvas `captureStream` + Web Audio mixing (MP4/WebM), patched by `fix-webm-duration`
-  - Background video frame-accurate seeking; progress messages in `#exMsg`
+  - Background video frame-accurate seeking; result/error messages in `#exMsg`
   - Share video (`#xShV`), result cached in `lastV`
-- 11.6 File naming `fname(ext)` with timestamp
-- 11.7 Watermark / signature (`D.wm`, studio Design tab "التوقيع"):
+- 11.6 Export progress (`#exProg`): floating progress bar with percentage + stage label
+  (`exStart`/`exSet`/`exEnd`); shown for PNG, share-image, video and share-video exports
+  - Cancel button (`#exProgCancel`) with confirmation dialog; `exCheck()` aborts image render,
+    WebCodecs encode loops, audio prep/fetch loops and `MediaRecorder` capture cleanly
+    (`{cancelled:1}` errors never trigger the mp4→recorder fallback)
+- 11.7 File naming `fname(ext)` with timestamp
+- 11.8 Watermark / signature (`D.wm`, studio Design tab "التوقيع"):
   - Optional, fixed signature baked into all canvas output: live preview (`#pv`) + video export frames
     (`exportRec` / `exportMp4`) + PNG export (`draw()` → `drawWM`). OFF by default.
   - Controls (all `data-k="wm.*"`, generic studio binding): show (`on`), text (`text`), font (`ff`, `#wmF`
@@ -404,6 +413,10 @@ designed images and videos. Single-page app, no framework, no build step.
   with a future Push backend.
 - Updates: version display (`#appVersion`), manual check (`#checkUpdatesButton`), automatic check on open
   (silent on connectivity failure), success toast `تم تحديث التطبيق إلى أحدث إصدار` after reload
+  - Spinning indicator (`#updateSpin`) next to the version while a check/apply is in progress
+    (manual and background); button disabled + status text for manual runs
+  - Background check runs shortly after load on http(s) only when online (`navigator.onLine`), and
+    retried when connectivity returns (`online` event); concurrent checks are guarded by `updateBusy`
 - Help (`#bHelp` → `#sHelp`): large popup with an expandable/collapsible nested topic tree, fully localized
 - About (`#bAbout`)
 
@@ -416,7 +429,7 @@ designed images and videos. Single-page app, no framework, no build step.
   - Precache core assets + all fonts (best-effort `allSettled`); includes `backgrounds/list.js` and
     `icon-b64.js` (embedded watermark icon)
   - `backgrounds/manifest.json` is bypassed (network) so new ready-made backgrounds appear; background images are cached normally
-  - Versioned app cache (currently `mushaf-20261109-1.2.5`); old caches purged on activate; `skipWaiting`/`clients.claim`
+  - Versioned app cache (currently `mushaf-20261110-1.2.6`); old caches purged on activate; `skipWaiting`/`clients.claim`
   - `notificationclick` focuses an existing window or opens the app for daily reminders
 - Service worker registered only over http(s); an automatic update check runs shortly after registration
 - App designed to work fully offline once cached
@@ -426,7 +439,7 @@ designed images and videos. Single-page app, no framework, no build step.
 
 ## 15. About Sheet (`#sAbout`)
 
-- Developer: Loay Abu Qaoud; date 2026-11-09; version 1.2.5
+- Developer: Loay Abu Qaoud; date 2026-11-10; version 1.2.6
 - Credits: King Fahd Complex (QCF4), Quranpedia, everyayah.com, Wikimedia Commons, Lucide, Tajawal, mp4-muxer
 
 ---
